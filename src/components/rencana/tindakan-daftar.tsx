@@ -18,6 +18,12 @@ function Sumber({ t }: { t: Tindakan }) {
   const c = CHUNK_BY_ID[t.sourceIds[0]];
   if (!c) return null;
   return (
+    <>
+    {c.turunan && (
+      <p className="mt-1 inline-flex rounded-full bg-muted px-2 py-0.5 text-xs font-medium text-foreground">
+        Turunan: {c.turunan}
+      </p>
+    )}
     <details className="mt-1 text-xs text-muted-foreground">
       <summary className="inline-flex min-h-8 cursor-pointer items-center rounded font-medium underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
         Sumber
@@ -27,9 +33,10 @@ function Sumber({ t }: { t: Tindakan }) {
           {c.sourceTitle} <ExternalLink className="size-3" aria-hidden="true" />
           <span className="sr-only">(buka di tab baru)</span>
         </a>
-        . Diakses {c.accessedAt}.{c.reviewedBy.length >= 2 ? ` Ditinjau oleh ${c.reviewedBy.join(" dan ")}.` : " Belum melalui tinjauan dua orang."}
+        . Diakses {c.accessedAt}.{c.reviewedBy.length > 0 ? ` Ditinjau oleh ${c.reviewedBy.join(" dan ")}.` : ""}
       </p>
     </details>
+    </>
   );
 }
 

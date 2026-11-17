@@ -1,14 +1,14 @@
 {
   "umum": {
-    "jumlah": 20,
+    "jumlah": 39,
     "minimum": 20
   },
   "banjir": {
-    "jumlah": 22,
+    "jumlah": 47,
     "minimum": 12
   },
   "longsor": {
-    "jumlah": 13,
+    "jumlah": 34,
     "minimum": 12
   },
   "gempa": {
@@ -20,23 +20,23 @@
     "minimum": 12
   },
   "tsunami": {
-    "jumlah": 0,
+    "jumlah": 23,
     "minimum": 8
   },
   "kekeringan": {
-    "jumlah": 0,
+    "jumlah": 16,
     "minimum": 8
   },
   "karhutla": {
-    "jumlah": 0,
+    "jumlah": 26,
     "minimum": 8
   },
   "gunung_api": {
-    "jumlah": 0,
+    "jumlah": 19,
     "minimum": 6
   },
   "gelombang_abrasi": {
-    "jumlah": 0,
+    "jumlah": 28,
     "minimum": 6
   }
 }

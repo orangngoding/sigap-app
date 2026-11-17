@@ -1,5 +1,7 @@
 
 import Link from "next/link";
+import { KartuLanjutkan } from "@/components/global/kartu-lanjutkan";
+import { BencanaDicakup, KartuModeDarurat, PratinjauKartu, TransparansiAi } from "@/components/beranda/beranda-blok";
 import {
   ArrowRight,
   ClipboardCheck,
@@ -14,6 +16,7 @@ import {
 export default function Home() {
   return (
     <main id="konten" tabIndex={-1} className="flex-1 focus:outline-none">
+      <KartuLanjutkan />
       <section className="mx-auto grid max-w-7xl items-center gap-12 px-4 py-16 sm:px-6 sm:py-24 lg:grid-cols-2 lg:px-8">
         {/* Hero Content */}
         <div className="max-w-2xl">
@@ -256,6 +259,11 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <BencanaDicakup />
+      <PratinjauKartu />
+      <TransparansiAi />
+      <KartuModeDarurat />
     </main>
   );
 }

@@ -49,11 +49,11 @@ export function muatKonten(root = process.cwd()): HasilMuat {
   const pack: HasilMuat["pack"] = {};
   for (const [h, minimum] of Object.entries(MIN_POTONGAN)) {
     const milik = chunks.filter((c) => c.hazard === h);
-    const ditinjau = milik.filter((c) => c.reviewedBy.length >= MIN_PENINJAU).length;
+    const ditinjau = milik.filter((c) => c.reviewedBy.length >= MIN_PENINJAU).length; // MIN_PENINJAU = 0: semua dihitung
     const siap = milik.length >= minimum && ditinjau === milik.length && milik.length > 0;
     pack[h] = { jumlah: milik.length, minimum, ditinjau, siap };
     if (milik.length < minimum) peringatan.push(`${h}: ${milik.length}/${minimum} potongan`);
-    if (milik.length > 0 && ditinjau < milik.length) peringatan.push(`${h}: ${milik.length - ditinjau} potongan belum punya ${MIN_PENINJAU} peninjau`);
+    if (MIN_PENINJAU > 0 && milik.length > 0 && ditinjau < milik.length) peringatan.push(`${h}: ${milik.length - ditinjau} potongan belum punya ${MIN_PENINJAU} peninjau`);
   }
   return { chunks, galat, peringatan, pack };
 }

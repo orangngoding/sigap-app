@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { BookOpen, Loader2, MapPin, Pencil, Printer, RefreshCw, Sparkles, UserRound } from "lucide-react";
+import { BookOpen, FileText, Loader2, MapPin, MessageCircleQuestion, Pencil, Printer, RefreshCw, Sparkles, UserRound } from "lucide-react";
 import type { Progres } from "@/types/rencana";
 import { DisclaimerBox } from "@/components/global/disclaimer-box";
 import { StatusBanner } from "@/components/global/status-banner";
@@ -253,11 +253,20 @@ export function RencanaView() {
       )}
 
       <TasSiaga tas={tas} progres={progres} onToggle={toggle} />
-      {!contoh && (
-        <Link href="/rencana/kartu" className="inline-flex min-h-12 items-center gap-2 rounded-lg bg-primary px-6 text-sm font-semibold text-primary-foreground hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-          <Printer className="size-4" aria-hidden="true" /> Cetak Kartu Siaga
+      {/* Aksi (Blueprint 7.2 blok 8): Buat Kartu Siaga (utama), Tanya asisten, Cetak rencana */}
+      <div className="tanpa-cetak flex flex-wrap gap-3">
+        {!contoh && (
+          <Link href="/rencana/kartu" className="inline-flex min-h-12 items-center gap-2 rounded-lg bg-primary px-6 text-sm font-semibold text-primary-foreground hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+            <Printer className="size-4" aria-hidden="true" /> Buat Kartu Siaga
+          </Link>
+        )}
+        <Link href="/tanya" className="inline-flex min-h-12 items-center gap-2 rounded-lg border border-border bg-surface px-5 text-sm font-semibold hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+          <MessageCircleQuestion className="size-4" aria-hidden="true" /> Tanya asisten
         </Link>
-      )}
+        <button type="button" onClick={() => window.print()} className="inline-flex min-h-12 items-center gap-2 rounded-lg border border-border bg-surface px-5 text-sm font-semibold hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+          <FileText className="size-4" aria-hidden="true" /> Cetak rencana
+        </button>
+      </div>
       {rencana && <p className="text-sm text-muted-foreground">{rencana.catatanKeterbatasan}</p>}
       <DisclaimerBox />
     </div>

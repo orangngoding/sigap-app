@@ -52,7 +52,7 @@ const gempa = buildGempa(
 assert.equal(gempa.terbaru?.magnitudo, 5.1);
 assert.equal(gempa.terbaru?.shakemapUrl, "https://static.bmkg.go.id/abc.mmi.jpg");
 assert.ok((gempa.terbaru?.jarakKm ?? 0) % 10 === 0);
-assert.equal(gempa.daftar.length, 2); // duplikat digabung
+assert.equal(gempa.daftar.length, 1); // duplikat digabung; gempa terbaru tidak diulang di daftar (terbukti dari data nyata BMKG)
 assert.equal(gempa.ringkasan.gempaDekat24j, true);
 assert.equal(buildGempa(null, null, null, undefined, now).terbaru, null);
 assert.equal(buildGempa(null, null, null, undefined, now).ringkasan.gempaDekat24j, false);

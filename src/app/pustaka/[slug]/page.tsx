@@ -3,7 +3,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { DisclaimerBox } from "@/components/global/disclaimer-box";
-import { ARTIKEL_BY_SLUG, SEMUA_ARTIKEL } from "@/lib/pustaka/data";
+import { CetakArtikel } from "@/components/pustaka/cetak-artikel";
+import { ARTIKEL_BY_SLUG, SEMUA_ARTIKEL, artikelTerkait } from "@/lib/pustaka/data";
 
 type ArtikelPageProps = {
   params: Promise<{
@@ -79,6 +80,11 @@ export default async function ArtikelPage({
                 >
                   <h3 className="font-semibold">{x.judul}</h3>
                   <p className="mt-1 leading-relaxed">{x.isi}</p>
+                  {x.turunan && (
+                    <p className="mt-2 inline-flex rounded-full bg-muted px-2 py-0.5 text-xs font-medium">
+                      Turunan: {x.turunan}
+                    </p>
+                  )}
                 </li>
               ))}
             </ul>
@@ -108,9 +114,27 @@ export default async function ArtikelPage({
           </section>
         )}
 
+        <div className="tanpa-cetak mt-6">
+          <CetakArtikel />
+        </div>
+
         <div className="mt-8">
           <DisclaimerBox />
         </div>
+
+        <section className="tanpa-cetak mt-8" aria-labelledby="artikel-terkait">
+          <h2 id="artikel-terkait" className="text-xl font-bold">Artikel terkait</h2>
+          <ul className="mt-3 space-y-2">
+            {artikelTerkait(a).map((t) => (
+              <li key={t.slug}>
+                <Link href={`/pustaka/${t.slug}`} className="block rounded-xl border border-border bg-surface p-4 hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+                  <span className="font-semibold">{t.title}</span>
+                  <span className="mt-0.5 block text-sm text-muted-foreground">{t.ringkasan}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
       </article>
     </main>
   );

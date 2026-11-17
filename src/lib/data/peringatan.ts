@@ -53,9 +53,20 @@ const normal = (s: string) => s.toLowerCase().replace(/[^a-z0-9 ]+/g, " ").repla
 /** "DKI Jakarta" -> "jakarta", "Provinsi Jawa Barat" -> "jawa barat": kecocokan nama provinsi yang longgar. */
 const inti = (provinsi: string) => normal(provinsi).replace(/^(provinsi|dki|di|daerah khusus ibukota|daerah istimewa)\s+/, "");
 
+/**
+ * Judul BMKG berbentuk "<Kejadian> di <Provinsi>" (diverifikasi pada umpan nyata 2026-11-17). Bila ada, provinsi
+ * dicocokkan SAMA PERSIS dengan bagian setelah " di ", sehingga "Riau" tidak cocok dengan "Kepulauan Riau" dan
+ * "Papua Barat" tidak cocok dengan "Papua Barat Daya". Bila judul tidak berpola itu, pakai pencocokan longgar.
+ */
 export function cocokProvinsi(i: ItemRss, provinsi: string): boolean {
   const p = inti(provinsi);
-  return p.length > 2 && normal(`${i.judul} ${i.deskripsi}`).includes(p);
+  if (p.length <= 2) return false;
+  const idx = i.judul.toLowerCase().lastIndexOf(" di ");
+  if (idx >= 0) {
+    const bagian = i.judul.slice(idx + 4).split(/,|\bdan\b/i).map(inti).filter(Boolean);
+    return bagian.some((b) => b === p);
+  }
+  return normal(`${i.judul} ${i.deskripsi}`).includes(p);
 }
 
 // ---------- CAP ----------

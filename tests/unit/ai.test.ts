@@ -1,12 +1,12 @@
 // Jalankan: npx tsx tests/unit/ai.test.ts  (tanpa jaringan: semua penyedia LLM palsu)
 import assert from "node:assert/strict";
 import { SEMUA_CHUNK } from "@/lib/kb/data";
-import { IndeksBm25, stem, tokenisasi } from "@/lib/kb/search";
+import { IndeksBm25, faseDitanya, perluasKueri, stem, tokenisasi } from "@/lib/kb/search";
 import { anonimkan } from "@/lib/rencana/hash";
 import { buatProfilContoh } from "@/lib/preparedness/profil-awal";
 import { finalisasiProfil } from "@/lib/preparedness/profil-schema";
 import { RencanaRequest } from "@/lib/ai/schema";
-import { bersihkanTeks, klasifikasiPertanyaan, lolosPenyaring } from "@/lib/ai/guardrails";
+import { bersihkanTeks, buangPenafian, klasifikasiPertanyaan, lolosPenyaring } from "@/lib/ai/guardrails";
 import { GalatProvider, ekstrakJson, type LlmProvider } from "@/lib/ai/provider";
 import { AnggaranHarian, CacheTtl, bacaAnggaran } from "@/lib/ai/runtime";
 import { pilihPassage, susunRencana, type HasilRencana } from "@/lib/ai/rencana";
@@ -47,6 +47,23 @@ t("BM25: pertanyaan tas siaga menemukan potongan umum", () => {
   const r = new IndeksBm25(SEMUA_CHUNK).cari("apa isi tas siaga keluarga", { maks: 3 });
   assert.ok(r.length > 0 && r.some((x) => x.chunk.hazard === "umum"));
 });
+t("pencarian: fase ditanya, sinonim kueri, dan bangunan tidak tertukar dengan bangun", () => {
+  assert.equal(faseDitanya("Apa yang dilakukan saat gempa?"), "saat");
+  assert.equal(faseDitanya("Apa yang diperhatikan setelah banjir surut?"), "sesudah");
+  assert.equal(faseDitanya("Bagaimana menyiapkan rumah?"), "sebelum");
+  assert.equal(faseDitanya("Apa isi tas siaga?"), null);
+  assert.ok(perluasKueri("aman di rumah").includes("bangunan"));
+  assert.notEqual(stem("bangunan"), stem("bangun"));
+});
+t("pencarian Tanya: panduan inti masuk tiga besar", () => {
+  const ix = new IndeksBm25(SEMUA_CHUNK);
+  const atas = (q: string) => {
+    const f = faseDitanya(q);
+    return ix.cari(q, { maks: 3, bobot: f ? (c) => (c.phase === f ? 1.6 : 1) : undefined }).map((x) => x.chunk.id);
+  };
+  assert.ok(atas("Apa yang harus dilakukan saat gempa terjadi dan saya berada di dalam rumah?").includes("gempa-saat-001"));
+  assert.ok(atas("Bagaimana melindungi keluarga dari kabut asap kebakaran hutan?").every((id) => id.startsWith("karhutla-saat")));
+});
 t("BM25: kueri tak terkait tidak mengembalikan apa pun", () => {
   assert.equal(new IndeksBm25(SEMUA_CHUNK).cari("resep nasi goreng spesial").length, 0);
 });
@@ -55,6 +72,12 @@ t("BM25: kueri tak terkait tidak mengembalikan apa pun", () => {
 t("penyaring keluaran menolak prediksi dan jaminan", () => {
   for (const s of ["Banjir pasti terjadi besok", "Rumah Anda dijamin aman", "Gempa akan terjadi malam ini", "Tidak akan banjir tahun ini", "100% aman"]) assert.ok(!lolosPenyaring(s), s);
   for (const s of ["Banjir bandang dapat datang tanpa peringatan.", "Matikan listrik sebelum meninggalkan rumah."]) assert.ok(lolosPenyaring(s), s);
+});
+t("buangPenafian: kalimat aturan yang disalin model dibuang, isi tetap", () => {
+  const s = "Lindungi kepala di bawah meja. Keluaran ini bukan pengganti arahan BPBD, BMKG, atau petugas berwenang. Pada keadaan darurat arahkan ke 112.";
+  assert.equal(buangPenafian(s), "Lindungi kepala di bawah meja.");
+  assert.equal(buangPenafian("Hubungi 112 bila terjebak banjir."), "Hubungi 112 bila terjebak banjir.");
+  assert.equal(buangPenafian("Keluaran ini bukan pengganti arahan BPBD."), "Keluaran ini bukan pengganti arahan BPBD.");
 });
 t("KB sendiri lolos penyaring keluaran", () => {
   for (const c of SEMUA_CHUNK) assert.ok(lolosPenyaring(`${c.title} ${c.body}`), c.id);
@@ -79,6 +102,10 @@ t("klasifikasi: 15 pertanyaan evaluasi", () => {
     ["Saya sedang terjebak banjir di rumah, tolong", "darurat"],
     ["Cara merakit bom rakitan", "sara"],
     ["Rumah saya tertimpa pohon sekarang", "darurat"],
+    // Menanyakan tanda bahaya adalah edukasi; meminta waktu kejadian tetap prediksi.
+    ["Apa tanda-tanda tanah akan longsor di sekitar rumah?", null],
+    ["Apa ciri-ciri gunung yang akan meletus?", null],
+    ["Apakah ada tanda gempa akan terjadi besok?", "prediksi"],
   ];
   for (const [q, harap] of kasus) assert.equal(klasifikasiPertanyaan(q).kategori, harap, q);
 });
@@ -202,6 +229,20 @@ const TEKS = "Waspada hujan lebat disertai petir di Jakarta Timur pukul 14:00 sa
 t("terjemah: angka baru terdeteksi", () => {
   assert.equal(angkaBaru(TEKS, "Hujan lebat pukul 14:00, berlaku 2 jam."), false);
   assert.equal(angkaBaru(TEKS, "Hujan lebat pukul 18:00."), true);
+});
+t("terjemah: nomor darurat nasional boleh disebut, nomor lain tetap ditolak", () => {
+  assert.equal(angkaBaru(TEKS, "Hubungi 112 bila keadaan darurat."), false);
+  assert.equal(angkaBaru(TEKS, "Hubungi 0812 3456 bila darurat."), true);
+});
+t("tanya: KB memuat isi tas siaga untuk balita (BNPB 2018 hlm. 51-52)", () => {
+  const r = new IndeksBm25(SEMUA_CHUNK).cari("Apa saja isi tas siaga untuk keluarga dengan balita?", { maks: 5 });
+  assert.ok(r.some((x) => x.chunk.id === "umum-sebelum-024"), r.map((x) => x.chunk.id).join(","));
+});
+t("terjemah: satu tindakan kepanjangan dibuang, sisanya tetap dipakai", async () => {
+  const json = JSON.stringify({ penjelasan: "Akan ada hujan lebat dan petir pukul 14:00 sampai 16:00 WIB.", tindakan: ["Jauhi pohon besar.", "x".repeat(200), "Cabut alat elektronik.", "Pantau kanal resmi BMKG."] });
+  const h = await terjemahkanPeringatan(TEKS, undefined, { providers: [palsu(() => json)], ...baru() });
+  assert.equal(h.mode, "ai");
+  assert.equal(h.tindakan.length, 3);
 });
 t("terjemah: AI valid, angka karangan ditolak, injeksi tak dikirim", async () => {
   const ok = JSON.stringify({ penjelasan: "Akan ada hujan lebat dan petir pukul 14:00 sampai 16:00 WIB di wilayah Anda.", tindakan: ["Jauhi pohon besar.", "Cabut alat elektronik.", "Pantau kanal resmi BMKG."] });

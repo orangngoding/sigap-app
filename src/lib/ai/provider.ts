@@ -27,7 +27,9 @@ export class GalatProvider extends Error {
 }
 
 const HOST_GEMINI = "generativelanguage.googleapis.com";
-const MODEL_BAWAAN = "gemini-2.5-flash"; // ganti lewat GEMINI_MODEL; kuota gratis dicek di AI Studio
+// Ganti lewat GEMINI_MODEL; kuota gratis dicek di AI Studio. Per 2026-11-17 gemini-2.5-flash membalas 404
+// ("no longer available to new users") dan model Flash penuh sering 503 karena ramai, sedangkan Flash Lite stabil.
+const MODEL_BAWAAN = "gemini-3.5-flash-lite";
 
 /** Buang pagar kode ``` bila model membungkus JSON-nya. */
 export function ekstrakJson(teks: string): string {

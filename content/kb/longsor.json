@@ -206,5 +206,341 @@
     "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
     "accessedAt": "2026-11-16",
     "reviewedBy": []
+  },
+  {
+    "id": "longsor-sesudah-001",
+    "hazard": "longsor",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Hindari wilayah longsor, tanah masih labil",
+    "body": "Hindari wilayah longsor karena kondisi tanahnya masih labil.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 44",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "longsor-sesudah-002",
+    "hazard": "longsor",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Antisipasi longsor susulan bila hujan turun",
+    "body": "Apabila hujan turun setelah longsor terjadi, antisipasi kemungkinan longsor susulan.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 44",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "longsor-sebelum-010",
+    "hazard": "longsor",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Waspadai retakan memanjang atau lengkung setelah hujan",
+    "body": "Retakan memanjang atau lengkung pada tanah atau bangunan, yang biasa muncul setelah hujan, dapat menjadi tanda longsor. Perhatikan juga lereng atau tembok penahan yang menggembung.",
+    "sourceTitle": "Pengenalan Karakteristik Bencana dan Upaya Mitigasinya di Indonesia, Edisi II (BNPB/BAKORNAS PB, 2007), hlm. 30",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/470.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "longsor-sebelum-011",
+    "hazard": "longsor",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Perhatikan pintu atau jendela yang tiba-tiba sulit dibuka",
+    "body": "Pintu atau jendela rumah yang tiba-tiba sulit dibuka dapat menandakan bangunan terdorong massa tanah yang bergerak.",
+    "sourceTitle": "Pengenalan Karakteristik Bencana dan Upaya Mitigasinya di Indonesia, Edisi II (BNPB/BAKORNAS PB, 2007), hlm. 30",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/470.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "longsor-sebelum-012",
+    "hazard": "longsor",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Waspadai mata air baru yang berubah keruh",
+    "body": "Rembesan atau mata air yang tiba-tiba muncul di lereng, lalu menjadi keruh bercampur lumpur, dapat menjadi tanda longsor.",
+    "sourceTitle": "Pengenalan Karakteristik Bencana dan Upaya Mitigasinya di Indonesia, Edisi II (BNPB/BAKORNAS PB, 2007), hlm. 30-31",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/470.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "longsor-sebelum-013",
+    "hazard": "longsor",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Perhatikan pohon atau tiang yang miring ke arah lereng",
+    "body": "Pohon atau tiang yang miring searah kemiringan lereng, serta suara gemuruh atau ledakan dari atas lereng, dapat menjadi tanda longsor.",
+    "sourceTitle": "Pengenalan Karakteristik Bencana dan Upaya Mitigasinya di Indonesia, Edisi II (BNPB/BAKORNAS PB, 2007), hlm. 31",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/470.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "longsor-sebelum-014",
+    "hazard": "longsor",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Beri tahu lingkungan bila ada kemungkinan longsor",
+    "body": "Beri tahu lingkungan sekitar bila terdapat kemungkinan terjadi longsor.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 43",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "longsor-sebelum-015",
+    "hazard": "longsor",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Waspadai sungai keruh bila ada potensi banjir bandang",
+    "body": "Pelajari tanda longsor di daerah berlereng: hujan lebat terus-menerus, rembesan, retakan, dan air sungai keruh bila ada potensi banjir bandang.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 43",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "longsor-sebelum-016",
+    "hazard": "longsor",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Ikut patroli warga di daerah rawan longsor",
+    "body": "Ikut aktif bersama masyarakat di daerah rawan longsor dalam patroli rutin, termasuk memeriksa aliran sungai di lereng atas yang terbendung karena dapat memicu banjir bandang.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 43",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "longsor-sebelum-017",
+    "hazard": "longsor",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Pertimbangkan mengungsi bila tanda longsor terlihat",
+    "body": "Bila tanda-tanda longsor sudah terlihat, pertimbangkan untuk mengungsi ke tempat yang aman.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 43",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "longsor-sebelum-018",
+    "hazard": "longsor",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "rendah",
+    "darurat": false,
+    "title": "Ketahui peta prakiraan gerakan tanah bulanan",
+    "body": "Badan Geologi membuat peta prakiraan wilayah potensi gerakan tanah setiap awal bulan. Peta ini dapat menjadi acuan peringatan dini saat curah hujan di atas normal di daerah rawan longsor.",
+    "sourceTitle": "Curah Hujan Tinggi, Masyarakat Diminta Waspadai Gerakan Tanah Longsor (Kementerian ESDM, 6 Februari 2018)",
+    "sourceUrl": "https://esdm.go.id/en/media-center/news-archives/curah-hujan-tinggi-masyarakat-diminta-waspadai-gerakan-tanah-longsor",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "longsor-saat-005",
+    "hazard": "longsor",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": true,
+    "title": "Tetap tenang agar bisa bertindak tepat",
+    "body": "Berusaha tenang, karena kondisi panik membuat kita tidak dapat bertindak tepat.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 44",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "longsor-saat-006",
+    "hazard": "longsor",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": true,
+    "title": "Segera tinggalkan rumah bila longsor di sekitar",
+    "body": "Bila longsor terjadi di sekitar rumah, cepat tinggalkan rumah dan berlindunglah di tempat aman. Jangan mendekati daerah longsoran karena longsor susulan masih mungkin.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 44",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "longsor-saat-007",
+    "hazard": "longsor",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": true,
+    "title": "Mengungsi bila kondisi sekitar membahayakan",
+    "body": "Bila kondisi di sekitar tempat tinggal membahayakan, mengungsilah.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 44",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "longsor-saat-008",
+    "hazard": "longsor",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Hubungi petugas di lingkungan tempat tinggal",
+    "body": "Hubungi petugas di lingkungan tempat tinggal dan pantau terus informasi.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 44",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "longsor-saat-009",
+    "hazard": "longsor",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "rendah",
+    "darurat": false,
+    "title": "Bantu orang lain bila memungkinkan",
+    "body": "Bila memungkinkan, bantu keluarga dan orang lain yang mengalami situasi sulit akibat longsor.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 44",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "longsor-sesudah-003",
+    "hazard": "longsor",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Kembali ke rumah hanya setelah dinyatakan aman",
+    "body": "Jangan kembali ke rumah bila informasi menyatakan kondisi belum aman. Kembalilah setelah situasi di tempat tinggal dinyatakan aman.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 44-45",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "longsor-sesudah-004",
+    "hazard": "longsor",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Tetap di tempat aman dan ikuti informasi",
+    "body": "Jauhi kawasan yang terkena longsor, tetap berada di tempat aman, dan ikuti terus informasi untuk memastikan Anda berada di tempat yang tepat.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 45",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "longsor-sesudah-005",
+    "hazard": "longsor",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Beri pertolongan tanpa membahayakan diri",
+    "body": "Berikan pertolongan bagi yang membutuhkan tanpa membahayakan keselamatan diri sendiri.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 45",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "longsor-sesudah-006",
+    "hazard": "longsor",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "rendah",
+    "darurat": false,
+    "title": "Laporkan kejadian dengan singkat dan jelas",
+    "body": "Laporkan kondisi dan kejadian dengan singkat dan jelas.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 45",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "longsor-sesudah-007",
+    "hazard": "longsor",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Ikuti perintah relokasi dari pihak berwenang",
+    "body": "Ikuti perintah relokasi apabila telah diputuskan oleh pihak yang berwenang.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 45",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
   }
 ]

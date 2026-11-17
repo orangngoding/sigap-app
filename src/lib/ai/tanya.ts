@@ -2,10 +2,10 @@
 // sebelum AI dipanggil agar konsisten, hemat kuota, dan kebal terhadap injeksi prompt.
 import type { HazardId } from "@/types";
 import type { Chunk } from "@/lib/kb/schema";
-import { indeksUntuk } from "@/lib/kb/search";
+import { faseDitanya, indeksUntuk } from "@/lib/kb/search";
 import { GalatProvider, type LlmProvider } from "./provider";
 import { JawabanTanya } from "./schema";
-import { BALASAN_TOLAK, adaKataTopik, bersihkanTeks, klasifikasiPertanyaan, lolosPenyaring, type KategoriTolak } from "./guardrails";
+import { BALASAN_TOLAK, adaKataTopik, bersihkanTeks, buangPenafian, klasifikasiPertanyaan, lolosPenyaring, type KategoriTolak } from "./guardrails";
 import { SISTEM_TANYA, blokData } from "./prompts";
 import { AnggaranHarian, anggaranGlobal } from "./runtime";
 
@@ -33,7 +33,8 @@ export interface DepsTanya {
 }
 
 const AMBANG_SKOR = 1.2; // di bawah ini dianggap tidak ada panduan yang relevan
-const MAKS_PASSAGE = 5;
+const MAKS_PASSAGE = 6;
+const BOBOT_FASE = 1.6;
 
 const tolak = (kategori: KategoriTolak): HasilTanya => ({
   mode: "cadangan",
@@ -52,8 +53,10 @@ export async function jawabPertanyaan(pertanyaan: string, bahaya: HazardId[] | u
   if (k.kategori) return tolak(k.kategori);
 
   // Pertanyaan boleh menyangkut bahaya mana pun; `bahaya` hanya memberi bobot lewat kueri, bukan menyaring.
+  // Fase yang ditanyakan ("saat gempa", "setelah banjir") diberi bobot; fase lain tetap bisa muncul.
+  const fase = faseDitanya(pertanyaan);
   const hasil = indeksUntuk(d.kb)
-    .cari(`${pertanyaan} ${(bahaya ?? []).join(" ")}`, { maks: MAKS_PASSAGE })
+    .cari(`${pertanyaan} ${(bahaya ?? []).join(" ")}`, { maks: MAKS_PASSAGE, bobot: fase ? (c) => (c.phase === fase ? BOBOT_FASE : 1) : undefined })
     .filter((r) => r.skor >= AMBANG_SKOR);
 
   if (hasil.length === 0) return tolak(adaKataTopik(pertanyaan) ? "tanpa_panduan" : "di_luar_topik");
@@ -86,7 +89,7 @@ export async function jawabPertanyaan(pertanyaan: string, bahaya: HazardId[] | u
       if (!v.success) continue;
       const idOk = new Set(passages.map((c) => c.id));
       const src = v.data.sourceIds.filter((id) => idOk.has(id));
-      const jawab = bersihkanTeks(v.data.jawaban);
+      const jawab = buangPenafian(bersihkanTeks(v.data.jawaban));
       if (v.data.refused || jawab.length < 10) return tolak("tanpa_panduan");
       if (src.length === 0 || !lolosPenyaring(jawab)) return cadangan(); // tanpa kutipan valid atau melanggar pagar
       return { mode: "ai", jawaban: jawab, refused: false, sumber: unik(passages.filter((c) => src.includes(c.id)).map(ke)) };

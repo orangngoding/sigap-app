@@ -1,0 +1,258 @@
+[
+  {
+    "id": "kekeringan-sebelum-001",
+    "hazard": "kekeringan",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Jaga sumber dan mata air",
+    "body": "Jaga sumber atau mata air di lingkungan Anda agar pasokan air tetap terjaga.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 50",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "kekeringan-sebelum-002",
+    "hazard": "kekeringan",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Gunakan air dengan bijak",
+    "body": "Gunakan air dengan bijak sepanjang waktu, bukan hanya ketika kemarau tiba.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 50",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "kekeringan-sebelum-003",
+    "hazard": "kekeringan",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "rendah",
+    "darurat": false,
+    "title": "Jangan merusak hutan dan kawasan cagar alam",
+    "body": "Jangan merusak hutan atau kawasan cagar alam yang menjaga cadangan air.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 50",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "kekeringan-sebelum-004",
+    "hazard": "kekeringan",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Buat tandon penampung air hujan di pekarangan",
+    "body": "Untuk memenuhi kebutuhan keluarga, buat tandon di sekitar pekarangan rumah untuk menampung air hujan.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 50",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "kekeringan-sebelum-005",
+    "hazard": "kekeringan",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "rendah",
+    "darurat": false,
+    "title": "Bangun waduk atau embung bersama warga",
+    "body": "Secara kolektif, buat waduk atau embung untuk menampung air hujan yang dipakai pada musim kemarau.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 50",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "kekeringan-sebelum-006",
+    "hazard": "kekeringan",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "rendah",
+    "darurat": false,
+    "title": "Pakai mulsa untuk menjaga kelembapan tanah",
+    "body": "Dalam pertanian, pakai mulsa, yaitu penutup tanaman budi daya, untuk menjaga kelembapan tanah serta menekan gulma dan penyakit.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 50",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "kekeringan-saat-001",
+    "hazard": "kekeringan",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": true,
+    "title": "Lapor dan minta bantuan air bersih",
+    "body": "Laporkan kekurangan air dan minta bantuan air bersih kepada pihak yang berwenang.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 51",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "kekeringan-saat-002",
+    "hazard": "kekeringan",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": true,
+    "title": "Atur jadwal pemakaian air yang tersisa",
+    "body": "Atur jadwal penggunaan air yang masih ada agar cukup untuk kebutuhan penting keluarga.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 51",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "kekeringan-saat-003",
+    "hazard": "kekeringan",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": true,
+    "title": "Matikan kran bila tidak dipakai",
+    "body": "Kurangi pemakaian air yang berlebih. Matikan kran bila tidak digunakan.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 51",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "kekeringan-saat-004",
+    "hazard": "kekeringan",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": true,
+    "title": "Pantau informasi resmi terkini",
+    "body": "Simak informasi terkini dari radio, televisi, media daring, dan sumber informasi resmi pemerintah.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 51",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "kekeringan-sesudah-001",
+    "hazard": "kekeringan",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Buat sumur resapan atau biopori",
+    "body": "Buat sumur resapan atau biopori agar air hujan lebih banyak meresap ke dalam tanah.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 52",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "kekeringan-sesudah-002",
+    "hazard": "kekeringan",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "rendah",
+    "darurat": false,
+    "title": "Dukung waduk atau bendungan penampung hujan",
+    "body": "Dukung pembuatan waduk atau bendungan untuk menampung air hujan.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 52",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "kekeringan-sebelum-007",
+    "hazard": "kekeringan",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Isi cadangan air selagi pasokan masih ada",
+    "body": "Isi cadangan air saat pasokan masih tersedia, dan simpan cadangan air bersih untuk kebutuhan prioritas.",
+    "sourceTitle": "Perkembangan Situasi dan Penanganan Bencana di Tanah Air Tanggal 12 Oktober 2026 (BNPB)",
+    "sourceUrl": "https://bnpb.go.id/berita/perkembangan-situasi-dan-penanganan-bencana-di-tanah-air-tanggal-12-oktober-2026",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "kekeringan-sebelum-008",
+    "hazard": "kekeringan",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Periksa dan perbaiki keran atau pipa yang bocor",
+    "body": "Periksa instalasi pipa secara berkala dan perbaiki keran atau pipa yang bocor agar air tidak terbuang.",
+    "sourceTitle": "Perkembangan Situasi dan Penanganan Bencana di Tanah Air per 3 Juli 2026 (BNPB)",
+    "sourceUrl": "https://www.bnpb.go.id/berita/perkembangan-situasi-dan-penanganan-bencana-di-tanah-air-per-3-juli-2026",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "kekeringan-saat-005",
+    "hazard": "kekeringan",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": true,
+    "title": "Prioritaskan air untuk memasak dan minum",
+    "body": "Gunakan air bersih secara bijak dengan memprioritaskan kebutuhan pokok, seperti memasak dan minum.",
+    "sourceTitle": "Perkembangan Situasi dan Penanganan Bencana di Tanah Air per 3 Juli 2026 (BNPB)",
+    "sourceUrl": "https://www.bnpb.go.id/berita/perkembangan-situasi-dan-penanganan-bencana-di-tanah-air-per-3-juli-2026",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "kekeringan-saat-006",
+    "hazard": "kekeringan",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Pakai ulang air bekas yang masih layak",
+    "body": "Manfaatkan kembali air bekas yang masih layak, misalnya air cucian sayur untuk menyiram tanaman.",
+    "sourceTitle": "Perkembangan Situasi dan Penanganan Bencana di Tanah Air Tanggal 7 Juli 2026 (BNPB)",
+    "sourceUrl": "https://www.bnpb.go.id/berita/perkembangan-situasi-dan-penanganan-bencana-di-tanah-air-tanggal-7-juli-2026",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  }
+]

@@ -358,5 +358,408 @@
     "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
     "accessedAt": "2026-11-16",
     "reviewedBy": []
+  },
+  {
+    "id": "banjir-sebelum-009",
+    "hazard": "banjir",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Tentukan peran tiap anggota keluarga saat banjir",
+    "body": "Tentukan peran dan tugas setiap anggota keluarga saat banjir, misalnya peran ayah, ibu, anak, dan asisten rumah tangga.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 37",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-sebelum-010",
+    "hazard": "banjir",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Letakkan tas siaga dekat pintu keluar",
+    "body": "Siapkan tas siaga keluarga dan letakkan di tempat yang mudah dijangkau, terlihat, dan dekat akses keluar rumah, untuk bertahan 3 x 24 jam pertama.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 38",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-sebelum-011",
+    "hazard": "banjir",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Pastikan jalur keluar rumah tidak terhalang",
+    "body": "Pastikan jalur evakuasi keluar rumah kosong dan tidak terhalang meja, kursi, atau lemari.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 38",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-sebelum-012",
+    "hazard": "banjir",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Ketahui tempat evakuasi akhir banjir terdekat",
+    "body": "Pastikan keluarga mengetahui tempat evakuasi akhir (TEA) banjir terdekat dari rumah.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 38",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-sebelum-013",
+    "hazard": "banjir",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Pantau info banjir, cuaca, dan status peringatan",
+    "body": "Simak informasi dan gunakan aplikasi info banjir, cuaca, serta status peringatan banjir dari instansi terkait.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 38",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-sebelum-014",
+    "hazard": "banjir",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Siapkan keluarga untuk evakuasi mandiri",
+    "body": "Latih keluarga menghadapi evakuasi mandiri, termasuk berlatih renang dan menyiapkan pelampung.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 38",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-sebelum-015",
+    "hazard": "banjir",
+    "phase": "sebelum",
+    "audience": [
+      "lansia",
+      "disabilitas"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Perhatikan anggota keluarga yang sakit atau berkebutuhan khusus",
+    "body": "Perhatikan anggota keluarga yang sakit atau berkebutuhan khusus dan masukkan kebutuhan mereka dalam rencana banjir.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 38",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-sebelum-016",
+    "hazard": "banjir",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "rendah",
+    "darurat": false,
+    "title": "Pasang penanda tinggi air hijau, kuning, merah",
+    "body": "Pasang bambu atau papan penanda ketinggian air di tempat yang disepakati dan mudah terlihat. Hijau berarti aman, kuning waspada, merah bahaya.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 39",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-sebelum-017",
+    "hazard": "banjir",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "rendah",
+    "darurat": false,
+    "title": "Tandai tempat yang berbahaya saat banjir",
+    "body": "Periksa dan beri tanda tempat yang membahayakan saat banjir, misalnya sumur tak tertutup, bekas galian, dan pagar berduri.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 39",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-sebelum-018",
+    "hazard": "banjir",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Selaraskan rencana keluarga dengan RT, RW, kelurahan",
+    "body": "Selaraskan rencana kedaruratan keluarga dengan tetangga, RT, RW, dan kelurahan: sistem peringatan dini, jalur evakuasi, titik kumpul, dan bantuan darurat.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 39",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-sebelum-019",
+    "hazard": "banjir",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "rendah",
+    "darurat": false,
+    "title": "Berlatih penyelamatan banjir bersama warga",
+    "body": "Adakan pelatihan dan simulasi penyelamatan banjir bersama keluarga dan warga sekitar.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 39",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-saat-010",
+    "hazard": "banjir",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": true,
+    "title": "Ikuti pengumuman RT, RW, atau petugas setempat",
+    "body": "Terima pengumuman dan pengarahan dari RT, RW, atau petugas setempat untuk evakuasi mandiri saat air berada di level hijau.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 39",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-saat-011",
+    "hazard": "banjir",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Siapkan obat, dokumen penting, makanan tahan lama",
+    "body": "Siapkan obat-obatan, dokumen penting, dan makanan yang mudah dibawa dan tahan lama.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 39",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-saat-012",
+    "hazard": "banjir",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Pindahkan barang elektronik",
+    "body": "Pindahkan barang elektronik saat air masih berada di level hijau.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 39",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-saat-013",
+    "hazard": "banjir",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Ungsikan hewan peliharaan dan ternak",
+    "body": "Bila memiliki hewan peliharaan atau ternak, segera ungsikan.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 39",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-saat-014",
+    "hazard": "banjir",
+    "phase": "saat",
+    "audience": [
+      "balita"
+    ],
+    "priority": "tinggi",
+    "darurat": true,
+    "title": "Awasi anak agar tidak bermain air banjir",
+    "body": "Awasi anak-anak agar tidak bermain air banjir, baik di dalam maupun di luar rumah.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 40",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-saat-015",
+    "hazard": "banjir",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": true,
+    "title": "Bawa tas siaga bencana",
+    "body": "Bawa tas siaga bencana saat air berada di level kuning atau merah.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 40",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-saat-016",
+    "hazard": "banjir",
+    "phase": "saat",
+    "audience": [
+      "lansia",
+      "disabilitas",
+      "balita"
+    ],
+    "priority": "tinggi",
+    "darurat": true,
+    "title": "Bawa anggota rentan ke tempat aman lebih awal",
+    "body": "Bawa anggota keluarga yang rentan, lansia, atau berkebutuhan khusus ke tempat aman yang diarahkan RT, RW, atau petugas, jauh sebelum air banjir meningkat.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 40",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-sesudah-006",
+    "hazard": "banjir",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Pastikan anggota keluarga dan barang ungsian lengkap",
+    "body": "Pastikan anggota keluarga dan barang yang diungsikan lengkap.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 40",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-sesudah-007",
+    "hazard": "banjir",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Dengarkan arahan lanjutan RT, RW, dan petugas",
+    "body": "Dengarkan arahan lanjutan dari RT, RW, dan petugas terkait sebelum bertindak.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 40",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-sesudah-008",
+    "hazard": "banjir",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Periksa rumah: dinding retak atau kerusakan lain",
+    "body": "Periksa rumah untuk melihat tanda dinding retak atau kerusakan lainnya.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 40",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-sesudah-009",
+    "hazard": "banjir",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Jangan langsung masuk rumah yang masih tergenang",
+    "body": "Jangan langsung masuk ke rumah yang masih digenangi air. Waspadai binatang beracun dan benda berbahaya yang tersembunyi.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 40",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-sesudah-010",
+    "hazard": "banjir",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Bersihkan perabot dan pakaian yang terendam",
+    "body": "Bersihkan seluruh perabot dan pakaian yang terendam banjir, dan bersihkan rumah serta sekitarnya, bisa lewat kerja bakti bersama warga.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 41",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-sesudah-011",
+    "hazard": "banjir",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "rendah",
+    "darurat": false,
+    "title": "Laporkan tindakan dan kerugian ke RT, RW, petugas",
+    "body": "Laporkan seluruh tindakan yang sudah dilakukan serta kerusakan dan kerugian kepada RT, RW, dan petugas.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 41",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-sesudah-012",
+    "hazard": "banjir",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "rendah",
+    "darurat": false,
+    "title": "Evaluasi rencana kesiapsiagaan keluarga",
+    "body": "Evaluasi rencana kesiapsiagaan keluarga berdasarkan pengalaman banjir yang baru terjadi.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 41",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
   }
 ]

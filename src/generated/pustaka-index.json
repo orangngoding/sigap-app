@@ -6,8 +6,9 @@
     "hazards": [
       "umum"
     ],
+    "kategori": "Keluarga",
     "intro": "Tas siaga membantu keluarga bertahan beberapa hari pertama setelah kejadian. Butir di bawah dirangkum dari panduan BNPB.",
-    "menit": 2,
+    "menit": 1,
     "bagian": [
       {
         "judul": "Persiapan sebelum bencana",
@@ -22,18 +23,6 @@
             "id": "umum-sebelum-002",
             "judul": "Siapkan perlengkapan dasar",
             "isi": "Siapkan kotak P3K, senter atau lampu baterai, radio, serta persediaan makanan dan air minum di tempat yang mudah diambil.",
-            "darurat": false
-          },
-          {
-            "id": "umum-sebelum-003",
-            "judul": "Pelajari P3K dan alat pemadam api",
-            "isi": "Pelajari pertolongan pertama dan cara memakai alat pemadam api ringan agar siap bertindak sebelum bantuan datang.",
-            "darurat": false
-          },
-          {
-            "id": "umum-sebelum-004",
-            "judul": "Kenali jalur keluar rumah",
-            "isi": "Ketahui letak pintu, tangga darurat, dan tempat paling aman untuk berlindung di rumah atau gedung tempat Anda tinggal.",
             "darurat": false
           },
           {
@@ -55,24 +44,6 @@
             "darurat": false
           },
           {
-            "id": "umum-sebelum-008",
-            "judul": "Kenali rute evakuasi",
-            "isi": "Ketahui rute evakuasi dari rumah dan lingkungan Anda, dan ajak seluruh anggota keluarga melewatinya bersama.",
-            "darurat": false
-          },
-          {
-            "id": "umum-sebelum-009",
-            "judul": "Cari tahu letak saklar listrik, kran air, dan gas",
-            "isi": "Ketahui letak untuk mematikan listrik, air, dan gas di rumah, dan pastikan anggota dewasa keluarga juga tahu.",
-            "darurat": false
-          },
-          {
-            "id": "umum-sebelum-010",
-            "judul": "Tentukan titik aman di dalam rumah",
-            "isi": "Kenali bagian rumah yang paling aman untuk berlindung, lalu beri tahu seluruh anggota keluarga.",
-            "darurat": false
-          },
-          {
             "id": "umum-sebelum-011",
             "judul": "Catat anggota keluarga yang rentan",
             "isi": "Catat anggota keluarga yang rentan, yaitu anak-anak, lansia, ibu hamil, dan penyandang disabilitas, lalu rencanakan bantuan untuk mereka.",
@@ -85,21 +56,9 @@
             "darurat": false
           },
           {
-            "id": "umum-sebelum-013",
-            "judul": "Siapkan air dan makanan tahan lama",
-            "isi": "Siapkan air minum dan makanan ringan tahan lama untuk sekitar tiga hari di dalam tas siaga.",
-            "darurat": false
-          },
-          {
-            "id": "umum-sebelum-014",
-            "judul": "Siapkan senter, radio, dan pengisi daya",
-            "isi": "Masukkan senter atau lampu kepala, radio atau ponsel beserta baterai atau power bank ke dalam tas siaga untuk memantau informasi.",
-            "darurat": false
-          },
-          {
-            "id": "umum-sebelum-015",
-            "judul": "Sesuaikan peringatan dini dengan jenis disabilitas",
-            "isi": "Pastikan peringatan dini dapat diterima anggota dengan disabilitas sesuai jenisnya, dan latih penyelamatan diri bersama kerabat terdekat.",
+            "id": "umum-sebelum-023",
+            "judul": "Siapkan perlengkapan bertahan 3x24 jam",
+            "isi": "Siapkan satu paket perlengkapan kebutuhan dasar keluarga untuk bertahan 3x24 jam saat bantuan belum tiba, berisi air minum dalam botol minimal 2 liter per orang per hari dan makanan siap makan yang tahan lama seperti biskuit.",
             "darurat": false
           }
         ]
@@ -117,6 +76,10 @@
       {
         "judul": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019)",
         "url": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf"
+      },
+      {
+        "judul": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak)",
+        "url": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf"
       }
     ]
   },
@@ -127,6 +90,7 @@
     "hazards": [
       "banjir"
     ],
+    "kategori": "Bencana",
     "intro": "Banjir bisa datang perlahan atau tiba-tiba. Langkah berikut dirangkum dari panduan BNPB.",
     "menit": 2,
     "bagian": [
@@ -134,51 +98,33 @@
         "judul": "Sebelum banjir",
         "butir": [
           {
-            "id": "banjir-sebelum-001",
-            "judul": "Hindari bantaran sungai",
-            "isi": "Jangan membangun atau menambah permukiman di bantaran sungai dan daerah rawan banjir.",
-            "darurat": false
-          },
-          {
-            "id": "banjir-sebelum-002",
-            "judul": "Jaga aliran sungai dan saluran",
-            "isi": "Jaga aliran sungai dari sampah dan lakukan penghijauan di hulu agar air lebih mudah mengalir.",
-            "darurat": false
-          },
-          {
-            "id": "banjir-sebelum-003",
-            "judul": "Pasang pompa di area rendah",
-            "isi": "Pasang pompa di area yang lebih rendah agar air genangan dapat dibuang.",
-            "darurat": false
-          },
-          {
             "id": "banjir-sebelum-004",
             "judul": "Bicarakan rencana banjir dan tempat bertemu",
             "isi": "Bicarakan ancaman banjir dengan keluarga dan sepakati tempat bertemu bila anggota keluarga terpencar.",
             "darurat": false
           },
           {
-            "id": "banjir-sebelum-005",
-            "judul": "Kenali rute evakuasi dan tempat yang lebih tinggi",
-            "isi": "Pahami rute evakuasi dan daerah yang lebih tinggi di sekitar rumah, serta saluran yang biasa dilalui air banjir.",
-            "darurat": false
-          },
-          {
-            "id": "banjir-sebelum-006",
-            "judul": "Ketahui cara mematikan air, listrik, dan gas",
-            "isi": "Pastikan Anda tahu cara mematikan air, listrik, dan gas, dan waspadai alat listrik yang berbahaya bila terkena air.",
-            "darurat": false
-          },
-          {
-            "id": "banjir-sebelum-007",
-            "judul": "Foto harta dan simpan dokumen di tempat aman",
-            "isi": "Catat dan foto harta benda, lalu simpan bersama dokumen penting di tempat yang aman dan tinggi.",
-            "darurat": false
-          },
-          {
             "id": "banjir-sebelum-008",
             "judul": "Catat kebutuhan khusus keluarga dan tetangga",
             "isi": "Ketahui kebutuhan khusus anggota keluarga dan tetangga bila banjir terjadi, dan siapkan persediaan untuk hidup mandiri sedikitnya tiga hari.",
+            "darurat": false
+          },
+          {
+            "id": "banjir-sebelum-009",
+            "judul": "Tentukan peran tiap anggota keluarga saat banjir",
+            "isi": "Tentukan peran dan tugas setiap anggota keluarga saat banjir, misalnya peran ayah, ibu, anak, dan asisten rumah tangga.",
+            "darurat": false
+          },
+          {
+            "id": "banjir-sebelum-010",
+            "judul": "Letakkan tas siaga dekat pintu keluar",
+            "isi": "Siapkan tas siaga keluarga dan letakkan di tempat yang mudah dijangkau, terlihat, dan dekat akses keluar rumah, untuk bertahan 3 x 24 jam pertama.",
+            "darurat": false
+          },
+          {
+            "id": "banjir-sebelum-001",
+            "judul": "Hindari bantaran sungai",
+            "isi": "Jangan membangun atau menambah permukiman di bantaran sungai dan daerah rawan banjir.",
             "darurat": false
           }
         ]
@@ -205,18 +151,6 @@
             "darurat": true
           },
           {
-            "id": "banjir-saat-004",
-            "judul": "Amankan barang berharga",
-            "isi": "Pindahkan barang berharga dan dokumen ke tempat yang lebih tinggi.",
-            "darurat": true
-          },
-          {
-            "id": "banjir-saat-005",
-            "judul": "Hubungi aparat setempat",
-            "isi": "Jika air terus naik, hubungi kantor desa, kelurahan, atau kecamatan.",
-            "darurat": true
-          },
-          {
             "id": "banjir-saat-006",
             "judul": "Jangan mengemudi di wilayah banjir",
             "isi": "Jangan mengemudikan mobil di wilayah banjir. Bila air mulai naik, tinggalkan mobil dan pindah ke tempat yang lebih tinggi.",
@@ -227,30 +161,12 @@
             "judul": "Waspada banjir bandang tanpa peringatan",
             "isi": "Banjir bandang dapat datang tanpa peringatan, juga saat hujan biasa. Waspadai saluran air dan tempat lewat arus deras.",
             "darurat": true
-          },
-          {
-            "id": "banjir-saat-008",
-            "judul": "Jangan sentuh alat listrik bila berdiri di air",
-            "isi": "Cabut alat yang masih tersambung listrik. Jangan menyentuh peralatan bermuatan listrik saat Anda berdiri di atas atau di dalam air.",
-            "darurat": true
-          },
-          {
-            "id": "banjir-saat-009",
-            "judul": "Berjalan di air dengan pijakan yang kokoh",
-            "isi": "Bila terpaksa berjalan di air, pilih pijakan yang tidak bergerak dan periksa dengan tongkat. Jangan berjalan di arus air.",
-            "darurat": false
           }
         ]
       },
       {
         "judul": "Sesudah banjir",
         "butir": [
-          {
-            "id": "banjir-sesudah-001",
-            "judul": "Bersihkan rumah dengan antiseptik",
-            "isi": "Bersihkan rumah dan perabot yang terkena banjir, lalu gunakan antiseptik.",
-            "darurat": false
-          },
           {
             "id": "banjir-sesudah-002",
             "judul": "Sediakan air bersih",
@@ -264,15 +180,21 @@
             "darurat": false
           },
           {
-            "id": "banjir-sesudah-004",
-            "judul": "Kembali ke rumah setelah ada izin petugas",
-            "isi": "Kembali ke rumah sesuai arahan pihak berwenang dan periksa bangunan dengan hati-hati karena kerusakan bisa tidak terlihat.",
+            "id": "banjir-sesudah-008",
+            "judul": "Periksa rumah: dinding retak atau kerusakan lain",
+            "isi": "Periksa rumah untuk melihat tanda dinding retak atau kerusakan lainnya.",
             "darurat": false
           },
           {
-            "id": "banjir-sesudah-005",
-            "judul": "Buang makanan yang terkena air banjir",
-            "isi": "Buang makanan yang terkontaminasi air banjir, lalu cuci tangan dengan sabun dan air bersih bila Anda terkena air banjir.",
+            "id": "banjir-sesudah-009",
+            "judul": "Jangan langsung masuk rumah yang masih tergenang",
+            "isi": "Jangan langsung masuk ke rumah yang masih digenangi air. Waspadai binatang beracun dan benda berbahaya yang tersembunyi.",
+            "darurat": false
+          },
+          {
+            "id": "banjir-sesudah-001",
+            "judul": "Bersihkan rumah dengan antiseptik",
+            "isi": "Bersihkan rumah dan perabot yang terkena banjir, lalu gunakan antiseptik.",
             "darurat": false
           }
         ]
@@ -280,52 +202,33 @@
     ],
     "sumber": [
       {
-        "judul": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
-        "url": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf"
-      },
-      {
         "judul": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019)",
         "url": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf"
+      },
+      {
+        "judul": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak)",
+        "url": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf"
+      },
+      {
+        "judul": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+        "url": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf"
       }
     ]
   },
   {
     "slug": "waspada-tanah-longsor",
     "title": "Waspada tanah longsor",
-    "ringkasan": "Mengenali daerah rawan dan langkah menyelamatkan diri saat longsor.",
+    "ringkasan": "Mengenali tanda dan daerah rawan, serta langkah menyelamatkan diri saat longsor.",
     "hazards": [
       "longsor"
     ],
-    "intro": "Longsor sering terjadi di lereng setelah hujan. Berikut langkah dari panduan BNPB.",
-    "menit": 1,
+    "kategori": "Bencana",
+    "intro": "Longsor sering terjadi di lereng setelah hujan dan berlangsung cepat. Berikut langkah dari panduan BNPB.",
+    "menit": 2,
     "bagian": [
       {
         "judul": "Sebelum longsor",
         "butir": [
-          {
-            "id": "longsor-sebelum-001",
-            "judul": "Hindari lereng rawan",
-            "isi": "Hindari membangun rumah di daerah rawan longsor.",
-            "darurat": false
-          },
-          {
-            "id": "longsor-sebelum-002",
-            "judul": "Kurangi kemiringan lereng",
-            "isi": "Kurangi kemiringan lereng di sekitar rumah bila memungkinkan, sebaiknya dengan arahan ahli.",
-            "darurat": false
-          },
-          {
-            "id": "longsor-sebelum-003",
-            "judul": "Jaga drainase tidak tersumbat",
-            "isi": "Pastikan saluran air dan drainase di sekitar lereng tidak tersumbat.",
-            "darurat": false
-          },
-          {
-            "id": "longsor-sebelum-004",
-            "judul": "Tanam pohon berakar kuat",
-            "isi": "Tanam pohon berakar kuat di lereng dan jangan menebang hutan sembarangan.",
-            "darurat": false
-          },
           {
             "id": "longsor-sebelum-005",
             "judul": "Waspada saat hujan lebat",
@@ -339,21 +242,21 @@
             "darurat": true
           },
           {
-            "id": "longsor-sebelum-007",
-            "judul": "Bangun dengan fondasi kuat dan tanah padat",
-            "isi": "Bila membangun di sekitar lereng, gunakan fondasi yang kuat dan padatkan tanah di sekitar rumah dengan arahan ahli.",
+            "id": "longsor-sebelum-010",
+            "judul": "Waspadai retakan memanjang atau lengkung setelah hujan",
+            "isi": "Retakan memanjang atau lengkung pada tanah atau bangunan, yang biasa muncul setelah hujan, dapat menjadi tanda longsor. Perhatikan juga lereng atau tembok penahan yang menggembung.",
             "darurat": false
           },
           {
-            "id": "longsor-sebelum-008",
-            "judul": "Kenali daerah rawan longsor",
-            "isi": "Kenali daerah rawan longsor di sekitar tempat tinggal Anda dan ketahui zona evakuasi yang telah ditentukan.",
+            "id": "longsor-sebelum-011",
+            "judul": "Perhatikan pintu atau jendela yang tiba-tiba sulit dibuka",
+            "isi": "Pintu atau jendela rumah yang tiba-tiba sulit dibuka dapat menandakan bangunan terdorong massa tanah yang bergerak.",
             "darurat": false
           },
           {
-            "id": "longsor-sebelum-009",
-            "judul": "Buat terasering dengan drainase yang tepat",
-            "isi": "Terasering dengan sistem drainase yang tepat membantu mengurangi risiko longsor pada lereng di sekitar rumah.",
+            "id": "longsor-sebelum-012",
+            "judul": "Waspadai mata air baru yang berubah keruh",
+            "isi": "Rembesan atau mata air yang tiba-tiba muncul di lereng, lalu menjadi keruh bercampur lumpur, dapat menjadi tanda longsor.",
             "darurat": false
           }
         ]
@@ -380,10 +283,51 @@
             "darurat": true
           },
           {
-            "id": "longsor-saat-004",
-            "judul": "Waspada longsor susulan saat hujan",
-            "isi": "Bila hujan turun setelah longsor terjadi, waspadai longsor susulan.",
+            "id": "longsor-saat-005",
+            "judul": "Tetap tenang agar bisa bertindak tepat",
+            "isi": "Berusaha tenang, karena kondisi panik membuat kita tidak dapat bertindak tepat.",
             "darurat": true
+          },
+          {
+            "id": "longsor-saat-006",
+            "judul": "Segera tinggalkan rumah bila longsor di sekitar",
+            "isi": "Bila longsor terjadi di sekitar rumah, cepat tinggalkan rumah dan berlindunglah di tempat aman. Jangan mendekati daerah longsoran karena longsor susulan masih mungkin.",
+            "darurat": true
+          }
+        ]
+      },
+      {
+        "judul": "Sesudah longsor",
+        "butir": [
+          {
+            "id": "longsor-sesudah-001",
+            "judul": "Hindari wilayah longsor, tanah masih labil",
+            "isi": "Hindari wilayah longsor karena kondisi tanahnya masih labil.",
+            "darurat": false
+          },
+          {
+            "id": "longsor-sesudah-002",
+            "judul": "Antisipasi longsor susulan bila hujan turun",
+            "isi": "Apabila hujan turun setelah longsor terjadi, antisipasi kemungkinan longsor susulan.",
+            "darurat": false
+          },
+          {
+            "id": "longsor-sesudah-003",
+            "judul": "Kembali ke rumah hanya setelah dinyatakan aman",
+            "isi": "Jangan kembali ke rumah bila informasi menyatakan kondisi belum aman. Kembalilah setelah situasi di tempat tinggal dinyatakan aman.",
+            "darurat": false
+          },
+          {
+            "id": "longsor-sesudah-004",
+            "judul": "Tetap di tempat aman dan ikuti informasi",
+            "isi": "Jauhi kawasan yang terkena longsor, tetap berada di tempat aman, dan ikuti terus informasi untuk memastikan Anda berada di tempat yang tepat.",
+            "darurat": false
+          },
+          {
+            "id": "longsor-sesudah-005",
+            "judul": "Beri pertolongan tanpa membahayakan diri",
+            "isi": "Berikan pertolongan bagi yang membutuhkan tanpa membahayakan keselamatan diri sendiri.",
+            "darurat": false
           }
         ]
       }
@@ -394,8 +338,16 @@
         "url": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf"
       },
       {
+        "judul": "Pengenalan Karakteristik Bencana dan Upaya Mitigasinya di Indonesia, Edisi II (BNPB/BAKORNAS PB, 2007)",
+        "url": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/470.pdf"
+      },
+      {
         "judul": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019)",
         "url": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf"
+      },
+      {
+        "judul": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak)",
+        "url": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf"
       }
     ]
   },
@@ -406,18 +358,13 @@
     "hazards": [
       "gempa"
     ],
+    "kategori": "Bencana",
     "intro": "Gempa tidak dapat diprediksi, sehingga kesiapan sebelumnya sangat menentukan. Rangkuman dari sumber resmi.",
     "menit": 1,
     "bagian": [
       {
         "judul": "Sebelum gempa",
         "butir": [
-          {
-            "id": "gempa-sebelum-001",
-            "judul": "Ikuti sosialisasi dan simulasi",
-            "isi": "Ikuti sosialisasi dan simulasi kesiapsiagaan gempa di lingkungan Anda.",
-            "darurat": false
-          },
           {
             "id": "gempa-sebelum-002",
             "judul": "Ikat perabot ke dinding",
@@ -434,6 +381,12 @@
             "id": "gempa-sebelum-004",
             "judul": "Periksa lokasi dan struktur rumah",
             "isi": "Pastikan rumah tidak berada di area rawan longsor atau likuefaksi, dan perbaiki struktur bangunan yang lemah.",
+            "darurat": false
+          },
+          {
+            "id": "gempa-sebelum-001",
+            "judul": "Ikuti sosialisasi dan simulasi",
+            "isi": "Ikuti sosialisasi dan simulasi kesiapsiagaan gempa di lingkungan Anda.",
             "darurat": false
           },
           {
@@ -454,21 +407,9 @@
             "darurat": true
           },
           {
-            "id": "gempa-saat-002",
-            "judul": "Matikan kompor",
-            "isi": "Jika tidak ada meja, lindungi kepala dengan bantal. Matikan kompor bila aman melakukannya.",
-            "darurat": true
-          },
-          {
             "id": "gempa-saat-003",
             "judul": "Jauhi gedung, tiang, dan pohon",
             "isi": "Jika di luar, menjauh dari gedung, tiang listrik, dan pohon, serta waspada terhadap retakan tanah.",
-            "darurat": true
-          },
-          {
-            "id": "gempa-saat-004",
-            "judul": "Berhenti di tempat terbuka",
-            "isi": "Jika di dalam mobil, berhenti di tempat terbuka dan jauh dari persimpangan.",
             "darurat": true
           },
           {
@@ -484,9 +425,9 @@
             "darurat": true
           },
           {
-            "id": "gempa-saat-007",
-            "judul": "Hindari lereng saat di pegunungan",
-            "isi": "Di daerah pegunungan, menjauh dari area yang berpotensi longsor.",
+            "id": "gempa-saat-002",
+            "judul": "Matikan kompor",
+            "isi": "Jika tidak ada meja, lindungi kepala dengan bantal. Matikan kompor bila aman melakukannya.",
             "darurat": true
           }
         ]
@@ -523,23 +464,266 @@
     ],
     "sumber": [
       {
-        "judul": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
-        "url": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf"
-      },
-      {
         "judul": "Antisipasi Gempa Bumi (BMKG)",
         "url": "https://www.bmkg.go.id/gempabumi/mitigasi/antisipasi-gempabumi"
+      },
+      {
+        "judul": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+        "url": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf"
+      }
+    ]
+  },
+  {
+    "slug": "tsunami-dan-evakuasi-ke-tempat-tinggi",
+    "title": "Tsunami dan evakuasi ke tempat tinggi",
+    "ringkasan": "Mengenali tanda tsunami setelah gempa dan cara menyelamatkan diri ke tempat tinggi.",
+    "hazards": [
+      "tsunami"
+    ],
+    "kategori": "Bencana",
+    "intro": "Tidak semua gempa memicu tsunami, tetapi tandanya perlu dikenali. Peringatan resmi tsunami dikeluarkan BMKG. Rangkuman dari buku saku BNPB.",
+    "menit": 2,
+    "bagian": [
+      {
+        "judul": "Sebelum tsunami",
+        "butir": [
+          {
+            "id": "tsunami-sebelum-001",
+            "judul": "Kenali tanda-tanda tsunami setelah gempa",
+            "isi": "Setelah gempa, waspadai tanda berikut: guncangan lama dan terasa kuat, air laut surut, bunyi gemuruh dari tengah laut, dan banyak ikan menggelepar di pantai yang airnya surut.",
+            "darurat": false
+          },
+          {
+            "id": "tsunami-sebelum-002",
+            "judul": "Ketahui kerawanan tempat tinggal dan jalur evakuasi",
+            "isi": "Cari tahu tingkat kerawanan tsunami di tempat tinggal Anda dan jalur tercepat menuju dataran yang lebih tinggi.",
+            "darurat": false
+          },
+          {
+            "id": "tsunami-sebelum-003",
+            "judul": "Pantau informasi resmi soal potensi tsunami",
+            "isi": "Setelah gempa, pantau media resmi untuk informasi potensi tsunami. Lembaga yang berwenang memberi peringatan tsunami adalah BMKG.",
+            "darurat": false
+          },
+          {
+            "id": "tsunami-sebelum-004",
+            "judul": "Kenali rambu bahaya tsunami",
+            "isi": "Wilayah yang berpotensi terdampak tsunami ditandai rambu peringatan bahaya tsunami. Kenali rambu itu beserta petunjuk jalur evakuasi di sekitar Anda.",
+            "darurat": false
+          },
+          {
+            "id": "tsunami-sebelum-005",
+            "judul": "Dukung penanaman pohon pelindung pesisir",
+            "isi": "Penanaman kelapa, cemara laut, beringin, dan bakau di pesisir dapat membantu meredam gelombang dan mencegah abrasi pantai. Ikut serta dalam penanaman di lingkungan Anda.",
+            "darurat": false
+          }
+        ]
+      },
+      {
+        "judul": "Saat tsunami",
+        "butir": [
+          {
+            "id": "tsunami-saat-001",
+            "judul": "Setelah gempa kuat, segera lari ke tempat tinggi",
+            "isi": "Setelah gempa besar mengguncang, segera berlari ke tempat yang tinggi dan bertahan di sana untuk sementara waktu.",
+            "darurat": true
+          },
+          {
+            "id": "tsunami-saat-002",
+            "judul": "Jauhi pantai, jangan menonton gelombang",
+            "isi": "Segera menjauhi pantai. Tidak perlu melihat datangnya tsunami dan jangan menangkap ikan yang terdampar karena air laut surut.",
+            "darurat": true
+          },
+          {
+            "id": "tsunami-saat-003",
+            "judul": "Menyingkir dari pantai saat ada sirine",
+            "isi": "Tidak semua gempa memicu tsunami. Bila mendengar sirine tanda bahaya atau pengumuman bahaya tsunami dari pihak berwenang, segera menyingkir dari daerah pantai dan ikuti arahan evakuasi.",
+            "darurat": true
+          },
+          {
+            "id": "tsunami-saat-004",
+            "judul": "Bimbing keluarga ke tempat lebih tinggi",
+            "isi": "Bila berada di rumah, usahakan tetap tenang dan segera bimbing keluarga menyelamatkan diri ke tempat yang lebih tinggi dan aman.",
+            "darurat": true
+          },
+          {
+            "id": "tsunami-saat-005",
+            "judul": "Bertahan di tempat tinggi sampai dinyatakan aman",
+            "isi": "Gelombang kedua dan ketiga biasanya lebih besar dari yang pertama, dan tsunami bisa datang sampai lima kali. Jangan meninggalkan tempat evakuasi sebelum pihak berwenang menyatakan aman.",
+            "darurat": true
+          }
+        ]
+      },
+      {
+        "judul": "Sesudah tsunami",
+        "butir": [
+          {
+            "id": "tsunami-sesudah-001",
+            "judul": "Kembali hanya setelah dinyatakan aman",
+            "isi": "Jangan kembali ke rumah sebelum keadaan dinyatakan aman oleh pihak berwenang.",
+            "darurat": false
+          },
+          {
+            "id": "tsunami-sesudah-002",
+            "judul": "Utamakan keselamatan, bukan barang",
+            "isi": "Utamakan keselamatan diri dan keluarga, bukan barang-barang. Waspadai instalasi listrik dan pipa gas.",
+            "darurat": false
+          },
+          {
+            "id": "tsunami-sesudah-003",
+            "judul": "Jauhi area tergenang dan rusak",
+            "isi": "Jauhi area yang tergenang dan rusak sampai ada informasi aman dari pihak berwenang. Hindari air yang bergerak karena arusnya dapat membahayakan.",
+            "darurat": false
+          },
+          {
+            "id": "tsunami-sesudah-004",
+            "judul": "Hindari air genangan: tercemar dan ada risiko listrik",
+            "isi": "Hindari air yang menggenang karena kemungkinan tercemar zat berbahaya dan ada ancaman tersengat aliran listrik.",
+            "darurat": false
+          },
+          {
+            "id": "tsunami-sesudah-005",
+            "judul": "Hati-hati memasuki gedung, fondasi mungkin rusak",
+            "isi": "Berhati-hatilah saat memasuki gedung karena ada ancaman kerusakan yang tidak terlihat, misalnya pada fondasi. Tetap di luar gedung yang masih dikelilingi air.",
+            "darurat": false
+          }
+        ]
+      }
+    ],
+    "sumber": [
+      {
+        "judul": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019)",
+        "url": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf"
+      }
+    ]
+  },
+  {
+    "slug": "siaga-erupsi-gunung-api",
+    "title": "Siaga erupsi gunung api",
+    "ringkasan": "Memahami status gunung api, kawasan rawan, dan cara melindungi diri dari abu.",
+    "hazards": [
+      "gunung_api"
+    ],
+    "kategori": "Bencana",
+    "intro": "Informasi resmi gunung api berasal dari PVMBG. Berikut langkah dari buku saku BNPB untuk warga di sekitar gunung api.",
+    "menit": 2,
+    "bagian": [
+      {
+        "judul": "Sebelum erupsi",
+        "butir": [
+          {
+            "id": "gunung_api-sebelum-001",
+            "judul": "Pantau arahan PVMBG dan aktivitas gunung api",
+            "isi": "Perhatikan arahan PVMBG dan perkembangan aktivitas gunung api. Informasinya tersedia di situs PVMBG dan aplikasi MAGMA Indonesia.",
+            "darurat": false
+          },
+          {
+            "id": "gunung_api-sebelum-002",
+            "judul": "Kenali empat tingkat status gunung api",
+            "isi": "Status gunung api terdiri atas level I Normal, II Waspada, III Siaga, dan IV Awas. Level IV berarti letusan awal sudah mulai dan menurut analisis PVMBG segera diikuti letusan utama.",
+            "darurat": false
+          },
+          {
+            "id": "gunung_api-sebelum-003",
+            "judul": "Kenali kawasan rawan bencana (KRB I, II, III)",
+            "isi": "KRB III terdekat puncak dan paling berisiko awan panas, lava, dan gas beracun. KRB II berisiko awan panas, lava, dan hujan abu lebat. KRB I berisiko lahar dan hujan abu.",
+            "darurat": false
+          },
+          {
+            "id": "gunung_api-sebelum-006",
+            "judul": "Ketahui jalur evakuasi dan tempat pengungsian",
+            "isi": "Ketahui jalur evakuasi dan tempat pengungsian (shelter) yang disiapkan pihak berwenang.",
+            "darurat": false
+          },
+          {
+            "id": "gunung_api-sebelum-004",
+            "judul": "Kenali jenis bahaya letusan gunung api",
+            "isi": "Bahaya letusan meliputi awan panas, aliran lava, gas beracun yang tidak berwarna dan berbau, lontaran batu pijar, hujan abu, dan lahar. Kenali tiap bahaya agar tahu apa yang harus dihindari.",
+            "darurat": false
+          }
+        ]
+      },
+      {
+        "judul": "Saat erupsi",
+        "butir": [
+          {
+            "id": "gunung_api-saat-001",
+            "judul": "Jangan berada di kawasan yang harus dikosongkan",
+            "isi": "Jangan berada di lokasi yang direkomendasikan untuk dikosongkan.",
+            "darurat": true
+          },
+          {
+            "id": "gunung_api-saat-002",
+            "judul": "Jauhi lembah dan aliran sungai",
+            "isi": "Jangan berada di lembah atau daerah aliran sungai.",
+            "darurat": true
+          },
+          {
+            "id": "gunung_api-saat-003",
+            "judul": "Hindari tempat terbuka, lindungi diri dari abu",
+            "isi": "Hindari tempat terbuka dan lindungi diri dari abu letusan gunung api.",
+            "darurat": true
+          },
+          {
+            "id": "gunung_api-saat-004",
+            "judul": "Tutup hidung dan mulut dengan masker atau kain basah",
+            "isi": "Gunakan masker atau kain basah untuk menutup mulut dan hidung.",
+            "darurat": true
+          },
+          {
+            "id": "gunung_api-saat-005",
+            "judul": "Pakai kacamata pelindung, bukan lensa kontak",
+            "isi": "Gunakan kacamata pelindung dan jangan memakai lensa kontak.",
+            "darurat": true
+          }
+        ]
+      },
+      {
+        "judul": "Sesudah erupsi",
+        "butir": [
+          {
+            "id": "gunung_api-sesudah-001",
+            "judul": "Kurangi paparan abu vulkanik",
+            "isi": "Kurangi paparan abu vulkanik pada diri dan keluarga.",
+            "darurat": false
+          },
+          {
+            "id": "gunung_api-sesudah-002",
+            "judul": "Hindari berkendara di area hujan abu",
+            "isi": "Hindari mengendarai mobil di daerah yang terkena hujan abu vulkanik karena dapat merusak mesin kendaraan.",
+            "darurat": false
+          },
+          {
+            "id": "gunung_api-sesudah-003",
+            "judul": "Bersihkan abu dari atap",
+            "isi": "Bersihkan timbunan debu vulkanik dari atap karena beratnya dapat merobohkan atau merusak atap rumah dan bangunan.",
+            "darurat": false
+          },
+          {
+            "id": "gunung_api-sesudah-004",
+            "judul": "Waspadai lahar di aliran sungai saat hujan",
+            "isi": "Waspadai wilayah aliran sungai yang berpotensi dilanda lahar pada musim hujan.",
+            "darurat": false
+          }
+        ]
+      }
+    ],
+    "sumber": [
+      {
+        "judul": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019)",
+        "url": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf"
       }
     ]
   },
   {
     "slug": "cuaca-ekstrem-puting-beliung",
     "title": "Cuaca ekstrem dan angin puting beliung",
-    "ringkasan": "Tanda cuaca memburuk dan cara berlindung dari angin kencang.",
+    "ringkasan": "Tanda cuaca memburuk dan cara berlindung dari angin kencang dan petir.",
     "hazards": [
       "cuaca_ekstrem"
     ],
-    "intro": "Hujan lebat, petir, dan angin kencang dapat muncul mendadak. Berikut langkah dari panduan resmi.",
+    "kategori": "Iklim",
+    "intro": "Hujan lebat, petir, dan angin kencang dapat muncul mendadak, terutama di masa peralihan musim. Berikut langkah dari panduan resmi.",
     "menit": 1,
     "bagian": [
       {
@@ -561,12 +745,6 @@
             "id": "cuaca_ekstrem-sebelum-003",
             "judul": "Matikan listrik dan elektronik",
             "isi": "Matikan listrik dan peralatan elektronik sebelum cuaca ekstrem tiba.",
-            "darurat": false
-          },
-          {
-            "id": "cuaca_ekstrem-sebelum-004",
-            "judul": "Pastikan rumah dalam kondisi kokoh",
-            "isi": "Upayakan rumah atau bangunan tempat tinggal kokoh agar lebih tahan angin kencang.",
             "darurat": false
           },
           {
@@ -648,12 +826,408 @@
     ]
   },
   {
+    "slug": "kekeringan-dan-hemat-air",
+    "title": "Kekeringan dan hemat air",
+    "ringkasan": "Menyiapkan cadangan air dan memakai air bijak saat kemarau panjang.",
+    "hazards": [
+      "kekeringan"
+    ],
+    "kategori": "Iklim",
+    "intro": "Kemarau panjang dapat membuat air bersih sulit didapat. Langkah berikut dirangkum dari buku saku dan imbauan BNPB.",
+    "menit": 1,
+    "bagian": [
+      {
+        "judul": "Sebelum kemarau",
+        "butir": [
+          {
+            "id": "kekeringan-sebelum-002",
+            "judul": "Gunakan air dengan bijak",
+            "isi": "Gunakan air dengan bijak sepanjang waktu, bukan hanya ketika kemarau tiba.",
+            "darurat": false
+          },
+          {
+            "id": "kekeringan-sebelum-007",
+            "judul": "Isi cadangan air selagi pasokan masih ada",
+            "isi": "Isi cadangan air saat pasokan masih tersedia, dan simpan cadangan air bersih untuk kebutuhan prioritas.",
+            "darurat": false
+          },
+          {
+            "id": "kekeringan-sebelum-001",
+            "judul": "Jaga sumber dan mata air",
+            "isi": "Jaga sumber atau mata air di lingkungan Anda agar pasokan air tetap terjaga.",
+            "darurat": false
+          },
+          {
+            "id": "kekeringan-sebelum-004",
+            "judul": "Buat tandon penampung air hujan di pekarangan",
+            "isi": "Untuk memenuhi kebutuhan keluarga, buat tandon di sekitar pekarangan rumah untuk menampung air hujan.",
+            "darurat": false
+          },
+          {
+            "id": "kekeringan-sebelum-008",
+            "judul": "Periksa dan perbaiki keran atau pipa yang bocor",
+            "isi": "Periksa instalasi pipa secara berkala dan perbaiki keran atau pipa yang bocor agar air tidak terbuang.",
+            "darurat": false
+          }
+        ]
+      },
+      {
+        "judul": "Saat kekeringan",
+        "butir": [
+          {
+            "id": "kekeringan-saat-001",
+            "judul": "Lapor dan minta bantuan air bersih",
+            "isi": "Laporkan kekurangan air dan minta bantuan air bersih kepada pihak yang berwenang.",
+            "darurat": true
+          },
+          {
+            "id": "kekeringan-saat-002",
+            "judul": "Atur jadwal pemakaian air yang tersisa",
+            "isi": "Atur jadwal penggunaan air yang masih ada agar cukup untuk kebutuhan penting keluarga.",
+            "darurat": true
+          },
+          {
+            "id": "kekeringan-saat-005",
+            "judul": "Prioritaskan air untuk memasak dan minum",
+            "isi": "Gunakan air bersih secara bijak dengan memprioritaskan kebutuhan pokok, seperti memasak dan minum.",
+            "darurat": true
+          },
+          {
+            "id": "kekeringan-saat-003",
+            "judul": "Matikan kran bila tidak dipakai",
+            "isi": "Kurangi pemakaian air yang berlebih. Matikan kran bila tidak digunakan.",
+            "darurat": true
+          },
+          {
+            "id": "kekeringan-saat-004",
+            "judul": "Pantau informasi resmi terkini",
+            "isi": "Simak informasi terkini dari radio, televisi, media daring, dan sumber informasi resmi pemerintah.",
+            "darurat": true
+          }
+        ]
+      },
+      {
+        "judul": "Sesudah kekeringan",
+        "butir": [
+          {
+            "id": "kekeringan-sesudah-001",
+            "judul": "Buat sumur resapan atau biopori",
+            "isi": "Buat sumur resapan atau biopori agar air hujan lebih banyak meresap ke dalam tanah.",
+            "darurat": false
+          },
+          {
+            "id": "kekeringan-sesudah-002",
+            "judul": "Dukung waduk atau bendungan penampung hujan",
+            "isi": "Dukung pembuatan waduk atau bendungan untuk menampung air hujan.",
+            "darurat": false
+          }
+        ]
+      }
+    ],
+    "sumber": [
+      {
+        "judul": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019)",
+        "url": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf"
+      },
+      {
+        "judul": "Perkembangan Situasi dan Penanganan Bencana di Tanah Air Tanggal 12 Oktober 2026 (BNPB)",
+        "url": "https://bnpb.go.id/berita/perkembangan-situasi-dan-penanganan-bencana-di-tanah-air-tanggal-12-oktober-2026"
+      },
+      {
+        "judul": "Perkembangan Situasi dan Penanganan Bencana di Tanah Air per 3 Juli 2026 (BNPB)",
+        "url": "https://www.bnpb.go.id/berita/perkembangan-situasi-dan-penanganan-bencana-di-tanah-air-per-3-juli-2026"
+      }
+    ]
+  },
+  {
+    "slug": "kabut-asap-dan-karhutla",
+    "title": "Kabut asap dan kebakaran hutan dan lahan",
+    "ringkasan": "Mencegah kebakaran lahan dan melindungi kesehatan keluarga dari asap.",
+    "hazards": [
+      "karhutla"
+    ],
+    "kategori": "Iklim",
+    "intro": "Asap kebakaran hutan dan lahan berbahaya bagi pernapasan, terutama bagi anak, lansia, dan ibu hamil. Rangkuman dari BNPB dan Kemenkes.",
+    "menit": 2,
+    "bagian": [
+      {
+        "judul": "Mencegah kebakaran",
+        "butir": [
+          {
+            "id": "karhutla-sebelum-001",
+            "judul": "Jangan membakar rumput dan puing",
+            "isi": "Warga di sekitar hutan perlu memahami bahaya membakar rumput dan puing, terutama saat kemarau dan berangin, karena api mudah menyebar dan meluas.",
+            "darurat": false
+          },
+          {
+            "id": "karhutla-sebelum-002",
+            "judul": "Pastikan api benar-benar padam sebelum pergi",
+            "isi": "Sebelum meninggalkan tempat pembakaran, pastikan api sudah mati dan bersihkan area dari bahan yang mudah terbakar.",
+            "darurat": false
+          },
+          {
+            "id": "karhutla-sebelum-003",
+            "judul": "Hindari membakar saat berangin",
+            "isi": "Hindari membakar ketika cuaca berangin karena angin kencang membuat api semakin besar dan meluas.",
+            "darurat": false
+          },
+          {
+            "id": "karhutla-sebelum-006",
+            "judul": "Jangan membuka lahan atau membersihkan pekarangan dengan membakar",
+            "isi": "Jangan membuka lahan atau membersihkan pekarangan dengan cara membakar.",
+            "darurat": false
+          },
+          {
+            "id": "karhutla-sebelum-007",
+            "judul": "Padamkan puntung rokok dan jangan tinggalkan bara api",
+            "isi": "Pastikan puntung rokok padam sebelum dibuang, jangan membuangnya sembarangan, dan jangan meninggalkan api atau bara setelah beraktivitas di luar rumah.",
+            "darurat": false
+          }
+        ]
+      },
+      {
+        "judul": "Saat ada asap",
+        "butir": [
+          {
+            "id": "karhutla-saat-001",
+            "judul": "Tetap di dalam rumah bila tidak ada keperluan",
+            "isi": "Bila tidak memiliki kepentingan, jangan keluar rumah.",
+            "darurat": true
+          },
+          {
+            "id": "karhutla-saat-002",
+            "judul": "Tutup celah udara berasap, jaga udara dalam ruangan",
+            "isi": "Tutup semua akses udara berasap yang bisa masuk ke rumah dan jaga udara dalam ruangan sebersih mungkin.",
+            "darurat": true
+          },
+          {
+            "id": "karhutla-saat-006",
+            "judul": "Laporkan ke Posko Kebakaran bila api menjalar",
+            "isi": "Bila api terus menjalar, segera laporkan kepada Posko Kebakaran atau pihak terkait.",
+            "darurat": true
+          },
+          {
+            "id": "karhutla-saat-009",
+            "judul": "Segera ke puskesmas bila sesak, batuk menetap, atau nyeri dada",
+            "isi": "Jangan sepelekan gejala pernapasan ringan. Bila mengalami sesak napas, batuk menetap, nyeri dada, atau iritasi mata berat, segera ke puskesmas atau rumah sakit terdekat.",
+            "darurat": true
+          },
+          {
+            "id": "karhutla-saat-003",
+            "judul": "Pakai masker atau kain saat keluar ruangan",
+            "isi": "Lindungi pernapasan dengan masker atau kain setiap kali beraktivitas di luar ruangan. Masker N95 memberi perlindungan lebih baik.",
+            "darurat": true
+          }
+        ]
+      },
+      {
+        "judul": "Setelah terpapar asap",
+        "butir": [
+          {
+            "id": "karhutla-sesudah-002",
+            "judul": "Periksa ke fasilitas kesehatan bila keluhan mengganggu",
+            "isi": "Segera periksa ke dokter atau fasilitas pelayanan kesehatan terdekat bila muncul masalah kesehatan yang mengganggu.",
+            "darurat": false
+          },
+          {
+            "id": "karhutla-sesudah-001",
+            "judul": "Kenali gejala dampak asap untuk deteksi dini",
+            "isi": "Kenali gejala atau keluhan yang timbul akibat asap kebakaran agar pengobatan awal dapat segera dilakukan.",
+            "darurat": false
+          },
+          {
+            "id": "karhutla-sesudah-003",
+            "judul": "Hentikan kebiasaan yang memperburuk, seperti merokok",
+            "isi": "Bila sudah sakit akibat asap, hentikan kebiasaan yang memperburuk penyakit, misalnya merokok.",
+            "darurat": false
+          },
+          {
+            "id": "karhutla-sesudah-004",
+            "judul": "Berobat teratur sesuai arahan dokter",
+            "isi": "Bila sakit akibat asap, berobat teratur ke dokter atau fasilitas kesehatan dan konsumsi obat yang diberikan secara teratur.",
+            "darurat": false
+          },
+          {
+            "id": "karhutla-sesudah-005",
+            "judul": "Ikuti skrining kesehatan dari pemerintah setempat",
+            "isi": "Pemerintah setempat dapat mengadakan skrining berkala (kuesioner, pemeriksaan fisik, dan fungsi paru) untuk menilai dampak asap. Ikuti bila tersedia.",
+            "darurat": false
+          }
+        ]
+      }
+    ],
+    "sumber": [
+      {
+        "judul": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019)",
+        "url": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf"
+      },
+      {
+        "judul": "Perkembangan Situasi dan Penanganan Bencana di Tanah Air per 3 Juli 2026 (BNPB)",
+        "url": "https://www.bnpb.go.id/berita/perkembangan-situasi-dan-penanganan-bencana-di-tanah-air-per-3-juli-2026"
+      },
+      {
+        "judul": "Perkembangan Situasi dan Penanganan Bencana di Tanah Air per 2 September 2026 (BNPB)",
+        "url": "https://www.bnpb.go.id/berita/perkembangan-situasi-dan-penanganan-bencana-di-tanah-air-per-2-september-2026"
+      },
+      {
+        "judul": "Menkes: Pakai Masker dan Pantau Kualitas Udara untuk Cegah Dampak Asap Karhutla (Rilis Kemenkes, 21 Agustus 2026)",
+        "url": "https://kemkes.go.id/id/menkes-pakai-masker-dan-pantau-kualitas-udara-untuk-cegah-dampak-asap-karhutla"
+      },
+      {
+        "judul": "Cegah dan Tangani Dampak Kesehatan Akibat Kabut Asap (Rilis Kemenkes, 15 Oktober 2015)",
+        "url": "https://www.kemkes.go.id/id/%20cegah-dan-tangani-dampak-kesehatan-akibat-kabut-asap"
+      }
+    ]
+  },
+  {
+    "slug": "gelombang-tinggi-dan-rob",
+    "title": "Gelombang tinggi, banjir rob, dan abrasi",
+    "ringkasan": "Memantau peringatan BMKG dan melindungi keluarga di pesisir.",
+    "hazards": [
+      "gelombang_abrasi"
+    ],
+    "kategori": "Iklim",
+    "intro": "Rob muncul saat pasang laut bertepatan dengan gelombang tinggi. Belum ada panduan resmi khusus untuk langkah saat dan sesudah rob, sehingga sebagian langkah diturunkan dari panduan banjir dan diberi tanda.",
+    "menit": 2,
+    "bagian": [
+      {
+        "judul": "Sebelum",
+        "butir": [
+          {
+            "id": "gelombang_abrasi-sebelum-005",
+            "judul": "Dengarkan pemberitahuan dini cuaca",
+            "isi": "Dengarkan pemberitahuan dini dari prakiraan cuaca lewat radio dan alat komunikasi, dan lengkapi diri dengan alat komunikasi.",
+            "darurat": false
+          },
+          {
+            "id": "gelombang_abrasi-sebelum-006",
+            "judul": "Hindari laut yang sedang dilanda cuaca buruk",
+            "isi": "Bila berlayar di tengah laut, usahakan menghindari daerah laut yang sedang dilanda cuaca buruk.",
+            "darurat": false
+          },
+          {
+            "id": "gelombang_abrasi-sebelum-007",
+            "judul": "Rencanakan pengungsian dan tempat evakuasi yang tinggi",
+            "isi": "Buat rencana pengungsian bila gelombang pasang melanda pantai. Ketahui tempat evakuasi yang cukup tinggi dan mudah dilalui di dekat permukiman.",
+            "darurat": false
+          },
+          {
+            "id": "gelombang_abrasi-sebelum-014",
+            "judul": "Pantau peringatan dini gelombang tinggi dan rob BMKG",
+            "isi": "BMKG menyediakan halaman Peringatan Dini Gelombang Tinggi dan Peringatan Banjir Pesisir (Rob). Pantau keduanya di bmkg.go.id.",
+            "darurat": false
+          },
+          {
+            "id": "gelombang_abrasi-sebelum-001",
+            "judul": "Tanam bakau di pesisir dan rawa",
+            "isi": "Bakau (mangrove) menjaga kestabilan garis pantai, mencegah abrasi, menahan lumpur, dan meredam gelombang pasang. Ikut serta dalam penanaman di pesisir Anda.",
+            "darurat": false
+          }
+        ]
+      },
+      {
+        "judul": "Saat gelombang tinggi atau rob",
+        "butir": [
+          {
+            "id": "gelombang_abrasi-saat-001",
+            "judul": "Jauhi pantai, berlari ke dataran tinggi",
+            "isi": "Saat gelombang pasang terjadi, jauhi pantai dan berlarilah ke dataran yang lebih tinggi.",
+            "darurat": true
+          },
+          {
+            "id": "gelombang_abrasi-saat-002",
+            "judul": "Matikan listrik, jangan sentuh alat listrik di air",
+            "isi": "Matikan jaringan listrik bila ada instruksi pihak berwenang dan cabut alat yang masih tersambung. Jangan menyentuh peralatan listrik saat berdiri di atas atau di dalam air.",
+            "darurat": true,
+            "turunan": "Turunan dari panduan banjir umum; belum ada panduan resmi khusus gelombang tinggi atau rob."
+          },
+          {
+            "id": "gelombang_abrasi-saat-003",
+            "judul": "Mengungsi lebih awal ke tempat yang lebih tinggi",
+            "isi": "Bila air sudah naik, segera evakuasi ke tempat yang lebih tinggi.",
+            "darurat": true,
+            "turunan": "Turunan dari panduan banjir umum; belum ada panduan resmi khusus gelombang tinggi atau rob."
+          },
+          {
+            "id": "gelombang_abrasi-saat-004",
+            "judul": "Jangan mengemudi di wilayah banjir",
+            "isi": "Jangan mengemudikan mobil di wilayah banjir. Bila air mulai naik, tinggalkan mobil dan menujulah ke tempat yang lebih tinggi karena mobil dapat tersapu arus.",
+            "darurat": true,
+            "turunan": "Turunan dari panduan banjir umum; belum ada panduan resmi khusus gelombang tinggi atau rob."
+          },
+          {
+            "id": "gelombang_abrasi-saat-005",
+            "judul": "Waspada arus bawah dan kubangan",
+            "isi": "Waspadai arus bawah, saluran air, kubangan, dan tempat lain yang tergenang air.",
+            "darurat": true,
+            "turunan": "Turunan dari panduan banjir umum; belum ada panduan resmi khusus gelombang tinggi atau rob."
+          }
+        ]
+      },
+      {
+        "judul": "Sesudah",
+        "butir": [
+          {
+            "id": "gelombang_abrasi-sesudah-001",
+            "judul": "Kembali hanya setelah dinyatakan aman",
+            "isi": "Kembali ke rumah sesuai perintah dari pihak yang berwenang.",
+            "darurat": false,
+            "turunan": "Turunan dari panduan banjir umum; belum ada panduan resmi khusus gelombang tinggi atau rob."
+          },
+          {
+            "id": "gelombang_abrasi-sesudah-002",
+            "judul": "Hindari area yang baru saja surut",
+            "isi": "Hindari area yang airnya baru saja surut karena jalan bisa keropos dan ambles.",
+            "darurat": false,
+            "turunan": "Turunan dari panduan banjir umum; belum ada panduan resmi khusus gelombang tinggi atau rob."
+          },
+          {
+            "id": "gelombang_abrasi-sesudah-003",
+            "judul": "Hati-hati memasuki bangunan yang terendam",
+            "isi": "Tetap di luar bangunan yang masih dikelilingi air. Berhati-hatilah saat memasuki bangunan karena kerusakan yang tidak terlihat, misalnya pada fondasi.",
+            "darurat": false,
+            "turunan": "Turunan dari panduan banjir umum; belum ada panduan resmi khusus gelombang tinggi atau rob."
+          },
+          {
+            "id": "gelombang_abrasi-sesudah-004",
+            "judul": "Hindari air genangan dan air yang bergerak",
+            "isi": "Hindari air genangan karena kemungkinan tercemar zat berbahaya dan ada ancaman kesetrum. Hindari juga air yang bergerak.",
+            "darurat": false,
+            "turunan": "Turunan dari panduan banjir umum; belum ada panduan resmi khusus gelombang tinggi atau rob."
+          },
+          {
+            "id": "gelombang_abrasi-sesudah-005",
+            "judul": "Bersihkan rumah dan buang makanan yang terendam",
+            "isi": "Bersihkan tempat tinggal dan lingkungan rumah dari sisa kotoran, serta buang makanan yang terkontaminasi air.",
+            "darurat": false,
+            "turunan": "Turunan dari panduan banjir umum; belum ada panduan resmi khusus gelombang tinggi atau rob."
+          }
+        ]
+      }
+    ],
+    "sumber": [
+      {
+        "judul": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+        "url": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf"
+      },
+      {
+        "judul": "Potensi Gelombang Tinggi dan Banjir Pesisir (Rob) di Perairan Utara Jawa (Siaran Pers BMKG, 4 Juni 2020)",
+        "url": "https://www.bmkg.go.id/siaran-pers/potensi-gelombang-tinggi-dan-banjir-pesisir-rob-di-perairan-utara-jawa"
+      },
+      {
+        "judul": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019)",
+        "url": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf"
+      }
+    ]
+  },
+  {
     "slug": "melindungi-anggota-keluarga-rentan",
     "title": "Melindungi anggota keluarga yang rentan",
     "ringkasan": "Persiapan khusus untuk lansia, anak, ibu hamil, dan penyandang disabilitas.",
     "hazards": [
       "umum"
     ],
+    "kategori": "Komunitas",
     "intro": "Setiap anggota keluarga punya kebutuhan berbeda saat bencana. Berikut butir panduan yang ditujukan khusus bagi mereka.",
     "menit": 1,
     "bagian": [
@@ -673,27 +1247,51 @@
             "darurat": false
           },
           {
+            "id": "banjir-saat-014",
+            "judul": "Awasi anak agar tidak bermain air banjir",
+            "isi": "Awasi anak-anak agar tidak bermain air banjir, baik di dalam maupun di luar rumah.",
+            "darurat": true
+          },
+          {
+            "id": "banjir-saat-016",
+            "judul": "Bawa anggota rentan ke tempat aman lebih awal",
+            "isi": "Bawa anggota keluarga yang rentan, lansia, atau berkebutuhan khusus ke tempat aman yang diarahkan RT, RW, atau petugas, jauh sebelum air banjir meningkat.",
+            "darurat": true
+          },
+          {
             "id": "umum-sebelum-011",
             "judul": "Catat anggota keluarga yang rentan",
             "isi": "Catat anggota keluarga yang rentan, yaitu anak-anak, lansia, ibu hamil, dan penyandang disabilitas, lalu rencanakan bantuan untuk mereka.",
             "darurat": false
           },
           {
+            "id": "umum-sebelum-024",
+            "judul": "Isi tas siaga untuk bayi dan balita",
+            "isi": "Jika ada bayi atau balita, masukkan ke tas siaga bubur bayi dan susu bubuk sesuai usianya, bedak bayi atau minyak telon, popok (pampers), dan perlak.",
+            "darurat": false
+          },
+          {
+            "id": "umum-sebelum-025",
+            "judul": "Siapkan obat cadangan untuk lansia dan orang sakit",
+            "isi": "Jika ada orang tua atau anggota keluarga dengan sakit yang lama, siapkan obat-obatan cadangan di dalam tas siaga.",
+            "darurat": false
+          },
+          {
+            "id": "banjir-sebelum-015",
+            "judul": "Perhatikan anggota keluarga yang sakit atau berkebutuhan khusus",
+            "isi": "Perhatikan anggota keluarga yang sakit atau berkebutuhan khusus dan masukkan kebutuhan mereka dalam rencana banjir.",
+            "darurat": false
+          },
+          {
+            "id": "karhutla-saat-011",
+            "judul": "Beri perlindungan ekstra bagi kelompok rentan",
+            "isi": "Anak-anak, lansia, ibu hamil, dan penderita penyakit bawaan paling berisiko terdampak asap. Beri mereka perlindungan ekstra.",
+            "darurat": false
+          },
+          {
             "id": "umum-sebelum-015",
             "judul": "Sesuaikan peringatan dini dengan jenis disabilitas",
             "isi": "Pastikan peringatan dini dapat diterima anggota dengan disabilitas sesuai jenisnya, dan latih penyelamatan diri bersama kerabat terdekat.",
-            "darurat": false
-          },
-          {
-            "id": "umum-sesudah-003",
-            "judul": "Perhatikan kondisi anak",
-            "isi": "Perhatikan trauma yang mungkin muncul, terutama pada anak-anak, dan dampingi mereka.",
-            "darurat": false
-          },
-          {
-            "id": "umum-sesudah-004",
-            "judul": "Dampingi anggota dengan disabilitas",
-            "isi": "Bantu anggota dengan disabilitas mendapat pertolongan dan bawa ke pengungsian atau fasilitas kesehatan bila diperlukan.",
             "darurat": false
           }
         ]
@@ -707,6 +1305,14 @@
       {
         "judul": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
         "url": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf"
+      },
+      {
+        "judul": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak)",
+        "url": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf"
+      },
+      {
+        "judul": "Kemenkes Perkuat Perlindungan Kelompok Rentan Hadapi Karhutla (Rilis Kemenkes, 26 Agustus 2026)",
+        "url": "https://kemkes.go.id/id/kemenkes-perkuat-perlindungan-kelompok-rentan-hadapi-karhutla"
       }
     ]
   }

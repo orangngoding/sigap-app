@@ -7,6 +7,8 @@ import { CuacaCard } from "./cuaca-card";
 import { GempaCard } from "./gempa-card";
 import { IklimCard } from "./iklim-card";
 import { PeringatanCard } from "./peringatan-card";
+import { PetaLokasi } from "./peta-lokasi.client";
+import { BahayaTerpilihCard } from "./bahaya-terpilih-card";
 
 export function ProfilLokasi({ lokasi, onGanti }: { lokasi: Lokasi; onGanti: () => void }) {
   const qc = useQueryClient();
@@ -34,12 +36,16 @@ export function ProfilLokasi({ lokasi, onGanti }: { lokasi: Lokasi; onGanti: () 
         </div>
       </div>
 
+      <PetaLokasi lat={lokasi.lat} lon={lokasi.lon} label={`Peta ${lokasi.kelurahan}`} />
+
       <div className="grid gap-4 lg:grid-cols-2">
         <CuacaCard adm4={lokasi.adm4} />
         <PeringatanCard lokasi={lokasi} />
         <GempaCard lat={lokasi.lat} lon={lokasi.lon} />
         <IklimCard lat={lokasi.lat} lon={lokasi.lon} />
       </div>
+
+      <BahayaTerpilihCard />
 
       <div className="flex justify-end pt-2">
         <Link href="/rencana/profil"

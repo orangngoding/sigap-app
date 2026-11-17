@@ -322,5 +322,309 @@
     "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
     "accessedAt": "2026-11-16",
     "reviewedBy": []
+  },
+  {
+    "id": "umum-sebelum-016",
+    "hazard": "umum",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Pahami sistem peringatan dini setempat",
+    "body": "Pahami sistem peringatan dini di lingkungan Anda dan ketahui rute evakuasi serta rencana pengungsian.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 59",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "umum-sebelum-017",
+    "hazard": "umum",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "rendah",
+    "darurat": false,
+    "title": "Ikut latihan kesiapsiagaan",
+    "body": "Latihan adalah upaya nyata meningkatkan kesiapsiagaan. BNPB menetapkan 26 April sebagai Hari Kesiapsiagaan Bencana dan mengajak semua pihak berlatih.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 58-59",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "umum-sebelum-018",
+    "hazard": "umum",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Pasang kalung dan tag identitas pada hewan peliharaan",
+    "body": "Pastikan hewan peliharaan memakai kalung dan tag identitas. Simpan beberapa foto hewan untuk membantu pencarian bila hilang.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 70",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "umum-sebelum-019",
+    "hazard": "umum",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Siapkan tas darurat untuk hewan peliharaan",
+    "body": "Isi tas darurat hewan: kotak P3K, makanan kaleng dan air untuk 3-5 hari, kandang atau carrier, kalung dan tali cadangan, kantong sekali pakai, sabun, serta selimut atau kain.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 70",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "umum-sebelum-020",
+    "hazard": "umum",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "rendah",
+    "darurat": false,
+    "title": "Ketahui tempat penitipan hewan",
+    "body": "Ketahui lokasi penitipan hewan, karena sebagian tempat pengungsian tidak menerima hewan. Beri tahu tim penyelamat hewan bila Anda memiliki banyak hewan.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 70",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "umum-sebelum-021",
+    "hazard": "umum",
+    "phase": "sebelum",
+    "audience": [
+      "disabilitas"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Latih bersama penyandang disabilitas dan kerabatnya",
+    "body": "Latih penyandang disabilitas bersama kerabat terdekat tentang pengurangan risiko bencana, dan komunikasikan risiko serta cara mengatasinya.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 63",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "umum-sebelum-022",
+    "hazard": "umum",
+    "phase": "sebelum",
+    "audience": [
+      "disabilitas"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Petakan kebutuhan penyandang disabilitas",
+    "body": "Petakan kebutuhan penyandang disabilitas pada saat dan setelah bencana, dan tingkatkan keamanan rumah serta ruang publik.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 63",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "umum-saat-002",
+    "hazard": "umum",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Kaji situasi dan kenali jenis bencana",
+    "body": "Kaji situasi: kenali jenis bencana dan kondisi di sekitar Anda sebelum bertindak.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 62",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "umum-saat-003",
+    "hazard": "umum",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Putuskan tinggal atau berpindah, ikuti instruksi",
+    "body": "Bila tidak dalam bahaya, tetap tinggal dan cari informasi terkini. Bila harus berpindah, putuskan cepat dan dengarkan instruksi pemerintah setempat.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 62",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "umum-saat-004",
+    "hazard": "umum",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Pastikan bisa bernapas",
+    "body": "Apa pun jenis bencananya, udara yang baik sangat penting. Lindungi diri dan cari udara bersih dengan menutup mulut memakai kain atau masker.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 62",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "umum-saat-005",
+    "hazard": "umum",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Bila terjebak reruntuhan, beri sinyal",
+    "body": "Bila berada di reruntuhan, cari celah untuk bernapas. Lempar sesuatu atau tiup peluit untuk meminta pertolongan, atau buat suara dengan benda di sekitar.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 62",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "umum-saat-006",
+    "hazard": "umum",
+    "phase": "saat",
+    "audience": [
+      "disabilitas"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Bantu penyandang disabilitas yang sendirian",
+    "body": "Dahulukan penyandang disabilitas yang sendirian dan belum mendapat pertolongan, dan sertakan kebutuhan khusus mereka saat evakuasi.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 63",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "umum-sesudah-005",
+    "hazard": "umum",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Pastikan air layak minum dan sanitasi",
+    "body": "Pastikan air yang diminum layak dan sanitasi terjaga untuk menjaga kesehatan keluarga.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 62",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "umum-sebelum-023",
+    "hazard": "umum",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Siapkan perlengkapan bertahan 3x24 jam",
+    "body": "Siapkan satu paket perlengkapan kebutuhan dasar keluarga untuk bertahan 3x24 jam saat bantuan belum tiba, berisi air minum dalam botol minimal 2 liter per orang per hari dan makanan siap makan yang tahan lama seperti biskuit.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 51-52",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "umum-sebelum-024",
+    "hazard": "umum",
+    "phase": "sebelum",
+    "audience": [
+      "balita"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Isi tas siaga untuk bayi dan balita",
+    "body": "Jika ada bayi atau balita, masukkan ke tas siaga bubur bayi dan susu bubuk sesuai usianya, bedak bayi atau minyak telon, popok (pampers), dan perlak.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 51-52",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "umum-sebelum-025",
+    "hazard": "umum",
+    "phase": "sebelum",
+    "audience": [
+      "lansia"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Siapkan obat cadangan untuk lansia dan orang sakit",
+    "body": "Jika ada orang tua atau anggota keluarga dengan sakit yang lama, siapkan obat-obatan cadangan di dalam tas siaga.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 51-52",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "umum-sebelum-026",
+    "hazard": "umum",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Lengkapi tas dengan P3K dan obat umum",
+    "body": "Masukkan perlengkapan P3K sederhana seperti antiseptik, kasa perban, plester, gunting kecil, peniti, dan pinset, serta obat-obatan umum yang biasa dipakai keluarga, misalnya obat batuk, sakit kepala, sakit lambung, diare, dan minyak kayu putih.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 51-52",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "umum-sebelum-027",
+    "hazard": "umum",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Bawa perlengkapan kebersihan dan perlengkapan dasar",
+    "body": "Tambahkan perlengkapan kebersihan pribadi (sabun, sikat gigi, pasta gigi, pembalut, handuk kecil, tisu basah), peluit, lilin dan korek api, selimut dan baju ganti, jas hujan plastik, buku tulis kecil dan pulpen, serta piring dan sendok plastik.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 51-52",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "umum-sebelum-028",
+    "hazard": "umum",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Periksa isi tas siaga setiap tiga bulan",
+    "body": "Periksa kembali isi tas siaga setiap 3 bulan, ganti makanan dan minuman dengan masa berlaku yang lebih baru, dan cocokkan isinya dengan kondisi anggota keluarga saat itu.",
+    "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 51-52",
+    "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
   }
 ]

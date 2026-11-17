@@ -80,15 +80,24 @@ export function buildGempa(
 
   const m5 = listFrom(terkini).map((g) => normalizeGempaItem(g, "m5", ref));
   const rasa = listFrom(dirasakan).map((g) => normalizeGempaItem(g, "dirasakan", ref));
-  const seen = new Set<string>();
-  const daftar = [...m5, ...rasa]
-    .filter((x): x is GempaItem => Boolean(x))
-    .filter((x) => {
-      const k = `${x.waktu}|${x.magnitudo}`;
-      if (seen.has(k)) return false;
-      seen.add(k);
-      return true;
-    })
+  // Satu gempa bisa muncul di beberapa berkas (mis. M7.1 ada di gempaterkini dan gempadirasakan, dan gempa
+  // terbaru ada di autogempa dan gempadirasakan). Gabungkan per kejadian: kolom yang hanya ada di salah satu
+  // berkas (Potensi, Dirasakan, Shakemap) tetap terbawa, dan gempa terbaru tidak diulang di daftar.
+  const kunci = (x: GempaItem) => `${x.waktu}|${x.magnitudo}`;
+  const gabung = new Map<string, GempaItem>();
+  for (const x of [...m5, ...rasa]) {
+    if (!x) continue;
+    const ada = gabung.get(kunci(x));
+    if (!ada) {
+      gabung.set(kunci(x), { ...x });
+      continue;
+    }
+    if (ada.potensi === undefined && x.potensi !== undefined) ada.potensi = x.potensi;
+    if (ada.dirasakan === undefined && x.dirasakan !== undefined) ada.dirasakan = x.dirasakan;
+    if (ada.shakemapUrl === undefined && x.shakemapUrl !== undefined) ada.shakemapUrl = x.shakemapUrl;
+  }
+  const daftar = [...gabung.values()]
+    .filter((x) => !terbaru || kunci(x) !== kunci(terbaru))
     .sort((a, b) => Date.parse(b.waktu) - Date.parse(a.waktu))
     .slice(0, 5);
 

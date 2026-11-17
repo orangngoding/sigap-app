@@ -70,7 +70,8 @@ export function normalizeCuaca(raw: unknown, now = new Date()): CuacaResponse {
       prakiraan.push({
         waktu,
         kondisi: toPlainText(it.weather_desc) || "Tidak diketahui",
-        ikon: typeof it.image === "string" && it.image.startsWith("https://") ? it.image : null,
+        // URL ikon BMKG memuat spasi ("hujan ringan-am.svg"); di-encode agar valid di semua peramban.
+        ikon: typeof it.image === "string" && it.image.startsWith("https://") ? it.image.trim().replace(/ /g, "%20") : null,
         suhu: toNumber(it.t),
         kelembapan: toNumber(it.hu),
         anginKmj: toNumber(it.ws),

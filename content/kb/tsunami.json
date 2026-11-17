@@ -1,0 +1,370 @@
+[
+  {
+    "id": "tsunami-sebelum-001",
+    "hazard": "tsunami",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Kenali tanda-tanda tsunami setelah gempa",
+    "body": "Setelah gempa, waspadai tanda berikut: guncangan lama dan terasa kuat, air laut surut, bunyi gemuruh dari tengah laut, dan banyak ikan menggelepar di pantai yang airnya surut.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 20",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "tsunami-sebelum-002",
+    "hazard": "tsunami",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Ketahui kerawanan tempat tinggal dan jalur evakuasi",
+    "body": "Cari tahu tingkat kerawanan tsunami di tempat tinggal Anda dan jalur tercepat menuju dataran yang lebih tinggi.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 20",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "tsunami-sebelum-003",
+    "hazard": "tsunami",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Pantau informasi resmi soal potensi tsunami",
+    "body": "Setelah gempa, pantau media resmi untuk informasi potensi tsunami. Lembaga yang berwenang memberi peringatan tsunami adalah BMKG.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 19-20",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "tsunami-sebelum-004",
+    "hazard": "tsunami",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Kenali rambu bahaya tsunami",
+    "body": "Wilayah yang berpotensi terdampak tsunami ditandai rambu peringatan bahaya tsunami. Kenali rambu itu beserta petunjuk jalur evakuasi di sekitar Anda.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 19, 76",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "tsunami-sebelum-005",
+    "hazard": "tsunami",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "rendah",
+    "darurat": false,
+    "title": "Dukung penanaman pohon pelindung pesisir",
+    "body": "Penanaman kelapa, cemara laut, beringin, dan bakau di pesisir dapat membantu meredam gelombang dan mencegah abrasi pantai. Ikut serta dalam penanaman di lingkungan Anda.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 66-69",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "tsunami-saat-001",
+    "hazard": "tsunami",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": true,
+    "title": "Setelah gempa kuat, segera lari ke tempat tinggi",
+    "body": "Setelah gempa besar mengguncang, segera berlari ke tempat yang tinggi dan bertahan di sana untuk sementara waktu.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 20",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "tsunami-saat-002",
+    "hazard": "tsunami",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": true,
+    "title": "Jauhi pantai, jangan menonton gelombang",
+    "body": "Segera menjauhi pantai. Tidak perlu melihat datangnya tsunami dan jangan menangkap ikan yang terdampar karena air laut surut.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 20",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "tsunami-saat-003",
+    "hazard": "tsunami",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": true,
+    "title": "Menyingkir dari pantai saat ada sirine",
+    "body": "Tidak semua gempa memicu tsunami. Bila mendengar sirine tanda bahaya atau pengumuman bahaya tsunami dari pihak berwenang, segera menyingkir dari daerah pantai dan ikuti arahan evakuasi.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 21",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "tsunami-saat-004",
+    "hazard": "tsunami",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": true,
+    "title": "Bimbing keluarga ke tempat lebih tinggi",
+    "body": "Bila berada di rumah, usahakan tetap tenang dan segera bimbing keluarga menyelamatkan diri ke tempat yang lebih tinggi dan aman.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 21",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "tsunami-saat-005",
+    "hazard": "tsunami",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": true,
+    "title": "Bertahan di tempat tinggi sampai dinyatakan aman",
+    "body": "Gelombang kedua dan ketiga biasanya lebih besar dari yang pertama, dan tsunami bisa datang sampai lima kali. Jangan meninggalkan tempat evakuasi sebelum pihak berwenang menyatakan aman.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 21-22",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "tsunami-saat-006",
+    "hazard": "tsunami",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": true,
+    "title": "Evakuasi dengan berjalan kaki, hindari jembatan",
+    "body": "Hindari jalan yang melewati jembatan. Dianjurkan evakuasi dengan berjalan kaki.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 22",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "tsunami-saat-007",
+    "hazard": "tsunami",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": true,
+    "title": "Tinggalkan kendaraan bila macet",
+    "body": "Bila evakuasi dengan kendaraan terjebak kemacetan, segera kunci dan tinggalkan kendaraan, lalu lanjutkan evakuasi dengan berjalan kaki.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 22",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "tsunami-saat-008",
+    "hazard": "tsunami",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Dengarkan informasi lewat radio atau ponsel",
+    "body": "Setelah sampai di tempat tinggi, dengarkan informasi dari pihak berwenang melalui radio atau alat komunikasi lainnya.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 21",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "tsunami-saat-009",
+    "hazard": "tsunami",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "rendah",
+    "darurat": false,
+    "title": "Di perahu atau kapal, tetap berlayar",
+    "body": "Bila berada di kapal atau perahu yang sedang berlayar, upayakan tetap berlayar dan hindari wilayah pelabuhan.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 22",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "tsunami-sesudah-001",
+    "hazard": "tsunami",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Kembali hanya setelah dinyatakan aman",
+    "body": "Jangan kembali ke rumah sebelum keadaan dinyatakan aman oleh pihak berwenang.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 22-23",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "tsunami-sesudah-002",
+    "hazard": "tsunami",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Utamakan keselamatan, bukan barang",
+    "body": "Utamakan keselamatan diri dan keluarga, bukan barang-barang. Waspadai instalasi listrik dan pipa gas.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 23",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "tsunami-sesudah-003",
+    "hazard": "tsunami",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Jauhi area tergenang dan rusak",
+    "body": "Jauhi area yang tergenang dan rusak sampai ada informasi aman dari pihak berwenang. Hindari air yang bergerak karena arusnya dapat membahayakan.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 23",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "tsunami-sesudah-004",
+    "hazard": "tsunami",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Hindari air genangan: tercemar dan ada risiko listrik",
+    "body": "Hindari air yang menggenang karena kemungkinan tercemar zat berbahaya dan ada ancaman tersengat aliran listrik.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 23",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "tsunami-sesudah-005",
+    "hazard": "tsunami",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Hati-hati memasuki gedung, fondasi mungkin rusak",
+    "body": "Berhati-hatilah saat memasuki gedung karena ada ancaman kerusakan yang tidak terlihat, misalnya pada fondasi. Tetap di luar gedung yang masih dikelilingi air.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 24",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "tsunami-sesudah-006",
+    "hazard": "tsunami",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Cuci tangan dengan sabun setelah kena air genangan",
+    "body": "Jaga kesehatan keluarga dengan mencuci tangan memakai sabun dan air bersih bila terkena air genangan tsunami. Buang makanan yang terkontaminasi air genangan.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 24",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "tsunami-sesudah-007",
+    "hazard": "tsunami",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Bila terluka, ke pos kesehatan terdekat",
+    "body": "Apabila terluka, dapatkan perawatan kesehatan di pos kesehatan terdekat.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 24",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "tsunami-sesudah-008",
+    "hazard": "tsunami",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "rendah",
+    "darurat": false,
+    "title": "Cari tahu lokasi bantuan tenda, pakaian, makanan",
+    "body": "Dengarkan berita atau informasi mengenai kondisi air serta tempat mendapatkan bantuan tenda darurat, pakaian, dan makanan.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 24",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "tsunami-sesudah-009",
+    "hazard": "tsunami",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "rendah",
+    "darurat": false,
+    "title": "Bersihkan sarang nyamuk dan serangga",
+    "body": "Bersihkan sarang nyamuk dan serangga lainnya di sekitar tempat tinggal. Ikut serta dalam kaporisasi sumber air bersih dan perbaikan jamban serta saluran limbah.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 24",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  }
+]

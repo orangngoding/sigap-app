@@ -6,6 +6,8 @@ import { SiteHeader } from "@/components/global/site-header";
 import { SiteFooter } from "@/components/global/site-footer";
 import { MobileBottomNav } from "@/components/global/mobile-bottom-nav";
 import { Providers } from "@/components/providers";
+import { Toaster } from "@/components/global/toaster";
+import { RegistrasiSW } from "@/components/darurat/registrasi-sw";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -48,6 +50,9 @@ export default function RootLayout({
         <Providers>{children}</Providers>
         <MobileBottomNav />
         <SiteFooter />
+        <Toaster />
+        {/* Didaftarkan di semua halaman agar Mode Darurat siap offline sejak kunjungan pertama (Blueprint 8.2) */}
+        <RegistrasiSW />
       </body>
     </html>
   );

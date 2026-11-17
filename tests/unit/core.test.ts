@@ -46,7 +46,7 @@ uji("faktor: lantai tinggi hanya apartemen/kos", () => assert.ok(!semuaFaktor({l
 uji("saran: gempa+cuaca selalu", () => assert.deepEqual(sarankanBahaya(buatProfilAwal().jawabanPemicu).map(s=>s.id),["gempa","cuaca_ekstrem"]));
 uji("saran: pesisir -> tsunami + gelombang_abrasi", () => { const j = {...buatProfilAwal().jawabanPemicu,"q-pesisir":"ya" as const}; const ids = sarankanBahaya(j).map(s=>s.id); assert.ok(ids.includes("tsunami")&&ids.includes("gelombang_abrasi")); });
 uji("selisih saran: jawaban Ya->banjir ditambah; Tidak->dilepas", () => { const p = buatProfilAwal(); const j1 = {...p.jawabanPemicu,"q-sungai":"ya" as const}; const r1 = terapkanPerubahanJawaban(p, j1); assert.ok(r1.bahaya.includes("banjir")); assert.deepEqual(r1.varianBanjir.sort(),["genangan","sungai"]); const r2 = terapkanPerubahanJawaban({...p,...r1,jawabanPemicu:j1}, p.jawabanPemicu); assert.ok(!r2.bahaya.includes("banjir")); });
-uji("saran: bahaya 'segera' (tsunami) tidak otomatis dipilih", () => { const p = buatProfilAwal(); const r = terapkanPerubahanJawaban(p,{...p.jawabanPemicu,"q-pesisir":"ya"}); assert.ok(!r.bahaya.includes("tsunami")); });
+uji("saran: jawaban pesisir memilih tsunami dan gelombang_abrasi (keduanya aktif)", () => { const p = buatProfilAwal(); const r = terapkanPerubahanJawaban(p,{...p.jawabanPemicu,"q-pesisir":"ya"}); assert.ok(r.bahaya.includes("tsunami")); assert.ok(r.bahaya.includes("gelombang_abrasi")); });
 
 // profil
 uji("rapikan: hitungan dijepit ke jumlah anggota", () => { const p = rapikanProfil({...buatProfilAwal(), jumlahAnggota:2, lansia:5}); assert.equal(p.lansia,2); });

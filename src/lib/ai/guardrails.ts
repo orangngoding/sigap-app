@@ -14,6 +14,24 @@ export const POLA_TERLARANG: RegExp[] = [
 
 export const lolosPenyaring = (teks: string): boolean => !POLA_TERLARANG.some((p) => p.test(teks));
 
+/**
+ * Untuk Jelaskan Peringatan: teks resmi BMKG sendiri memakai frasa seperti "akan terjadi", dan penjelasan
+ * yang mengulangnya apa adanya tidak boleh ditolak. Frasa terlarang diperbolehkan hanya bila frasa itu BESERTA
+ * dua kata yang mengikutinya ada persis di teks sumber ("akan terjadi pada 17 November" dari BMKG lolos,
+ * "Banjir akan terjadi besok" tidak). Klaim tambahan AI (mis. "pasti aman") tetap ditolak.
+ */
+export function lolosPenyaringKutipan(keluaran: string, sumber: string): boolean {
+  const s = sumber.toLowerCase().replace(/\s+/g, " ");
+  return !POLA_TERLARANG.some((p) => {
+    const global = new RegExp(p.source, p.flags.includes("g") ? p.flags : `${p.flags}g`);
+    return [...keluaran.matchAll(global)].some((m) => {
+      const akhir = (m.index ?? 0) + m[0].length;
+      const lanjutan = keluaran.slice(akhir).match(/^(?:\s+[^\s.,;:!?]+){0,2}/)?.[0] ?? "";
+      return !s.includes(`${m[0]}${lanjutan}`.toLowerCase().replace(/\s+/g, " "));
+    });
+  });
+}
+
 /** Buang markup dan karakter kontrol dari keluaran model; hasil dirender sebagai teks biasa. */
 export function bersihkanTeks(teks: string): string {
   return teks
@@ -22,6 +40,19 @@ export function bersihkanTeks(teks: string): string {
     .replace(/[*_`#>]+/g, "")
     .replace(/\s+/g, " ")
     .trim();
+}
+
+/** Kalimat penafian yang disalin model dari instruksi; UI sudah menampilkan penafian sendiri. */
+const POLA_PENAFIAN = [
+  /\b(keluaran|jawaban|informasi|penjelasan) ini bukan pengganti arahan\b/i,
+  /\bpada keadaan darurat,? arahkan ke 112\b/i,
+];
+
+/** Buang kalimat penafian dari jawaban AI. Bila semua kalimat adalah penafian, teks asli dikembalikan. */
+export function buangPenafian(teks: string): string {
+  const kalimat = teks.match(/[^.!?]+[.!?]*/g) ?? [teks];
+  const sisa = kalimat.filter((k) => !POLA_PENAFIAN.some((p) => p.test(k))).join("").trim();
+  return sisa.length >= 10 ? sisa : teks;
 }
 
 // ---------- Balasan penolakan standar (Blueprint 16.5) ----------
@@ -54,6 +85,7 @@ export const BALASAN_TOLAK: Record<KategoriTolak, string> = {
 // ---------- Klasifikasi pertanyaan sebelum memanggil AI ----------
 const BENCANA = "banjir|gempa|longsor|tsunami|meletus|letusan|bencana|kebakaran|puting beliung|badai|kekeringan|karhutla";
 const KONDISIONAL = /\b(jika|bila|apabila|kalau|ketika|saat|waktu)\b/i;
+const TANDA = /\b(tanda|tanda-tanda|ciri|ciri-ciri|gejala|pertanda|mengenali|kenali)\b/i;
 
 const RE = {
   ubahInstruksi: [
@@ -85,6 +117,7 @@ const RE = {
     /\b(prediksi|ramalan|memprediksi|meramal|ramalkan)\b/i,
     new RegExp(`\\bkapan\\b[^.?!]{0,40}\\b(${BENCANA}|terjadi)\\b`, "i"),
     new RegExp(`\\b(besok|lusa|nanti malam|minggu depan|bulan depan)\\b[^.?!]{0,30}\\b(${BENCANA})\\b`, "i"),
+    new RegExp(`\\b(${BENCANA})\\b[^.?!]{0,30}\\b(besok|lusa|nanti malam|minggu depan|bulan depan)\\b`, "i"),
   ],
   prediksiAkan: [new RegExp(`\\b(apakah|akankah|apa)\\b[^.?!]{0,50}\\b(akan|bakal)\\b[^.?!]{0,40}\\b(${BENCANA}|terjadi)\\b`, "i")],
 };
@@ -100,7 +133,8 @@ export function klasifikasiPertanyaan(q: string): HasilKlasifikasi {
   if (RE.medis.some((r) => r.test(s))) return { kategori: "medis" };
   if (RE.lokasiEvakuasi.some((r) => r.test(s))) return { kategori: "lokasi_evakuasi" };
   if (RE.prediksiKuat.some((r) => r.test(s))) return { kategori: "prediksi" };
-  if (RE.prediksiAkan.some((r) => r.test(s)) && !KONDISIONAL.test(s)) return { kategori: "prediksi" };
+  // "Apa tanda-tanda tanah akan longsor?" menanyakan cara mengenali bahaya (edukasi), bukan meminta ramalan.
+  if (RE.prediksiAkan.some((r) => r.test(s)) && !KONDISIONAL.test(s) && !TANDA.test(s)) return { kategori: "prediksi" };
   return { kategori: null };
 }
 

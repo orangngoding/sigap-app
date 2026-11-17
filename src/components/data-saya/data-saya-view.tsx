@@ -1,8 +1,11 @@
 "use client";
 import { useState } from "react";
-import { Trash2 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Download, Trash2 } from "lucide-react";
+import { toast } from "@/lib/toast";
 import { StatusBanner } from "@/components/global/status-banner";
 import { useHydrate } from "@/hooks/use-hydrate";
+import { useKartuStore } from "@/stores/kartu-store";
 import { useLokasiStore } from "@/stores/lokasi-store";
 import { useProfilStore } from "@/stores/profil-store";
 import { useProgresStore } from "@/stores/progres-store";
@@ -20,31 +23,65 @@ function hapusSisaKunci() {
   }
 }
 
+/** Semua isi penyimpanan lokal SIGAP (kunci `sigap:v1:*`) sebagai objek JSON. */
+function kumpulkanData(): Record<string, unknown> {
+  const out: Record<string, unknown> = {};
+  try {
+    for (const k of Object.keys(localStorage)) {
+      if (!k.startsWith("sigap:v1:")) continue;
+      const mentah = localStorage.getItem(k);
+      try { out[k] = mentah ? JSON.parse(mentah) : null; } catch { out[k] = mentah; }
+    }
+  } catch {
+    /* penyimpanan tidak tersedia */
+  }
+  return out;
+}
+
+const ukuranKb = (data: Record<string, unknown>) => Math.max(1, Math.round(new Blob([JSON.stringify(data)]).size / 1024));
+
 export function DataSayaView() {
-  const siap = useHydrate(useLokasiStore, useProfilStore, useProgresStore, useRencanaStore);
+  const siap = useHydrate(useLokasiStore, useProfilStore, useProgresStore, useRencanaStore, useKartuStore);
   const lokasi = useLokasiStore((s) => s.lokasi);
   const profil = useProfilStore((s) => s.profil);
   const progres = useProgresStore((s) => s.progres);
   const rencana = useRencanaStore((s) => s.rencana);
   const [selesai, setSelesai] = useState(false);
   const [konfirmasi, setKonfirmasi] = useState(false);
+  const router = useRouter();
 
   const hapusSemua = () => {
     useLokasiStore.getState().clearLokasi();
     useProfilStore.getState().reset();
     useProgresStore.getState().reset();
     useRencanaStore.getState().reset();
+    useKartuStore.getState().reset();
     hapusSisaKunci();
     setKonfirmasi(false);
     setSelesai(true);
+    // Blueprint 8.6: arahkan ke Beranda dengan toast konfirmasi.
+    toast("Semua data SIGAP di perangkat ini sudah dihapus.");
+    router.push("/");
   };
   const selesaiCentang = Object.keys(progres).length;
+
+  const ekspor = () => {
+    const data = { diekspor: new Date().toISOString(), data: kumpulkanData() };
+    const url = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], { type: "application/json" }));
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "data-sigap.json";
+    a.click();
+    URL.revokeObjectURL(url);
+    toast("Data diekspor sebagai data-sigap.json.");
+  };
 
   const baris: Array<[string, string]> = [
     ["Lokasi", lokasi ? `${lokasi.kelurahan}, ${lokasi.kecamatan}, ${lokasi.kabKota}` : "Belum dipilih"],
     ["Profil keluarga", profil.bahaya.length > 0 ? `${profil.jumlahAnggota} anggota, ${profil.bahaya.length} bahaya dipilih` : "Belum diisi"],
     ["Rencana siaga", rencana ? `Tersimpan (${rencana.mode === "ai" ? "dengan bantuan AI" : "tanpa AI"})` : "Belum ada"],
     ["Progres", selesaiCentang > 0 ? `${selesaiCentang} butir ditandai selesai` : "Belum ada"],
+    ["Perkiraan ukuran data", siap ? `${ukuranKb(kumpulkanData())} KB di perangkat ini` : "Menghitung"],
   ];
 
   return (
@@ -66,6 +103,9 @@ export function DataSayaView() {
           ))}
         </dl>
       )}
+      <div className="flex flex-wrap items-center gap-3">
+        <button type="button" onClick={ekspor} className={BTN}><Download className="size-4" aria-hidden="true" /> Ekspor data (JSON)</button>
+      </div>
       <div aria-live="polite">
         {!konfirmasi ? (
           <button type="button" onClick={() => setKonfirmasi(true)} className={BTN}><Trash2 className="size-4" aria-hidden="true" /> Hapus semua data saya</button>

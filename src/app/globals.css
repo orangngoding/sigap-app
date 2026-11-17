@@ -174,3 +174,28 @@
     line-height: 1.5;
   }
 }
+
+/* Gaya cetak bersama (Blueprint 8.4 dan 16.6): navigasi dan tombol disembunyikan, hitam putih, tanpa latar. */
+@media print {
+  header,
+  footer,
+  nav,
+  .tanpa-cetak {
+    display: none !important;
+  }
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  a {
+    color: #000 !important;
+    text-decoration: underline;
+  }
+  details > summary {
+    list-style: none;
+  }
+  section,
+  li {
+    break-inside: avoid;
+  }
+}

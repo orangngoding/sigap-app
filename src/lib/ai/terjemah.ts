@@ -1,9 +1,10 @@
 // Terjemah Peringatan (Blueprint 8.3, 10.1, 13.3): AI hanya menyederhanakan teks resmi.
 import { GalatProvider, type LlmProvider } from "./provider";
 import { TerjemahPeringatan } from "./schema";
-import { bersihkanTeks, klasifikasiPertanyaan, lolosPenyaring } from "./guardrails";
+import { bersihkanTeks, buangPenafian, klasifikasiPertanyaan, lolosPenyaringKutipan } from "./guardrails";
 import { SISTEM_TERJEMAH, blokData } from "./prompts";
 import { AnggaranHarian, anggaranGlobal } from "./runtime";
+import kontak from "@/generated/kontak.json";
 
 export interface HasilTerjemah {
   mode: "ai" | "cadangan";
@@ -31,10 +32,14 @@ export interface DepsTerjemah {
   batasWaktuMs?: number;
 }
 
+/** Nomor darurat nasional yang juga tampil di aplikasi dan Kartu Siaga; boleh disebut walau tidak ada di teks. */
+export const NOMOR_DARURAT_DIIZINKAN: readonly string[] = kontak.kontak.map((k) => k.nomor);
+
 /** Angka, jam, dan tanggal pada keluaran harus ada di teks sumber: AI tidak boleh menambah fakta baru. */
-export function angkaBaru(sumber: string, keluaran: string): boolean {
+export function angkaBaru(sumber: string, keluaran: string, diizinkan: readonly string[] = NOMOR_DARURAT_DIIZINKAN): boolean {
   const ambil = (s: string) => new Set((s.match(/\d+(?:[.,:]\d+)*/g) ?? []).map((x) => x.replace(/^0+(?=\d)/, "")));
   const asal = ambil(sumber);
+  for (const n of diizinkan) asal.add(n);
   for (const a of ambil(keluaran)) if (!asal.has(a)) return true;
   return false;
 }
@@ -59,13 +64,17 @@ export async function terjemahkanPeringatan(
   for (const p of d.providers) {
     try {
       const mentah = await p.hasilJson({ system: SISTEM_TERJEMAH, user, suhu: 0.2, maksTokenKeluaran: 900, timeoutMs: d.batasWaktuMs ?? 15_000 });
-      const v = TerjemahPeringatan.safeParse(JSON.parse(mentah));
+      const json = JSON.parse(mentah) as { tindakan?: unknown };
+      // Satu tindakan yang kepanjangan cukup dibuang, tidak perlu menggagalkan seluruh jawaban (minimal 3 tetap dicek skema).
+      if (Array.isArray(json?.tindakan)) json.tindakan = json.tindakan.filter((t) => typeof t !== "string" || t.length <= 160);
+      const v = TerjemahPeringatan.safeParse(json);
       if (!v.success) continue;
-      const penjelasan = bersihkanTeks(v.data.penjelasan);
+      const penjelasan = buangPenafian(bersihkanTeks(v.data.penjelasan));
       const tindakan = v.data.tindakan.map(bersihkanTeks).filter((t) => t.length > 0);
       const semua = [penjelasan, ...tindakan].join(" ");
       if (penjelasan.length < 10 || tindakan.length < 3) continue;
-      if (!lolosPenyaring(semua) || angkaBaru(teks, semua)) return cadangan();
+      // Kalimat resmi BMKG memakai "akan terjadi"; mengulangnya apa adanya boleh, menambah klaim sendiri tidak.
+      if (!lolosPenyaringKutipan(semua, teks) || angkaBaru(teks, semua)) return cadangan();
       return { mode: "ai", penjelasan, tindakan: tindakan.slice(0, 5), tautanResmi: TAUTAN_PERINGATAN };
     } catch (e) {
       if (e instanceof GalatProvider || e instanceof SyntaxError) continue;

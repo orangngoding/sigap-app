@@ -1,21 +1,79 @@
-// Service worker sederhana: simpan halaman dan aset yang pernah dibuka, lalu pakai saat luring.
-// Data pribadi tidak disentuh (tersimpan di localStorage, bukan di cache ini). API tidak di-cache.
-const CACHE = "sigap-v1";
-self.addEventListener("install", (e) => { e.waitUntil(caches.open(CACHE).then((c) => c.add("/darurat")).catch(() => {})); self.skipWaiting(); });
-self.addEventListener("activate", (e) => {
-  e.waitUntil(caches.keys().then((ks) => Promise.all(ks.filter((k) => k !== CACHE).map((k) => caches.delete(k)))).then(() => self.clients.claim()));
+// Service worker SIGAP (Blueprint 8.2 dan 17.3).
+// - Saat dipasang: simpan halaman inti offline (Mode Darurat, Kartu Siaga, Beranda) BESERTA berkas JS/CSS yang
+//   dirujuk HTML-nya, agar Mode Darurat tetap berfungsi dalam mode pesawat setelah satu kali kunjungan online.
+//   Langkah darurat semua bahaya dan daftar nomor penting ikut terkemas di berkas JS itu.
+// - Halaman lain: jaringan dulu, simpan salinan, pakai salinan saat offline.
+// - API dan data pribadi tidak pernah disimpan di cache ini (data pengguna ada di localStorage).
+// Ganti VERSI tiap rilis agar cache lama dibersihkan.
+const VERSI = "sigap-v2";
+const HALAMAN_INTI = ["/darurat", "/rencana/kartu", "/"];
+const POLA_ASET = /\/_next\/static\/[^"'\s)\\]+/g;
+
+async function simpanHalaman(cache, path) {
+  const res = await fetch(path, { cache: "no-store" });
+  if (!res.ok) return;
+  const html = await res.clone().text();
+  await cache.put(path, res);
+  const aset = [...new Set(html.match(POLA_ASET) ?? [])];
+  await Promise.allSettled(aset.map((a) => cache.add(a)));
+}
+
+self.addEventListener("install", (e) => {
+  e.waitUntil(
+    caches
+      .open(VERSI)
+      .then((c) => Promise.allSettled(HALAMAN_INTI.map((p) => simpanHalaman(c, p))))
+      .finally(() => self.skipWaiting()),
+  );
 });
+
+self.addEventListener("activate", (e) => {
+  e.waitUntil(
+    caches
+      .keys()
+      .then((ks) => Promise.all(ks.filter((k) => k !== VERSI).map((k) => caches.delete(k))))
+      .then(() => self.clients.claim()),
+  );
+});
+
 self.addEventListener("fetch", (e) => {
   const r = e.request;
   const url = new URL(r.url);
   if (r.method !== "GET" || url.origin !== location.origin || url.pathname.startsWith("/api/")) return;
+
+  // Aset build berversi (nama berkas memuat hash): ambil dari cache dulu.
+  if (url.pathname.startsWith("/_next/static/")) {
+    e.respondWith(
+      caches.match(r).then(
+        (m) =>
+          m ||
+          fetch(r).then((res) => {
+            if (res.ok) {
+              const salin = res.clone();
+              caches.open(VERSI).then((c) => c.put(r, salin));
+            }
+            return res;
+          }),
+      ),
+    );
+    return;
+  }
+
+  // Halaman dan berkas publik lain: jaringan dulu, salinan saat offline. Navigasi yang belum pernah disimpan
+  // diarahkan ke Mode Darurat (Blueprint 8.7: halaman offline menautkan Mode Darurat dan Kartu Siaga).
   e.respondWith(
-    fetch(r).then((res) => {
-      if (res.ok && (r.mode === "navigate" || url.pathname.startsWith("/_next/static/") || url.pathname === "/darurat")) {
-        const salin = res.clone();
-        caches.open(CACHE).then((c) => c.put(r, salin));
-      }
-      return res;
-    }).catch(() => caches.match(r).then((m) => m || (r.mode === "navigate" ? caches.match("/darurat") : undefined))),
+    fetch(r)
+      .then((res) => {
+        if (res.ok && (r.mode === "navigate" || url.pathname.startsWith("/data/"))) {
+          const salin = res.clone();
+          caches.open(VERSI).then((c) => c.put(r, salin));
+        }
+        return res;
+      })
+      .catch(() =>
+        caches
+          .match(r, { ignoreSearch: r.mode === "navigate" })
+          .then((m) => m || (r.mode === "navigate" ? caches.match("/darurat") : undefined)),
+      ),
   );
 });

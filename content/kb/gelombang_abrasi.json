@@ -1,0 +1,461 @@
+[
+  {
+    "id": "gelombang_abrasi-sebelum-001",
+    "hazard": "gelombang_abrasi",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Tanam bakau di pesisir dan rawa",
+    "body": "Bakau (mangrove) menjaga kestabilan garis pantai, mencegah abrasi, menahan lumpur, dan meredam gelombang pasang. Ikut serta dalam penanaman di pesisir Anda.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 69",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "gelombang_abrasi-sebelum-002",
+    "hazard": "gelombang_abrasi",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Tanam cemara laut di tepi pantai",
+    "body": "Cemara laut dapat menahan terjangan ombak dan mencegah abrasi pantai. Ikut serta dalam penanaman di tepi pantai.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 68",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "gelombang_abrasi-sebelum-003",
+    "hazard": "gelombang_abrasi",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "rendah",
+    "darurat": false,
+    "title": "Tanam kelapa di pesisir",
+    "body": "Pohon kelapa berakar serabut panjang dan dapat menahan ombak serta mencegah abrasi dan erosi di pesisir.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 66",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "gelombang_abrasi-sebelum-004",
+    "hazard": "gelombang_abrasi",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "rendah",
+    "darurat": false,
+    "title": "Tanam beringin untuk menahan erosi",
+    "body": "Beringin berakar dalam dan kuat sehingga membantu menahan erosi dan menambah cadangan air tanah.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 67",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "gelombang_abrasi-sebelum-005",
+    "hazard": "gelombang_abrasi",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Dengarkan pemberitahuan dini cuaca",
+    "body": "Dengarkan pemberitahuan dini dari prakiraan cuaca lewat radio dan alat komunikasi, dan lengkapi diri dengan alat komunikasi.",
+    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012), hlm. 33-34",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "gelombang_abrasi-sebelum-006",
+    "hazard": "gelombang_abrasi",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Hindari laut yang sedang dilanda cuaca buruk",
+    "body": "Bila berlayar di tengah laut, usahakan menghindari daerah laut yang sedang dilanda cuaca buruk.",
+    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012), hlm. 33",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "gelombang_abrasi-sebelum-007",
+    "hazard": "gelombang_abrasi",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Rencanakan pengungsian dan tempat evakuasi yang tinggi",
+    "body": "Buat rencana pengungsian bila gelombang pasang melanda pantai. Ketahui tempat evakuasi yang cukup tinggi dan mudah dilalui di dekat permukiman.",
+    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012), hlm. 33-34",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "gelombang_abrasi-sebelum-008",
+    "hazard": "gelombang_abrasi",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Kenali tanda gelombang pasang dan cara menyelamatkan diri",
+    "body": "Warga pesisir perlu mengenali tanda gelombang pasang, misalnya angin kencang, badai di tengah laut, dan cuaca yang tiba-tiba gelap, serta cara menyelamatkan diri.",
+    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012), hlm. 32, 34",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "gelombang_abrasi-sebelum-009",
+    "hazard": "gelombang_abrasi",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Laporkan tanda-tanda ke petugas",
+    "body": "Laporkan segera tanda-tanda gelombang pasang kepada kepala desa, polisi, stasiun radio, SATLAK PB, atau instansi terkait.",
+    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012), hlm. 34",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "gelombang_abrasi-sebelum-010",
+    "hazard": "gelombang_abrasi",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Kenali banjir rob",
+    "body": "Banjir rob adalah banjir akibat naiknya permukaan air laut. Penyebab banjir secara umum antara lain curah hujan di atas normal dan pasang naik air laut.",
+    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012), hlm. 17",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "gelombang_abrasi-sebelum-011",
+    "hazard": "gelombang_abrasi",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "rendah",
+    "darurat": false,
+    "title": "Kenali abrasi pantai",
+    "body": "Gelombang pasang di laut dapat menyapu daerah pinggir pantai. Proses tersapunya pantai ini disebut abrasi.",
+    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012), hlm. 31",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "gelombang_abrasi-sebelum-012",
+    "hazard": "gelombang_abrasi",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "rendah",
+    "darurat": false,
+    "title": "Ketahui kapan pasang laut paling tinggi",
+    "body": "Pasang purnama terjadi sekitar tanggal 1 dan 15, saat bulan mati dan bulan purnama, ketika bulan, bumi, dan matahari segaris. Tinggi pasang pada saat itu sangat besar dibanding hari lain.",
+    "sourceTitle": "Pengenalan Karakteristik Bencana dan Upaya Mitigasinya di Indonesia, Edisi II (BNPB/BAKORNAS PB, 2007), hlm. 46",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/470.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "gelombang_abrasi-sebelum-013",
+    "hazard": "gelombang_abrasi",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "rendah",
+    "darurat": false,
+    "title": "Dukung pemecah ombak dan tembok penahan pantai",
+    "body": "Pemecah ombak mengurangi energi gelombang di pantai bergelombang besar, dan tembok penahan air pasang dibangun pada garis pantai berisiko. Dukung pembangunannya di lingkungan Anda.",
+    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012), hlm. 33-34",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "gelombang_abrasi-saat-001",
+    "hazard": "gelombang_abrasi",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": true,
+    "title": "Jauhi pantai, berlari ke dataran tinggi",
+    "body": "Saat gelombang pasang terjadi, jauhi pantai dan berlarilah ke dataran yang lebih tinggi.",
+    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012), hlm. 33",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "gelombang_abrasi-saat-002",
+    "hazard": "gelombang_abrasi",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": true,
+    "title": "Matikan listrik, jangan sentuh alat listrik di air",
+    "body": "Matikan jaringan listrik bila ada instruksi pihak berwenang dan cabut alat yang masih tersambung. Jangan menyentuh peralatan listrik saat berdiri di atas atau di dalam air.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 36",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": [],
+    "turunan": "Turunan dari panduan banjir umum; belum ada panduan resmi khusus gelombang tinggi atau rob."
+  },
+  {
+    "id": "gelombang_abrasi-saat-003",
+    "hazard": "gelombang_abrasi",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": true,
+    "title": "Mengungsi lebih awal ke tempat yang lebih tinggi",
+    "body": "Bila air sudah naik, segera evakuasi ke tempat yang lebih tinggi.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 36",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": [],
+    "turunan": "Turunan dari panduan banjir umum; belum ada panduan resmi khusus gelombang tinggi atau rob."
+  },
+  {
+    "id": "gelombang_abrasi-saat-004",
+    "hazard": "gelombang_abrasi",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": true,
+    "title": "Jangan mengemudi di wilayah banjir",
+    "body": "Jangan mengemudikan mobil di wilayah banjir. Bila air mulai naik, tinggalkan mobil dan menujulah ke tempat yang lebih tinggi karena mobil dapat tersapu arus.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 37",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": [],
+    "turunan": "Turunan dari panduan banjir umum; belum ada panduan resmi khusus gelombang tinggi atau rob."
+  },
+  {
+    "id": "gelombang_abrasi-saat-005",
+    "hazard": "gelombang_abrasi",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": true,
+    "title": "Waspada arus bawah dan kubangan",
+    "body": "Waspadai arus bawah, saluran air, kubangan, dan tempat lain yang tergenang air.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 36",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": [],
+    "turunan": "Turunan dari panduan banjir umum; belum ada panduan resmi khusus gelombang tinggi atau rob."
+  },
+  {
+    "id": "gelombang_abrasi-saat-006",
+    "hazard": "gelombang_abrasi",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Pindahkan barang berharga ke tempat yang lebih tinggi",
+    "body": "Bila masih ada waktu, letakkan barang berharga di bagian rumah yang lebih tinggi dan amankan rumah sebelum mengungsi.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 36",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": [],
+    "turunan": "Turunan dari panduan banjir umum; belum ada panduan resmi khusus gelombang tinggi atau rob."
+  },
+  {
+    "id": "gelombang_abrasi-sesudah-001",
+    "hazard": "gelombang_abrasi",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Kembali hanya setelah dinyatakan aman",
+    "body": "Kembali ke rumah sesuai perintah dari pihak yang berwenang.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 38",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": [],
+    "turunan": "Turunan dari panduan banjir umum; belum ada panduan resmi khusus gelombang tinggi atau rob."
+  },
+  {
+    "id": "gelombang_abrasi-sesudah-002",
+    "hazard": "gelombang_abrasi",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Hindari area yang baru saja surut",
+    "body": "Hindari area yang airnya baru saja surut karena jalan bisa keropos dan ambles.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 38",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": [],
+    "turunan": "Turunan dari panduan banjir umum; belum ada panduan resmi khusus gelombang tinggi atau rob."
+  },
+  {
+    "id": "gelombang_abrasi-sesudah-003",
+    "hazard": "gelombang_abrasi",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Hati-hati memasuki bangunan yang terendam",
+    "body": "Tetap di luar bangunan yang masih dikelilingi air. Berhati-hatilah saat memasuki bangunan karena kerusakan yang tidak terlihat, misalnya pada fondasi.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 38",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": [],
+    "turunan": "Turunan dari panduan banjir umum; belum ada panduan resmi khusus gelombang tinggi atau rob."
+  },
+  {
+    "id": "gelombang_abrasi-sesudah-004",
+    "hazard": "gelombang_abrasi",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Hindari air genangan dan air yang bergerak",
+    "body": "Hindari air genangan karena kemungkinan tercemar zat berbahaya dan ada ancaman kesetrum. Hindari juga air yang bergerak.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 38",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": [],
+    "turunan": "Turunan dari panduan banjir umum; belum ada panduan resmi khusus gelombang tinggi atau rob."
+  },
+  {
+    "id": "gelombang_abrasi-sesudah-005",
+    "hazard": "gelombang_abrasi",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Bersihkan rumah dan buang makanan yang terendam",
+    "body": "Bersihkan tempat tinggal dan lingkungan rumah dari sisa kotoran, serta buang makanan yang terkontaminasi air.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 39",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": [],
+    "turunan": "Turunan dari panduan banjir umum; belum ada panduan resmi khusus gelombang tinggi atau rob."
+  },
+  {
+    "id": "gelombang_abrasi-sesudah-006",
+    "hazard": "gelombang_abrasi",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Cuci tangan dengan sabun, bersihkan sumber air",
+    "body": "Cuci tangan dengan sabun dan air bersih bila terkena air. Ikut kaporitisasi sumur gali serta perbaiki jamban dan saluran pembuangan air limbah.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 39",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": [],
+    "turunan": "Turunan dari panduan banjir umum; belum ada panduan resmi khusus gelombang tinggi atau rob."
+  },
+  {
+    "id": "gelombang_abrasi-sebelum-014",
+    "hazard": "gelombang_abrasi",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Pantau peringatan dini gelombang tinggi dan rob BMKG",
+    "body": "BMKG menyediakan halaman Peringatan Dini Gelombang Tinggi dan Peringatan Banjir Pesisir (Rob). Pantau keduanya di bmkg.go.id.",
+    "sourceTitle": "Potensi Gelombang Tinggi dan Banjir Pesisir (Rob) di Perairan Utara Jawa (Siaran Pers BMKG, 4 Juni 2020)",
+    "sourceUrl": "https://www.bmkg.go.id/siaran-pers/potensi-gelombang-tinggi-dan-banjir-pesisir-rob-di-perairan-utara-jawa",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "gelombang_abrasi-sebelum-015",
+    "hazard": "gelombang_abrasi",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Rob muncul dari gabungan pasang bulan dan gelombang tinggi",
+    "body": "Banjir pesisir (rob) berdampak signifikan saat pasang air laut akibat fase bulan bertepatan dengan gelombang tinggi. Faktor astronomis dan meteorologis ini dapat bergabung.",
+    "sourceTitle": "Potensi Gelombang Tinggi dan Banjir Pesisir (Rob) di Perairan Utara Jawa (Siaran Pers BMKG, 4 Juni 2020)",
+    "sourceUrl": "https://www.bmkg.go.id/siaran-pers/potensi-gelombang-tinggi-dan-banjir-pesisir-rob-di-perairan-utara-jawa",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "gelombang_abrasi-sebelum-016",
+    "hazard": "gelombang_abrasi",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "rendah",
+    "darurat": false,
+    "title": "Kenali kelas tinggi gelombang BMKG",
+    "body": "BMKG memakai Skala Douglas: tenang 0,1-0,5 m, rendah 0,5-1,25 m, sedang 1,25-2,5 m, dan tinggi 2,5-4,0 m (tinggi gelombang signifikan).",
+    "sourceTitle": "Buletin Meteorologi-Oseanografi Indonesia Vol. 3, September 2026 (BMKG Maritim), hlm. 18",
+    "sourceUrl": "https://maritim.bmkg.go.id/marine2026-data/doc/bmoi.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  }
+]

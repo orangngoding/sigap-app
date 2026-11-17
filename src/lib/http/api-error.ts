@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { unstable_rethrow } from "next/navigation";
 import type { ApiErrorBody } from "@/types";
 
 // Kode galat sesuai Blueprint 13.4
@@ -26,6 +27,9 @@ export class ApiError extends Error {
 }
 
 export function errorResponse(err: unknown, route: string, startedAt?: number) {
+  // Sinyal internal Next.js (mis. penundaan prerender saat req.headers/req.url diakses) harus diteruskan,
+  // bukan dianggap galat aplikasi.
+  if (!(err instanceof ApiError)) unstable_rethrow(err);
   const code: ApiErrorCode = err instanceof ApiError ? err.code : "GALAT_INTERNAL";
   const def = CATALOG[code];
   // Log hanya rute, status, durasi, kode galat (tanpa isi permintaan) — Blueprint 13.1

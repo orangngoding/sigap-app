@@ -1,0 +1,421 @@
+[
+  {
+    "id": "karhutla-sebelum-001",
+    "hazard": "karhutla",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Jangan membakar rumput dan puing",
+    "body": "Warga di sekitar hutan perlu memahami bahaya membakar rumput dan puing, terutama saat kemarau dan berangin, karena api mudah menyebar dan meluas.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 55",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "karhutla-sebelum-002",
+    "hazard": "karhutla",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Pastikan api benar-benar padam sebelum pergi",
+    "body": "Sebelum meninggalkan tempat pembakaran, pastikan api sudah mati dan bersihkan area dari bahan yang mudah terbakar.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 55",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "karhutla-sebelum-003",
+    "hazard": "karhutla",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Hindari membakar saat berangin",
+    "body": "Hindari membakar ketika cuaca berangin karena angin kencang membuat api semakin besar dan meluas.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 55",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "karhutla-sebelum-004",
+    "hazard": "karhutla",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Kenali rambu kawasan rawan kebakaran hutan",
+    "body": "Di kawasan hutan, perhatikan rambu peringatan bergambar api. Rambu itu menandakan kawasan tersebut rawan kebakaran.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 55, 76",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "karhutla-sebelum-005",
+    "hazard": "karhutla",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Pantau kualitas udara (PM10)",
+    "body": "Pantau kualitas udara di wilayah terdampak. Kategori PM10: Baik 0-50, Sedang 50-150, Tidak Sehat 150-250, Sangat Tidak Sehat 250-350, Berbahaya di atas 350. Informasinya ada di laman BMKG.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 54",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "karhutla-saat-001",
+    "hazard": "karhutla",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": true,
+    "title": "Tetap di dalam rumah bila tidak ada keperluan",
+    "body": "Bila tidak memiliki kepentingan, jangan keluar rumah.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 56",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "karhutla-saat-002",
+    "hazard": "karhutla",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": true,
+    "title": "Tutup celah udara berasap, jaga udara dalam ruangan",
+    "body": "Tutup semua akses udara berasap yang bisa masuk ke rumah dan jaga udara dalam ruangan sebersih mungkin.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 56",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "karhutla-saat-003",
+    "hazard": "karhutla",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": true,
+    "title": "Pakai masker atau kain saat keluar ruangan",
+    "body": "Lindungi pernapasan dengan masker atau kain setiap kali beraktivitas di luar ruangan. Masker N95 memberi perlindungan lebih baik.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 56",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "karhutla-saat-004",
+    "hazard": "karhutla",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": true,
+    "title": "Nyalakan AC atau penyaring udara bila ada",
+    "body": "Nyalakan AC atau penyaring udara. Bila tidak punya dan rumah terlalu pengap, cari tempat perlindungan.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 56",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "karhutla-saat-005",
+    "hazard": "karhutla",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Cuci tangan dan wajah setelah dari luar ruangan",
+    "body": "Cuci tangan dan wajah sesudah beraktivitas di luar ruangan.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 56",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "karhutla-saat-006",
+    "hazard": "karhutla",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": true,
+    "title": "Laporkan ke Posko Kebakaran bila api menjalar",
+    "body": "Bila api terus menjalar, segera laporkan kepada Posko Kebakaran atau pihak terkait.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 56",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "karhutla-saat-007",
+    "hazard": "karhutla",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Periksa ke dokter bila punya gangguan jantung atau paru",
+    "body": "Segera periksa ke dokter bila Anda memiliki gangguan jantung atau paru-paru.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 56",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "karhutla-saat-008",
+    "hazard": "karhutla",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "rendah",
+    "darurat": false,
+    "title": "Cukupi air putih, buah, dan makanan bergizi",
+    "body": "Cukupi asupan air putih, buah, dan makanan bergizi selama udara berasap.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 56",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "karhutla-sebelum-006",
+    "hazard": "karhutla",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Jangan membuka lahan atau membersihkan pekarangan dengan membakar",
+    "body": "Jangan membuka lahan atau membersihkan pekarangan dengan cara membakar.",
+    "sourceTitle": "Perkembangan Situasi dan Penanganan Bencana di Tanah Air per 3 Juli 2026 (BNPB)",
+    "sourceUrl": "https://www.bnpb.go.id/berita/perkembangan-situasi-dan-penanganan-bencana-di-tanah-air-per-3-juli-2026",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "karhutla-sebelum-007",
+    "hazard": "karhutla",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Padamkan puntung rokok dan jangan tinggalkan bara api",
+    "body": "Pastikan puntung rokok padam sebelum dibuang, jangan membuangnya sembarangan, dan jangan meninggalkan api atau bara setelah beraktivitas di luar rumah.",
+    "sourceTitle": "Perkembangan Situasi dan Penanganan Bencana di Tanah Air per 2 September 2026 (BNPB)",
+    "sourceUrl": "https://www.bnpb.go.id/berita/perkembangan-situasi-dan-penanganan-bencana-di-tanah-air-per-2-september-2026",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "karhutla-sebelum-008",
+    "hazard": "karhutla",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Laporkan titik api sedini mungkin",
+    "body": "Segera laporkan keberadaan titik api kepada aparat atau BPBD agar dapat ditangani sedini mungkin.",
+    "sourceTitle": "Perkembangan Situasi dan Penanganan Bencana di Tanah Air per 2 September 2026 (BNPB)",
+    "sourceUrl": "https://www.bnpb.go.id/berita/perkembangan-situasi-dan-penanganan-bencana-di-tanah-air-per-2-september-2026",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "karhutla-sebelum-009",
+    "hazard": "karhutla",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Pastikan persediaan obat rutin cukup di rumah",
+    "body": "Bagi anggota keluarga yang punya penyakit sebelumnya, pastikan obat yang dikonsumsi rutin tersedia cukup di rumah, sesuai anjuran dokter.",
+    "sourceTitle": "Cegah dan Tangani Dampak Kesehatan Akibat Kabut Asap (Rilis Kemenkes, 15 Oktober 2015)",
+    "sourceUrl": "https://www.kemkes.go.id/id/%20cegah-dan-tangani-dampak-kesehatan-akibat-kabut-asap",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "karhutla-saat-009",
+    "hazard": "karhutla",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": true,
+    "title": "Segera ke puskesmas bila sesak, batuk menetap, atau nyeri dada",
+    "body": "Jangan sepelekan gejala pernapasan ringan. Bila mengalami sesak napas, batuk menetap, nyeri dada, atau iritasi mata berat, segera ke puskesmas atau rumah sakit terdekat.",
+    "sourceTitle": "Menkes: Pakai Masker dan Pantau Kualitas Udara untuk Cegah Dampak Asap Karhutla (Rilis Kemenkes, 21 Agustus 2026)",
+    "sourceUrl": "https://kemkes.go.id/id/menkes-pakai-masker-dan-pantau-kualitas-udara-untuk-cegah-dampak-asap-karhutla",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "karhutla-saat-010",
+    "hazard": "karhutla",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Periksa indeks kualitas udara sebelum keluar rumah",
+    "body": "Periksa indeks kualitas udara secara rutin lewat aplikasi resmi agar dapat memutuskan dengan tepat sebelum beraktivitas di luar rumah.",
+    "sourceTitle": "Menkes: Pakai Masker dan Pantau Kualitas Udara untuk Cegah Dampak Asap Karhutla (Rilis Kemenkes, 21 Agustus 2026)",
+    "sourceUrl": "https://kemkes.go.id/id/menkes-pakai-masker-dan-pantau-kualitas-udara-untuk-cegah-dampak-asap-karhutla",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "karhutla-saat-011",
+    "hazard": "karhutla",
+    "phase": "saat",
+    "audience": [
+      "lansia",
+      "balita",
+      "hamil",
+      "disabilitas"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Beri perlindungan ekstra bagi kelompok rentan",
+    "body": "Anak-anak, lansia, ibu hamil, dan penderita penyakit bawaan paling berisiko terdampak asap. Beri mereka perlindungan ekstra.",
+    "sourceTitle": "Kemenkes Perkuat Perlindungan Kelompok Rentan Hadapi Karhutla (Rilis Kemenkes, 26 Agustus 2026)",
+    "sourceUrl": "https://kemkes.go.id/id/kemenkes-perkuat-perlindungan-kelompok-rentan-hadapi-karhutla",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "karhutla-saat-012",
+    "hazard": "karhutla",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "rendah",
+    "darurat": false,
+    "title": "Kenali Rumah Oksigen di wilayah terdampak",
+    "body": "Di berbagai titik terdampak, Kemenkes menyiagakan Rumah Oksigen, yaitu ruangan kedap asap dengan penyaring udara dan oksigen konsentrator untuk warga yang sesak napas akut.",
+    "sourceTitle": "Kemenkes Perkuat Perlindungan Kelompok Rentan Hadapi Karhutla (Rilis Kemenkes, 26 Agustus 2026)",
+    "sourceUrl": "https://kemkes.go.id/id/kemenkes-perkuat-perlindungan-kelompok-rentan-hadapi-karhutla",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "karhutla-sesudah-001",
+    "hazard": "karhutla",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Kenali gejala dampak asap untuk deteksi dini",
+    "body": "Kenali gejala atau keluhan yang timbul akibat asap kebakaran agar pengobatan awal dapat segera dilakukan.",
+    "sourceTitle": "Cegah dan Tangani Dampak Kesehatan Akibat Kabut Asap (Rilis Kemenkes, 15 Oktober 2015)",
+    "sourceUrl": "https://www.kemkes.go.id/id/%20cegah-dan-tangani-dampak-kesehatan-akibat-kabut-asap",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "karhutla-sesudah-002",
+    "hazard": "karhutla",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Periksa ke fasilitas kesehatan bila keluhan mengganggu",
+    "body": "Segera periksa ke dokter atau fasilitas pelayanan kesehatan terdekat bila muncul masalah kesehatan yang mengganggu.",
+    "sourceTitle": "Cegah dan Tangani Dampak Kesehatan Akibat Kabut Asap (Rilis Kemenkes, 15 Oktober 2015)",
+    "sourceUrl": "https://www.kemkes.go.id/id/%20cegah-dan-tangani-dampak-kesehatan-akibat-kabut-asap",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "karhutla-sesudah-003",
+    "hazard": "karhutla",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Hentikan kebiasaan yang memperburuk, seperti merokok",
+    "body": "Bila sudah sakit akibat asap, hentikan kebiasaan yang memperburuk penyakit, misalnya merokok.",
+    "sourceTitle": "Cegah dan Tangani Dampak Kesehatan Akibat Kabut Asap (Rilis Kemenkes, 15 Oktober 2015)",
+    "sourceUrl": "https://www.kemkes.go.id/id/%20cegah-dan-tangani-dampak-kesehatan-akibat-kabut-asap",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "karhutla-sesudah-004",
+    "hazard": "karhutla",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Berobat teratur sesuai arahan dokter",
+    "body": "Bila sakit akibat asap, berobat teratur ke dokter atau fasilitas kesehatan dan konsumsi obat yang diberikan secara teratur.",
+    "sourceTitle": "Cegah dan Tangani Dampak Kesehatan Akibat Kabut Asap (Rilis Kemenkes, 15 Oktober 2015)",
+    "sourceUrl": "https://www.kemkes.go.id/id/%20cegah-dan-tangani-dampak-kesehatan-akibat-kabut-asap",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  },
+  {
+    "id": "karhutla-sesudah-005",
+    "hazard": "karhutla",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "rendah",
+    "darurat": false,
+    "title": "Ikuti skrining kesehatan dari pemerintah setempat",
+    "body": "Pemerintah setempat dapat mengadakan skrining berkala (kuesioner, pemeriksaan fisik, dan fungsi paru) untuk menilai dampak asap. Ikuti bila tersedia.",
+    "sourceTitle": "Cegah dan Tangani Dampak Kesehatan Akibat Kabut Asap (Rilis Kemenkes, 15 Oktober 2015)",
+    "sourceUrl": "https://www.kemkes.go.id/id/%20cegah-dan-tangani-dampak-kesehatan-akibat-kabut-asap",
+    "accessedAt": "2026-11-17",
+    "reviewedBy": []
+  }
+]

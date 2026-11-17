@@ -4,14 +4,18 @@
     "title": "Menyiapkan tas siaga keluarga",
     "ringkasan": "Isi dan cara menyiapkan tas siaga serta rencana keluarga sebelum bencana.",
     "hazards": ["umum"],
+    "kategori": "Keluarga",
     "intro": "Tas siaga membantu keluarga bertahan beberapa hari pertama setelah kejadian. Butir di bawah dirangkum dari panduan BNPB.",
-    "bagian": [{ "judul": "Persiapan sebelum bencana", "hazard": "umum", "phase": "sebelum" }]
+    "bagian": [
+      { "judul": "Persiapan sebelum bencana", "hazard": "umum", "phase": "sebelum", "maks": 8 }
+    ]
   },
   {
     "slug": "siap-menghadapi-banjir",
     "title": "Siap menghadapi banjir",
     "ringkasan": "Langkah sebelum, saat, dan sesudah banjir untuk keluarga.",
     "hazards": ["banjir"],
+    "kategori": "Bencana",
     "intro": "Banjir bisa datang perlahan atau tiba-tiba. Langkah berikut dirangkum dari panduan BNPB.",
     "bagian": [
       { "judul": "Sebelum banjir", "hazard": "banjir", "phase": "sebelum" },
@@ -22,12 +26,14 @@
   {
     "slug": "waspada-tanah-longsor",
     "title": "Waspada tanah longsor",
-    "ringkasan": "Mengenali daerah rawan dan langkah menyelamatkan diri saat longsor.",
+    "ringkasan": "Mengenali tanda dan daerah rawan, serta langkah menyelamatkan diri saat longsor.",
     "hazards": ["longsor"],
-    "intro": "Longsor sering terjadi di lereng setelah hujan. Berikut langkah dari panduan BNPB.",
+    "kategori": "Bencana",
+    "intro": "Longsor sering terjadi di lereng setelah hujan dan berlangsung cepat. Berikut langkah dari panduan BNPB.",
     "bagian": [
       { "judul": "Sebelum longsor", "hazard": "longsor", "phase": "sebelum" },
-      { "judul": "Saat longsor", "hazard": "longsor", "phase": "saat" }
+      { "judul": "Saat longsor", "hazard": "longsor", "phase": "saat" },
+      { "judul": "Sesudah longsor", "hazard": "longsor", "phase": "sesudah" }
     ]
   },
   {
@@ -35,6 +41,7 @@
     "title": "Melindungi diri saat gempa bumi",
     "ringkasan": "Langkah sebelum, saat, dan sesudah gempa bumi.",
     "hazards": ["gempa"],
+    "kategori": "Bencana",
     "intro": "Gempa tidak dapat diprediksi, sehingga kesiapan sebelumnya sangat menentukan. Rangkuman dari sumber resmi.",
     "bagian": [
       { "judul": "Sebelum gempa", "hazard": "gempa", "phase": "sebelum" },
@@ -43,11 +50,38 @@
     ]
   },
   {
+    "slug": "tsunami-dan-evakuasi-ke-tempat-tinggi",
+    "title": "Tsunami dan evakuasi ke tempat tinggi",
+    "ringkasan": "Mengenali tanda tsunami setelah gempa dan cara menyelamatkan diri ke tempat tinggi.",
+    "hazards": ["tsunami"],
+    "kategori": "Bencana",
+    "intro": "Tidak semua gempa memicu tsunami, tetapi tandanya perlu dikenali. Peringatan resmi tsunami dikeluarkan BMKG. Rangkuman dari buku saku BNPB.",
+    "bagian": [
+      { "judul": "Sebelum tsunami", "hazard": "tsunami", "phase": "sebelum" },
+      { "judul": "Saat tsunami", "hazard": "tsunami", "phase": "saat" },
+      { "judul": "Sesudah tsunami", "hazard": "tsunami", "phase": "sesudah" }
+    ]
+  },
+  {
+    "slug": "siaga-erupsi-gunung-api",
+    "title": "Siaga erupsi gunung api",
+    "ringkasan": "Memahami status gunung api, kawasan rawan, dan cara melindungi diri dari abu.",
+    "hazards": ["gunung_api"],
+    "kategori": "Bencana",
+    "intro": "Informasi resmi gunung api berasal dari PVMBG. Berikut langkah dari buku saku BNPB untuk warga di sekitar gunung api.",
+    "bagian": [
+      { "judul": "Sebelum erupsi", "hazard": "gunung_api", "phase": "sebelum" },
+      { "judul": "Saat erupsi", "hazard": "gunung_api", "phase": "saat" },
+      { "judul": "Sesudah erupsi", "hazard": "gunung_api", "phase": "sesudah" }
+    ]
+  },
+  {
     "slug": "cuaca-ekstrem-puting-beliung",
     "title": "Cuaca ekstrem dan angin puting beliung",
-    "ringkasan": "Tanda cuaca memburuk dan cara berlindung dari angin kencang.",
+    "ringkasan": "Tanda cuaca memburuk dan cara berlindung dari angin kencang dan petir.",
     "hazards": ["cuaca_ekstrem"],
-    "intro": "Hujan lebat, petir, dan angin kencang dapat muncul mendadak. Berikut langkah dari panduan resmi.",
+    "kategori": "Iklim",
+    "intro": "Hujan lebat, petir, dan angin kencang dapat muncul mendadak, terutama di masa peralihan musim. Berikut langkah dari panduan resmi.",
     "bagian": [
       { "judul": "Sebelum", "hazard": "cuaca_ekstrem", "phase": "sebelum" },
       { "judul": "Saat kejadian", "hazard": "cuaca_ekstrem", "phase": "saat" },
@@ -55,11 +89,53 @@
     ]
   },
   {
+    "slug": "kekeringan-dan-hemat-air",
+    "title": "Kekeringan dan hemat air",
+    "ringkasan": "Menyiapkan cadangan air dan memakai air bijak saat kemarau panjang.",
+    "hazards": ["kekeringan"],
+    "kategori": "Iklim",
+    "intro": "Kemarau panjang dapat membuat air bersih sulit didapat. Langkah berikut dirangkum dari buku saku dan imbauan BNPB.",
+    "bagian": [
+      { "judul": "Sebelum kemarau", "hazard": "kekeringan", "phase": "sebelum" },
+      { "judul": "Saat kekeringan", "hazard": "kekeringan", "phase": "saat" },
+      { "judul": "Sesudah kekeringan", "hazard": "kekeringan", "phase": "sesudah" }
+    ]
+  },
+  {
+    "slug": "kabut-asap-dan-karhutla",
+    "title": "Kabut asap dan kebakaran hutan dan lahan",
+    "ringkasan": "Mencegah kebakaran lahan dan melindungi kesehatan keluarga dari asap.",
+    "hazards": ["karhutla"],
+    "kategori": "Iklim",
+    "intro": "Asap kebakaran hutan dan lahan berbahaya bagi pernapasan, terutama bagi anak, lansia, dan ibu hamil. Rangkuman dari BNPB dan Kemenkes.",
+    "bagian": [
+      { "judul": "Mencegah kebakaran", "hazard": "karhutla", "phase": "sebelum" },
+      { "judul": "Saat ada asap", "hazard": "karhutla", "phase": "saat" },
+      { "judul": "Setelah terpapar asap", "hazard": "karhutla", "phase": "sesudah" }
+    ]
+  },
+  {
+    "slug": "gelombang-tinggi-dan-rob",
+    "title": "Gelombang tinggi, banjir rob, dan abrasi",
+    "ringkasan": "Memantau peringatan BMKG dan melindungi keluarga di pesisir.",
+    "hazards": ["gelombang_abrasi"],
+    "kategori": "Iklim",
+    "intro": "Rob muncul saat pasang laut bertepatan dengan gelombang tinggi. Belum ada panduan resmi khusus untuk langkah saat dan sesudah rob, sehingga sebagian langkah diturunkan dari panduan banjir dan diberi tanda.",
+    "bagian": [
+      { "judul": "Sebelum", "hazard": "gelombang_abrasi", "phase": "sebelum" },
+      { "judul": "Saat gelombang tinggi atau rob", "hazard": "gelombang_abrasi", "phase": "saat" },
+      { "judul": "Sesudah", "hazard": "gelombang_abrasi", "phase": "sesudah" }
+    ]
+  },
+  {
     "slug": "melindungi-anggota-keluarga-rentan",
     "title": "Melindungi anggota keluarga yang rentan",
     "ringkasan": "Persiapan khusus untuk lansia, anak, ibu hamil, dan penyandang disabilitas.",
     "hazards": ["umum"],
+    "kategori": "Komunitas",
     "intro": "Setiap anggota keluarga punya kebutuhan berbeda saat bencana. Berikut butir panduan yang ditujukan khusus bagi mereka.",
-    "bagian": [{ "judul": "Butir khusus kelompok rentan", "audienceKhusus": true }]
+    "bagian": [
+      { "judul": "Butir khusus kelompok rentan", "audienceKhusus": true, "maks": 10 }
+    ]
   }
 ]
