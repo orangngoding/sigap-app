@@ -1,0 +1,1422 @@
+{
+  "chunks": [
+    {
+      "id": "banjir-sebelum-001",
+      "hazard": "banjir",
+      "phase": "sebelum",
+      "audience": [
+        "umum"
+      ],
+      "priority": "sedang",
+      "darurat": false,
+      "title": "Hindari bantaran sungai",
+      "body": "Jangan membangun atau menambah permukiman di bantaran sungai dan daerah rawan banjir.",
+      "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "banjir-sebelum-002",
+      "hazard": "banjir",
+      "phase": "sebelum",
+      "audience": [
+        "umum"
+      ],
+      "priority": "rendah",
+      "darurat": false,
+      "title": "Jaga aliran sungai dan saluran",
+      "body": "Jaga aliran sungai dari sampah dan lakukan penghijauan di hulu agar air lebih mudah mengalir.",
+      "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "banjir-sebelum-003",
+      "hazard": "banjir",
+      "phase": "sebelum",
+      "audience": [
+        "umum"
+      ],
+      "priority": "rendah",
+      "darurat": false,
+      "title": "Pasang pompa di area rendah",
+      "body": "Pasang pompa di area yang lebih rendah agar air genangan dapat dibuang.",
+      "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "banjir-sebelum-004",
+      "hazard": "banjir",
+      "phase": "sebelum",
+      "audience": [
+        "umum"
+      ],
+      "priority": "tinggi",
+      "darurat": false,
+      "title": "Bicarakan rencana banjir dan tempat bertemu",
+      "body": "Bicarakan ancaman banjir dengan keluarga dan sepakati tempat bertemu bila anggota keluarga terpencar.",
+      "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 34",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "banjir-sebelum-005",
+      "hazard": "banjir",
+      "phase": "sebelum",
+      "audience": [
+        "umum"
+      ],
+      "priority": "sedang",
+      "darurat": false,
+      "title": "Kenali rute evakuasi dan tempat yang lebih tinggi",
+      "body": "Pahami rute evakuasi dan daerah yang lebih tinggi di sekitar rumah, serta saluran yang biasa dilalui air banjir.",
+      "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 33-34",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "banjir-sebelum-006",
+      "hazard": "banjir",
+      "phase": "sebelum",
+      "audience": [
+        "umum"
+      ],
+      "priority": "sedang",
+      "darurat": false,
+      "title": "Ketahui cara mematikan air, listrik, dan gas",
+      "body": "Pastikan Anda tahu cara mematikan air, listrik, dan gas, dan waspadai alat listrik yang berbahaya bila terkena air.",
+      "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 34-35",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "banjir-sebelum-007",
+      "hazard": "banjir",
+      "phase": "sebelum",
+      "audience": [
+        "umum"
+      ],
+      "priority": "sedang",
+      "darurat": false,
+      "title": "Foto harta dan simpan dokumen di tempat aman",
+      "body": "Catat dan foto harta benda, lalu simpan bersama dokumen penting di tempat yang aman dan tinggi.",
+      "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 34-35",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "banjir-sebelum-008",
+      "hazard": "banjir",
+      "phase": "sebelum",
+      "audience": [
+        "lansia",
+        "balita",
+        "disabilitas",
+        "hamil"
+      ],
+      "priority": "tinggi",
+      "darurat": false,
+      "title": "Catat kebutuhan khusus keluarga dan tetangga",
+      "body": "Ketahui kebutuhan khusus anggota keluarga dan tetangga bila banjir terjadi, dan siapkan persediaan untuk hidup mandiri sedikitnya tiga hari.",
+      "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 34",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "banjir-saat-001",
+      "hazard": "banjir",
+      "phase": "saat",
+      "audience": [
+        "umum"
+      ],
+      "priority": "tinggi",
+      "darurat": true,
+      "title": "Jauhi saluran air",
+      "body": "Hindari berjalan di dekat saluran air karena arus dan kedalamannya sulit diperkirakan.",
+      "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "banjir-saat-002",
+      "hazard": "banjir",
+      "phase": "saat",
+      "audience": [
+        "umum"
+      ],
+      "priority": "tinggi",
+      "darurat": true,
+      "title": "Matikan listrik",
+      "body": "Matikan listrik atau minta PLN memutusnya di wilayah yang terdampak banjir.",
+      "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "banjir-saat-003",
+      "hazard": "banjir",
+      "phase": "saat",
+      "audience": [
+        "umum"
+      ],
+      "priority": "tinggi",
+      "darurat": true,
+      "title": "Mengungsi lebih awal",
+      "body": "Mengungsilah sejak dini selagi genangan masih bisa dilewati.",
+      "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "banjir-saat-004",
+      "hazard": "banjir",
+      "phase": "saat",
+      "audience": [
+        "umum"
+      ],
+      "priority": "sedang",
+      "darurat": true,
+      "title": "Amankan barang berharga",
+      "body": "Pindahkan barang berharga dan dokumen ke tempat yang lebih tinggi.",
+      "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "banjir-saat-005",
+      "hazard": "banjir",
+      "phase": "saat",
+      "audience": [
+        "umum"
+      ],
+      "priority": "sedang",
+      "darurat": true,
+      "title": "Hubungi aparat setempat",
+      "body": "Jika air terus naik, hubungi kantor desa, kelurahan, atau kecamatan.",
+      "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "banjir-saat-006",
+      "hazard": "banjir",
+      "phase": "saat",
+      "audience": [
+        "umum"
+      ],
+      "priority": "tinggi",
+      "darurat": true,
+      "title": "Jangan mengemudi di wilayah banjir",
+      "body": "Jangan mengemudikan mobil di wilayah banjir. Bila air mulai naik, tinggalkan mobil dan pindah ke tempat yang lebih tinggi.",
+      "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 37",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "banjir-saat-007",
+      "hazard": "banjir",
+      "phase": "saat",
+      "audience": [
+        "umum"
+      ],
+      "priority": "tinggi",
+      "darurat": true,
+      "varian": [
+        "bandang"
+      ],
+      "title": "Waspada banjir bandang tanpa peringatan",
+      "body": "Banjir bandang dapat datang tanpa peringatan, juga saat hujan biasa. Waspadai saluran air dan tempat lewat arus deras.",
+      "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 36-37",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "banjir-saat-008",
+      "hazard": "banjir",
+      "phase": "saat",
+      "audience": [
+        "umum"
+      ],
+      "priority": "tinggi",
+      "darurat": true,
+      "title": "Jangan sentuh alat listrik bila berdiri di air",
+      "body": "Cabut alat yang masih tersambung listrik. Jangan menyentuh peralatan bermuatan listrik saat Anda berdiri di atas atau di dalam air.",
+      "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 36",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "banjir-saat-009",
+      "hazard": "banjir",
+      "phase": "saat",
+      "audience": [
+        "umum"
+      ],
+      "priority": "sedang",
+      "darurat": false,
+      "title": "Berjalan di air dengan pijakan yang kokoh",
+      "body": "Bila terpaksa berjalan di air, pilih pijakan yang tidak bergerak dan periksa dengan tongkat. Jangan berjalan di arus air.",
+      "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 37",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "banjir-sesudah-001",
+      "hazard": "banjir",
+      "phase": "sesudah",
+      "audience": [
+        "umum"
+      ],
+      "priority": "sedang",
+      "darurat": false,
+      "title": "Bersihkan rumah dengan antiseptik",
+      "body": "Bersihkan rumah dan perabot yang terkena banjir, lalu gunakan antiseptik.",
+      "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "banjir-sesudah-002",
+      "hazard": "banjir",
+      "phase": "sesudah",
+      "audience": [
+        "balita",
+        "lansia",
+        "umum"
+      ],
+      "priority": "tinggi",
+      "darurat": false,
+      "title": "Sediakan air bersih",
+      "body": "Sediakan air bersih untuk minum dan kebersihan agar terhindar dari diare.",
+      "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "banjir-sesudah-003",
+      "hazard": "banjir",
+      "phase": "sesudah",
+      "audience": [
+        "umum"
+      ],
+      "priority": "tinggi",
+      "darurat": false,
+      "title": "Hindari air banjir dan air yang bergerak",
+      "body": "Hindari air banjir karena mungkin tercemar dan berisiko tersetrum. Hindari juga area yang airnya baru surut karena tanah bisa ambles.",
+      "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 38",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "banjir-sesudah-004",
+      "hazard": "banjir",
+      "phase": "sesudah",
+      "audience": [
+        "umum"
+      ],
+      "priority": "sedang",
+      "darurat": false,
+      "title": "Kembali ke rumah setelah ada izin petugas",
+      "body": "Kembali ke rumah sesuai arahan pihak berwenang dan periksa bangunan dengan hati-hati karena kerusakan bisa tidak terlihat.",
+      "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 38",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "banjir-sesudah-005",
+      "hazard": "banjir",
+      "phase": "sesudah",
+      "audience": [
+        "umum"
+      ],
+      "priority": "sedang",
+      "darurat": false,
+      "title": "Buang makanan yang terkena air banjir",
+      "body": "Buang makanan yang terkontaminasi air banjir, lalu cuci tangan dengan sabun dan air bersih bila Anda terkena air banjir.",
+      "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 39",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "cuaca_ekstrem-sebelum-001",
+      "hazard": "cuaca_ekstrem",
+      "phase": "sebelum",
+      "audience": [
+        "umum"
+      ],
+      "priority": "sedang",
+      "darurat": false,
+      "title": "Kenali tanda puting beliung",
+      "body": "Waspadai awan gelap yang tinggi dan tebal, petir atau guruh dari kejauhan, dan suara gemuruh.",
+      "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "cuaca_ekstrem-sebelum-002",
+      "hazard": "cuaca_ekstrem",
+      "phase": "sebelum",
+      "audience": [
+        "umum"
+      ],
+      "priority": "sedang",
+      "darurat": false,
+      "title": "Amankan barang dan tutup rumah",
+      "body": "Masukkan barang ke dalam rumah serta tutup dan kunci jendela dan pintu.",
+      "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "cuaca_ekstrem-sebelum-003",
+      "hazard": "cuaca_ekstrem",
+      "phase": "sebelum",
+      "audience": [
+        "umum"
+      ],
+      "priority": "sedang",
+      "darurat": false,
+      "title": "Matikan listrik dan elektronik",
+      "body": "Matikan listrik dan peralatan elektronik sebelum cuaca ekstrem tiba.",
+      "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "cuaca_ekstrem-sebelum-004",
+      "hazard": "cuaca_ekstrem",
+      "phase": "sebelum",
+      "audience": [
+        "umum"
+      ],
+      "priority": "rendah",
+      "darurat": false,
+      "title": "Pastikan rumah dalam kondisi kokoh",
+      "body": "Upayakan rumah atau bangunan tempat tinggal kokoh agar lebih tahan angin kencang.",
+      "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 46",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "cuaca_ekstrem-sebelum-005",
+      "hazard": "cuaca_ekstrem",
+      "phase": "sebelum",
+      "audience": [
+        "umum"
+      ],
+      "priority": "sedang",
+      "darurat": false,
+      "title": "Pelajari cara menyelamatkan diri dari puting beliung",
+      "body": "Tambah pengetahuan tentang angin puting beliung dan cara menyelamatkan diri, lalu bagikan ke seluruh keluarga.",
+      "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 46",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "cuaca_ekstrem-sebelum-006",
+      "hazard": "cuaca_ekstrem",
+      "phase": "sebelum",
+      "audience": [
+        "umum"
+      ],
+      "priority": "sedang",
+      "darurat": false,
+      "title": "Kenali tanda cuaca yang memburuk",
+      "body": "Waspadai udara yang terasa panas lalu muncul awan gelap yang bertahan hingga sore hari.",
+      "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 46",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "cuaca_ekstrem-saat-001",
+      "hazard": "cuaca_ekstrem",
+      "phase": "saat",
+      "audience": [
+        "umum"
+      ],
+      "priority": "tinggi",
+      "darurat": true,
+      "title": "Posisi aman saat petir dekat",
+      "body": "Jika petir sudah dekat, membungkuk, duduk, dan peluk lutut. Jangan tiarap di tanah.",
+      "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "cuaca_ekstrem-saat-002",
+      "hazard": "cuaca_ekstrem",
+      "phase": "saat",
+      "audience": [
+        "umum"
+      ],
+      "priority": "tinggi",
+      "darurat": true,
+      "title": "Jauhi benda tinggi",
+      "body": "Jauhi bangunan tinggi, tiang listrik, dan papan reklame.",
+      "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "cuaca_ekstrem-saat-003",
+      "hazard": "cuaca_ekstrem",
+      "phase": "saat",
+      "audience": [
+        "umum"
+      ],
+      "priority": "tinggi",
+      "darurat": true,
+      "title": "Masuk ke bangunan kokoh",
+      "body": "Berlindunglah di dalam bangunan yang kokoh.",
+      "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "cuaca_ekstrem-saat-004",
+      "hazard": "cuaca_ekstrem",
+      "phase": "saat",
+      "audience": [
+        "umum"
+      ],
+      "priority": "tinggi",
+      "darurat": true,
+      "title": "Jangan berteduh di bawah pohon besar atau papan reklame",
+      "body": "Jangan berlindung di bawah pohon besar dan papan reklame karena bisa tumbang atau jatuh.",
+      "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 48",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "cuaca_ekstrem-sesudah-001",
+      "hazard": "cuaca_ekstrem",
+      "phase": "sesudah",
+      "audience": [
+        "umum"
+      ],
+      "priority": "tinggi",
+      "darurat": false,
+      "title": "Pastikan tidak ada yang cedera",
+      "body": "Pastikan seluruh anggota keluarga tidak cedera dan beri pertolongan darurat bila perlu.",
+      "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "cuaca_ekstrem-sesudah-002",
+      "hazard": "cuaca_ekstrem",
+      "phase": "sesudah",
+      "audience": [
+        "umum"
+      ],
+      "priority": "sedang",
+      "darurat": false,
+      "title": "Laporkan kerusakan listrik atau gas",
+      "body": "Laporkan kerusakan listrik atau gas kepada pihak berwenang.",
+      "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "cuaca_ekstrem-sesudah-003",
+      "hazard": "cuaca_ekstrem",
+      "phase": "sesudah",
+      "audience": [
+        "umum"
+      ],
+      "priority": "rendah",
+      "darurat": false,
+      "title": "Lanjutkan perjalanan hati-hati",
+      "body": "Jika sedang dalam perjalanan, lanjutkan dengan hati-hati.",
+      "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "gempa-sebelum-001",
+      "hazard": "gempa",
+      "phase": "sebelum",
+      "audience": [
+        "umum"
+      ],
+      "priority": "rendah",
+      "darurat": false,
+      "title": "Ikuti sosialisasi dan simulasi",
+      "body": "Ikuti sosialisasi dan simulasi kesiapsiagaan gempa di lingkungan Anda.",
+      "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "gempa-sebelum-002",
+      "hazard": "gempa",
+      "phase": "sebelum",
+      "audience": [
+        "umum"
+      ],
+      "priority": "sedang",
+      "darurat": false,
+      "title": "Ikat perabot ke dinding",
+      "body": "Pasang perabot ke dinding dan ikat benda yang menggantung agar tidak jatuh saat guncangan.",
+      "sourceTitle": "Antisipasi Gempa Bumi (BMKG)",
+      "sourceUrl": "https://www.bmkg.go.id/gempabumi/mitigasi/antisipasi-gempabumi",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "gempa-sebelum-003",
+      "hazard": "gempa",
+      "phase": "sebelum",
+      "audience": [
+        "umum"
+      ],
+      "priority": "sedang",
+      "darurat": false,
+      "title": "Taruh benda berat di bawah",
+      "body": "Letakkan benda berat di bagian bawah dan periksa benda menggantung seperti lampu.",
+      "sourceTitle": "Antisipasi Gempa Bumi (BMKG)",
+      "sourceUrl": "https://www.bmkg.go.id/gempabumi/mitigasi/antisipasi-gempabumi",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "gempa-sebelum-004",
+      "hazard": "gempa",
+      "phase": "sebelum",
+      "audience": [
+        "umum"
+      ],
+      "priority": "sedang",
+      "darurat": false,
+      "title": "Periksa lokasi dan struktur rumah",
+      "body": "Pastikan rumah tidak berada di area rawan longsor atau likuefaksi, dan perbaiki struktur bangunan yang lemah.",
+      "sourceTitle": "Antisipasi Gempa Bumi (BMKG)",
+      "sourceUrl": "https://www.bmkg.go.id/gempabumi/mitigasi/antisipasi-gempabumi",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "gempa-sebelum-005",
+      "hazard": "gempa",
+      "phase": "sebelum",
+      "audience": [
+        "umum"
+      ],
+      "priority": "rendah",
+      "darurat": false,
+      "title": "Matikan air, gas, listrik saat tak dipakai",
+      "body": "Matikan air, gas, dan listrik saat tidak dipakai untuk mengurangi risiko kebakaran setelah gempa.",
+      "sourceTitle": "Antisipasi Gempa Bumi (BMKG)",
+      "sourceUrl": "https://www.bmkg.go.id/gempabumi/mitigasi/antisipasi-gempabumi",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "gempa-saat-001",
+      "hazard": "gempa",
+      "phase": "saat",
+      "audience": [
+        "umum"
+      ],
+      "priority": "tinggi",
+      "darurat": true,
+      "title": "Lindungi kepala di dalam bangunan",
+      "body": "Lindungi kepala dan badan, misalnya dengan berlindung di bawah meja, lalu keluar bila memungkinkan.",
+      "sourceTitle": "Antisipasi Gempa Bumi (BMKG)",
+      "sourceUrl": "https://www.bmkg.go.id/gempabumi/mitigasi/antisipasi-gempabumi",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "gempa-saat-002",
+      "hazard": "gempa",
+      "phase": "saat",
+      "audience": [
+        "umum"
+      ],
+      "priority": "sedang",
+      "darurat": true,
+      "title": "Matikan kompor",
+      "body": "Jika tidak ada meja, lindungi kepala dengan bantal. Matikan kompor bila aman melakukannya.",
+      "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "gempa-saat-003",
+      "hazard": "gempa",
+      "phase": "saat",
+      "audience": [
+        "umum"
+      ],
+      "priority": "tinggi",
+      "darurat": true,
+      "title": "Jauhi gedung, tiang, dan pohon",
+      "body": "Jika di luar, menjauh dari gedung, tiang listrik, dan pohon, serta waspada terhadap retakan tanah.",
+      "sourceTitle": "Antisipasi Gempa Bumi (BMKG)",
+      "sourceUrl": "https://www.bmkg.go.id/gempabumi/mitigasi/antisipasi-gempabumi",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "gempa-saat-004",
+      "hazard": "gempa",
+      "phase": "saat",
+      "audience": [
+        "umum"
+      ],
+      "priority": "sedang",
+      "darurat": true,
+      "title": "Berhenti di tempat terbuka",
+      "body": "Jika di dalam mobil, berhenti di tempat terbuka dan jauh dari persimpangan.",
+      "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "gempa-saat-005",
+      "hazard": "gempa",
+      "phase": "saat",
+      "audience": [
+        "umum"
+      ],
+      "priority": "tinggi",
+      "darurat": true,
+      "title": "Jangan pakai lift",
+      "body": "Jangan menggunakan lift saat atau segera setelah gempa.",
+      "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "gempa-saat-006",
+      "hazard": "gempa",
+      "phase": "saat",
+      "audience": [
+        "umum"
+      ],
+      "priority": "tinggi",
+      "darurat": true,
+      "title": "Menuju dataran tinggi bila ada tanda tsunami",
+      "body": "Di pantai, segera menuju dataran tinggi jika tanda tsunami muncul.",
+      "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "gempa-saat-007",
+      "hazard": "gempa",
+      "phase": "saat",
+      "audience": [
+        "umum"
+      ],
+      "priority": "sedang",
+      "darurat": true,
+      "title": "Hindari lereng saat di pegunungan",
+      "body": "Di daerah pegunungan, menjauh dari area yang berpotensi longsor.",
+      "sourceTitle": "Antisipasi Gempa Bumi (BMKG)",
+      "sourceUrl": "https://www.bmkg.go.id/gempabumi/mitigasi/antisipasi-gempabumi",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "gempa-sesudah-001",
+      "hazard": "gempa",
+      "phase": "sesudah",
+      "audience": [
+        "umum"
+      ],
+      "priority": "tinggi",
+      "darurat": false,
+      "title": "Keluar lewat tangga biasa",
+      "body": "Keluar dengan tertib melalui tangga biasa, bukan lift atau tangga berjalan.",
+      "sourceTitle": "Antisipasi Gempa Bumi (BMKG)",
+      "sourceUrl": "https://www.bmkg.go.id/gempabumi/mitigasi/antisipasi-gempabumi",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "gempa-sesudah-002",
+      "hazard": "gempa",
+      "phase": "sesudah",
+      "audience": [
+        "umum"
+      ],
+      "priority": "tinggi",
+      "darurat": false,
+      "title": "Periksa api dan kebocoran gas",
+      "body": "Periksa kebakaran, kebocoran gas, dan korsleting. Matikan listrik dan jangan menyalakan api.",
+      "sourceTitle": "Antisipasi Gempa Bumi (BMKG)",
+      "sourceUrl": "https://www.bmkg.go.id/gempabumi/mitigasi/antisipasi-gempabumi",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "gempa-sesudah-003",
+      "hazard": "gempa",
+      "phase": "sesudah",
+      "audience": [
+        "umum"
+      ],
+      "priority": "tinggi",
+      "darurat": false,
+      "title": "Jangan masuk bangunan yang rusak",
+      "body": "Jangan masuk ke bangunan yang terdampak gempa karena berisiko runtuh.",
+      "sourceTitle": "Antisipasi Gempa Bumi (BMKG)",
+      "sourceUrl": "https://www.bmkg.go.id/gempabumi/mitigasi/antisipasi-gempabumi",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "gempa-sesudah-004",
+      "hazard": "gempa",
+      "phase": "sesudah",
+      "audience": [
+        "umum"
+      ],
+      "priority": "sedang",
+      "darurat": false,
+      "title": "Waspadai gempa susulan",
+      "body": "Hindari berjalan di sekitar area terdampak karena gempa susulan masih mungkin terjadi.",
+      "sourceTitle": "Antisipasi Gempa Bumi (BMKG)",
+      "sourceUrl": "https://www.bmkg.go.id/gempabumi/mitigasi/antisipasi-gempabumi",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "longsor-sebelum-001",
+      "hazard": "longsor",
+      "phase": "sebelum",
+      "audience": [
+        "umum"
+      ],
+      "priority": "sedang",
+      "darurat": false,
+      "title": "Hindari lereng rawan",
+      "body": "Hindari membangun rumah di daerah rawan longsor.",
+      "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "longsor-sebelum-002",
+      "hazard": "longsor",
+      "phase": "sebelum",
+      "audience": [
+        "umum"
+      ],
+      "priority": "rendah",
+      "darurat": false,
+      "title": "Kurangi kemiringan lereng",
+      "body": "Kurangi kemiringan lereng di sekitar rumah bila memungkinkan, sebaiknya dengan arahan ahli.",
+      "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "longsor-sebelum-003",
+      "hazard": "longsor",
+      "phase": "sebelum",
+      "audience": [
+        "umum"
+      ],
+      "priority": "sedang",
+      "darurat": false,
+      "title": "Jaga drainase tidak tersumbat",
+      "body": "Pastikan saluran air dan drainase di sekitar lereng tidak tersumbat.",
+      "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "longsor-sebelum-004",
+      "hazard": "longsor",
+      "phase": "sebelum",
+      "audience": [
+        "umum"
+      ],
+      "priority": "rendah",
+      "darurat": false,
+      "title": "Tanam pohon berakar kuat",
+      "body": "Tanam pohon berakar kuat di lereng dan jangan menebang hutan sembarangan.",
+      "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "longsor-sebelum-005",
+      "hazard": "longsor",
+      "phase": "sebelum",
+      "audience": [
+        "umum"
+      ],
+      "priority": "tinggi",
+      "darurat": false,
+      "title": "Waspada saat hujan lebat",
+      "body": "Tingkatkan kewaspadaan saat hujan lebat, terutama bila tinggal di dekat lereng atau tebing.",
+      "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "longsor-sebelum-006",
+      "hazard": "longsor",
+      "phase": "sebelum",
+      "audience": [
+        "umum"
+      ],
+      "priority": "tinggi",
+      "darurat": true,
+      "title": "Kenali tanda-tanda longsor",
+      "body": "Waspadai retakan vertikal di tebing, munculnya air tanah tiba-tiba, air sumur yang keruh, dan batu kecil yang mulai berjatuhan.",
+      "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "longsor-sebelum-007",
+      "hazard": "longsor",
+      "phase": "sebelum",
+      "audience": [
+        "umum"
+      ],
+      "priority": "rendah",
+      "darurat": false,
+      "title": "Bangun dengan fondasi kuat dan tanah padat",
+      "body": "Bila membangun di sekitar lereng, gunakan fondasi yang kuat dan padatkan tanah di sekitar rumah dengan arahan ahli.",
+      "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 41-42",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "longsor-sebelum-008",
+      "hazard": "longsor",
+      "phase": "sebelum",
+      "audience": [
+        "umum"
+      ],
+      "priority": "sedang",
+      "darurat": false,
+      "title": "Kenali daerah rawan longsor",
+      "body": "Kenali daerah rawan longsor di sekitar tempat tinggal Anda dan ketahui zona evakuasi yang telah ditentukan.",
+      "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 42-44",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "longsor-sebelum-009",
+      "hazard": "longsor",
+      "phase": "sebelum",
+      "audience": [
+        "umum"
+      ],
+      "priority": "rendah",
+      "darurat": false,
+      "title": "Buat terasering dengan drainase yang tepat",
+      "body": "Terasering dengan sistem drainase yang tepat membantu mengurangi risiko longsor pada lereng di sekitar rumah.",
+      "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 41",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "longsor-saat-001",
+      "hazard": "longsor",
+      "phase": "saat",
+      "audience": [
+        "umum"
+      ],
+      "priority": "tinggi",
+      "darurat": true,
+      "title": "Menjauh dari suara gemuruh longsoran",
+      "body": "Segera menjauh dari suara gemuruh dan dari arah datangnya longsoran.",
+      "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 44",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "longsor-saat-002",
+      "hazard": "longsor",
+      "phase": "saat",
+      "audience": [
+        "umum"
+      ],
+      "priority": "tinggi",
+      "darurat": true,
+      "title": "Jauhi area yang baru longsor",
+      "body": "Hindari wilayah yang baru longsor karena tanahnya labil.",
+      "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 44",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "longsor-saat-003",
+      "hazard": "longsor",
+      "phase": "saat",
+      "audience": [
+        "umum"
+      ],
+      "priority": "tinggi",
+      "darurat": true,
+      "title": "Ikuti sirine ke zona evakuasi",
+      "body": "Bila sirine peringatan longsor berbunyi, segera menuju zona evakuasi yang telah ditentukan.",
+      "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 44",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "longsor-saat-004",
+      "hazard": "longsor",
+      "phase": "saat",
+      "audience": [
+        "umum"
+      ],
+      "priority": "sedang",
+      "darurat": true,
+      "title": "Waspada longsor susulan saat hujan",
+      "body": "Bila hujan turun setelah longsor terjadi, waspadai longsor susulan.",
+      "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 44",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "umum-sebelum-001",
+      "hazard": "umum",
+      "phase": "sebelum",
+      "audience": [
+        "umum"
+      ],
+      "priority": "tinggi",
+      "darurat": false,
+      "title": "Catat nomor telepon penting",
+      "body": "Catat nomor keluarga, tetangga, dan layanan darurat. Simpan di ponsel dan tulis di kertas yang mudah dijangkau.",
+      "sourceTitle": "Antisipasi Gempa Bumi (BMKG)",
+      "sourceUrl": "https://www.bmkg.go.id/gempabumi/mitigasi/antisipasi-gempabumi",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "umum-sebelum-002",
+      "hazard": "umum",
+      "phase": "sebelum",
+      "audience": [
+        "umum"
+      ],
+      "priority": "tinggi",
+      "darurat": false,
+      "title": "Siapkan perlengkapan dasar",
+      "body": "Siapkan kotak P3K, senter atau lampu baterai, radio, serta persediaan makanan dan air minum di tempat yang mudah diambil.",
+      "sourceTitle": "Antisipasi Gempa Bumi (BMKG)",
+      "sourceUrl": "https://www.bmkg.go.id/gempabumi/mitigasi/antisipasi-gempabumi",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "umum-sebelum-003",
+      "hazard": "umum",
+      "phase": "sebelum",
+      "audience": [
+        "umum"
+      ],
+      "priority": "sedang",
+      "darurat": false,
+      "title": "Pelajari P3K dan alat pemadam api",
+      "body": "Pelajari pertolongan pertama dan cara memakai alat pemadam api ringan agar siap bertindak sebelum bantuan datang.",
+      "sourceTitle": "Antisipasi Gempa Bumi (BMKG)",
+      "sourceUrl": "https://www.bmkg.go.id/gempabumi/mitigasi/antisipasi-gempabumi",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "umum-sebelum-004",
+      "hazard": "umum",
+      "phase": "sebelum",
+      "audience": [
+        "umum"
+      ],
+      "priority": "sedang",
+      "darurat": false,
+      "title": "Kenali jalur keluar rumah",
+      "body": "Ketahui letak pintu, tangga darurat, dan tempat paling aman untuk berlindung di rumah atau gedung tempat Anda tinggal.",
+      "sourceTitle": "Antisipasi Gempa Bumi (BMKG)",
+      "sourceUrl": "https://www.bmkg.go.id/gempabumi/mitigasi/antisipasi-gempabumi",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "umum-sebelum-005",
+      "hazard": "umum",
+      "phase": "sebelum",
+      "audience": [
+        "umum"
+      ],
+      "priority": "tinggi",
+      "darurat": false,
+      "title": "Siapkan tas siaga bencana",
+      "body": "Siapkan tas siaga bencana dan ketahui sumber informasi resmi seperti BMKG, televisi, dan radio.",
+      "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "umum-sebelum-006",
+      "hazard": "umum",
+      "phase": "sebelum",
+      "audience": [
+        "umum"
+      ],
+      "priority": "tinggi",
+      "darurat": false,
+      "title": "Susun rencana darurat keluarga",
+      "body": "Buat rencana darurat keluarga: kenali ancaman di sekitar, titik kumpul, nomor penting, rute evakuasi, dan titik aman di dalam rumah.",
+      "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 64",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "umum-sebelum-007",
+      "hazard": "umum",
+      "phase": "sebelum",
+      "audience": [
+        "umum"
+      ],
+      "priority": "tinggi",
+      "darurat": false,
+      "title": "Sepakati titik kumpul keluarga",
+      "body": "Tentukan titik kumpul yang disepakati seluruh keluarga agar mudah bertemu bila terpisah saat kejadian.",
+      "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 64",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "umum-sebelum-008",
+      "hazard": "umum",
+      "phase": "sebelum",
+      "audience": [
+        "umum"
+      ],
+      "priority": "sedang",
+      "darurat": false,
+      "title": "Kenali rute evakuasi",
+      "body": "Ketahui rute evakuasi dari rumah dan lingkungan Anda, dan ajak seluruh anggota keluarga melewatinya bersama.",
+      "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 64",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "umum-sebelum-009",
+      "hazard": "umum",
+      "phase": "sebelum",
+      "audience": [
+        "umum"
+      ],
+      "priority": "sedang",
+      "darurat": false,
+      "title": "Cari tahu letak saklar listrik, kran air, dan gas",
+      "body": "Ketahui letak untuk mematikan listrik, air, dan gas di rumah, dan pastikan anggota dewasa keluarga juga tahu.",
+      "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 64",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "umum-sebelum-010",
+      "hazard": "umum",
+      "phase": "sebelum",
+      "audience": [
+        "umum"
+      ],
+      "priority": "sedang",
+      "darurat": false,
+      "title": "Tentukan titik aman di dalam rumah",
+      "body": "Kenali bagian rumah yang paling aman untuk berlindung, lalu beri tahu seluruh anggota keluarga.",
+      "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 64",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "umum-sebelum-011",
+      "hazard": "umum",
+      "phase": "sebelum",
+      "audience": [
+        "lansia",
+        "balita",
+        "disabilitas",
+        "hamil"
+      ],
+      "priority": "tinggi",
+      "darurat": false,
+      "title": "Catat anggota keluarga yang rentan",
+      "body": "Catat anggota keluarga yang rentan, yaitu anak-anak, lansia, ibu hamil, dan penyandang disabilitas, lalu rencanakan bantuan untuk mereka.",
+      "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 64",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "umum-sebelum-012",
+      "hazard": "umum",
+      "phase": "sebelum",
+      "audience": [
+        "umum"
+      ],
+      "priority": "tinggi",
+      "darurat": false,
+      "title": "Simpan dokumen dan uang tunai di tas siaga",
+      "body": "Masukkan salinan surat penting dan uang tunai secukupnya untuk sekitar tiga hari ke dalam tas siaga yang tahan air.",
+      "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 65",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "umum-sebelum-013",
+      "hazard": "umum",
+      "phase": "sebelum",
+      "audience": [
+        "umum"
+      ],
+      "priority": "sedang",
+      "darurat": false,
+      "title": "Siapkan air dan makanan tahan lama",
+      "body": "Siapkan air minum dan makanan ringan tahan lama untuk sekitar tiga hari di dalam tas siaga.",
+      "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 65",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "umum-sebelum-014",
+      "hazard": "umum",
+      "phase": "sebelum",
+      "audience": [
+        "umum"
+      ],
+      "priority": "sedang",
+      "darurat": false,
+      "title": "Siapkan senter, radio, dan pengisi daya",
+      "body": "Masukkan senter atau lampu kepala, radio atau ponsel beserta baterai atau power bank ke dalam tas siaga untuk memantau informasi.",
+      "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 65",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "umum-sebelum-015",
+      "hazard": "umum",
+      "phase": "sebelum",
+      "audience": [
+        "disabilitas"
+      ],
+      "priority": "sedang",
+      "darurat": false,
+      "title": "Sesuaikan peringatan dini dengan jenis disabilitas",
+      "body": "Pastikan peringatan dini dapat diterima anggota dengan disabilitas sesuai jenisnya, dan latih penyelamatan diri bersama kerabat terdekat.",
+      "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 68",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "umum-saat-001",
+      "hazard": "umum",
+      "phase": "saat",
+      "audience": [
+        "umum"
+      ],
+      "priority": "sedang",
+      "darurat": true,
+      "title": "Utamakan informasi resmi",
+      "body": "Ikuti informasi dari BMKG, televisi, dan radio, serta arahan petugas di lokasi.",
+      "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "umum-sesudah-001",
+      "hazard": "umum",
+      "phase": "sesudah",
+      "audience": [
+        "umum"
+      ],
+      "priority": "tinggi",
+      "darurat": false,
+      "title": "Periksa korban dan beri P3K",
+      "body": "Periksa apakah ada yang terluka dan lakukan P3K. Minta pertolongan segera bila luka parah.",
+      "sourceTitle": "Antisipasi Gempa Bumi (BMKG)",
+      "sourceUrl": "https://www.bmkg.go.id/gempabumi/mitigasi/antisipasi-gempabumi",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "umum-sesudah-002",
+      "hazard": "umum",
+      "phase": "sesudah",
+      "audience": [
+        "umum"
+      ],
+      "priority": "sedang",
+      "darurat": false,
+      "title": "Jangan mudah percaya isu",
+      "body": "Dengarkan informasi dari radio atau sumber resmi dan jangan mudah percaya kabar yang tidak jelas asalnya.",
+      "sourceTitle": "Antisipasi Gempa Bumi (BMKG)",
+      "sourceUrl": "https://www.bmkg.go.id/gempabumi/mitigasi/antisipasi-gempabumi",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "umum-sesudah-003",
+      "hazard": "umum",
+      "phase": "sesudah",
+      "audience": [
+        "balita",
+        "umum"
+      ],
+      "priority": "sedang",
+      "darurat": false,
+      "title": "Perhatikan kondisi anak",
+      "body": "Perhatikan trauma yang mungkin muncul, terutama pada anak-anak, dan dampingi mereka.",
+      "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    },
+    {
+      "id": "umum-sesudah-004",
+      "hazard": "umum",
+      "phase": "sesudah",
+      "audience": [
+        "disabilitas"
+      ],
+      "priority": "sedang",
+      "darurat": false,
+      "title": "Dampingi anggota dengan disabilitas",
+      "body": "Bantu anggota dengan disabilitas mendapat pertolongan dan bawa ke pengungsian atau fasilitas kesehatan bila diperlukan.",
+      "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 68",
+      "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+      "accessedAt": "2026-11-16",
+      "reviewedBy": []
+    }
+  ],
+  "pack": {
+    "umum": {
+      "jumlah": 20,
+      "minimum": 20,
+      "ditinjau": 0,
+      "siap": false
+    },
+    "banjir": {
+      "jumlah": 22,
+      "minimum": 12,
+      "ditinjau": 0,
+      "siap": false
+    },
+    "longsor": {
+      "jumlah": 13,
+      "minimum": 12,
+      "ditinjau": 0,
+      "siap": false
+    },
+    "gempa": {
+      "jumlah": 16,
+      "minimum": 12,
+      "ditinjau": 0,
+      "siap": false
+    },
+    "cuaca_ekstrem": {
+      "jumlah": 13,
+      "minimum": 12,
+      "ditinjau": 0,
+      "siap": false
+    },
+    "tsunami": {
+      "jumlah": 0,
+      "minimum": 8,
+      "ditinjau": 0,
+      "siap": false
+    },
+    "kekeringan": {
+      "jumlah": 0,
+      "minimum": 8,
+      "ditinjau": 0,
+      "siap": false
+    },
+    "karhutla": {
+      "jumlah": 0,
+      "minimum": 8,
+      "ditinjau": 0,
+      "siap": false
+    },
+    "gunung_api": {
+      "jumlah": 0,
+      "minimum": 6,
+      "ditinjau": 0,
+      "siap": false
+    },
+    "gelombang_abrasi": {
+      "jumlah": 0,
+      "minimum": 6,
+      "ditinjau": 0,
+      "siap": false
+    }
+  }
+}

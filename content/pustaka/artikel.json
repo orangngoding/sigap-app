@@ -1,0 +1,65 @@
+[
+  {
+    "slug": "tas-siaga-keluarga",
+    "title": "Menyiapkan tas siaga keluarga",
+    "ringkasan": "Isi dan cara menyiapkan tas siaga serta rencana keluarga sebelum bencana.",
+    "hazards": ["umum"],
+    "intro": "Tas siaga membantu keluarga bertahan beberapa hari pertama setelah kejadian. Butir di bawah dirangkum dari panduan BNPB.",
+    "bagian": [{ "judul": "Persiapan sebelum bencana", "hazard": "umum", "phase": "sebelum" }]
+  },
+  {
+    "slug": "siap-menghadapi-banjir",
+    "title": "Siap menghadapi banjir",
+    "ringkasan": "Langkah sebelum, saat, dan sesudah banjir untuk keluarga.",
+    "hazards": ["banjir"],
+    "intro": "Banjir bisa datang perlahan atau tiba-tiba. Langkah berikut dirangkum dari panduan BNPB.",
+    "bagian": [
+      { "judul": "Sebelum banjir", "hazard": "banjir", "phase": "sebelum" },
+      { "judul": "Saat banjir", "hazard": "banjir", "phase": "saat" },
+      { "judul": "Sesudah banjir", "hazard": "banjir", "phase": "sesudah" }
+    ]
+  },
+  {
+    "slug": "waspada-tanah-longsor",
+    "title": "Waspada tanah longsor",
+    "ringkasan": "Mengenali daerah rawan dan langkah menyelamatkan diri saat longsor.",
+    "hazards": ["longsor"],
+    "intro": "Longsor sering terjadi di lereng setelah hujan. Berikut langkah dari panduan BNPB.",
+    "bagian": [
+      { "judul": "Sebelum longsor", "hazard": "longsor", "phase": "sebelum" },
+      { "judul": "Saat longsor", "hazard": "longsor", "phase": "saat" }
+    ]
+  },
+  {
+    "slug": "melindungi-diri-saat-gempa",
+    "title": "Melindungi diri saat gempa bumi",
+    "ringkasan": "Langkah sebelum, saat, dan sesudah gempa bumi.",
+    "hazards": ["gempa"],
+    "intro": "Gempa tidak dapat diprediksi, sehingga kesiapan sebelumnya sangat menentukan. Rangkuman dari sumber resmi.",
+    "bagian": [
+      { "judul": "Sebelum gempa", "hazard": "gempa", "phase": "sebelum" },
+      { "judul": "Saat gempa", "hazard": "gempa", "phase": "saat" },
+      { "judul": "Sesudah gempa", "hazard": "gempa", "phase": "sesudah" }
+    ]
+  },
+  {
+    "slug": "cuaca-ekstrem-puting-beliung",
+    "title": "Cuaca ekstrem dan angin puting beliung",
+    "ringkasan": "Tanda cuaca memburuk dan cara berlindung dari angin kencang.",
+    "hazards": ["cuaca_ekstrem"],
+    "intro": "Hujan lebat, petir, dan angin kencang dapat muncul mendadak. Berikut langkah dari panduan resmi.",
+    "bagian": [
+      { "judul": "Sebelum", "hazard": "cuaca_ekstrem", "phase": "sebelum" },
+      { "judul": "Saat kejadian", "hazard": "cuaca_ekstrem", "phase": "saat" },
+      { "judul": "Sesudah", "hazard": "cuaca_ekstrem", "phase": "sesudah" }
+    ]
+  },
+  {
+    "slug": "melindungi-anggota-keluarga-rentan",
+    "title": "Melindungi anggota keluarga yang rentan",
+    "ringkasan": "Persiapan khusus untuk lansia, anak, ibu hamil, dan penyandang disabilitas.",
+    "hazards": ["umum"],
+    "intro": "Setiap anggota keluarga punya kebutuhan berbeda saat bencana. Berikut butir panduan yang ditujukan khusus bagi mereka.",
+    "bagian": [{ "judul": "Butir khusus kelompok rentan", "audienceKhusus": true }]
+  }
+]

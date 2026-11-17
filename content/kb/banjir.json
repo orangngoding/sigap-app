@@ -1,0 +1,362 @@
+[
+  {
+    "id": "banjir-sebelum-001",
+    "hazard": "banjir",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Hindari bantaran sungai",
+    "body": "Jangan membangun atau menambah permukiman di bantaran sungai dan daerah rawan banjir.",
+    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-sebelum-002",
+    "hazard": "banjir",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "rendah",
+    "darurat": false,
+    "title": "Jaga aliran sungai dan saluran",
+    "body": "Jaga aliran sungai dari sampah dan lakukan penghijauan di hulu agar air lebih mudah mengalir.",
+    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-sebelum-003",
+    "hazard": "banjir",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "rendah",
+    "darurat": false,
+    "title": "Pasang pompa di area rendah",
+    "body": "Pasang pompa di area yang lebih rendah agar air genangan dapat dibuang.",
+    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-sebelum-004",
+    "hazard": "banjir",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Bicarakan rencana banjir dan tempat bertemu",
+    "body": "Bicarakan ancaman banjir dengan keluarga dan sepakati tempat bertemu bila anggota keluarga terpencar.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 34",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-sebelum-005",
+    "hazard": "banjir",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Kenali rute evakuasi dan tempat yang lebih tinggi",
+    "body": "Pahami rute evakuasi dan daerah yang lebih tinggi di sekitar rumah, serta saluran yang biasa dilalui air banjir.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 33-34",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-sebelum-006",
+    "hazard": "banjir",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Ketahui cara mematikan air, listrik, dan gas",
+    "body": "Pastikan Anda tahu cara mematikan air, listrik, dan gas, dan waspadai alat listrik yang berbahaya bila terkena air.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 34-35",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-sebelum-007",
+    "hazard": "banjir",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Foto harta dan simpan dokumen di tempat aman",
+    "body": "Catat dan foto harta benda, lalu simpan bersama dokumen penting di tempat yang aman dan tinggi.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 34-35",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-sebelum-008",
+    "hazard": "banjir",
+    "phase": "sebelum",
+    "audience": [
+      "lansia",
+      "balita",
+      "disabilitas",
+      "hamil"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Catat kebutuhan khusus keluarga dan tetangga",
+    "body": "Ketahui kebutuhan khusus anggota keluarga dan tetangga bila banjir terjadi, dan siapkan persediaan untuk hidup mandiri sedikitnya tiga hari.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 34",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-saat-001",
+    "hazard": "banjir",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": true,
+    "title": "Jauhi saluran air",
+    "body": "Hindari berjalan di dekat saluran air karena arus dan kedalamannya sulit diperkirakan.",
+    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-saat-002",
+    "hazard": "banjir",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": true,
+    "title": "Matikan listrik",
+    "body": "Matikan listrik atau minta PLN memutusnya di wilayah yang terdampak banjir.",
+    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-saat-003",
+    "hazard": "banjir",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": true,
+    "title": "Mengungsi lebih awal",
+    "body": "Mengungsilah sejak dini selagi genangan masih bisa dilewati.",
+    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-saat-004",
+    "hazard": "banjir",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": true,
+    "title": "Amankan barang berharga",
+    "body": "Pindahkan barang berharga dan dokumen ke tempat yang lebih tinggi.",
+    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-saat-005",
+    "hazard": "banjir",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": true,
+    "title": "Hubungi aparat setempat",
+    "body": "Jika air terus naik, hubungi kantor desa, kelurahan, atau kecamatan.",
+    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-saat-006",
+    "hazard": "banjir",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": true,
+    "title": "Jangan mengemudi di wilayah banjir",
+    "body": "Jangan mengemudikan mobil di wilayah banjir. Bila air mulai naik, tinggalkan mobil dan pindah ke tempat yang lebih tinggi.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 37",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-saat-007",
+    "hazard": "banjir",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": true,
+    "varian": [
+      "bandang"
+    ],
+    "title": "Waspada banjir bandang tanpa peringatan",
+    "body": "Banjir bandang dapat datang tanpa peringatan, juga saat hujan biasa. Waspadai saluran air dan tempat lewat arus deras.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 36-37",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-saat-008",
+    "hazard": "banjir",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": true,
+    "title": "Jangan sentuh alat listrik bila berdiri di air",
+    "body": "Cabut alat yang masih tersambung listrik. Jangan menyentuh peralatan bermuatan listrik saat Anda berdiri di atas atau di dalam air.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 36",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-saat-009",
+    "hazard": "banjir",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Berjalan di air dengan pijakan yang kokoh",
+    "body": "Bila terpaksa berjalan di air, pilih pijakan yang tidak bergerak dan periksa dengan tongkat. Jangan berjalan di arus air.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 37",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-sesudah-001",
+    "hazard": "banjir",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Bersihkan rumah dengan antiseptik",
+    "body": "Bersihkan rumah dan perabot yang terkena banjir, lalu gunakan antiseptik.",
+    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-sesudah-002",
+    "hazard": "banjir",
+    "phase": "sesudah",
+    "audience": [
+      "balita",
+      "lansia",
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Sediakan air bersih",
+    "body": "Sediakan air bersih untuk minum dan kebersihan agar terhindar dari diare.",
+    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-sesudah-003",
+    "hazard": "banjir",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Hindari air banjir dan air yang bergerak",
+    "body": "Hindari air banjir karena mungkin tercemar dan berisiko tersetrum. Hindari juga area yang airnya baru surut karena tanah bisa ambles.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 38",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-sesudah-004",
+    "hazard": "banjir",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Kembali ke rumah setelah ada izin petugas",
+    "body": "Kembali ke rumah sesuai arahan pihak berwenang dan periksa bangunan dengan hati-hati karena kerusakan bisa tidak terlihat.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 38",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "banjir-sesudah-005",
+    "hazard": "banjir",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Buang makanan yang terkena air banjir",
+    "body": "Buang makanan yang terkontaminasi air banjir, lalu cuci tangan dengan sabun dan air bersih bila Anda terkena air banjir.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 39",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  }
+]

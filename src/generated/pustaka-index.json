@@ -1,0 +1,713 @@
+[
+  {
+    "slug": "tas-siaga-keluarga",
+    "title": "Menyiapkan tas siaga keluarga",
+    "ringkasan": "Isi dan cara menyiapkan tas siaga serta rencana keluarga sebelum bencana.",
+    "hazards": [
+      "umum"
+    ],
+    "intro": "Tas siaga membantu keluarga bertahan beberapa hari pertama setelah kejadian. Butir di bawah dirangkum dari panduan BNPB.",
+    "menit": 2,
+    "bagian": [
+      {
+        "judul": "Persiapan sebelum bencana",
+        "butir": [
+          {
+            "id": "umum-sebelum-001",
+            "judul": "Catat nomor telepon penting",
+            "isi": "Catat nomor keluarga, tetangga, dan layanan darurat. Simpan di ponsel dan tulis di kertas yang mudah dijangkau.",
+            "darurat": false
+          },
+          {
+            "id": "umum-sebelum-002",
+            "judul": "Siapkan perlengkapan dasar",
+            "isi": "Siapkan kotak P3K, senter atau lampu baterai, radio, serta persediaan makanan dan air minum di tempat yang mudah diambil.",
+            "darurat": false
+          },
+          {
+            "id": "umum-sebelum-003",
+            "judul": "Pelajari P3K dan alat pemadam api",
+            "isi": "Pelajari pertolongan pertama dan cara memakai alat pemadam api ringan agar siap bertindak sebelum bantuan datang.",
+            "darurat": false
+          },
+          {
+            "id": "umum-sebelum-004",
+            "judul": "Kenali jalur keluar rumah",
+            "isi": "Ketahui letak pintu, tangga darurat, dan tempat paling aman untuk berlindung di rumah atau gedung tempat Anda tinggal.",
+            "darurat": false
+          },
+          {
+            "id": "umum-sebelum-005",
+            "judul": "Siapkan tas siaga bencana",
+            "isi": "Siapkan tas siaga bencana dan ketahui sumber informasi resmi seperti BMKG, televisi, dan radio.",
+            "darurat": false
+          },
+          {
+            "id": "umum-sebelum-006",
+            "judul": "Susun rencana darurat keluarga",
+            "isi": "Buat rencana darurat keluarga: kenali ancaman di sekitar, titik kumpul, nomor penting, rute evakuasi, dan titik aman di dalam rumah.",
+            "darurat": false
+          },
+          {
+            "id": "umum-sebelum-007",
+            "judul": "Sepakati titik kumpul keluarga",
+            "isi": "Tentukan titik kumpul yang disepakati seluruh keluarga agar mudah bertemu bila terpisah saat kejadian.",
+            "darurat": false
+          },
+          {
+            "id": "umum-sebelum-008",
+            "judul": "Kenali rute evakuasi",
+            "isi": "Ketahui rute evakuasi dari rumah dan lingkungan Anda, dan ajak seluruh anggota keluarga melewatinya bersama.",
+            "darurat": false
+          },
+          {
+            "id": "umum-sebelum-009",
+            "judul": "Cari tahu letak saklar listrik, kran air, dan gas",
+            "isi": "Ketahui letak untuk mematikan listrik, air, dan gas di rumah, dan pastikan anggota dewasa keluarga juga tahu.",
+            "darurat": false
+          },
+          {
+            "id": "umum-sebelum-010",
+            "judul": "Tentukan titik aman di dalam rumah",
+            "isi": "Kenali bagian rumah yang paling aman untuk berlindung, lalu beri tahu seluruh anggota keluarga.",
+            "darurat": false
+          },
+          {
+            "id": "umum-sebelum-011",
+            "judul": "Catat anggota keluarga yang rentan",
+            "isi": "Catat anggota keluarga yang rentan, yaitu anak-anak, lansia, ibu hamil, dan penyandang disabilitas, lalu rencanakan bantuan untuk mereka.",
+            "darurat": false
+          },
+          {
+            "id": "umum-sebelum-012",
+            "judul": "Simpan dokumen dan uang tunai di tas siaga",
+            "isi": "Masukkan salinan surat penting dan uang tunai secukupnya untuk sekitar tiga hari ke dalam tas siaga yang tahan air.",
+            "darurat": false
+          },
+          {
+            "id": "umum-sebelum-013",
+            "judul": "Siapkan air dan makanan tahan lama",
+            "isi": "Siapkan air minum dan makanan ringan tahan lama untuk sekitar tiga hari di dalam tas siaga.",
+            "darurat": false
+          },
+          {
+            "id": "umum-sebelum-014",
+            "judul": "Siapkan senter, radio, dan pengisi daya",
+            "isi": "Masukkan senter atau lampu kepala, radio atau ponsel beserta baterai atau power bank ke dalam tas siaga untuk memantau informasi.",
+            "darurat": false
+          },
+          {
+            "id": "umum-sebelum-015",
+            "judul": "Sesuaikan peringatan dini dengan jenis disabilitas",
+            "isi": "Pastikan peringatan dini dapat diterima anggota dengan disabilitas sesuai jenisnya, dan latih penyelamatan diri bersama kerabat terdekat.",
+            "darurat": false
+          }
+        ]
+      }
+    ],
+    "sumber": [
+      {
+        "judul": "Antisipasi Gempa Bumi (BMKG)",
+        "url": "https://www.bmkg.go.id/gempabumi/mitigasi/antisipasi-gempabumi"
+      },
+      {
+        "judul": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+        "url": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf"
+      },
+      {
+        "judul": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019)",
+        "url": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf"
+      }
+    ]
+  },
+  {
+    "slug": "siap-menghadapi-banjir",
+    "title": "Siap menghadapi banjir",
+    "ringkasan": "Langkah sebelum, saat, dan sesudah banjir untuk keluarga.",
+    "hazards": [
+      "banjir"
+    ],
+    "intro": "Banjir bisa datang perlahan atau tiba-tiba. Langkah berikut dirangkum dari panduan BNPB.",
+    "menit": 2,
+    "bagian": [
+      {
+        "judul": "Sebelum banjir",
+        "butir": [
+          {
+            "id": "banjir-sebelum-001",
+            "judul": "Hindari bantaran sungai",
+            "isi": "Jangan membangun atau menambah permukiman di bantaran sungai dan daerah rawan banjir.",
+            "darurat": false
+          },
+          {
+            "id": "banjir-sebelum-002",
+            "judul": "Jaga aliran sungai dan saluran",
+            "isi": "Jaga aliran sungai dari sampah dan lakukan penghijauan di hulu agar air lebih mudah mengalir.",
+            "darurat": false
+          },
+          {
+            "id": "banjir-sebelum-003",
+            "judul": "Pasang pompa di area rendah",
+            "isi": "Pasang pompa di area yang lebih rendah agar air genangan dapat dibuang.",
+            "darurat": false
+          },
+          {
+            "id": "banjir-sebelum-004",
+            "judul": "Bicarakan rencana banjir dan tempat bertemu",
+            "isi": "Bicarakan ancaman banjir dengan keluarga dan sepakati tempat bertemu bila anggota keluarga terpencar.",
+            "darurat": false
+          },
+          {
+            "id": "banjir-sebelum-005",
+            "judul": "Kenali rute evakuasi dan tempat yang lebih tinggi",
+            "isi": "Pahami rute evakuasi dan daerah yang lebih tinggi di sekitar rumah, serta saluran yang biasa dilalui air banjir.",
+            "darurat": false
+          },
+          {
+            "id": "banjir-sebelum-006",
+            "judul": "Ketahui cara mematikan air, listrik, dan gas",
+            "isi": "Pastikan Anda tahu cara mematikan air, listrik, dan gas, dan waspadai alat listrik yang berbahaya bila terkena air.",
+            "darurat": false
+          },
+          {
+            "id": "banjir-sebelum-007",
+            "judul": "Foto harta dan simpan dokumen di tempat aman",
+            "isi": "Catat dan foto harta benda, lalu simpan bersama dokumen penting di tempat yang aman dan tinggi.",
+            "darurat": false
+          },
+          {
+            "id": "banjir-sebelum-008",
+            "judul": "Catat kebutuhan khusus keluarga dan tetangga",
+            "isi": "Ketahui kebutuhan khusus anggota keluarga dan tetangga bila banjir terjadi, dan siapkan persediaan untuk hidup mandiri sedikitnya tiga hari.",
+            "darurat": false
+          }
+        ]
+      },
+      {
+        "judul": "Saat banjir",
+        "butir": [
+          {
+            "id": "banjir-saat-001",
+            "judul": "Jauhi saluran air",
+            "isi": "Hindari berjalan di dekat saluran air karena arus dan kedalamannya sulit diperkirakan.",
+            "darurat": true
+          },
+          {
+            "id": "banjir-saat-002",
+            "judul": "Matikan listrik",
+            "isi": "Matikan listrik atau minta PLN memutusnya di wilayah yang terdampak banjir.",
+            "darurat": true
+          },
+          {
+            "id": "banjir-saat-003",
+            "judul": "Mengungsi lebih awal",
+            "isi": "Mengungsilah sejak dini selagi genangan masih bisa dilewati.",
+            "darurat": true
+          },
+          {
+            "id": "banjir-saat-004",
+            "judul": "Amankan barang berharga",
+            "isi": "Pindahkan barang berharga dan dokumen ke tempat yang lebih tinggi.",
+            "darurat": true
+          },
+          {
+            "id": "banjir-saat-005",
+            "judul": "Hubungi aparat setempat",
+            "isi": "Jika air terus naik, hubungi kantor desa, kelurahan, atau kecamatan.",
+            "darurat": true
+          },
+          {
+            "id": "banjir-saat-006",
+            "judul": "Jangan mengemudi di wilayah banjir",
+            "isi": "Jangan mengemudikan mobil di wilayah banjir. Bila air mulai naik, tinggalkan mobil dan pindah ke tempat yang lebih tinggi.",
+            "darurat": true
+          },
+          {
+            "id": "banjir-saat-007",
+            "judul": "Waspada banjir bandang tanpa peringatan",
+            "isi": "Banjir bandang dapat datang tanpa peringatan, juga saat hujan biasa. Waspadai saluran air dan tempat lewat arus deras.",
+            "darurat": true
+          },
+          {
+            "id": "banjir-saat-008",
+            "judul": "Jangan sentuh alat listrik bila berdiri di air",
+            "isi": "Cabut alat yang masih tersambung listrik. Jangan menyentuh peralatan bermuatan listrik saat Anda berdiri di atas atau di dalam air.",
+            "darurat": true
+          },
+          {
+            "id": "banjir-saat-009",
+            "judul": "Berjalan di air dengan pijakan yang kokoh",
+            "isi": "Bila terpaksa berjalan di air, pilih pijakan yang tidak bergerak dan periksa dengan tongkat. Jangan berjalan di arus air.",
+            "darurat": false
+          }
+        ]
+      },
+      {
+        "judul": "Sesudah banjir",
+        "butir": [
+          {
+            "id": "banjir-sesudah-001",
+            "judul": "Bersihkan rumah dengan antiseptik",
+            "isi": "Bersihkan rumah dan perabot yang terkena banjir, lalu gunakan antiseptik.",
+            "darurat": false
+          },
+          {
+            "id": "banjir-sesudah-002",
+            "judul": "Sediakan air bersih",
+            "isi": "Sediakan air bersih untuk minum dan kebersihan agar terhindar dari diare.",
+            "darurat": false
+          },
+          {
+            "id": "banjir-sesudah-003",
+            "judul": "Hindari air banjir dan air yang bergerak",
+            "isi": "Hindari air banjir karena mungkin tercemar dan berisiko tersetrum. Hindari juga area yang airnya baru surut karena tanah bisa ambles.",
+            "darurat": false
+          },
+          {
+            "id": "banjir-sesudah-004",
+            "judul": "Kembali ke rumah setelah ada izin petugas",
+            "isi": "Kembali ke rumah sesuai arahan pihak berwenang dan periksa bangunan dengan hati-hati karena kerusakan bisa tidak terlihat.",
+            "darurat": false
+          },
+          {
+            "id": "banjir-sesudah-005",
+            "judul": "Buang makanan yang terkena air banjir",
+            "isi": "Buang makanan yang terkontaminasi air banjir, lalu cuci tangan dengan sabun dan air bersih bila Anda terkena air banjir.",
+            "darurat": false
+          }
+        ]
+      }
+    ],
+    "sumber": [
+      {
+        "judul": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+        "url": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf"
+      },
+      {
+        "judul": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019)",
+        "url": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf"
+      }
+    ]
+  },
+  {
+    "slug": "waspada-tanah-longsor",
+    "title": "Waspada tanah longsor",
+    "ringkasan": "Mengenali daerah rawan dan langkah menyelamatkan diri saat longsor.",
+    "hazards": [
+      "longsor"
+    ],
+    "intro": "Longsor sering terjadi di lereng setelah hujan. Berikut langkah dari panduan BNPB.",
+    "menit": 1,
+    "bagian": [
+      {
+        "judul": "Sebelum longsor",
+        "butir": [
+          {
+            "id": "longsor-sebelum-001",
+            "judul": "Hindari lereng rawan",
+            "isi": "Hindari membangun rumah di daerah rawan longsor.",
+            "darurat": false
+          },
+          {
+            "id": "longsor-sebelum-002",
+            "judul": "Kurangi kemiringan lereng",
+            "isi": "Kurangi kemiringan lereng di sekitar rumah bila memungkinkan, sebaiknya dengan arahan ahli.",
+            "darurat": false
+          },
+          {
+            "id": "longsor-sebelum-003",
+            "judul": "Jaga drainase tidak tersumbat",
+            "isi": "Pastikan saluran air dan drainase di sekitar lereng tidak tersumbat.",
+            "darurat": false
+          },
+          {
+            "id": "longsor-sebelum-004",
+            "judul": "Tanam pohon berakar kuat",
+            "isi": "Tanam pohon berakar kuat di lereng dan jangan menebang hutan sembarangan.",
+            "darurat": false
+          },
+          {
+            "id": "longsor-sebelum-005",
+            "judul": "Waspada saat hujan lebat",
+            "isi": "Tingkatkan kewaspadaan saat hujan lebat, terutama bila tinggal di dekat lereng atau tebing.",
+            "darurat": false
+          },
+          {
+            "id": "longsor-sebelum-006",
+            "judul": "Kenali tanda-tanda longsor",
+            "isi": "Waspadai retakan vertikal di tebing, munculnya air tanah tiba-tiba, air sumur yang keruh, dan batu kecil yang mulai berjatuhan.",
+            "darurat": true
+          },
+          {
+            "id": "longsor-sebelum-007",
+            "judul": "Bangun dengan fondasi kuat dan tanah padat",
+            "isi": "Bila membangun di sekitar lereng, gunakan fondasi yang kuat dan padatkan tanah di sekitar rumah dengan arahan ahli.",
+            "darurat": false
+          },
+          {
+            "id": "longsor-sebelum-008",
+            "judul": "Kenali daerah rawan longsor",
+            "isi": "Kenali daerah rawan longsor di sekitar tempat tinggal Anda dan ketahui zona evakuasi yang telah ditentukan.",
+            "darurat": false
+          },
+          {
+            "id": "longsor-sebelum-009",
+            "judul": "Buat terasering dengan drainase yang tepat",
+            "isi": "Terasering dengan sistem drainase yang tepat membantu mengurangi risiko longsor pada lereng di sekitar rumah.",
+            "darurat": false
+          }
+        ]
+      },
+      {
+        "judul": "Saat longsor",
+        "butir": [
+          {
+            "id": "longsor-saat-001",
+            "judul": "Menjauh dari suara gemuruh longsoran",
+            "isi": "Segera menjauh dari suara gemuruh dan dari arah datangnya longsoran.",
+            "darurat": true
+          },
+          {
+            "id": "longsor-saat-002",
+            "judul": "Jauhi area yang baru longsor",
+            "isi": "Hindari wilayah yang baru longsor karena tanahnya labil.",
+            "darurat": true
+          },
+          {
+            "id": "longsor-saat-003",
+            "judul": "Ikuti sirine ke zona evakuasi",
+            "isi": "Bila sirine peringatan longsor berbunyi, segera menuju zona evakuasi yang telah ditentukan.",
+            "darurat": true
+          },
+          {
+            "id": "longsor-saat-004",
+            "judul": "Waspada longsor susulan saat hujan",
+            "isi": "Bila hujan turun setelah longsor terjadi, waspadai longsor susulan.",
+            "darurat": true
+          }
+        ]
+      }
+    ],
+    "sumber": [
+      {
+        "judul": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+        "url": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf"
+      },
+      {
+        "judul": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019)",
+        "url": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf"
+      }
+    ]
+  },
+  {
+    "slug": "melindungi-diri-saat-gempa",
+    "title": "Melindungi diri saat gempa bumi",
+    "ringkasan": "Langkah sebelum, saat, dan sesudah gempa bumi.",
+    "hazards": [
+      "gempa"
+    ],
+    "intro": "Gempa tidak dapat diprediksi, sehingga kesiapan sebelumnya sangat menentukan. Rangkuman dari sumber resmi.",
+    "menit": 1,
+    "bagian": [
+      {
+        "judul": "Sebelum gempa",
+        "butir": [
+          {
+            "id": "gempa-sebelum-001",
+            "judul": "Ikuti sosialisasi dan simulasi",
+            "isi": "Ikuti sosialisasi dan simulasi kesiapsiagaan gempa di lingkungan Anda.",
+            "darurat": false
+          },
+          {
+            "id": "gempa-sebelum-002",
+            "judul": "Ikat perabot ke dinding",
+            "isi": "Pasang perabot ke dinding dan ikat benda yang menggantung agar tidak jatuh saat guncangan.",
+            "darurat": false
+          },
+          {
+            "id": "gempa-sebelum-003",
+            "judul": "Taruh benda berat di bawah",
+            "isi": "Letakkan benda berat di bagian bawah dan periksa benda menggantung seperti lampu.",
+            "darurat": false
+          },
+          {
+            "id": "gempa-sebelum-004",
+            "judul": "Periksa lokasi dan struktur rumah",
+            "isi": "Pastikan rumah tidak berada di area rawan longsor atau likuefaksi, dan perbaiki struktur bangunan yang lemah.",
+            "darurat": false
+          },
+          {
+            "id": "gempa-sebelum-005",
+            "judul": "Matikan air, gas, listrik saat tak dipakai",
+            "isi": "Matikan air, gas, dan listrik saat tidak dipakai untuk mengurangi risiko kebakaran setelah gempa.",
+            "darurat": false
+          }
+        ]
+      },
+      {
+        "judul": "Saat gempa",
+        "butir": [
+          {
+            "id": "gempa-saat-001",
+            "judul": "Lindungi kepala di dalam bangunan",
+            "isi": "Lindungi kepala dan badan, misalnya dengan berlindung di bawah meja, lalu keluar bila memungkinkan.",
+            "darurat": true
+          },
+          {
+            "id": "gempa-saat-002",
+            "judul": "Matikan kompor",
+            "isi": "Jika tidak ada meja, lindungi kepala dengan bantal. Matikan kompor bila aman melakukannya.",
+            "darurat": true
+          },
+          {
+            "id": "gempa-saat-003",
+            "judul": "Jauhi gedung, tiang, dan pohon",
+            "isi": "Jika di luar, menjauh dari gedung, tiang listrik, dan pohon, serta waspada terhadap retakan tanah.",
+            "darurat": true
+          },
+          {
+            "id": "gempa-saat-004",
+            "judul": "Berhenti di tempat terbuka",
+            "isi": "Jika di dalam mobil, berhenti di tempat terbuka dan jauh dari persimpangan.",
+            "darurat": true
+          },
+          {
+            "id": "gempa-saat-005",
+            "judul": "Jangan pakai lift",
+            "isi": "Jangan menggunakan lift saat atau segera setelah gempa.",
+            "darurat": true
+          },
+          {
+            "id": "gempa-saat-006",
+            "judul": "Menuju dataran tinggi bila ada tanda tsunami",
+            "isi": "Di pantai, segera menuju dataran tinggi jika tanda tsunami muncul.",
+            "darurat": true
+          },
+          {
+            "id": "gempa-saat-007",
+            "judul": "Hindari lereng saat di pegunungan",
+            "isi": "Di daerah pegunungan, menjauh dari area yang berpotensi longsor.",
+            "darurat": true
+          }
+        ]
+      },
+      {
+        "judul": "Sesudah gempa",
+        "butir": [
+          {
+            "id": "gempa-sesudah-001",
+            "judul": "Keluar lewat tangga biasa",
+            "isi": "Keluar dengan tertib melalui tangga biasa, bukan lift atau tangga berjalan.",
+            "darurat": false
+          },
+          {
+            "id": "gempa-sesudah-002",
+            "judul": "Periksa api dan kebocoran gas",
+            "isi": "Periksa kebakaran, kebocoran gas, dan korsleting. Matikan listrik dan jangan menyalakan api.",
+            "darurat": false
+          },
+          {
+            "id": "gempa-sesudah-003",
+            "judul": "Jangan masuk bangunan yang rusak",
+            "isi": "Jangan masuk ke bangunan yang terdampak gempa karena berisiko runtuh.",
+            "darurat": false
+          },
+          {
+            "id": "gempa-sesudah-004",
+            "judul": "Waspadai gempa susulan",
+            "isi": "Hindari berjalan di sekitar area terdampak karena gempa susulan masih mungkin terjadi.",
+            "darurat": false
+          }
+        ]
+      }
+    ],
+    "sumber": [
+      {
+        "judul": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+        "url": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf"
+      },
+      {
+        "judul": "Antisipasi Gempa Bumi (BMKG)",
+        "url": "https://www.bmkg.go.id/gempabumi/mitigasi/antisipasi-gempabumi"
+      }
+    ]
+  },
+  {
+    "slug": "cuaca-ekstrem-puting-beliung",
+    "title": "Cuaca ekstrem dan angin puting beliung",
+    "ringkasan": "Tanda cuaca memburuk dan cara berlindung dari angin kencang.",
+    "hazards": [
+      "cuaca_ekstrem"
+    ],
+    "intro": "Hujan lebat, petir, dan angin kencang dapat muncul mendadak. Berikut langkah dari panduan resmi.",
+    "menit": 1,
+    "bagian": [
+      {
+        "judul": "Sebelum",
+        "butir": [
+          {
+            "id": "cuaca_ekstrem-sebelum-001",
+            "judul": "Kenali tanda puting beliung",
+            "isi": "Waspadai awan gelap yang tinggi dan tebal, petir atau guruh dari kejauhan, dan suara gemuruh.",
+            "darurat": false
+          },
+          {
+            "id": "cuaca_ekstrem-sebelum-002",
+            "judul": "Amankan barang dan tutup rumah",
+            "isi": "Masukkan barang ke dalam rumah serta tutup dan kunci jendela dan pintu.",
+            "darurat": false
+          },
+          {
+            "id": "cuaca_ekstrem-sebelum-003",
+            "judul": "Matikan listrik dan elektronik",
+            "isi": "Matikan listrik dan peralatan elektronik sebelum cuaca ekstrem tiba.",
+            "darurat": false
+          },
+          {
+            "id": "cuaca_ekstrem-sebelum-004",
+            "judul": "Pastikan rumah dalam kondisi kokoh",
+            "isi": "Upayakan rumah atau bangunan tempat tinggal kokoh agar lebih tahan angin kencang.",
+            "darurat": false
+          },
+          {
+            "id": "cuaca_ekstrem-sebelum-005",
+            "judul": "Pelajari cara menyelamatkan diri dari puting beliung",
+            "isi": "Tambah pengetahuan tentang angin puting beliung dan cara menyelamatkan diri, lalu bagikan ke seluruh keluarga.",
+            "darurat": false
+          },
+          {
+            "id": "cuaca_ekstrem-sebelum-006",
+            "judul": "Kenali tanda cuaca yang memburuk",
+            "isi": "Waspadai udara yang terasa panas lalu muncul awan gelap yang bertahan hingga sore hari.",
+            "darurat": false
+          }
+        ]
+      },
+      {
+        "judul": "Saat kejadian",
+        "butir": [
+          {
+            "id": "cuaca_ekstrem-saat-001",
+            "judul": "Posisi aman saat petir dekat",
+            "isi": "Jika petir sudah dekat, membungkuk, duduk, dan peluk lutut. Jangan tiarap di tanah.",
+            "darurat": true
+          },
+          {
+            "id": "cuaca_ekstrem-saat-002",
+            "judul": "Jauhi benda tinggi",
+            "isi": "Jauhi bangunan tinggi, tiang listrik, dan papan reklame.",
+            "darurat": true
+          },
+          {
+            "id": "cuaca_ekstrem-saat-003",
+            "judul": "Masuk ke bangunan kokoh",
+            "isi": "Berlindunglah di dalam bangunan yang kokoh.",
+            "darurat": true
+          },
+          {
+            "id": "cuaca_ekstrem-saat-004",
+            "judul": "Jangan berteduh di bawah pohon besar atau papan reklame",
+            "isi": "Jangan berlindung di bawah pohon besar dan papan reklame karena bisa tumbang atau jatuh.",
+            "darurat": true
+          }
+        ]
+      },
+      {
+        "judul": "Sesudah",
+        "butir": [
+          {
+            "id": "cuaca_ekstrem-sesudah-001",
+            "judul": "Pastikan tidak ada yang cedera",
+            "isi": "Pastikan seluruh anggota keluarga tidak cedera dan beri pertolongan darurat bila perlu.",
+            "darurat": false
+          },
+          {
+            "id": "cuaca_ekstrem-sesudah-002",
+            "judul": "Laporkan kerusakan listrik atau gas",
+            "isi": "Laporkan kerusakan listrik atau gas kepada pihak berwenang.",
+            "darurat": false
+          },
+          {
+            "id": "cuaca_ekstrem-sesudah-003",
+            "judul": "Lanjutkan perjalanan hati-hati",
+            "isi": "Jika sedang dalam perjalanan, lanjutkan dengan hati-hati.",
+            "darurat": false
+          }
+        ]
+      }
+    ],
+    "sumber": [
+      {
+        "judul": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+        "url": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf"
+      },
+      {
+        "judul": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019)",
+        "url": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf"
+      }
+    ]
+  },
+  {
+    "slug": "melindungi-anggota-keluarga-rentan",
+    "title": "Melindungi anggota keluarga yang rentan",
+    "ringkasan": "Persiapan khusus untuk lansia, anak, ibu hamil, dan penyandang disabilitas.",
+    "hazards": [
+      "umum"
+    ],
+    "intro": "Setiap anggota keluarga punya kebutuhan berbeda saat bencana. Berikut butir panduan yang ditujukan khusus bagi mereka.",
+    "menit": 1,
+    "bagian": [
+      {
+        "judul": "Butir khusus kelompok rentan",
+        "butir": [
+          {
+            "id": "banjir-sebelum-008",
+            "judul": "Catat kebutuhan khusus keluarga dan tetangga",
+            "isi": "Ketahui kebutuhan khusus anggota keluarga dan tetangga bila banjir terjadi, dan siapkan persediaan untuk hidup mandiri sedikitnya tiga hari.",
+            "darurat": false
+          },
+          {
+            "id": "banjir-sesudah-002",
+            "judul": "Sediakan air bersih",
+            "isi": "Sediakan air bersih untuk minum dan kebersihan agar terhindar dari diare.",
+            "darurat": false
+          },
+          {
+            "id": "umum-sebelum-011",
+            "judul": "Catat anggota keluarga yang rentan",
+            "isi": "Catat anggota keluarga yang rentan, yaitu anak-anak, lansia, ibu hamil, dan penyandang disabilitas, lalu rencanakan bantuan untuk mereka.",
+            "darurat": false
+          },
+          {
+            "id": "umum-sebelum-015",
+            "judul": "Sesuaikan peringatan dini dengan jenis disabilitas",
+            "isi": "Pastikan peringatan dini dapat diterima anggota dengan disabilitas sesuai jenisnya, dan latih penyelamatan diri bersama kerabat terdekat.",
+            "darurat": false
+          },
+          {
+            "id": "umum-sesudah-003",
+            "judul": "Perhatikan kondisi anak",
+            "isi": "Perhatikan trauma yang mungkin muncul, terutama pada anak-anak, dan dampingi mereka.",
+            "darurat": false
+          },
+          {
+            "id": "umum-sesudah-004",
+            "judul": "Dampingi anggota dengan disabilitas",
+            "isi": "Bantu anggota dengan disabilitas mendapat pertolongan dan bawa ke pengungsian atau fasilitas kesehatan bila diperlukan.",
+            "darurat": false
+          }
+        ]
+      }
+    ],
+    "sumber": [
+      {
+        "judul": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019)",
+        "url": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf"
+      },
+      {
+        "judul": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+        "url": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf"
+      }
+    ]
+  }
+]

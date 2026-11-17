@@ -1,0 +1,210 @@
+[
+  {
+    "id": "cuaca_ekstrem-sebelum-001",
+    "hazard": "cuaca_ekstrem",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Kenali tanda puting beliung",
+    "body": "Waspadai awan gelap yang tinggi dan tebal, petir atau guruh dari kejauhan, dan suara gemuruh.",
+    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "cuaca_ekstrem-sebelum-002",
+    "hazard": "cuaca_ekstrem",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Amankan barang dan tutup rumah",
+    "body": "Masukkan barang ke dalam rumah serta tutup dan kunci jendela dan pintu.",
+    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "cuaca_ekstrem-sebelum-003",
+    "hazard": "cuaca_ekstrem",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Matikan listrik dan elektronik",
+    "body": "Matikan listrik dan peralatan elektronik sebelum cuaca ekstrem tiba.",
+    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "cuaca_ekstrem-sebelum-004",
+    "hazard": "cuaca_ekstrem",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "rendah",
+    "darurat": false,
+    "title": "Pastikan rumah dalam kondisi kokoh",
+    "body": "Upayakan rumah atau bangunan tempat tinggal kokoh agar lebih tahan angin kencang.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 46",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "cuaca_ekstrem-sebelum-005",
+    "hazard": "cuaca_ekstrem",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Pelajari cara menyelamatkan diri dari puting beliung",
+    "body": "Tambah pengetahuan tentang angin puting beliung dan cara menyelamatkan diri, lalu bagikan ke seluruh keluarga.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 46",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "cuaca_ekstrem-sebelum-006",
+    "hazard": "cuaca_ekstrem",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Kenali tanda cuaca yang memburuk",
+    "body": "Waspadai udara yang terasa panas lalu muncul awan gelap yang bertahan hingga sore hari.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 46",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "cuaca_ekstrem-saat-001",
+    "hazard": "cuaca_ekstrem",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": true,
+    "title": "Posisi aman saat petir dekat",
+    "body": "Jika petir sudah dekat, membungkuk, duduk, dan peluk lutut. Jangan tiarap di tanah.",
+    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "cuaca_ekstrem-saat-002",
+    "hazard": "cuaca_ekstrem",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": true,
+    "title": "Jauhi benda tinggi",
+    "body": "Jauhi bangunan tinggi, tiang listrik, dan papan reklame.",
+    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "cuaca_ekstrem-saat-003",
+    "hazard": "cuaca_ekstrem",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": true,
+    "title": "Masuk ke bangunan kokoh",
+    "body": "Berlindunglah di dalam bangunan yang kokoh.",
+    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "cuaca_ekstrem-saat-004",
+    "hazard": "cuaca_ekstrem",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": true,
+    "title": "Jangan berteduh di bawah pohon besar atau papan reklame",
+    "body": "Jangan berlindung di bawah pohon besar dan papan reklame karena bisa tumbang atau jatuh.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 48",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "cuaca_ekstrem-sesudah-001",
+    "hazard": "cuaca_ekstrem",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Pastikan tidak ada yang cedera",
+    "body": "Pastikan seluruh anggota keluarga tidak cedera dan beri pertolongan darurat bila perlu.",
+    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "cuaca_ekstrem-sesudah-002",
+    "hazard": "cuaca_ekstrem",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Laporkan kerusakan listrik atau gas",
+    "body": "Laporkan kerusakan listrik atau gas kepada pihak berwenang.",
+    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "cuaca_ekstrem-sesudah-003",
+    "hazard": "cuaca_ekstrem",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "rendah",
+    "darurat": false,
+    "title": "Lanjutkan perjalanan hati-hati",
+    "body": "Jika sedang dalam perjalanan, lanjutkan dengan hati-hati.",
+    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  }
+]

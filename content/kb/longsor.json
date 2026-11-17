@@ -1,0 +1,210 @@
+[
+  {
+    "id": "longsor-sebelum-001",
+    "hazard": "longsor",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Hindari lereng rawan",
+    "body": "Hindari membangun rumah di daerah rawan longsor.",
+    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "longsor-sebelum-002",
+    "hazard": "longsor",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "rendah",
+    "darurat": false,
+    "title": "Kurangi kemiringan lereng",
+    "body": "Kurangi kemiringan lereng di sekitar rumah bila memungkinkan, sebaiknya dengan arahan ahli.",
+    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "longsor-sebelum-003",
+    "hazard": "longsor",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Jaga drainase tidak tersumbat",
+    "body": "Pastikan saluran air dan drainase di sekitar lereng tidak tersumbat.",
+    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "longsor-sebelum-004",
+    "hazard": "longsor",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "rendah",
+    "darurat": false,
+    "title": "Tanam pohon berakar kuat",
+    "body": "Tanam pohon berakar kuat di lereng dan jangan menebang hutan sembarangan.",
+    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "longsor-sebelum-005",
+    "hazard": "longsor",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Waspada saat hujan lebat",
+    "body": "Tingkatkan kewaspadaan saat hujan lebat, terutama bila tinggal di dekat lereng atau tebing.",
+    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "longsor-sebelum-006",
+    "hazard": "longsor",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": true,
+    "title": "Kenali tanda-tanda longsor",
+    "body": "Waspadai retakan vertikal di tebing, munculnya air tanah tiba-tiba, air sumur yang keruh, dan batu kecil yang mulai berjatuhan.",
+    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "longsor-sebelum-007",
+    "hazard": "longsor",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "rendah",
+    "darurat": false,
+    "title": "Bangun dengan fondasi kuat dan tanah padat",
+    "body": "Bila membangun di sekitar lereng, gunakan fondasi yang kuat dan padatkan tanah di sekitar rumah dengan arahan ahli.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 41-42",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "longsor-sebelum-008",
+    "hazard": "longsor",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Kenali daerah rawan longsor",
+    "body": "Kenali daerah rawan longsor di sekitar tempat tinggal Anda dan ketahui zona evakuasi yang telah ditentukan.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 42-44",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "longsor-sebelum-009",
+    "hazard": "longsor",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "rendah",
+    "darurat": false,
+    "title": "Buat terasering dengan drainase yang tepat",
+    "body": "Terasering dengan sistem drainase yang tepat membantu mengurangi risiko longsor pada lereng di sekitar rumah.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 41",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "longsor-saat-001",
+    "hazard": "longsor",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": true,
+    "title": "Menjauh dari suara gemuruh longsoran",
+    "body": "Segera menjauh dari suara gemuruh dan dari arah datangnya longsoran.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 44",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "longsor-saat-002",
+    "hazard": "longsor",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": true,
+    "title": "Jauhi area yang baru longsor",
+    "body": "Hindari wilayah yang baru longsor karena tanahnya labil.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 44",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "longsor-saat-003",
+    "hazard": "longsor",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": true,
+    "title": "Ikuti sirine ke zona evakuasi",
+    "body": "Bila sirine peringatan longsor berbunyi, segera menuju zona evakuasi yang telah ditentukan.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 44",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "longsor-saat-004",
+    "hazard": "longsor",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": true,
+    "title": "Waspada longsor susulan saat hujan",
+    "body": "Bila hujan turun setelah longsor terjadi, waspadai longsor susulan.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 44",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  }
+]

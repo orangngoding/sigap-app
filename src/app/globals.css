@@ -1,0 +1,176 @@
+
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  /* Base colors */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+
+  /* Semantic colors */
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-danger: var(--danger);
+  --color-danger-foreground: var(--danger-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+
+  /* Hazard accent colors */
+  --color-hazard-flood: var(--hazard-flood);
+  --color-hazard-landslide: var(--hazard-landslide);
+  --color-hazard-earthquake: var(--hazard-earthquake);
+  --color-hazard-extreme-weather: var(--hazard-extreme-weather);
+  --color-hazard-tsunami: var(--hazard-tsunami);
+  --color-hazard-drought: var(--hazard-drought);
+  --color-hazard-wildfire: var(--hazard-wildfire);
+  --color-hazard-volcano: var(--hazard-volcano);
+  --color-hazard-coastal: var(--hazard-coastal);
+
+  /* Fonts */
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-geist-sans);
+
+  /* shadcn/ui colors */
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  /* Sidebar */
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Charts */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* Radius */
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  /* SIGAP base palette */
+  --primary: #0F766E;
+  --primary-foreground: #FFFFFF;
+
+  --background: #FAFAF7;
+  --surface: #FFFFFF;
+  --foreground: #1A1A17;
+  --text: #1A1A17;
+  --text-muted: #5C5C55;
+  --border: #E4E4DC;
+
+  /* Component colors */
+  --card: #FFFFFF;
+  --card-foreground: #1A1A17;
+  --popover: #FFFFFF;
+  --popover-foreground: #1A1A17;
+
+  --secondary: #F1F1EB;
+  --secondary-foreground: #1A1A17;
+  --muted: #F1F1EB;
+  --muted-foreground: #5C5C55;
+  --accent: #E8F3F1;
+  --accent-foreground: #134E4A;
+
+  /* Status colors */
+  --warning: #FEF3C7;
+  --warning-foreground: #92400E;
+
+  --danger: #FEE2E2;
+  --danger-foreground: #991B1B;
+  --destructive: #B91C1C;
+
+  --success: #DCFCE7;
+  --success-foreground: #166534;
+
+  --info: #DBEAFE;
+  --info-foreground: #1E40AF;
+
+  --input: #E4E4DC;
+  --ring: #0F766E;
+
+  /* Hazard accents */
+  --hazard-flood: #1D4ED8;
+  --hazard-landslide: #78350F;
+  --hazard-earthquake: #6D28D9;
+  --hazard-extreme-weather: #0E7490;
+  --hazard-tsunami: #0369A1;
+  --hazard-drought: #A16207;
+  --hazard-wildfire: #C2410C;
+  --hazard-volcano: #57534E;
+  --hazard-coastal: #4338CA;
+
+  /* Charts */
+  --chart-1: #0F766E;
+  --chart-2: #1D4ED8;
+  --chart-3: #6D28D9;
+  --chart-4: #0E7490;
+  --chart-5: #A16207;
+
+  /* Layout */
+  --radius: 0.75rem;
+
+  /* Sidebar */
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: #1A1A17;
+  --sidebar-primary: #0F766E;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #E8F3F1;
+  --sidebar-accent-foreground: #134E4A;
+  --sidebar-border: #E4E4DC;
+  --sidebar-ring: #0F766E;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    @apply font-sans;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}

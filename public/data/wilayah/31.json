@@ -1,0 +1,11 @@
+{
+  "kode": "31",
+  "nama": "DKI Jakarta",
+  "kabKota": [
+    { "kode": "31.71", "nama": "Kota Administrasi Jakarta Pusat",
+      "kecamatan": [
+        { "kode": "31.71.01", "nama": "Gambir",
+          "kelurahan": [ { "kode": "31.71.01.1001", "nama": "Gambir", "lat": -6.1700, "lon": 106.8228 } ] }
+      ] }
+  ]
+}

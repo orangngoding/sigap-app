@@ -1,0 +1,258 @@
+[
+  {
+    "id": "gempa-sebelum-001",
+    "hazard": "gempa",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "rendah",
+    "darurat": false,
+    "title": "Ikuti sosialisasi dan simulasi",
+    "body": "Ikuti sosialisasi dan simulasi kesiapsiagaan gempa di lingkungan Anda.",
+    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "gempa-sebelum-002",
+    "hazard": "gempa",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Ikat perabot ke dinding",
+    "body": "Pasang perabot ke dinding dan ikat benda yang menggantung agar tidak jatuh saat guncangan.",
+    "sourceTitle": "Antisipasi Gempa Bumi (BMKG)",
+    "sourceUrl": "https://www.bmkg.go.id/gempabumi/mitigasi/antisipasi-gempabumi",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "gempa-sebelum-003",
+    "hazard": "gempa",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Taruh benda berat di bawah",
+    "body": "Letakkan benda berat di bagian bawah dan periksa benda menggantung seperti lampu.",
+    "sourceTitle": "Antisipasi Gempa Bumi (BMKG)",
+    "sourceUrl": "https://www.bmkg.go.id/gempabumi/mitigasi/antisipasi-gempabumi",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "gempa-sebelum-004",
+    "hazard": "gempa",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Periksa lokasi dan struktur rumah",
+    "body": "Pastikan rumah tidak berada di area rawan longsor atau likuefaksi, dan perbaiki struktur bangunan yang lemah.",
+    "sourceTitle": "Antisipasi Gempa Bumi (BMKG)",
+    "sourceUrl": "https://www.bmkg.go.id/gempabumi/mitigasi/antisipasi-gempabumi",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "gempa-sebelum-005",
+    "hazard": "gempa",
+    "phase": "sebelum",
+    "audience": [
+      "umum"
+    ],
+    "priority": "rendah",
+    "darurat": false,
+    "title": "Matikan air, gas, listrik saat tak dipakai",
+    "body": "Matikan air, gas, dan listrik saat tidak dipakai untuk mengurangi risiko kebakaran setelah gempa.",
+    "sourceTitle": "Antisipasi Gempa Bumi (BMKG)",
+    "sourceUrl": "https://www.bmkg.go.id/gempabumi/mitigasi/antisipasi-gempabumi",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "gempa-saat-001",
+    "hazard": "gempa",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": true,
+    "title": "Lindungi kepala di dalam bangunan",
+    "body": "Lindungi kepala dan badan, misalnya dengan berlindung di bawah meja, lalu keluar bila memungkinkan.",
+    "sourceTitle": "Antisipasi Gempa Bumi (BMKG)",
+    "sourceUrl": "https://www.bmkg.go.id/gempabumi/mitigasi/antisipasi-gempabumi",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "gempa-saat-002",
+    "hazard": "gempa",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": true,
+    "title": "Matikan kompor",
+    "body": "Jika tidak ada meja, lindungi kepala dengan bantal. Matikan kompor bila aman melakukannya.",
+    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "gempa-saat-003",
+    "hazard": "gempa",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": true,
+    "title": "Jauhi gedung, tiang, dan pohon",
+    "body": "Jika di luar, menjauh dari gedung, tiang listrik, dan pohon, serta waspada terhadap retakan tanah.",
+    "sourceTitle": "Antisipasi Gempa Bumi (BMKG)",
+    "sourceUrl": "https://www.bmkg.go.id/gempabumi/mitigasi/antisipasi-gempabumi",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "gempa-saat-004",
+    "hazard": "gempa",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": true,
+    "title": "Berhenti di tempat terbuka",
+    "body": "Jika di dalam mobil, berhenti di tempat terbuka dan jauh dari persimpangan.",
+    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "gempa-saat-005",
+    "hazard": "gempa",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": true,
+    "title": "Jangan pakai lift",
+    "body": "Jangan menggunakan lift saat atau segera setelah gempa.",
+    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "gempa-saat-006",
+    "hazard": "gempa",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": true,
+    "title": "Menuju dataran tinggi bila ada tanda tsunami",
+    "body": "Di pantai, segera menuju dataran tinggi jika tanda tsunami muncul.",
+    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "gempa-saat-007",
+    "hazard": "gempa",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": true,
+    "title": "Hindari lereng saat di pegunungan",
+    "body": "Di daerah pegunungan, menjauh dari area yang berpotensi longsor.",
+    "sourceTitle": "Antisipasi Gempa Bumi (BMKG)",
+    "sourceUrl": "https://www.bmkg.go.id/gempabumi/mitigasi/antisipasi-gempabumi",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "gempa-sesudah-001",
+    "hazard": "gempa",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Keluar lewat tangga biasa",
+    "body": "Keluar dengan tertib melalui tangga biasa, bukan lift atau tangga berjalan.",
+    "sourceTitle": "Antisipasi Gempa Bumi (BMKG)",
+    "sourceUrl": "https://www.bmkg.go.id/gempabumi/mitigasi/antisipasi-gempabumi",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "gempa-sesudah-002",
+    "hazard": "gempa",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Periksa api dan kebocoran gas",
+    "body": "Periksa kebakaran, kebocoran gas, dan korsleting. Matikan listrik dan jangan menyalakan api.",
+    "sourceTitle": "Antisipasi Gempa Bumi (BMKG)",
+    "sourceUrl": "https://www.bmkg.go.id/gempabumi/mitigasi/antisipasi-gempabumi",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "gempa-sesudah-003",
+    "hazard": "gempa",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Jangan masuk bangunan yang rusak",
+    "body": "Jangan masuk ke bangunan yang terdampak gempa karena berisiko runtuh.",
+    "sourceTitle": "Antisipasi Gempa Bumi (BMKG)",
+    "sourceUrl": "https://www.bmkg.go.id/gempabumi/mitigasi/antisipasi-gempabumi",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "gempa-sesudah-004",
+    "hazard": "gempa",
+    "phase": "sesudah",
+    "audience": [
+      "umum"
+    ],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Waspadai gempa susulan",
+    "body": "Hindari berjalan di sekitar area terdampak karena gempa susulan masih mungkin terjadi.",
+    "sourceTitle": "Antisipasi Gempa Bumi (BMKG)",
+    "sourceUrl": "https://www.bmkg.go.id/gempabumi/mitigasi/antisipasi-gempabumi",
+    "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  }
+]

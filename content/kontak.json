@@ -1,0 +1,27 @@
+{
+  "diperbarui": "2026-11-16",
+  "perluVerifikasi": true,
+  "catatan": "Nomor layanan darurat nasional. Verifikasi ke sumber pemerintah sebelum dirilis.",
+  "kontak": [
+    {
+      "nama": "Panggilan darurat terpadu",
+      "nomor": "112"
+    },
+    {
+      "nama": "Polisi",
+      "nomor": "110"
+    },
+    {
+      "nama": "Pemadam kebakaran",
+      "nomor": "113"
+    },
+    {
+      "nama": "Basarnas (SAR)",
+      "nomor": "115"
+    },
+    {
+      "nama": "Ambulans",
+      "nomor": "119"
+    }
+  ]
+}
