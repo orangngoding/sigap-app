@@ -3,7 +3,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   BookOpen,
   ClipboardList,
@@ -55,6 +55,24 @@ const moreNavigation = [
 export function MobileBottomNav() {
   const pathname = usePathname();
   const [isMoreOpen, setIsMoreOpen] = useState(false);
+  const navRef = useRef<HTMLElement>(null);
+
+  // Tutup menu "Lainnya" saat pengguna mengetuk di luar navigasi atau menekan Esc.
+  useEffect(() => {
+    if (!isMoreOpen) return;
+    const tutupLuar = (e: PointerEvent) => {
+      if (!navRef.current?.contains(e.target as Node)) setIsMoreOpen(false);
+    };
+    const tutupEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsMoreOpen(false);
+    };
+    document.addEventListener("pointerdown", tutupLuar);
+    document.addEventListener("keydown", tutupEsc);
+    return () => {
+      document.removeEventListener("pointerdown", tutupLuar);
+      document.removeEventListener("keydown", tutupEsc);
+    };
+  }, [isMoreOpen]);
 
 
   function isActive(href: string) {
@@ -71,6 +89,7 @@ export function MobileBottomNav() {
 
   return (
     <nav
+      ref={navRef}
       aria-label="Navigasi bawah"
       className="fixed inset-x-0 bottom-0 z-50 border-t border-border bg-surface pb-[env(safe-area-inset-bottom)] md:hidden"
     >
@@ -83,6 +102,7 @@ export function MobileBottomNav() {
             <Link
               key={item.href}
               href={item.href}
+              onClick={() => setIsMoreOpen(false)}
               aria-current={active ? "page" : undefined}
               className={`flex flex-col items-center justify-center gap-1 text-xs transition-colors ${
                 active

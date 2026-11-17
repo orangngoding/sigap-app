@@ -126,7 +126,7 @@ export function KartuView() {
                 a.href = url;
                 a.download = namaBerkasKartu(lokasi.kelurahan);
                 a.click();
-                URL.revokeObjectURL(url);
+                setTimeout(() => URL.revokeObjectURL(url), 1000); // dicabut langsung dapat membatalkan unduhan di Safari
                 toast(terpangkas ? "PDF diunduh, tetapi sebagian isi dipangkas agar muat satu halaman. Pilih A4 agar lengkap." : "Kartu Siaga diunduh sebagai PDF.");
               } catch {
                 toast("PDF belum berhasil dibuat. Coba tombol Cetak lalu pilih Simpan sebagai PDF.");

@@ -245,7 +245,7 @@ export async function susunRencana(m: RencanaRequestT, d: DepsRencana): Promise<
   const tas = hitungTas(profil);
   const sorotan = sorotanDariRingkasan(m.ringkasanData);
   const kunci = hashMasukan(
-    `${m.lokasi.provinsi}|${m.lokasi.kabKota}|${m.lokasi.kecamatan}|${m.lokasi.kelurahan}|${kunciHari(sekarang)}|${sorotan.length}`,
+    `${m.lokasi.provinsi}|${m.lokasi.kabKota}|${m.lokasi.kecamatan}|${m.lokasi.kelurahan}|${kunciHari(sekarang)}|hujan:${Number(!!m.ringkasanData?.hujanLebat48j)}|gempa:${Number(!!m.ringkasanData?.gempaDekat24j)}`,
     profil,
   );
 

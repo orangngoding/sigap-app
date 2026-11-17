@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowRight, LocateFixed } from "lucide-react";
 import type { Lokasi } from "@/types";
 import { kabKotaTerdekat, type KabKotaRingkas } from "@/lib/geo/terdekat";
@@ -28,6 +28,7 @@ export function WilayahPicker({ onSubmit }: { onSubmit: (l: Lokasi) => void }) {
   const [loadingProv, setLoadingProv] = useState(false);
   const [mencari, setMencari] = useState(false);
   const [info, setInfo] = useState<string | null>(null);
+  const permintaanProv = useRef(0);
 
   useEffect(() => {
     fetch("/data/wilayah/provinsi.json")
@@ -37,17 +38,21 @@ export function WilayahPicker({ onSubmit }: { onSubmit: (l: Lokasi) => void }) {
   }, []);
 
   async function pilihProvinsi(kode: string, kabAwal: string | null = null) {
+    // Hanya permintaan terakhir yang boleh mengisi state; jawaban lama yang datang belakangan diabaikan.
+    const id = ++permintaanProv.current;
     setKab(kabAwal); setKec(null); setKel(null); setError(null); setLoadingProv(true);
     try {
       const r = await fetch(`/data/wilayah/${kode}.json`); // dimuat malas per provinsi
       if (!r.ok) throw new Error();
-      setProv((await r.json()) as Prov);
+      const data = (await r.json()) as Prov;
+      if (id === permintaanProv.current) setProv(data);
     } catch {
+      if (id !== permintaanProv.current) return;
       setProv(null);
       setKab(null);
       setError("Data provinsi ini belum dapat dimuat. Coba lagi.");
     } finally {
-      setLoadingProv(false);
+      if (id === permintaanProv.current) setLoadingProv(false);
     }
   }
 

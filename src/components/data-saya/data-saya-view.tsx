@@ -5,6 +5,7 @@ import { Download, Trash2 } from "lucide-react";
 import { toast } from "@/lib/toast";
 import { StatusBanner } from "@/components/global/status-banner";
 import { useHydrate } from "@/hooks/use-hydrate";
+import { finalisasiProfil } from "@/lib/preparedness/profil-schema";
 import { useKartuStore } from "@/stores/kartu-store";
 import { useLokasiStore } from "@/stores/lokasi-store";
 import { useProfilStore } from "@/stores/profil-store";
@@ -72,13 +73,14 @@ export function DataSayaView() {
     a.href = url;
     a.download = "data-sigap.json";
     a.click();
-    URL.revokeObjectURL(url);
+    setTimeout(() => URL.revokeObjectURL(url), 1000); // dicabut langsung dapat membatalkan unduhan di Safari
     toast("Data diekspor sebagai data-sigap.json.");
   };
 
   const baris: Array<[string, string]> = [
     ["Lokasi", lokasi ? `${lokasi.kelurahan}, ${lokasi.kecamatan}, ${lokasi.kabKota}` : "Belum dipilih"],
-    ["Profil keluarga", profil.bahaya.length > 0 ? `${profil.jumlahAnggota} anggota, ${profil.bahaya.length} bahaya dipilih` : "Belum diisi"],
+    // Profil awal sudah berisi bahaya bawaan, jadi "terisi" berarti semua langkah wizard sudah valid.
+    ["Profil keluarga", finalisasiProfil(profil) ? `${profil.jumlahAnggota} anggota, ${profil.bahaya.length} bahaya dipilih` : "Belum diisi lengkap"],
     ["Rencana siaga", rencana ? `Tersimpan (${rencana.mode === "ai" ? "dengan bantuan AI" : "tanpa AI"})` : "Belum ada"],
     ["Progres", selesaiCentang > 0 ? `${selesaiCentang} butir ditandai selesai` : "Belum ada"],
     ["Perkiraan ukuran data", siap ? `${ukuranKb(kumpulkanData())} KB di perangkat ini` : "Menghitung"],

@@ -53,7 +53,7 @@ export function useSusunRencana(lokasi: Lokasi | null, anon: ProfilAnonim | null
       const timer = setTimeout(() => c.abort(), BATAS_WAKTU_KLIEN);
       setStatus("menyusun");
       setAlasan(undefined);
-      catatPenyusunan();
+      if (!otomatis) catatPenyusunan(); // penyusunan otomatis tidak memakan jatah "Susun ulang" pengguna
       try {
         const res = await fetch("/api/rencana", {
           method: "POST",

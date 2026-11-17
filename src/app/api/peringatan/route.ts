@@ -5,7 +5,7 @@ import { cachedWithStale } from "@/lib/http/server-cache";
 import { enforceRateLimit } from "@/lib/ratelimit/ratelimit";
 import { fetchPeringatan } from "@/lib/data/peringatan";
 
-const nama = z.string().trim().min(2).max(60).regex(/^[\p{L}0-9 .,'\-]+$/u);
+const nama = z.string().trim().min(2).max(60).regex(/^[\p{L}0-9 .,'()/\-]+$/u); // dataset memuat mis. "Tiro/Truseb", "Misool (Misool Utara)"
 const Query = z.object({ provinsi: nama, kabKota: nama.optional(), kecamatan: nama.optional() });
 
 export async function GET(req: Request) {
