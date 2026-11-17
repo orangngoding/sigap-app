@@ -10,7 +10,7 @@
     "validate:content": "tsx scripts/validate-content.ts",
     "build:content": "tsx scripts/build-content.ts",
     "test:unit": "tsx tests/unit/core.test.ts && tsx tests/unit/rencana.test.ts && tsx tests/unit/data.test.ts && tsx tests/unit/ai.test.ts && tsx tests/unit/kartu.test.ts && tsx tests/unit/geo.test.ts && tsx tests/unit/bmkg.test.ts && tsx tests/unit/pdf.test.ts",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "next typegen && tsc --noEmit",
     "eval:ai": "tsx scripts/evaluasi-ai.ts"
   },
   "dependencies": {
