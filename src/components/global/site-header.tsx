@@ -1,90 +1,43 @@
-
 import Link from "next/link";
-import {
-  BookOpen,
-  ClipboardList,
-  MapPin,
-  MessageCircle,
-  ShieldAlert,
-} from "lucide-react";
-
-const navigation = [
-  {
-    label: "Lokasi",
-    href: "/lokasi",
-    icon: MapPin,
-  },
-  {
-    label: "Rencana",
-    href: "/rencana",
-    icon: ClipboardList,
-  },
-  {
-    label: "Tanya",
-    href: "/tanya",
-    icon: MessageCircle,
-  },
-  {
-    label: "Pustaka",
-    href: "/pustaka",
-    icon: BookOpen,
-  },
-];
+import { Suspense } from "react";
+import { Lock, ShieldAlert } from "lucide-react";
+import { NavUtama } from "./nav-utama";
+import { Logo } from "./logo";
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-surface">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        {/* Logo */}
-        <Link
-          href="/"
-          className="flex shrink-0 items-center gap-2"
-          aria-label="SIGAP - Beranda"
-        >
-          <span className="flex size-9 items-center justify-center rounded-xl bg-primary text-primary-foreground">
-            <ShieldAlert className="size-5" aria-hidden="true" />
-          </span>
-
-          <span className="flex flex-col leading-tight">
-            <span className="text-lg font-bold tracking-tight text-foreground">
-              SIGAP
-            </span>
-            <span className="hidden text-[10px] text-muted-foreground sm:block">
-              Siaga dan Tanggap Bencana
-            </span>
-          </span>
+    <header className="tanpa-cetak kaca sticky top-0 z-50 w-full border-b border-border/70">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+        <Link href="/" className="group flex shrink-0 items-center rounded-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary" aria-label="SIGAP - Beranda">
+          <Logo />
         </Link>
 
-        {/* Navigasi Desktop */}
-        <nav
-          aria-label="Navigasi utama"
-          className="hidden items-center gap-6 md:flex"
+        {/* usePathname pada rute dinamis memerlukan Suspense saat Cache Components aktif. */}
+        <Suspense fallback={<div className="hidden flex-1 md:block" />}>
+          <NavUtama />
+        </Suspense>
+
+        <div className="flex items-center gap-2">
+        <Link
+          href="/data-saya"
+          className="hidden min-h-10 items-center gap-1.5 rounded-xl px-3 text-sm font-semibold text-muted-foreground hover:bg-muted hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary lg:inline-flex"
+          title="Data & privasi: lihat, pindahkan, atau hapus data Anda"
         >
-          {navigation.map((item) => {
-            const Icon = item.icon;
-
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-              >
-                <Icon className="size-4" aria-hidden="true" />
-                {item.label}
-              </Link>
-            );
-          })}
-        </nav>
-
-        {/* Tombol Mode Darurat */}
+          <Lock className="size-4" aria-hidden="true" /> Data &amp; privasi
+        </Link>
         <Link
           href="/darurat"
-          className="inline-flex min-h-10 items-center justify-center gap-2 rounded-lg bg-destructive px-3 text-sm font-semibold text-white transition-colors hover:bg-red-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-destructive sm:px-4"
+          className="inline-flex min-h-10 items-center justify-center gap-2 rounded-xl bg-destructive px-3 text-sm font-bold text-white shadow-sm shadow-red-900/20 hover:bg-red-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-destructive sm:px-4"
           aria-label="Buka Mode Darurat"
         >
-          <ShieldAlert className="size-5 shrink-0" aria-hidden="true" />
+          <span className="relative flex size-2.5" aria-hidden="true">
+            <span className="absolute inline-flex size-full animate-ping rounded-full bg-white/70 motion-reduce:animate-none" />
+            <span className="relative inline-flex size-2.5 rounded-full bg-white" />
+          </span>
           <span className="hidden sm:inline">Mode Darurat</span>
+          <ShieldAlert className="size-5 shrink-0 sm:hidden" aria-hidden="true" />
         </Link>
+        </div>
       </div>
     </header>
   );

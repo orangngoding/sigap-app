@@ -42,6 +42,26 @@ export function bersihkanTeks(teks: string): string {
     .trim();
 }
 
+/**
+ * Untuk jawaban percakapan: seperti `bersihkanTeks`, tetapi format ringan dipertahankan (baris baru, poin "- ",
+ * langkah "1. ", dan **tebal**) agar UI dapat merendernya sebagai teks yang aman.
+ */
+export function bersihkanTeksChat(teks: string): string {
+  return teks
+    .replace(/\r\n?/g, "\n")
+    .replace(/<[^>]*>/g, " ")
+    .replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/g, "")
+    .replace(/\[([^\]]+)\]\((?:[^)]*)\)/g, "$1") // tautan markdown -> teksnya saja
+    .replace(/^\s{0,3}#{1,6}\s*/gm, "") // judul markdown
+    .replace(/^\s*[*•]\s+/gm, "- ") // poin seragam
+    .replace(/`+/g, "")
+    .replace(/__([^_]+)__/g, "**$1**")
+    .replace(/[ \t]+/g, " ")
+    .replace(/ *\n */g, "\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
+
 /** Kalimat penafian yang disalin model dari instruksi; UI sudah menampilkan penafian sendiri. */
 const POLA_PENAFIAN = [
   /\b(keluaran|jawaban|informasi|penjelasan) ini bukan pengganti arahan\b/i,

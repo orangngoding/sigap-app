@@ -4,6 +4,7 @@ import { RefreshCw } from "lucide-react";
 import type { ApiBase } from "@/types";
 import { SumberBadge } from "@/components/global/sumber-badge";
 import { waktuMutlak } from "@/lib/utils/format";
+import { TombolTanya } from "@/components/tanya/tombol-tanya";
 
 interface Props<T extends ApiBase> {
   title: string;
@@ -15,12 +16,14 @@ interface Props<T extends ApiBase> {
   minHeight?: string;
   /** Kalimat takeaway dibuat kode, bukan AI (Blueprint 6.2) */
   takeaway: (d: T) => string;
+  /** Pertanyaan untuk Asisten tentang data ini (tombol "Tanya Asisten"). */
+  tanya?: (d: T) => string;
   children: (d: T) => React.ReactNode;
 }
 
 /** Kerangka kartu dengan lima keadaan: memuat, berhasil, data lama, galat, kosong (Blueprint 6.4). */
 export function DataCard<T extends ApiBase>({
-  title, icon: Icon, query, officialUrl, minHeight = "min-h-48", takeaway, children,
+  title, icon: Icon, query, officialUrl, minHeight = "min-h-48", takeaway, tanya, children,
 }: Props<T>) {
   const { data, isLoading, isError, refetch, isFetching } = query;
   const judulId = `k-${title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
@@ -70,6 +73,7 @@ export function DataCard<T extends ApiBase>({
             </div>
           )}
           <p className="text-sm font-medium text-foreground">{takeaway(data)}</p>
+          {tanya && <TombolTanya label="Apa artinya bagi keluarga saya?" pertanyaan={tanya(data)} />}
           {children(data)}
           <SumberBadge sumber={data.sumber} />
         </div>

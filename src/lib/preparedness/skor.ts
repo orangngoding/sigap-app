@@ -1,4 +1,5 @@
-import type { Phase } from "@/types";
+import type { HazardId, Phase } from "@/types";
+import { HAZARD_BY_ID } from "@/lib/hazards/hazards";
 import type { ItemTas, Progres, Tindakan } from "@/types/rencana";
 import { BOBOT_PRIORITAS, TINGKAT_SKOR } from "./constants";
 
@@ -7,7 +8,7 @@ export interface ButirSkor {
   key: string; // actionId atau `tas:${id}`
   judul: string;
   bobot: number;
-  phase: Phase | "tas";
+  phase: Phase | "tas" | "latihan";
   urutan: number; // urutan tampil, dipakai sebagai pemutus seri
 }
 
@@ -22,8 +23,9 @@ export interface HasilSkor {
 /**
  * Bangun butir skor: tindakan fase Sebelum dan Saat + semua item tas.
  * Fase Sesudah tidak dihitung karena belum dapat dilakukan sebelum kejadian.
+ * `latihan`: bahaya yang punya skenario Latihan Siaga; lulus latihan = butir `latihan:${hazard}` tercentang.
  */
-export function bangunButir(tindakan: Tindakan[], tas: ItemTas[]): ButirSkor[] {
+export function bangunButir(tindakan: Tindakan[], tas: ItemTas[], latihan: HazardId[] = []): ButirSkor[] {
   const butir: ButirSkor[] = [];
   for (const t of tindakan) {
     if (t.phase === "sesudah") continue;
@@ -31,6 +33,9 @@ export function bangunButir(tindakan: Tindakan[], tas: ItemTas[]): ButirSkor[] {
   }
   for (const i of tas) {
     butir.push({ key: `tas:${i.id}`, judul: `Siapkan ${i.nama.toLowerCase()}`, bobot: i.bobot, phase: "tas", urutan: butir.length });
+  }
+  for (const h of latihan) {
+    butir.push({ key: `latihan:${h}`, judul: `Selesaikan Latihan Siaga ${HAZARD_BY_ID[h].label.toLowerCase()}`, bobot: 2, phase: "latihan", urutan: butir.length });
   }
   return butir;
 }

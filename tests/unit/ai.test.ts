@@ -6,11 +6,11 @@ import { anonimkan } from "@/lib/rencana/hash";
 import { buatProfilContoh } from "@/lib/preparedness/profil-awal";
 import { finalisasiProfil } from "@/lib/preparedness/profil-schema";
 import { RencanaRequest } from "@/lib/ai/schema";
-import { bersihkanTeks, buangPenafian, klasifikasiPertanyaan, lolosPenyaring } from "@/lib/ai/guardrails";
+import { bersihkanTeks, bersihkanTeksChat, buangPenafian, klasifikasiPertanyaan, lolosPenyaring } from "@/lib/ai/guardrails";
 import { GalatProvider, ekstrakJson, type LlmProvider } from "@/lib/ai/provider";
 import { AnggaranHarian, CacheTtl, bacaAnggaran } from "@/lib/ai/runtime";
 import { pilihPassage, susunRencana, type HasilRencana } from "@/lib/ai/rencana";
-import { jawabPertanyaan } from "@/lib/ai/tanya";
+import { BALASAN_AI_TIDAK_TERSEDIA, jawabPertanyaan, type HasilTanya } from "@/lib/ai/tanya";
 import { angkaBaru, terjemahkanPeringatan } from "@/lib/ai/terjemah";
 import { ARTIKEL_RINGKAS } from "@/lib/pustaka/data";
 import { bersihXml, cakupanUntuk, cocokProvinsi, gabungkan, uraiCap, uraiRss } from "@/lib/data/peringatan";
@@ -195,33 +195,83 @@ t("rencana: teks injeksi di profil tidak membuat prompt menyalin instruksi ke ba
   assert.equal((dilihat.match(/<<<AKHIR DATA PROFIL>>>/g) ?? []).length, 1); // penanda tidak dapat dipalsukan
 });
 
-// ---------- Tanya ----------
-t("tanya: penolakan standar tanpa memanggil AI", async () => {
+// ---------- Asisten (Tanya) ----------
+const depsTanya = (providers: LlmProvider[]) => ({ kb: SEMUA_CHUNK, providers, anggaran: new AnggaranHarian(() => 100), cache: new CacheTtl<HasilTanya>(60_000) });
+
+t("asisten: penolakan standar tanpa memanggil AI", async () => {
   let n = 0;
-  const d = { kb: SEMUA_CHUNK, providers: [palsu(() => (n++, "{}"))], ...baru() };
+  const d = depsTanya([palsu(() => (n++, "{}"))]);
   for (const q of ["Kapan banjir akan terjadi?", "Berapa dosis obat demam?", "Di mana lokasi evakuasi terdekat?"]) assert.equal((await jawabPertanyaan(q, undefined, d)).refused, true, q);
   const dr = await jawabPertanyaan("Saya sedang terjebak banjir", undefined, d);
   assert.ok(dr.darurat && dr.jawaban.includes("112"));
   assert.equal(n, 0);
 });
-t("tanya: di luar topik vs tanpa panduan", async () => {
-  const d = { kb: SEMUA_CHUNK, providers: [], ...baru() };
-  assert.equal((await jawabPertanyaan("Bagaimana resep rendang yang enak?", undefined, d)).kategori, "di_luar_topik");
+t("asisten: 'Apa itu BMKG?' tanpa panduan KB tetap dijawab AI dari pengetahuan umum", async () => {
+  let dilihat = "";
+  const d = depsTanya([palsu((u) => ((dilihat = u), JSON.stringify({ jawaban: "BMKG adalah **Badan Meteorologi, Klimatologi, dan Geofisika**.", sourceIds: ["umum-sebelum-001"], saranLanjutan: ["Apa saja layanan BMKG?"], refused: false })))]);
+  const h = await jawabPertanyaan("Apa itu BMKG?", undefined, d);
+  assert.equal(h.mode, "ai");
+  assert.equal(h.refused, false);
+  assert.equal(h.dasar, "umum");
+  assert.ok(h.jawaban.includes("**Badan Meteorologi"));
+  assert.equal(h.sumber.length, 0); // id yang tidak diberikan sebagai passage tidak dipercaya
+  assert.deepEqual(h.saran, ["Apa saja layanan BMKG?"]);
+  assert.ok(dilihat.includes("<<<DATA PERTANYAAN>>>")); // passage (bila ada) hanya bahan; model boleh memakai pengetahuannya
 });
-t("tanya: jawaban AI bersumber; kutipan karangan = cadangan; refused dihormati", async () => {
-  const d = (f: (u: string) => string) => ({ kb: SEMUA_CHUNK, providers: [palsu(f)], ...baru() });
+t("asisten: tanpa AI dan tanpa panduan memberi pesan jujur, bukan menolak", async () => {
+  const h = await jawabPertanyaan("Bagaimana resep rendang yang enak?", undefined, depsTanya([]));
+  assert.equal(h.refused, false);
+  assert.equal(h.mode, "cadangan");
+  assert.equal(h.jawaban, BALASAN_AI_TIDAK_TERSEDIA);
+});
+t("asisten: jawaban AI bersumber; kutipan karangan dibuang; refused dan ramalan dihormati", async () => {
+  const d = (f: (u: string) => string) => depsTanya([palsu(f)]);
   const q = "Apa isi tas siaga keluarga?";
   const idPertama = (u: string) => u.match(/^\[([a-z_]+-\w+-\d{3})\]/m)![1];
   const bagus = await jawabPertanyaan(q, undefined, d((u) => JSON.stringify({ jawaban: "Siapkan dokumen, air, dan senter dalam tas siaga.", sourceIds: [idPertama(u)], refused: false })));
   assert.equal(bagus.mode, "ai");
+  assert.equal(bagus.dasar, "panduan");
   assert.ok(bagus.sumber.length === 1);
   const halu = await jawabPertanyaan(q, undefined, d(() => JSON.stringify({ jawaban: "Siapkan banyak hal penting.", sourceIds: ["x-saat-999"], refused: false })));
-  assert.equal(halu.mode, "cadangan");
-  assert.ok(halu.sumber.length > 0);
-  const tolak = await jawabPertanyaan(q, undefined, d(() => JSON.stringify({ jawaban: "", sourceIds: [], refused: true })));
+  assert.equal(halu.sumber.length, 0);
+  assert.equal(halu.dasar, "umum");
+  const tolak = await jawabPertanyaan(q, undefined, d(() => JSON.stringify({ jawaban: "-", sourceIds: [], refused: true })));
   assert.equal(tolak.refused, true);
-  const prediksi = await jawabPertanyaan(q, undefined, d(() => JSON.stringify({ jawaban: "Banjir pasti terjadi besok, siapkan tas.", sourceIds: ["umum-sebelum-001"], refused: false })));
+  const prediksi = await jawabPertanyaan(q, undefined, d(() => JSON.stringify({ jawaban: "Banjir pasti terjadi besok, siapkan tas.", sourceIds: [], refused: false })));
   assert.equal(prediksi.mode, "cadangan");
+  assert.ok(!prediksi.jawaban.includes("pasti terjadi"));
+});
+t("asisten: riwayat percakapan dan konteks keluarga sampai ke model; pertanyaan berulang dari cache", async () => {
+  let n = 0;
+  let riwayatDilihat: unknown[] = [];
+  let user = "";
+  const p: LlmProvider = {
+    nama: "palsu",
+    hasilJson: async (r) => {
+      n++;
+      riwayatDilihat = r.riwayat ?? [];
+      user = r.user;
+      return JSON.stringify({ jawaban: "Untuk lansia, siapkan kacamata cadangan.", sourceIds: [], refused: false });
+    },
+  };
+  const d = depsTanya([p]);
+  const m = {
+    riwayat: [
+      { peran: "asisten" as const, teks: "sapaan yang harus dibuang" },
+      { peran: "pengguna" as const, teks: "Apa isi tas siaga?" },
+      { peran: "asisten" as const, teks: "Air, makanan, senter." },
+    ],
+    konteks: { lansia: 1, jumlahAnggota: 4, wilayah: "Kramat Jati, Jakarta Timur" },
+  };
+  await jawabPertanyaan("Kalau untuk lansia?", m, d);
+  assert.equal(riwayatDilihat.length, 2); // dimulai dari giliran pengguna
+  assert.ok(user.includes("1 lansia") && user.includes("Kramat Jati"));
+  await jawabPertanyaan("Kalau untuk lansia?", m, d);
+  assert.equal(n, 1);
+});
+t("asisten: format ringan dipertahankan, markup berbahaya dibuang", () => {
+  const s = bersihkanTeksChat("## Judul\n* satu\n* dua <script>x</script>\n\n\n1. langkah [BMKG](https://x.y)");
+  assert.equal(s, "Judul\n- satu\n- dua x\n\n1. langkah BMKG");
 });
 
 // ---------- Terjemah ----------

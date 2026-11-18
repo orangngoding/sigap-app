@@ -1,10 +1,20 @@
 "use client";
-import Link from "next/link";
 import { BellRing, ExternalLink } from "lucide-react";
 import type { Lokasi, PeringatanResponse } from "@/types";
 import { useDataCard, TTL } from "@/hooks/use-data-card";
 import { waktuMutlak } from "@/lib/utils/format";
 import { DataCard } from "./data-card";
+import { useAsistenUi } from "@/stores/asisten-ui-store";
+
+/** Buka panel Asisten dan jelaskan teks peringatan resmi ini dengan bahasa sederhana. */
+function TombolJelaskan({ teks }: { teks: string }) {
+  const jelaskan = useAsistenUi((s) => s.jelaskan);
+  return (
+    <button type="button" onClick={() => jelaskan(teks)} className="font-semibold text-primary underline underline-offset-2">
+      Jelaskan untuk saya
+    </button>
+  );
+}
 
 const RESMI = "https://www.bmkg.go.id/peringatan-dini";
 
@@ -30,7 +40,8 @@ export function PeringatanCard({ lokasi }: { lokasi: Pick<Lokasi, "adm4" | "prov
   const qs = new URLSearchParams({ provinsi: lokasi.provinsi, kabKota: lokasi.kabKota, kecamatan: lokasi.kecamatan }).toString();
   const query = useDataCard<PeringatanResponse>("peringatan", lokasi.adm4, `/api/peringatan?${qs}`, TTL.peringatan);
   return (
-    <DataCard title="Peringatan Dini" icon={BellRing} query={query} officialUrl={RESMI} minHeight="min-h-40" takeaway={takeawayPeringatan}>
+    <DataCard title="Peringatan Dini" icon={BellRing} query={query} officialUrl={RESMI} minHeight="min-h-40" takeaway={takeawayPeringatan}
+      tanya={(d) => (d.daftar[0] ? `Apa arti peringatan dini BMKG "${d.daftar[0].judul}" untuk keluarga saya dan apa yang perlu disiapkan?` : "Apa itu peringatan dini cuaca BMKG dan bagaimana cara memantaunya?")}>
       {(d) => (
         <div className="space-y-3 text-sm">
           {d.daftar.slice(0, 3).map((p) => (
@@ -43,9 +54,7 @@ export function PeringatanCard({ lokasi }: { lokasi: Pick<Lokasi, "adm4" | "prov
               </p>
               <p className="mt-2">{p.ringkasan}</p>
               <div className="mt-2 flex flex-wrap items-center gap-3">
-                <Link href="/tanya?tab=terjemah" onClick={() => siapkanPenjelasan(p.teks)} className="font-semibold text-primary underline underline-offset-2">
-                  Jelaskan untuk saya
-                </Link>
+                <TombolJelaskan teks={p.teks} />
                 <a href={p.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-primary underline underline-offset-2">
                   Teks resmi <ExternalLink className="size-3.5" aria-hidden="true" />
                 </a>

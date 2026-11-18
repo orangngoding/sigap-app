@@ -21,6 +21,7 @@ export function GempaCard({ lat, lon }: { lat: number; lon: number }) {
     <DataCard
       title="Gempa Bumi" icon={Activity} query={query} minHeight="min-h-64"
       officialUrl="https://www.bmkg.go.id/gempabumi/gempabumi-terkini.bmkg" takeaway={takeawayGempa}
+      tanya={(d) => `Data gempa BMKG: ${takeawayGempa(d)} Apa artinya bagi keluarga saya dan apa yang perlu saya lakukan untuk bersiap?`}
     >
       {(d) => (
         <div className="space-y-3 text-sm">

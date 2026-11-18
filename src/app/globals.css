@@ -35,9 +35,12 @@
   --color-hazard-coastal: var(--hazard-coastal);
 
   /* Fonts */
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-jakarta);
   --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-geist-sans);
+  --font-heading: var(--font-jakarta);
+  --color-ink: var(--ink);
+  --color-ink-foreground: var(--ink-foreground);
+  --color-ink-muted: var(--ink-muted);
 
   /* shadcn/ui colors */
   --color-primary: var(--primary);
@@ -90,7 +93,11 @@
   --primary: #0F766E;
   --primary-foreground: #FFFFFF;
 
-  --background: #FAFAF7;
+  --background: #F7F8F5;
+  /* Teal sangat gelap untuk pita gelap, hero foto, dan footer */
+  --ink: #08201F;
+  --ink-foreground: #F2F7F5;
+  --ink-muted: #A8BDB8;
   --surface: #FFFFFF;
   --foreground: #1A1A17;
   --text: #1A1A17;
@@ -176,16 +183,71 @@
 }
 
 /* Gaya cetak bersama (Blueprint 8.4 dan 16.6): navigasi dan tombol disembunyikan, hitam putih, tanpa latar. */
+/* Gaya cetak bersama (Blueprint 8.4 dan 16.6). Yang disembunyikan hanya bagian situs bertanda .tanpa-cetak
+   (header, footer, navigasi bawah, tombol). Animasi, bayangan, kaca, dan gradasi dimatikan agar tidak ada
+   isi yang tercetak transparan atau berbayang; kepala halaman bergambar dicetak polos hitam putih. */
 @media print {
-  header,
-  footer,
-  nav,
+  @page { margin: 16mm 14mm; }
   .tanpa-cetak {
     display: none !important;
   }
-  body {
+  html, body {
     background: #fff !important;
     color: #000 !important;
+  }
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  /* Elemen beranimasi masuk/muncul selalu utuh di kertas. */
+  [data-muncul], [data-masuk], .halaman-masuk {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .cetak-polos {
+    background: #fff !important;
+    color: #000 !important;
+    min-height: 0 !important;
+    padding: 0 0 8mm !important;
+    border-bottom: 2px solid #000 !important;
+    border-radius: 0 !important;
+  }
+  .cetak-polos img,
+  .cetak-polos [aria-hidden="true"] {
+    display: none !important;
+  }
+  .cetak-polos * {
+    color: #000 !important;
+    background: transparent !important;
+    -webkit-text-fill-color: #000 !important;
+  }
+  .cetak-polos > div {
+    padding: 0 !important;
+  }
+  /* Panel gelap (Iklim 2050): kotak putih bergaris; angka animasi tetap tampil. */
+  .cetak-panel {
+    background: #fff !important;
+    border: 1px solid #000 !important;
+    padding: 6mm !important;
+  }
+  .cetak-panel * {
+    color: #000 !important;
+    -webkit-text-fill-color: #000 !important;
+    background: transparent !important;
+  }
+  .cetak-panel .pointer-events-none {
+    display: none !important;
+  }
+  /* Recharts tidak mengukur ulang saat cetak: perkecil grafik selebar layar agar muat di kertas. */
+  .cetak-grafik {
+    zoom: 0.6;
+  }
+  .cetak-grafik .recharts-tooltip-wrapper {
+    display: none !important;
   }
   a {
     color: #000 !important;
@@ -194,8 +256,260 @@
   details > summary {
     list-style: none;
   }
-  section,
-  li {
+  /* Bagian panjang boleh terpotong antarhalaman; butir dan kartu kecil tidak. */
+  li, figure, table, .cetak-utuh {
     break-inside: avoid;
   }
+  h1, h2, h3 {
+    break-after: avoid;
+  }
+  main {
+    padding: 0 !important;
+  }
+}
+
+/* ---------- Lapisan gerak (Tahap 4) ----------
+   Prinsip: hero masuk sekali saat dimuat; kontrol menjawab penunjuk (naik 2px, tekan saat klik);
+   tidak ada animasi karena scroll; semua berhenti bila pengguna memilih "kurangi gerakan". */
+@layer components {
+  /* Tombol dan tautan bergaya tombol: sedikit mengecil saat ditekan. */
+  :where(button:not(:disabled), a[class*="min-h-1"], a[class*="rounded-lg"]) {
+    transition-property: color, background-color, border-color, box-shadow, transform, opacity;
+    transition-duration: 150ms;
+    transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+  }
+  :where(button:not(:disabled), a[class*="min-h-1"], a[class*="rounded-lg"]):active {
+    transform: scale(0.97);
+  }
+
+  /* Kartu bertautan: naik 2px dan bayangan lembut saat disorot. */
+  .angkat {
+    transition: transform 200ms cubic-bezier(0.2, 0, 0, 1), box-shadow 200ms, border-color 200ms;
+  }
+  .angkat:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px -14px rgb(15 118 110 / 0.35);
+  }
+
+  /* Masuk sekali saat halaman dimuat (hero). Urutan lewat --tunda. */
+  [data-masuk] {
+    animation: sigap-masuk 640ms cubic-bezier(0.2, 0, 0, 1) backwards;
+    animation-delay: var(--tunda, 0ms);
+  }
+
+  /* Titik "sedang mengetik". */
+  .titik-ketik span {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin: 0 2px;
+    border-radius: 9999px;
+    background: currentColor;
+    animation: sigap-titik 1.2s ease-in-out infinite;
+  }
+  .titik-ketik span:nth-child(2) { animation-delay: 0.15s; }
+  .titik-ketik span:nth-child(3) { animation-delay: 0.3s; }
+
+  /* Cincin denyut untuk tingkat Waspada. */
+  .denyut {
+    position: relative;
+  }
+  .denyut::after {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    border-radius: inherit;
+    border: 2px solid currentColor;
+    opacity: 0;
+    animation: sigap-denyut 2.4s ease-out infinite;
+  }
+}
+
+@keyframes sigap-masuk {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes sigap-titik {
+  0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+  40% { transform: translateY(-4px); opacity: 1; }
+}
+@keyframes sigap-denyut {
+  0% { opacity: 0.6; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.25); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .angkat:hover { transform: none; }
+}
+
+/* ---------- Rombak tampilan ---------- */
+@layer base {
+  h1, h2, h3 {
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+  p { text-wrap: pretty; }
+  ::selection { background: rgb(15 118 110 / 0.18); }
+}
+
+@layer components {
+  /* Foto di dalam bingkai: membesar 3% saat kartu induknya disorot. */
+  .foto-zoom img {
+    transition: transform 700ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  .group:hover .foto-zoom img,
+  .foto-zoom:hover img {
+    transform: scale(1.03);
+  }
+
+  /* Pola titik halus untuk latar kepala halaman tanpa foto. */
+  .latar-titik {
+    background-image: radial-gradient(rgb(15 118 110 / 0.12) 1px, transparent 1px);
+    background-size: 18px 18px;
+  }
+
+  /* Kaca: header dan panel di atas foto. */
+  .kaca {
+    background-color: rgb(255 255 255 / 0.78);
+    backdrop-filter: saturate(1.6) blur(14px);
+    -webkit-backdrop-filter: saturate(1.6) blur(14px);
+  }
+  .kaca-gelap {
+    background-color: rgb(8 32 31 / 0.55);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+}
+
+/* Muncul saat terlihat: CSS scroll-driven, tanpa JavaScript. Peramban yang belum mendukung
+   menampilkan konten apa adanya (tidak pernah tersembunyi). */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    [data-muncul] {
+      animation: sigap-muncul linear both;
+      animation-timeline: view();
+      animation-range: entry 5% cover 28%;
+    }
+  }
+}
+@keyframes sigap-muncul {
+  from { opacity: 0; transform: translateY(22px) scale(0.985); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Transisi halaman: isi halaman baru masuk halus. Fill "backwards": setelah selesai tidak ada transform yang
+   tertinggal, sehingga lapisan position:fixed di dalam halaman tidak terkurung di bawah header. */
+.halaman-masuk {
+  animation: sigap-halaman 420ms cubic-bezier(0.2, 0, 0, 1) backwards;
+}
+@keyframes sigap-halaman {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .halaman-masuk { animation: none; }
+  .group:hover .foto-zoom img, .foto-zoom:hover img { transform: none; }
+}
+
+/* Garis alur Metodologi: cahaya mengalir dari kiri ke kanan. */
+.alur-garis {
+  background: linear-gradient(90deg, rgb(52 211 153 / 0.15), rgb(52 211 153 / 0.9), rgb(52 211 153 / 0.15));
+  background-size: 200% 100%;
+  animation: sigap-alir 3.2s linear infinite;
+}
+@keyframes sigap-alir {
+  from { background-position: 100% 0; }
+  to { background-position: -100% 0; }
+}
+
+/* Panel tab yang baru aktif: masuk halus (CSS, tanpa memasang ulang isinya). */
+.panel-masuk {
+  animation: sigap-panel 320ms cubic-bezier(0.2, 0, 0, 1) backwards;
+}
+@keyframes sigap-panel {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ---------- Efek modern (Tahap 2) ---------- */
+@layer components {
+  /* Ken Burns: foto latar membesar perlahan, bolak-balik. */
+  .ken-burns {
+    animation: sigap-ken-burns 24s ease-in-out infinite alternate;
+    transform-origin: 60% 40%;
+  }
+
+  /* Teks gradasi berkilau. */
+  .teks-kilau {
+    background-image: linear-gradient(100deg, #6ee7b7 0%, #99f6e4 35%, #ffffff 50%, #99f6e4 65%, #6ee7b7 100%);
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: sigap-kilau 6s ease-in-out infinite;
+  }
+
+  /* Kartu sorot: cahaya lembut mengikuti penunjuk (posisi dari --sx/--sy, diatur JS). */
+  .sorot {
+    position: relative;
+    isolation: isolate;
+  }
+  .sorot::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 300ms;
+    background: radial-gradient(420px circle at var(--sx, 50%) var(--sy, 50%), rgb(16 185 129 / 0.14), transparent 45%);
+    pointer-events: none;
+  }
+  .sorot:hover::before {
+    opacity: 1;
+  }
+}
+
+/* Bilah kemajuan baca (CSS scroll-driven; peramban lama cukup tidak menampilkannya). */
+.kemajuan-baca {
+  display: none;
+}
+@supports (animation-timeline: scroll()) {
+  .kemajuan-baca {
+    display: block;
+    position: fixed;
+    inset: 4rem 0 auto 0;
+    z-index: 40;
+    height: 3px;
+    transform-origin: 0 50%;
+    background: linear-gradient(90deg, #0f766e, #10b981);
+    animation: sigap-baca linear both;
+    animation-timeline: scroll(root);
+  }
+}
+
+@keyframes sigap-ken-burns {
+  from { transform: scale(1); }
+  to { transform: scale(1.09); }
+}
+@keyframes sigap-kilau {
+  0%, 100% { background-position: 100% 0; }
+  50% { background-position: 0% 0; }
+}
+@keyframes sigap-baca {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ken-burns, .teks-kilau { animation: none; }
+  .kemajuan-baca { display: none; }
+}
+@media print {
+  .kemajuan-baca { display: none !important; }
 }

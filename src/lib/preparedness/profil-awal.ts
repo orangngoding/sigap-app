@@ -83,3 +83,11 @@ export function buatProfilContoh(): ProfilDraft {
     kontakDarurat: [],
   };
 }
+
+/**
+ * true bila pengguna sudah mengisi profil (bukan nilai bawaan). Nilai bawaan seperti "1 anggota" tidak boleh
+ * dikirim ke AI sebagai fakta, agar Asisten tidak menyimpulkan "Anda tinggal sendirian".
+ */
+export function profilSudahDiisi(p: Pick<ProfilDraft, "bangunan" | "jumlahAnggota" | "lansia" | "balita" | "hamil" | "disabilitas">): boolean {
+  return p.bangunan !== null || p.jumlahAnggota > 1 || p.lansia + p.balita + p.hamil + p.disabilitas > 0;
+}

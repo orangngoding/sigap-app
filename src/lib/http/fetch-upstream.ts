@@ -5,6 +5,7 @@ const ALLOWED_HOSTS = new Set([
   "api.bmkg.go.id",
   "data.bmkg.go.id",
   "archive-api.open-meteo.com",
+  "climate-api.open-meteo.com", // proyeksi iklim CMIP6 (Mesin Waktu Iklim)
   "www.bmkg.go.id", // umpan peringatan dini (RSS/CAP)
 ]);
 
@@ -13,6 +14,8 @@ const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 export interface UpstreamOptions {
   timeoutMs?: number; // default 8 detik
   revalidateSeconds?: number; // cache fetch Next.js
+  /** Jumlah percobaan (bawaan 2). Permintaan lambat seperti proyeksi iklim memakai 1 agar tidak melewati batas durasi. */
+  percobaan?: number;
 }
 
 /**
@@ -31,13 +34,13 @@ export async function fetchUpstreamText(url: string, opsi: UpstreamOptions = {})
 async function fetchUpstream<T>(
   url: string,
   jenis: "json" | "text",
-  { timeoutMs = 8000, revalidateSeconds = 0 }: UpstreamOptions,
+  { timeoutMs = 8000, revalidateSeconds = 0, percobaan = 2 }: UpstreamOptions,
 ): Promise<T> {
   const host = new URL(url).hostname;
   if (!ALLOWED_HOSTS.has(host)) throw new ApiError("GALAT_INTERNAL");
 
   let lastTimeout = false;
-  for (let attempt = 0; attempt < 2; attempt++) {
+  for (let attempt = 0; attempt < percobaan; attempt++) {
     const ctrl = new AbortController();
     const timer = setTimeout(() => ctrl.abort(), timeoutMs);
     try {
@@ -55,7 +58,7 @@ async function fetchUpstream<T>(
     } finally {
       clearTimeout(timer);
     }
-    if (attempt === 0) await sleep(300);
+    if (attempt < percobaan - 1) await sleep(300);
   }
   throw new ApiError(lastTimeout ? "SUMBER_TIMEOUT" : "SUMBER_GAGAL");
 }

@@ -7,6 +7,8 @@ import { safeStorage } from "@/lib/storage/safe-storage";
 interface ProgresState {
   progres: Progres;
   toggle: (key: string) => void;
+  /** Tetapkan nilai centang (dipakai Latihan Siaga: lulus = tercentang). */
+  setel: (key: string, nilai: boolean) => void;
   reset: () => void;
 }
 
@@ -20,6 +22,13 @@ export const useProgresStore = create<ProgresState>()(
           const next = { ...s.progres };
           if (next[key]) delete next[key];
           else next[key] = true;
+          return { progres: next };
+        }),
+      setel: (key, nilai) =>
+        set((s) => {
+          const next = { ...s.progres };
+          if (nilai) next[key] = true;
+          else delete next[key];
           return { progres: next };
         }),
       reset: () => set({ progres: {} }),

@@ -1,0 +1,445 @@
+{
+ "note": "Credits for the photographs in this folder: photos.mjs credits prints the footer block for the ones the pages use.",
+ "photos": [
+  {
+   "file": "photo-f24987552-960.jpg",
+   "files": [
+    "photo-f24987552-500.jpg",
+    "photo-f24987552-960.jpg"
+   ],
+   "id": "f24987552",
+   "alt": "VOA People walk through Jakarta's flooded streets",
+   "by": "VOA Indonesian Service",
+   "licence": "Public domain",
+   "licenceUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+   "page": "https://commons.wikimedia.org/wiki/File:VOA_People_walk_through_Jakarta%27s_flooded_streets.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f178976464-500.jpg",
+   "files": [
+    "photo-f178976464-500.jpg"
+   ],
+   "id": "f178976464",
+   "alt": "Floods in Padangsidimpuan caused by Cyclone Senyar",
+   "by": "Indonesian National Board for Disaster Management",
+   "licence": "Public domain",
+   "licenceUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+   "page": "https://commons.wikimedia.org/wiki/File:Floods_in_Padangsidimpuan_caused_by_Cyclone_Senyar.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f179111951-960.jpg",
+   "files": [
+    "photo-f179111951-500.jpg",
+    "photo-f179111951-960.jpg"
+   ],
+   "id": "f179111951",
+   "alt": "Flood in Southeast Aceh Regency, Sumatra",
+   "by": "Indonesian National Board for Disaster Management",
+   "licence": "Public domain",
+   "licenceUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+   "page": "https://commons.wikimedia.org/wiki/File:Flood_in_Southeast_Aceh_Regency,_Sumatra.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f175945322-960.jpg",
+   "files": [
+    "photo-f175945322-500.jpg",
+    "photo-f175945322-960.jpg"
+   ],
+   "id": "f175945322",
+   "alt": "House's damage by earthquakes in Bandung Regency, Indonesia",
+   "by": "National Agency for Disaster Countermeasure",
+   "licence": "Public domain",
+   "licenceUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+   "page": "https://commons.wikimedia.org/wiki/File:House%27s_damage_by_earthquakes_in_Bandung_Regency,_Indonesia.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f194018868-500.jpg",
+   "files": [
+    "photo-f194018868-500.jpg"
+   ],
+   "id": "f194018868",
+   "alt": "A house destroyed by earthquake in Sigi, Sulawesi",
+   "by": "National Agency for Disaster Countermeasure",
+   "licence": "Public domain",
+   "licenceUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+   "page": "https://commons.wikimedia.org/wiki/File:A_house_destroyed_by_earthquake_in_Sigi,_Sulawesi.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f179054788-500.jpg",
+   "files": [
+    "photo-f179054788-500.jpg"
+   ],
+   "id": "f179054788",
+   "alt": "Landslide in North Tapanuli following heavy rainfall",
+   "by": "Indonesian National Board for Disaster Management",
+   "licence": "Public domain",
+   "licenceUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+   "page": "https://commons.wikimedia.org/wiki/File:Landslide_in_North_Tapanuli_following_heavy_rainfall.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f129338457.jpg",
+   "files": [
+    "photo-f129338457-500.jpg",
+    "photo-f129338457-960.jpg",
+    "photo-f129338457.jpg"
+   ],
+   "id": "f129338457",
+   "alt": "Serasan landslide aftermath",
+   "by": "National Disaster Mitigation Agency",
+   "licence": "Public domain",
+   "licenceUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+   "page": "https://commons.wikimedia.org/wiki/File:Serasan_landslide_aftermath.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f78603196.jpg",
+   "files": [
+    "photo-f78603196-500.jpg",
+    "photo-f78603196-960.jpg",
+    "photo-f78603196.jpg"
+   ],
+   "id": "f78603196",
+   "alt": "Asap Erupsi Gunung Sinabung di Pagi Hari",
+   "by": "Arteri Project",
+   "licence": "CC BY-SA 4.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Asap_Erupsi_Gunung_Sinabung_di_Pagi_Hari.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f70799068.jpg",
+   "files": [
+    "photo-f70799068-500.jpg",
+    "photo-f70799068-960.jpg",
+    "photo-f70799068.jpg"
+   ],
+   "id": "f70799068",
+   "alt": "Mount Merapi Eruption (5134675344)",
+   "by": "USAID Indonesia",
+   "licence": "Public domain",
+   "licenceUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+   "page": "https://commons.wikimedia.org/wiki/File:Mount_Merapi_Eruption_(5134675344).jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f17888837-500.jpg",
+   "files": [
+    "photo-f17888837-500.jpg"
+   ],
+   "id": "f17888837",
+   "alt": "Tsunami Evacuation Route",
+   "by": "An-d",
+   "licence": "CC BY-SA 3.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Tsunami_Evacuation_Route.JPG",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f5360782-960.jpg",
+   "files": [
+    "photo-f5360782-500.jpg",
+    "photo-f5360782-960.jpg"
+   ],
+   "id": "f5360782",
+   "alt": "Fishing boats in Banda Aceh after 2004 tsunami DD-SD-06-07375",
+   "by": "Michael L. Bak",
+   "licence": "Public domain",
+   "licenceUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+   "page": "https://commons.wikimedia.org/wiki/File:Fishing_boats_in_Banda_Aceh_after_2004_tsunami_DD-SD-06-07375.JPEG",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f15794313-960.jpg",
+   "files": [
+    "photo-f15794313-500.jpg",
+    "photo-f15794313-960.jpg"
+   ],
+   "id": "f15794313",
+   "alt": "Kabut Asap",
+   "by": "anwar siak from Kesultanan Siak, indonesia",
+   "licence": "CC BY 2.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Kabut_Asap.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f197920036-960.jpg",
+   "files": [
+    "photo-f197920036-500.jpg",
+    "photo-f197920036-960.jpg"
+   ],
+   "id": "f197920036",
+   "alt": "Forest Fire Haze in Berau",
+   "by": "Mesa Kala",
+   "licence": "CC BY 4.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Forest_Fire_Haze_in_Berau.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f90076337-960.jpg",
+   "files": [
+    "photo-f90076337-500.jpg",
+    "photo-f90076337-960.jpg"
+   ],
+   "id": "f90076337",
+   "alt": "Cracked earth after prolonged drought. 2020",
+   "by": "Rosser1954",
+   "licence": "CC BY-SA 4.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Cracked_earth_after_prolonged_drought._2020.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f71630387.jpg",
+   "files": [
+    "photo-f71630387-500.jpg",
+    "photo-f71630387-960.jpg",
+    "photo-f71630387.jpg"
+   ],
+   "id": "f71630387",
+   "alt": "Lightning Storm",
+   "by": "Rolland Anthony",
+   "licence": "CC BY 3.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by/3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Lightning_Storm_(63669379).jpeg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f79275292.jpg",
+   "files": [
+    "photo-f79275292-500.jpg",
+    "photo-f79275292-960.jpg",
+    "photo-f79275292.jpg"
+   ],
+   "id": "f79275292",
+   "alt": "Jakarta's sky before rain comes",
+   "by": "Achmad Hikam",
+   "licence": "CC BY-SA 4.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Jakarta%27s_sky_before_rain_comes.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f60306315-500.jpg",
+   "files": [
+    "photo-f60306315-500.jpg"
+   ],
+   "id": "f60306315",
+   "alt": "Abrasi 2, Pulau Gede, Rembang 10162016",
+   "by": "Ubaidillah Elmuddin",
+   "licence": "CC BY-SA 4.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Abrasi_2,_Pulau_Gede,_Rembang_10162016.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f148648446.jpg",
+   "files": [
+    "photo-f148648446-500.jpg",
+    "photo-f148648446-960.jpg",
+    "photo-f148648446.jpg"
+   ],
+   "id": "f148648446",
+   "alt": "High waves between São Jorge and Pico (Azores) 2011",
+   "by": "JopkeB",
+   "licence": "CC BY-SA 4.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:High_waves_between_S%C3%A3o_Jorge_and_Pico_(Azores)_2011.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f52359941.jpg",
+   "files": [
+    "photo-f52359941-500.jpg",
+    "photo-f52359941-960.jpg",
+    "photo-f52359941.jpg"
+   ],
+   "id": "f52359941",
+   "alt": "Earthquake Survival Kit - Checklist (2851285426)",
+   "by": "David Pursehouse from Kawasaki, Japan",
+   "licence": "CC BY 2.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Earthquake_Survival_Kit_-_Checklist_(2851285426).jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f185773293-960.jpg",
+   "files": [
+    "photo-f185773293-500.jpg",
+    "photo-f185773293-960.jpg"
+   ],
+   "id": "f185773293",
+   "alt": "Marines Support an Elementary School Tsunami Drill (9034447)",
+   "by": "U.S. Marine Corps photo by Lance Cpl. Weston Brown",
+   "licence": "Public domain",
+   "licenceUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+   "page": "https://commons.wikimedia.org/wiki/File:Marines_Support_an_Elementary_School_Tsunami_Drill_(9034447).jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f146550473.jpg",
+   "files": [
+    "photo-f146550473-500.jpg",
+    "photo-f146550473-960.jpg",
+    "photo-f146550473.jpg"
+   ],
+   "id": "f146550473",
+   "alt": "August 2007, emergency exercise in Ginza 8",
+   "by": "Syced",
+   "licence": "CC0",
+   "licenceUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:August_2007,_emergency_exercise_in_Ginza_8.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f198179543-960.jpg",
+   "files": [
+    "photo-f198179543-500.jpg",
+    "photo-f198179543-960.jpg"
+   ],
+   "id": "f198179543",
+   "alt": "Rice Fields with Mount Singgalang in the Distance, Biaro, Ampek Angkek, Agam Regency",
+   "by": "Undeka 11",
+   "licence": "CC BY-SA 4.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Rice_Fields_with_Mount_Singgalang_in_the_Distance,_Biaro,_Ampek_Angkek,_Agam_Regency.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f196042719-960.jpg",
+   "files": [
+    "photo-f196042719-500.jpg",
+    "photo-f196042719-960.jpg"
+   ],
+   "id": "f196042719",
+   "alt": "Rice Terrace View, Bali, Indonesia",
+   "by": "Hariyono Suwardi",
+   "licence": "CC BY 4.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Rice_Terrace_View,_Bali,_Indonesia.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f179111675.jpg",
+   "files": [
+    "photo-f179111675-500.jpg",
+    "photo-f179111675-960.jpg",
+    "photo-f179111675.jpg"
+   ],
+   "id": "f179111675",
+   "alt": "Aid sent for disaster management in West Sumatra",
+   "by": "Indonesian National Board for Disaster Management",
+   "licence": "Public domain",
+   "licenceUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+   "page": "https://commons.wikimedia.org/wiki/File:Aid_sent_for_disaster_management_in_West_Sumatra.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f24987551-960.jpg",
+   "files": [
+    "photo-f24987551-500.jpg",
+    "photo-f24987551-960.jpg"
+   ],
+   "id": "f24987551",
+   "alt": "VOA A car tries to drive through Jakarta's flooded streets",
+   "by": "VOA Indonesian Service",
+   "licence": "Public domain",
+   "licenceUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+   "page": "https://commons.wikimedia.org/wiki/File:VOA_A_car_tries_to_drive_through_Jakarta%27s_flooded_streets.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f63362905.jpg",
+   "files": [
+    "photo-f63362905-500.jpg",
+    "photo-f63362905-960.jpg",
+    "photo-f63362905.jpg"
+   ],
+   "id": "f63362905",
+   "alt": "Mount Sinabung 2017 (33117536845)",
+   "by": "Pavel Kirillov from St.Petersburg, Russia",
+   "licence": "CC BY-SA 2.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Mount_Sinabung_2017_(33117536845).jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f138823187-960.jpg",
+   "files": [
+    "photo-f138823187-500.jpg",
+    "photo-f138823187-960.jpg"
+   ],
+   "id": "f138823187",
+   "alt": "D. Llenando la mochila de emergencia",
+   "by": "Muriano Andre",
+   "licence": "CC BY-SA 4.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:D._Llenando_la_mochila_de_emergencia.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f34190563-960.jpg",
+   "files": [
+    "photo-f34190563-500.jpg",
+    "photo-f34190563-960.jpg"
+   ],
+   "id": "f34190563",
+   "alt": "Earthquake Kit in Japan 2008",
+   "by": "Toby Oxborrow",
+   "licence": "CC BY-SA 2.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Earthquake_Kit_in_Japan_2008.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f165035457-960.jpg",
+   "files": [
+    "photo-f165035457-500.jpg",
+    "photo-f165035457-960.jpg"
+   ],
+   "id": "f165035457",
+   "alt": "Jalur Evakuasi Kapo-Kapo",
+   "by": "Harris Est 13",
+   "licence": "CC0",
+   "licenceUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:Jalur_Evakuasi_Kapo-Kapo.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f120884281-960.jpg",
+   "files": [
+    "photo-f120884281-500.jpg",
+    "photo-f120884281-960.jpg"
+   ],
+   "id": "f120884281",
+   "alt": "Alat Ukur Cuaca Milik BMKG",
+   "by": "SATELITBM",
+   "licence": "CC BY-SA 4.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Alat_Ukur_Cuaca_Milik_BMKG.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f18568392.jpg",
+   "files": [
+    "photo-f18568392-500.jpg",
+    "photo-f18568392-960.jpg",
+    "photo-f18568392.jpg"
+   ],
+   "id": "f18568392",
+   "alt": "First Aid Kit (Frankfurt am Main, 18.02.2012)",
+   "by": "Christian Düringer",
+   "licence": "CC BY-SA 3.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:First_Aid_Kit_(Frankfurt_am_Main,_18.02.2012).jpg",
+   "source": "Wikimedia Commons"
+  }
+ ]
+}

@@ -38,6 +38,26 @@ export const JawabanTanya = z.object({
   refused: z.boolean(),
 });
 
+/** Keluaran Asisten SIGAP (percakapan): boleh memakai panduan KB dan pengetahuan umum model. */
+export const JawabanAsisten = z.object({
+  jawaban: z.string().min(1).max(2400),
+  sourceIds: z.array(z.string()).max(8).default([]),
+  // Saran dan aksi berlebih cukup dipotong, dan aksi yang rusak diabaikan: tidak boleh membuang jawaban yang baik.
+  saranLanjutan: z.array(z.string().max(90)).default([]).transform((x) => x.slice(0, 3)),
+  /** Id aksi aplikasi yang relevan, dipilih dari daftar AKSI yang diberikan (divalidasi kode). */
+  aksi: z.array(z.string().max(60)).default([]).transform((x) => x.slice(0, 5)).catch([]),
+  refused: z.boolean().default(false),
+});
+
+/** Keluaran Briefing Siaga Hari Ini: AI hanya merangkai kalimat dari sinyal yang dihitung kode. */
+export const BriefingKeluaran = z.object({
+  ringkasan: z.string().min(10).max(480),
+  tindakan: z
+    .array(z.object({ judul: z.string().min(3).max(90), alasan: z.string().min(5).max(220) }))
+    .min(3)
+    .max(4),
+});
+
 // ---------- Masukan API ----------
 const hitung = z.number().int().min(0).max(12);
 const teks = (maks: number) => z.string().trim().min(1).max(maks);
@@ -95,7 +115,107 @@ export const TerjemahRequest = z.object({
     .optional(),
 });
 
+export const GiliranSchema = z.object({
+  peran: z.enum(["pengguna", "asisten"]),
+  teks: z.string().trim().min(1).max(2400),
+});
+
+/** Konteks anonim keluarga untuk personalisasi jawaban (Blueprint 12.3: tanpa nama, kontak, catatan). */
+export const KonteksTanyaSchema = z.object({
+  wilayah: z.string().trim().max(160).optional(),
+  jumlahAnggota: z.number().int().min(1).max(12).optional(),
+  lansia: hitung.optional(),
+  balita: hitung.optional(),
+  hamil: hitung.optional(),
+  disabilitas: hitung.optional(),
+  hewanPeliharaan: z.boolean().optional(),
+  bangunan: z.enum(["rumah_1_lantai", "rumah_bertingkat", "apartemen", "kos", "lainnya"]).optional(),
+});
+export type KonteksTanya = z.infer<typeof KonteksTanyaSchema>;
+
+const teksPendek = z.string().trim().min(1).max(120);
+
+/** Ringkasan rencana keluarga tanpa identitas (judul tindakan dan nama isi tas saja). */
+export const RingkasRencanaSchema = z.object({
+  skor: z.number().int().min(0).max(100),
+  label: z.string().max(30),
+  belumDikerjakan: z.array(teksPendek).max(8).default([]),
+  tasBelumSiap: z.array(teksPendek).max(10).default([]),
+  tasKedaluwarsa: z.array(teksPendek).max(8).default([]),
+  latihanLulus: z.number().int().min(0).max(20).optional(),
+  latihanTotal: z.number().int().min(0).max(20).optional(),
+});
+export type RingkasRencana = z.infer<typeof RingkasRencanaSchema>;
+
+const namaWilayahTanya = z.string().trim().min(2).max(60).regex(/^[\p{L}0-9 .,'()/\-]+$/u);
+/** Lokasi untuk membaca kondisi BMKG terkini. Koordinat hanya dipakai server, tidak dikirim ke AI. */
+export const LokasiTanyaSchema = z.object({
+  adm4: z.string().regex(/^\d{2}\.\d{2}\.\d{2}\.\d{4}$/),
+  kecamatan: namaWilayahTanya,
+  kabKota: namaWilayahTanya,
+  provinsi: namaWilayahTanya,
+  lat: z.number().min(-12).max(7),
+  lon: z.number().min(94).max(142),
+});
+export type LokasiTanya = z.infer<typeof LokasiTanyaSchema>;
+
 export const TanyaRequest = z.object({
-  pertanyaan: z.string().trim().min(3).max(300),
+  pertanyaan: z.string().trim().min(2).max(500),
   bahaya: z.array(HazardId).max(9).optional(),
+  /** Giliran sebelumnya; hanya 8 terakhir yang dipakai. */
+  riwayat: z.array(GiliranSchema).max(20).optional(),
+  konteks: KonteksTanyaSchema.optional(),
+  rencana: RingkasRencanaSchema.optional(),
+  lokasi: LokasiTanyaSchema.optional(),
+});
+
+const namaWilayah = z.string().trim().min(2).max(60).regex(/^[\p{L}0-9 .,'()/\-]+$/u);
+
+export const BriefingRequest = z.object({
+  lokasi: z.object({
+    adm4: z.string().regex(/^\d{2}\.\d{2}\.\d{2}\.\d{4}$/),
+    kelurahan: namaWilayah.optional(),
+    kecamatan: namaWilayah,
+    kabKota: namaWilayah,
+    provinsi: namaWilayah,
+    lat: z.number().min(-12).max(7),
+    lon: z.number().min(94).max(142),
+  }),
+  bahaya: z.array(HazardId).max(9).optional(),
+  konteks: KonteksTanyaSchema.omit({ wilayah: true }).optional(),
+});
+export type BriefingRequestT = z.infer<typeof BriefingRequest>;
+
+// ---------- Mesin Waktu Iklim: rencana adaptasi keluarga ----------
+export const KATEGORI_ADAPTASI = ["rumah", "air", "kesehatan", "ekonomi", "komunitas"] as const;
+export const KAPAN_ADAPTASI = ["sekarang", "1-5 tahun", "jangka panjang"] as const;
+export const BIAYA_ADAPTASI = ["rendah", "sedang", "tinggi"] as const;
+
+export const AdaptasiKeluaran = z.object({
+  ringkasan: z.string().min(20).max(600),
+  dampak: z.array(z.object({ judul: z.string().min(3).max(80), isi: z.string().min(10).max(260) })).min(2).max(4),
+  langkah: z
+    .array(
+      z.object({
+        kategori: z.enum(KATEGORI_ADAPTASI),
+        judul: z.string().min(3).max(100),
+        alasan: z.string().min(10).max(260),
+        kapan: z.enum(KAPAN_ADAPTASI),
+        biaya: z.enum(BIAYA_ADAPTASI),
+      }),
+    )
+    .min(4)
+    .max(7),
+});
+export type AdaptasiKeluaranT = z.infer<typeof AdaptasiKeluaran>;
+
+export const AdaptasiRequest = z.object({
+  lokasi: z.object({
+    lat: z.number().min(-12).max(7),
+    lon: z.number().min(94).max(142),
+    kabKota: namaWilayahTanya,
+    provinsi: namaWilayahTanya,
+  }),
+  bahaya: z.array(HazardId).max(9).optional(),
+  konteks: KonteksTanyaSchema.omit({ wilayah: true }).optional(),
 });

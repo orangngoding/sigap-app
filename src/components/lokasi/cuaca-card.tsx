@@ -29,6 +29,7 @@ export function CuacaCard({ adm4 }: { adm4: string }) {
     <DataCard
       title="Cuaca" icon={CloudSun} query={query} minHeight="min-h-64"
       officialUrl="https://www.bmkg.go.id/cuaca/prakiraan-cuaca" takeaway={takeawayCuaca}
+      tanya={(d) => `Prakiraan cuaca BMKG di wilayah saya: ${takeawayCuaca(d)} Apa artinya bagi keluarga saya dan apa yang perlu disiapkan hari ini?`}
     >
       {(d) => (
         <div className="space-y-2">

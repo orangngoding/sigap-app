@@ -1,5 +1,6 @@
 "use client";
-import { TrendingUp } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, TrendingUp } from "lucide-react";
 import { Bar, CartesianGrid, Line, ComposedChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import type { IklimResponse } from "@/types";
 import { useDataCard, TTL } from "@/hooks/use-data-card";
@@ -18,6 +19,7 @@ export function IklimCard({ lat, lon }: { lat: number; lon: number }) {
     <DataCard
       title="Tren Iklim" icon={TrendingUp} query={query} minHeight="min-h-80"
       officialUrl="https://open-meteo.com/" takeaway={takeawayIklim}
+      tanya={(d) => `Data tren iklim di wilayah saya: ${takeawayIklim(d)} Apa kaitannya dengan perubahan iklim dan bagaimana keluarga saya bisa beradaptasi?`}
     >
       {(d) => {
         const xs = d.tahunan.map((t) => t.tahun);
@@ -45,6 +47,9 @@ export function IklimCard({ lat, lon }: { lat: number; lon: number }) {
               Garis tipis adalah tren linear sederhana, bukan klaim signifikansi statistik.
             </p>
             <p className="text-xs text-muted-foreground">{d.catatan}</p>
+            <Link href="/iklim" className="inline-flex min-h-9 items-center gap-1 text-sm font-semibold text-primary underline underline-offset-2">
+              Lihat proyeksi iklim wilayah ini menuju 2050 <ArrowRight className="size-4" aria-hidden="true" />
+            </Link>
           </div>
         );
       }}

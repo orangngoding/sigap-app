@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { SEMUA_ARTIKEL } from "@/lib/pustaka/data";
+import { FOTO, fotoArtikel } from "@/lib/gambar";
 import { PustakaDaftar } from "@/components/pustaka/pustaka-daftar";
+import { KepalaHalaman } from "@/components/global/kepala-halaman";
 
 export const metadata: Metadata = {
   title: "Pustaka",
@@ -8,12 +10,20 @@ export const metadata: Metadata = {
 };
 
 export default function PustakaPage() {
-  const artikel = SEMUA_ARTIKEL.map(({ slug, title, ringkasan, hazards, kategori, menit }) => ({ slug, title, ringkasan, hazards, kategori, menit }));
+  // Artikel unggulan (kartu besar) di depan: banjir, bencana paling sering di Indonesia.
+  const urut = [...SEMUA_ARTIKEL].sort((a, b) => Number(b.slug === "siap-menghadapi-banjir") - Number(a.slug === "siap-menghadapi-banjir"));
+  const artikel = urut.map(({ slug, title, ringkasan, hazards, kategori, menit }) => ({
+    slug, title, ringkasan, hazards, kategori, menit, foto: fotoArtikel(slug, hazards),
+  }));
   return (
     <main id="konten" tabIndex={-1} className="flex-1 focus:outline-none">
-      <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6 lg:px-8">
-        <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Pustaka</h1>
-        <p className="mt-2 text-muted-foreground">Panduan singkat yang bisa dibaca tanpa mengisi profil. Setiap butir menyebut sumbernya.</p>
+      <KepalaHalaman
+        label="Pustaka"
+        judul="Panduan siaga yang bisa dibaca kapan saja"
+        deskripsi={`${artikel.length} artikel singkat dari panduan resmi BNPB, BMKG, dan Kemenkes. Tanpa mengisi profil, dan setiap butir menyebut sumbernya.`}
+        foto={FOTO.lanskap2}
+      />
+      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         <PustakaDaftar artikel={artikel} />
       </div>
     </main>

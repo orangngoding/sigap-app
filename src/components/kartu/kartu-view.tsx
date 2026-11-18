@@ -68,7 +68,7 @@ export function KartuView() {
       <style>{`
         @page { size: ${ukuran}; margin: 12mm; }
         @media print {
-          header, footer, nav, .tanpa-cetak { display: none !important; }
+          .tanpa-cetak { display: none !important; }
           body { background: #fff !important; }
           .kartu { border: 0 !important; padding: 0 !important; box-shadow: none !important; }
         }
@@ -150,7 +150,7 @@ export function KartuView() {
         {kosong && <p className="text-sm text-muted-foreground">Nomor darurat masih menunggu verifikasi tim sebelum dirilis (lihat Metodologi).</p>}
       </div>
 
-      <article className="kartu rounded-2xl border border-border bg-white p-6 text-black" style={{ fontSize: `${pt}pt`, lineHeight: 1.35 }}>
+      <article className="kartu cetak-utuh rounded-2xl border border-border bg-white p-6 text-black" style={{ fontSize: `${pt}pt`, lineHeight: 1.35 }}>
         <header className="border-b-2 border-black pb-2">
           <h1 className="font-extrabold uppercase" style={{ fontSize: kecil ? "15pt" : "18pt" }}>Kartu Siaga Keluarga</h1>
           {namaKeluarga.trim() && <p className="font-bold">{namaKeluarga.trim()}</p>}

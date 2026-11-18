@@ -30,13 +30,21 @@ const navigation = [
     icon: ClipboardList,
   },
   {
-    label: "Tanya",
+    label: "Asisten",
     href: "/tanya",
     icon: MessageCircle,
   },
 ];
 
 const moreNavigation = [
+  {
+    label: "Iklim 2050",
+    href: "/iklim",
+  },
+  {
+    label: "Latihan Siaga",
+    href: "/latihan",
+  },
   {
     label: "Pustaka",
     href: "/pustaka",
@@ -47,7 +55,7 @@ const moreNavigation = [
     href: "/metodologi",
   },
   {
-    label: "Data Saya",
+    label: "Data & privasi",
     href: "/data-saya",
   },
 ];
@@ -91,7 +99,7 @@ export function MobileBottomNav() {
     <nav
       ref={navRef}
       aria-label="Navigasi bawah"
-      className="fixed inset-x-0 bottom-0 z-50 border-t border-border bg-surface pb-[env(safe-area-inset-bottom)] md:hidden"
+      className="tanpa-cetak kaca fixed inset-x-0 bottom-0 z-50 border-t border-border/70 pb-[env(safe-area-inset-bottom)] md:hidden"
     >
       <div className="mx-auto grid h-16 max-w-lg grid-cols-5">
         {navigation.map((item) => {
@@ -110,11 +118,13 @@ export function MobileBottomNav() {
                   : "text-muted-foreground hover:text-primary"
               }`}
             >
-              <Icon
-                className="size-5"
-                strokeWidth={active ? 2.25 : 1.75}
-                aria-hidden="true"
-              />
+              <span className={`flex h-7 w-12 items-center justify-center rounded-full transition-colors ${active ? "bg-primary/12" : ""}`}>
+                <Icon
+                  className="size-5"
+                  strokeWidth={active ? 2.25 : 1.75}
+                  aria-hidden="true"
+                />
+              </span>
               <span>{item.label}</span>
             </Link>
           );
@@ -143,7 +153,7 @@ export function MobileBottomNav() {
       {isMoreOpen && (
         <div
           id="mobile-more-menu"
-          className="absolute right-3 bottom-full mb-2 w-52 rounded-xl border border-border bg-surface p-2 shadow-lg"
+          className="absolute right-3 bottom-full mb-2 w-56 rounded-2xl border border-border bg-surface p-2 shadow-xl animate-in fade-in-0 slide-in-from-bottom-2"
         >
           <div className="px-3 py-2 text-xs font-semibold text-muted-foreground">
             MENU LAINNYA

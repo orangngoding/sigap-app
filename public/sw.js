@@ -5,7 +5,7 @@
 // - Halaman lain: jaringan dulu, simpan salinan, pakai salinan saat offline.
 // - API dan data pribadi tidak pernah disimpan di cache ini (data pengguna ada di localStorage).
 // Ganti VERSI tiap rilis agar cache lama dibersihkan.
-const VERSI = "sigap-v2";
+const VERSI = "sigap-v4";
 const HALAMAN_INTI = ["/darurat", "/rencana/kartu", "/"];
 const POLA_ASET = /\/_next\/static\/[^"'\s)\\]+/g;
 

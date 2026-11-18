@@ -9,6 +9,7 @@ import { IklimCard } from "./iklim-card";
 import { PeringatanCard } from "./peringatan-card";
 import { PetaLokasi } from "./peta-lokasi.client";
 import { BahayaTerpilihCard } from "./bahaya-terpilih-card";
+import { BriefingHarian } from "@/components/beranda/briefing-harian";
 
 export function ProfilLokasi({ lokasi, onGanti }: { lokasi: Lokasi; onGanti: () => void }) {
   const qc = useQueryClient();
@@ -35,6 +36,8 @@ export function ProfilLokasi({ lokasi, onGanti }: { lokasi: Lokasi; onGanti: () 
           </button>
         </div>
       </div>
+
+      <BriefingHarian varian="lokasi" />
 
       <PetaLokasi lat={lokasi.lat} lon={lokasi.lon} label={`Peta ${lokasi.kelurahan}`} />
 
