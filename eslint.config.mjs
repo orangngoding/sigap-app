@@ -12,6 +12,10 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Alat bantu pengembangan (skill AI), bukan kode aplikasi:
+    ".claude/**",
+    ".taste-skill/**",
+    ".playwright-cli/**",
   ]),
 ]);
 
