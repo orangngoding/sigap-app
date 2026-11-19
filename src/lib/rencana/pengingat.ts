@@ -50,7 +50,7 @@ const esc = (s: string) => s.replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace
 const ymd = (d: Date) => `${d.getUTCFullYear()}${String(d.getUTCMonth() + 1).padStart(2, "0")}${String(d.getUTCDate()).padStart(2, "0")}`;
 const stamp = (d: Date) => d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
 /** Baris lebih dari 75 oktet dilipat sesuai RFC 5545. */
-const lipat = (baris: string) => {
+export const lipat = (baris: string) => {
   const out: string[] = [];
   let sisa = baris;
   while (sisa.length > 73) {
@@ -61,7 +61,7 @@ const lipat = (baris: string) => {
   return out.join("\r\n");
 };
 
-interface AcaraIcs {
+export interface AcaraIcs {
   uid: string;
   tanggal: Date; // hari (UTC tengah malam)
   judul: string;
@@ -69,7 +69,7 @@ interface AcaraIcs {
   rrule?: string;
 }
 
-function acara(a: AcaraIcs, now: Date): string[] {
+export function acara(a: AcaraIcs, now: Date): string[] {
   const akhir = new Date(a.tanggal.getTime() + HARI_MS);
   return [
     "BEGIN:VEVENT",

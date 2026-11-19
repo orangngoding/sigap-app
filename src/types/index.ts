@@ -160,6 +160,22 @@ export interface PeringatanResponse extends ApiBase {
   tautanResmi: string;
 }
 
+export interface BeritaItem {
+  id: string;
+  judul: string;
+  /** Nama media penerbit. */
+  sumber: string;
+  waktu: string;
+  /** Tautan keluar (https) ke berita. */
+  url: string;
+}
+
+export interface BeritaResponse extends ApiBase {
+  /** false = umpan tidak terbaca; UI tidak boleh menyatakan "tidak ada berita". */
+  tersedia: boolean;
+  daftar: BeritaItem[];
+}
+
 export interface ApiErrorBody {
   error: { code: string; message: string; retryable: boolean };
 }

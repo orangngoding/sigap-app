@@ -173,6 +173,12 @@
 
   html {
     @apply font-sans;
+    /* Header menempel (4rem): fokus keyboard dan tautan #bagian tidak boleh tertutup (WCAG 2.2 SC 2.4.11). */
+    scroll-padding-top: 4.5rem;
+  }
+  /* Halaman dengan bilah kedua yang ikut menempel (artikel Pustaka, tab Rencana): ruang ekstra. */
+  html:has(.bilah-artikel, .bilah-lengket) {
+    scroll-padding-top: 7.5rem;
   }
 
   body {
@@ -338,13 +344,49 @@
   100% { opacity: 0; transform: scale(1.25); }
 }
 
+/* Pudar saja: pengganti masuk-bergeser untuk pengguna yang meminta "kurangi gerakan". */
+@keyframes sigap-pudar {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes sigap-titik-pudar {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+/* Kurangi gerakan, bukan hapus umpan balik. Gerak spasial (bergeser, membesar, memutar) dan putaran tak berujung
+   dibuang; perubahan opasitas, warna, dan bayangan tetap berjalan sehingga buka-tutup panel, hover, status, dan
+   tombol masih terbaca. Pengganti bagi aturan lama yang mematikan semua durasi menjadi 0,01 ms. */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+    /* Transisi hanya untuk properti yang tidak bergerak di ruang; transform tidak ikut. */
+    transition-property: opacity, color, background-color, border-color, text-decoration-color, fill, stroke, box-shadow !important;
   }
+  /* Dialog, sheet, dan menu (tw-animate-css): tetap pudar, tanpa geser, zoom, putar, atau blur. */
+  [class*="animate-in"], [class*="animate-out"] {
+    --tw-enter-translate-x: 0 !important;
+    --tw-enter-translate-y: 0 !important;
+    --tw-enter-scale: 1 !important;
+    --tw-enter-rotate: 0 !important;
+    --tw-enter-blur: 0 !important;
+    --tw-exit-translate-x: 0 !important;
+    --tw-exit-translate-y: 0 !important;
+    --tw-exit-scale: 1 !important;
+    --tw-exit-rotate: 0 !important;
+    --tw-exit-blur: 0 !important;
+  }
+  /* Masuk-bergeser buatan sendiri menjadi pudar singkat. */
+  [data-masuk], .panel-masuk, .halaman-masuk {
+    animation-name: sigap-pudar;
+    animation-duration: 200ms;
+  }
+  /* "Sedang mengetik": titik tidak melompat, hanya berdenyut halus. */
+  .titik-ketik span { animation-name: sigap-titik-pudar; }
+  /* Cincin Waspada tidak berdenyut, tetapi tetap tampak sebagai penanda statis. */
+  .denyut::after { animation: none; opacity: 0.5; }
+  /* Hiasan yang bergerak terus. */
+  .alur-garis { animation: none; }
   .angkat:hover { transform: none; }
 }
 
@@ -413,7 +455,6 @@
   to { opacity: 1; transform: none; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .halaman-masuk { animation: none; }
   .group:hover .foto-zoom img, .foto-zoom:hover img { transform: none; }
 }
 
@@ -421,7 +462,7 @@
 .alur-garis {
   background: linear-gradient(90deg, rgb(52 211 153 / 0.15), rgb(52 211 153 / 0.9), rgb(52 211 153 / 0.15));
   background-size: 200% 100%;
-  animation: sigap-alir 3.2s linear infinite;
+  animation: sigap-alir 3.2s linear 2;
 }
 @keyframes sigap-alir {
   from { background-position: 100% 0; }
@@ -439,20 +480,15 @@
 
 /* ---------- Efek modern (Tahap 2) ---------- */
 @layer components {
-  /* Ken Burns: foto latar membesar perlahan, bolak-balik. */
+  /* Ken Burns: foto latar membesar perlahan satu kali lalu diam, supaya tidak menggerakkan lapisan terus-menerus. */
   .ken-burns {
-    animation: sigap-ken-burns 24s ease-in-out infinite alternate;
+    animation: sigap-ken-burns 24s ease-out both;
     transform-origin: 60% 40%;
   }
 
-  /* Teks gradasi berkilau. */
-  .teks-kilau {
-    background-image: linear-gradient(100deg, #6ee7b7 0%, #99f6e4 35%, #ffffff 50%, #99f6e4 65%, #6ee7b7 100%);
-    background-size: 220% 100%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    animation: sigap-kilau 6s ease-in-out infinite;
+  /* Penekanan pada teks di atas foto: warna padat, bukan gradasi (tanpa kilau). */
+  .teks-sorot {
+    color: #6ee7b7;
   }
 
   /* Kartu sorot: cahaya lembut mengikuti penunjuk (posisi dari --sx/--sy, diatur JS). */
@@ -498,16 +534,12 @@
   from { transform: scale(1); }
   to { transform: scale(1.09); }
 }
-@keyframes sigap-kilau {
-  0%, 100% { background-position: 100% 0; }
-  50% { background-position: 0% 0; }
-}
 @keyframes sigap-baca {
   from { transform: scaleX(0); }
   to { transform: scaleX(1); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .ken-burns, .teks-kilau { animation: none; }
+  .ken-burns { animation: none; }
   .kemajuan-baca { display: none; }
 }
 @media print {

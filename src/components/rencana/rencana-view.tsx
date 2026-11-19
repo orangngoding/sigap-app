@@ -51,6 +51,7 @@ const tabSah = (x: string | null): x is TabId => TAB.some((t) => t.id === x);
 function LangkahKurang({ ikon, pesan, href, tombol }: { ikon: React.ReactNode; pesan: string; href: string; tombol: string }) {
   return (
     <div className="rounded-2xl border border-border bg-surface p-8 text-center">
+      <h1 className="sr-only">Rencana Siaga</h1>
       <div className="mx-auto flex size-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">{ikon}</div>
       <p className="mx-auto mt-4 max-w-md text-base font-semibold text-foreground">{pesan}</p>
       <Link href={href} className="mt-6 inline-flex min-h-12 items-center justify-center rounded-lg bg-primary px-6 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
@@ -221,7 +222,7 @@ export function RencanaView() {
       <StepIndicator current="rencana" done={["lokasi", "profil"]} />
       <StorageBanner />
       {contoh && (
-        <StatusBanner tone="info" action={<Link href="/lokasi" className="font-semibold underline">Gunakan data saya</Link>}>
+        <StatusBanner tone="info" action={<Link href="/lokasi" className="inline-flex min-h-11 items-center font-semibold underline">Gunakan data saya</Link>}>
           Ini contoh, bukan data Anda.
         </StatusBanner>
       )}
@@ -251,13 +252,13 @@ export function RencanaView() {
 
       {!contoh && <StatusSusun status={status} alasan={alasan} pulihMenit={pulihMenit} usang={usang} onSusun={() => void susun({ paksa: true })} onBatal={batal} />}
       {sorotan.length > 0 && (
-        <StatusBanner tone="warning" action={<Link href="/lokasi" className="font-semibold underline">Lihat data</Link>}>
+        <StatusBanner tone="warning" action={<Link href="/lokasi" className="inline-flex min-h-11 items-center font-semibold underline">Lihat data</Link>}>
           <strong>Perhatikan hari ini:</strong> {sorotan.join(" ")}
         </StatusBanner>
       )}
 
       {/* Navigasi tab: menempel di bawah header agar berpindah bagian tanpa menggulir panjang. */}
-      <div ref={tabRef} className="tanpa-cetak sticky top-16 z-30 -mx-4 scroll-mt-16 px-4 py-2 sm:mx-0 sm:px-0">
+      <div ref={tabRef} className="tanpa-cetak bilah-lengket sticky top-16 z-30 -mx-4 px-4 py-2 sm:mx-0 sm:px-0">
         <div role="tablist" aria-label="Bagian rencana" className="kaca isolate flex gap-1 overflow-x-auto rounded-2xl border border-border/70 p-1 shadow-sm">
           {TAB.map(({ id, label, Ikon }) => {
             const aktif = tab === id;
@@ -270,7 +271,7 @@ export function RencanaView() {
               >
                 {aktif && <motion.span layoutId="tab-rencana" className="absolute inset-0 -z-10 rounded-xl bg-primary shadow-sm shadow-primary/30" transition={{ type: "spring", stiffness: 420, damping: 34 }} />}
                 <Ikon className="size-4" aria-hidden="true" /> {label}
-                {badge && <span className={`rounded-full px-1.5 text-[11px] tabular-nums ${aktif ? "bg-white/20" : "bg-muted"}`}>{badge}</span>}
+                {badge && <span className={`rounded-full px-1.5 text-xs tabular-nums ${aktif ? "bg-white/20" : "bg-muted"}`}>{badge}</span>}
               </button>
             );
           })}

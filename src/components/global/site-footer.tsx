@@ -7,7 +7,7 @@ const KOLOM = [
     judul: "Fitur",
     tautan: [
       ["Profil wilayah", "/lokasi"],
-      ["Iklim 2050", "/iklim"],
+      ["Siaga Iklim", "/iklim"],
       ["Rencana Siaga", "/rencana"],
       ["Latihan Siaga", "/latihan"],
       ["Asisten SIGAP", "/tanya"],
@@ -33,7 +33,7 @@ const SUMBER = [
   ["Wikimedia Commons", "https://commons.wikimedia.org/", "foto"],
 ] as const;
 
-const TAUTAN = "rounded text-sm text-ink-muted transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-300";
+const TAUTAN = "inline-flex min-h-8 items-center rounded text-sm any-pointer-coarse:min-h-11 any-pointer-coarse:min-w-11 text-ink-muted transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-300";
 
 export function SiteFooter() {
   return (
@@ -41,7 +41,7 @@ export function SiteFooter() {
       <div className="mx-auto max-w-7xl px-4 pb-28 pt-14 sm:px-6 md:pb-10 lg:px-8">
         <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
           <div>
-            <Link href="/" className="group inline-flex rounded-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-300" aria-label="SIGAP - Beranda">
+            <Link href="/" className="group inline-flex min-h-11 items-center rounded-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-300" aria-label="SIGAP - Beranda">
               <Logo terang />
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink-muted">
@@ -55,7 +55,7 @@ export function SiteFooter() {
           {KOLOM.map((k) => (
             <div key={k.judul}>
               <h2 className="text-sm font-semibold text-white">{k.judul}</h2>
-              <ul className="mt-4 space-y-2.5">
+              <ul className="mt-3 space-y-0.5">
                 {k.tautan.map(([label, href]) => (
                   <li key={href}><Link href={href} className={TAUTAN}>{label}</Link></li>
                 ))}
@@ -65,9 +65,9 @@ export function SiteFooter() {
 
           <div>
             <h2 className="text-sm font-semibold text-white">Sumber data</h2>
-            <ul className="mt-4 space-y-2.5">
+            <ul className="mt-3 space-y-0.5">
               {SUMBER.map(([label, href, ket]) => (
-                <li key={href}>
+                <li key={href} className="flex flex-wrap items-center">
                   <a href={href} target="_blank" rel="noreferrer" className={TAUTAN}>{label}</a>
                   {ket && <span className="text-xs text-ink-muted/70"> · {ket}</span>}
                 </li>

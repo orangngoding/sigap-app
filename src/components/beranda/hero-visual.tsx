@@ -65,7 +65,7 @@ export function HeroVisual() {
           <ol className="mt-3 grid grid-cols-3 gap-2 text-xs">
             {["Bersihkan saluran air", "Siapkan obat nenek", "Isi daya ponsel"].map((t, i) => (
               <li key={t} className="rounded-xl border border-border bg-background p-2.5">
-                <span className="mb-1 flex size-5 items-center justify-center rounded-full bg-primary text-[11px] font-bold text-primary-foreground">{i + 1}</span>
+                <span className="mb-1 flex size-5 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">{i + 1}</span>
                 <span className="font-medium text-foreground">{t}</span>
               </li>
             ))}

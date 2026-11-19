@@ -51,19 +51,19 @@ export function FiturUnggulan() {
         >
           <span className="relative z-10 block p-6 sm:p-10">
             <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-400/15 px-3 py-1 text-xs font-semibold text-amber-200">
-              <Thermometer className="size-3.5" aria-hidden="true" /> Baru: Mesin Waktu Iklim
+              <Thermometer className="size-3.5" aria-hidden="true" /> Baru: Siaga Iklim
             </span>
-            <span className="mt-4 block text-2xl font-bold text-white sm:text-3xl">Seperti apa iklim di wilayahmu pada 2050?</span>
+            <span className="mt-4 block text-2xl font-bold text-white sm:text-3xl">Bulan mana yang rawan bagi rumahmu, dan apa yang perlu disiapkan?</span>
             <span className="mt-3 block max-w-xl text-sm leading-relaxed text-ink-muted sm:text-base">
-              Bandingkan hari sangat panas, hujan ekstrem, dan kemarau antara 1990-an, sekarang, dan menuju 2050 dari dua model iklim global. Lalu AI menyusun rencana adaptasi untuk keluargamu.
+              Lihat bulan paling rawan panas, hujan lebat, dan kemarau di wilayahmu saat ini dan 10-25 tahun lagi, uji seberapa siap rumahmu, lalu dapatkan tindakan yang perlu dilakukan lebih dulu, lengkap dengan pengingat kalender.
             </span>
             <span className="mt-6 flex flex-wrap gap-1.5">
-              {["Proyeksi CMIP6 resolusi tinggi", "Angka dihitung kode", "Rencana adaptasi keluarga"].map((c) => (
+              {["Kalender risiko 12 bulan", "Uji ketahanan rumah", "Saran tindakan dari AI"].map((c) => (
                 <span key={c} className="rounded-full bg-white/10 px-2.5 py-1 text-xs font-medium text-white">{c}</span>
               ))}
             </span>
             <span className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-amber-200">
-              Putar waktu <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 motion-reduce:transition-none" aria-hidden="true" />
+              Mulai uji rumah <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 motion-reduce:transition-none" aria-hidden="true" />
             </span>
           </span>
           <span className="relative block min-h-48 md:min-h-full">

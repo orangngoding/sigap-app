@@ -134,7 +134,7 @@ export function PratinjauKartu() {
             <p className="mt-2 font-bold">Isi tas siaga</p>
             <p>36 liter air minum &middot; 36 porsi makanan &middot; 1 set kotak P3K</p>
             <div className="mt-3 flex items-end justify-between border-t-2 border-black pt-2">
-              <p className="max-w-[70%] text-[11px]">Bukan pengganti arahan BPBD, BMKG, atau petugas berwenang.</p>
+              <p className="max-w-[70%] text-xs">Bukan pengganti arahan BPBD, BMKG, atau petugas berwenang.</p>
               <div className="grid size-12 grid-cols-4 gap-0.5">{Array.from({ length: 16 }, (_, i) => <span key={i} className={(i * 7) % 3 ? "bg-black" : "bg-white"} />)}</div>
             </div>
           </div>

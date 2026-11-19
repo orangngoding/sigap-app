@@ -121,7 +121,7 @@ export function DaruratView() {
           <h2 id="d-nomor" className="sr-only">Nomor penting</h2>
           <a href={`tel:${utama.nomor}`} className={`group relative flex min-h-36 items-center gap-5 overflow-hidden rounded-3xl bg-red-600 p-6 text-white shadow-2xl shadow-red-900/50 hover:bg-red-500 ${FOKUS}`}>
             <span className="relative flex size-20 shrink-0 items-center justify-center rounded-full bg-white text-red-600">
-              <span className="absolute inset-0 animate-ping rounded-full bg-white/50 motion-reduce:animate-none" aria-hidden="true" />
+              <span className="absolute inset-0 animate-ping [animation-iteration-count:3]! rounded-full bg-white/50 motion-reduce:animate-none" aria-hidden="true" />
               <Phone className="relative size-9" aria-hidden="true" />
             </span>
             <span>
@@ -224,8 +224,8 @@ export function DaruratView() {
             </ul>
           )}
           <p className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-base">
-            <Link href="/rencana/kartu" className="underline underline-offset-4">Buka Kartu Siaga</Link>
-            <Link href="/rencana/profil" className="underline underline-offset-4">Isi atau ubah profil</Link>
+            <Link href="/rencana/kartu" className="inline-flex min-h-14 items-center underline underline-offset-4">Buka Kartu Siaga</Link>
+            <Link href="/rencana/profil" className="inline-flex min-h-14 items-center underline underline-offset-4">Isi atau ubah profil</Link>
           </p>
         </section>
 

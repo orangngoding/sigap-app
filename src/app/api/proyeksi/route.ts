@@ -12,7 +12,7 @@ const Query = z.object({
   lon: z.coerce.number().min(94).max(142),
 });
 
-/** Mesin Waktu Iklim: metrik proyeksi iklim 1990-an, kini, dan menuju 2050 untuk satu lokasi. */
+/** Siaga Iklim: metrik proyeksi iklim (tahunan dan per bulan) 1990-an, saat ini (2011-2030), dan 2031-2050 untuk satu lokasi. */
 export async function GET(req: Request) {
   const started = Date.now();
   try {

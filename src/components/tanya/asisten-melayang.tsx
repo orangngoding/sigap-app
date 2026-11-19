@@ -48,7 +48,7 @@ export function AsistenMelayang() {
             <div className="flex items-center gap-1">
               <button
                 type="button" onClick={() => useTanyaStore.getState().sesiBaru()}
-                className="inline-flex size-10 items-center justify-center rounded-lg hover:bg-muted focus-visible:outline-2 focus-visible:outline-primary"
+                className="inline-flex size-11 items-center justify-center rounded-lg hover:bg-muted focus-visible:outline-2 focus-visible:outline-primary"
                 aria-label="Percakapan baru" title="Percakapan baru"
               >
                 <Plus className="size-4" aria-hidden="true" />
@@ -56,14 +56,14 @@ export function AsistenMelayang() {
               <Link
                 href="/tanya"
                 onClick={() => setTerbuka(false)}
-                className="inline-flex size-10 items-center justify-center rounded-lg hover:bg-muted focus-visible:outline-2 focus-visible:outline-primary"
+                className="inline-flex size-11 items-center justify-center rounded-lg hover:bg-muted focus-visible:outline-2 focus-visible:outline-primary"
                 aria-label="Buka halaman Asisten dan riwayat"
                 title="Buka halaman Asisten dan riwayat"
               >
                 <Maximize2 className="size-4" aria-hidden="true" />
               </Link>
               <Dialog.Close
-                className="inline-flex size-10 items-center justify-center rounded-lg hover:bg-muted focus-visible:outline-2 focus-visible:outline-primary"
+                className="inline-flex size-11 items-center justify-center rounded-lg hover:bg-muted focus-visible:outline-2 focus-visible:outline-primary"
                 aria-label="Tutup Asisten"
               >
                 <X className="size-5" aria-hidden="true" />

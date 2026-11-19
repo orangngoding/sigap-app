@@ -48,7 +48,7 @@ export function IklimCard({ lat, lon }: { lat: number; lon: number }) {
             </p>
             <p className="text-xs text-muted-foreground">{d.catatan}</p>
             <Link href="/iklim" className="inline-flex min-h-9 items-center gap-1 text-sm font-semibold text-primary underline underline-offset-2">
-              Lihat proyeksi iklim wilayah ini menuju 2050 <ArrowRight className="size-4" aria-hidden="true" />
+              Lihat bulan rawan dan uji kesiapan rumah Anda <ArrowRight className="size-4" aria-hidden="true" />
             </Link>
           </div>
         );

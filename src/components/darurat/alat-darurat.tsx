@@ -4,6 +4,7 @@ import { createPortal } from "react-dom";
 // dan kirim lokasi (GPS perangkat; dikirim lewat WhatsApp/SMS/menu Bagikan oleh pengguna sendiri).
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Flashlight, LocateFixed, Loader2, Megaphone, Square, X } from "lucide-react";
+import { PESAN_TIDAK_AMAN, pesanGalatLokasi } from "@/lib/geo/galat-lokasi";
 
 const FOKUS = "focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-white";
 const KARTU = `flex min-h-24 flex-col items-start justify-between gap-2 rounded-2xl border-2 p-4 text-left transition-colors ${FOKUS}`;
@@ -101,6 +102,11 @@ function KirimLokasi() {
       setPesan("Perangkat ini tidak mendukung lokasi.");
       return;
     }
+    if (!window.isSecureContext) {
+      setStatus("galat");
+      setPesan(PESAN_TIDAK_AMAN);
+      return;
+    }
     setStatus("mencari");
     navigator.geolocation.getCurrentPosition(
       (p) => {
@@ -109,7 +115,7 @@ function KirimLokasi() {
       },
       (e) => {
         setStatus("galat");
-        setPesan(e.code === 1 ? "Izin lokasi ditolak. Izinkan lokasi di pengaturan peramban." : "Lokasi belum didapat. Coba di tempat terbuka.");
+        void pesanGalatLokasi(e).then(setPesan);
       },
       { enableHighAccuracy: true, timeout: 20_000, maximumAge: 30_000 },
     );

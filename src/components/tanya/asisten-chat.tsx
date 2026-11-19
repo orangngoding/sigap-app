@@ -51,7 +51,7 @@ function Sumber({ h }: { h: NonNullable<PesanChat["hasil"]> }) {
       {semua.slice(0, 4).map((x, i) => (
         <li key={x.key}>
           <a href={x.url} target="_blank" rel="noreferrer" title={x.judul} className="inline-flex max-w-[16rem] items-center gap-1.5 rounded-full border border-border bg-background px-2.5 py-1 text-xs font-medium text-foreground hover:border-primary/40 hover:text-primary">
-            <span className="flex size-4 shrink-0 items-center justify-center rounded-full bg-primary/10 text-[10px] font-bold text-primary">{i + 1}</span>
+            <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">{i + 1}</span>
             <span className="truncate">{x.judul}</span>
           </a>
         </li>
@@ -171,7 +171,7 @@ function Gelembung({
         {p.hasil?.aksi && p.hasil.aksi.length > 0 && (
           <div className="mt-3 flex flex-wrap gap-2">
             {p.hasil.aksi.map((a) => (
-              <Link key={a.id} href={a.href} className="group inline-flex min-h-10 items-center gap-1.5 rounded-xl bg-primary/10 px-3.5 text-sm font-semibold text-primary hover:bg-primary hover:text-primary-foreground focus-visible:outline-2 focus-visible:outline-primary">
+              <Link key={a.id} href={a.href} className="group inline-flex min-h-11 items-center gap-1.5 rounded-xl bg-primary/10 px-3.5 text-sm font-semibold text-primary hover:bg-primary hover:text-primary-foreground focus-visible:outline-2 focus-visible:outline-primary">
                 {a.label} <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
               </Link>
             ))}
@@ -328,7 +328,7 @@ export function AsistenChat({ varian = "halaman" }: Props) {
             {saran.length > 0 && (
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex flex-wrap gap-2 pl-11" aria-label="Saran pertanyaan">
                 {saran.map((s) => (
-                  <button key={s} type="button" disabled={memuatGlobal} onClick={() => tanya(s)} className="inline-flex min-h-10 items-center gap-1.5 rounded-full border border-primary/25 bg-primary/5 px-3.5 text-left text-sm font-medium text-primary hover:bg-primary/10 focus-visible:outline-2 focus-visible:outline-primary disabled:opacity-50">
+                  <button key={s} type="button" disabled={memuatGlobal} onClick={() => tanya(s)} className="inline-flex min-h-11 items-center gap-1.5 rounded-full border border-primary/25 bg-primary/5 px-3.5 text-left text-sm font-medium text-primary hover:bg-primary/10 focus-visible:outline-2 focus-visible:outline-primary disabled:opacity-50">
                     <Sparkles className="size-3.5 shrink-0" aria-hidden="true" /> {s}
                   </button>
                 ))}
@@ -360,21 +360,21 @@ export function AsistenChat({ varian = "halaman" }: Props) {
                 <button
                   type="button" onClick={dikte.mendengar ? dikte.berhenti : dikte.mulai} disabled={memuatGlobal}
                   aria-pressed={dikte.mendengar} aria-label={dikte.mendengar ? "Berhenti mendengarkan" : "Bertanya dengan suara"}
-                  className={`relative inline-flex size-10 items-center justify-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:opacity-50 ${dikte.mendengar ? "bg-destructive text-white" : "text-muted-foreground hover:bg-muted hover:text-foreground"}`}
+                  className={`relative inline-flex size-11 items-center justify-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:opacity-50 ${dikte.mendengar ? "bg-destructive text-white" : "text-muted-foreground hover:bg-muted hover:text-foreground"}`}
                 >
                   {dikte.mendengar && <span className="absolute inset-0 animate-ping rounded-full bg-destructive/40 motion-reduce:animate-none" aria-hidden="true" />}
                   {dikte.mendengar ? <MicOff className="relative size-4" aria-hidden="true" /> : <Mic className="size-4" aria-hidden="true" />}
                 </button>
               )}
               {memuatGlobal ? (
-                <button type="button" onClick={batal} aria-label="Hentikan jawaban" className="inline-flex size-10 items-center justify-center rounded-full bg-foreground text-background hover:bg-foreground/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+                <button type="button" onClick={batal} aria-label="Hentikan jawaban" className="inline-flex size-11 items-center justify-center rounded-full bg-foreground text-background hover:bg-foreground/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
                   <Square className="size-4 fill-current" aria-hidden="true" />
                 </button>
               ) : (
                 <button
                   type="submit" disabled={q.trim().length < 2 || kepanjangan}
                   aria-label={peringatan ? "Jelaskan peringatan" : "Kirim pertanyaan"}
-                  className="inline-flex size-10 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-sm shadow-primary/30 hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:bg-muted disabled:text-muted-foreground disabled:shadow-none"
+                  className="inline-flex size-11 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-sm shadow-primary/30 hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:bg-muted disabled:text-muted-foreground disabled:shadow-none"
                 >
                   <ArrowUp className="size-5" aria-hidden="true" />
                 </button>

@@ -49,7 +49,7 @@ export function KartuView() {
   if (!lokasi || !profil || !rencana) {
     return (
       <div className="rounded-2xl border border-border bg-surface p-8 text-center">
-        <p className="font-semibold">Kartu Siaga dibuat dari rencana Anda.</p>
+        <h1 className="font-semibold">Kartu Siaga dibuat dari rencana Anda.</h1>
         <p className="mt-1 text-sm text-muted-foreground">Pilih lokasi dan isi profil keluarga dulu, lalu buka Rencana Siaga.</p>
         <Link href="/rencana" className="mt-4 inline-flex min-h-12 items-center rounded-lg bg-primary px-6 text-sm font-semibold text-primary-foreground">Ke Rencana Siaga</Link>
       </div>

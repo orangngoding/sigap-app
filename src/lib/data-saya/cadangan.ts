@@ -7,7 +7,7 @@ export const AWALAN = "sigap:v1:";
 export const MAKS_BYTE_CADANGAN = 2 * 1024 * 1024;
 
 /** Kunci yang boleh dipulihkan. Cache respons data dan antrean toast tidak ikut (bisa dibuat ulang). */
-const POLA_KUNCI = /^sigap:v1:(lokasi|profil|progres|rencana|kartu|tanya|latihan|tas)$/;
+const POLA_KUNCI = /^sigap:v1:(lokasi|profil|progres|rencana|kartu|tanya|latihan|tas|iklimrumah)$/;
 
 export interface IsiCadangan {
   diekspor: string | null;
@@ -19,16 +19,16 @@ export interface IsiCadangan {
 export type HasilBaca = { ok: true; isi: IsiCadangan } | { ok: false; pesan: string };
 
 export function bacaCadangan(teks: string): HasilBaca {
-  if (new TextEncoder().encode(teks).length > MAKS_BYTE_CADANGAN) return { ok: false, pesan: "File terlalu besar untuk cadangan SIGAP." };
+  if (new TextEncoder().encode(teks).length > MAKS_BYTE_CADANGAN) return { ok: false, pesan: "Berkas terlalu besar untuk data SIGAP." };
   let json: unknown;
   try {
     json = JSON.parse(teks);
   } catch {
-    return { ok: false, pesan: "File bukan JSON yang valid. Pilih file data-sigap.json hasil ekspor." };
+    return { ok: false, pesan: "Berkas ini bukan data SIGAP. Pilih berkas “Data-SIGAP…” yang Anda simpan dari HP lama." };
   }
   const o = json as { diekspor?: unknown; data?: unknown };
   if (!o || typeof o !== "object" || !o.data || typeof o.data !== "object" || Array.isArray(o.data)) {
-    return { ok: false, pesan: "Isi file tidak dikenali sebagai cadangan SIGAP." };
+    return { ok: false, pesan: "Isi berkas tidak dikenali sebagai data SIGAP." };
   }
   const kunci: Record<string, string> = {};
   const dilewati: string[] = [];
@@ -44,7 +44,7 @@ export function bacaCadangan(teks: string): HasilBaca {
     }
     kunci[k] = JSON.stringify(v);
   }
-  if (Object.keys(kunci).length === 0) return { ok: false, pesan: "Tidak ada data SIGAP yang bisa dipulihkan dari file ini." };
+  if (Object.keys(kunci).length === 0) return { ok: false, pesan: "Tidak ada data SIGAP yang bisa dipulihkan dari berkas ini." };
   const diekspor = typeof o.diekspor === "string" && !Number.isNaN(Date.parse(o.diekspor)) ? o.diekspor : null;
   return { ok: true, isi: { diekspor, kunci, dilewati } };
 }
@@ -58,6 +58,7 @@ const LABEL: Record<string, string> = {
   tanya: "riwayat Asisten",
   latihan: "hasil Latihan Siaga",
   tas: "kedaluwarsa tas siaga",
+  iklimrumah: "jawaban Siaga Iklim",
 };
 
 /** Daftar isi cadangan yang mudah dibaca, untuk konfirmasi sebelum memulihkan. */

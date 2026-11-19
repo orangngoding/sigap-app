@@ -219,3 +219,39 @@ export const AdaptasiRequest = z.object({
   bahaya: z.array(HazardId).max(9).optional(),
   konteks: KonteksTanyaSchema.omit({ wilayah: true }).optional(),
 });
+
+// ---------- Siaga Iklim: Penasihat Keputusan ----------
+export const KeputusanIklimRequest = z.object({
+  lokasi: z.object({
+    lat: z.number().min(-12).max(7),
+    lon: z.number().min(94).max(142),
+    kabKota: namaWilayahTanya,
+    provinsi: namaWilayahTanya,
+  }),
+  rumah: z.object({
+    anggota: z.number().int().min(1).max(12),
+    rentan: z.number().int().min(0).max(12),
+    litersTersimpan: z.number().int().min(0).max(50_000),
+    atap: z.enum(["seng", "genteng", "beton", "lainnya"]),
+    sumberAir: z.enum(["pdam", "sumur", "beli", "lainnya"]),
+    gangguanAir: z.enum(["jarang", "hari", "minggu", "kemarau"]),
+    pernahTergenang: z.boolean(),
+  }),
+  /** Keinginan atau batasan pengguna dengan kata sendiri (ruang, anggaran, status rumah). Diperlakukan sebagai data. */
+  kendala: z.string().trim().max(300).optional(),
+});
+
+export const KeputusanIklimKeluaran = z.object({
+  ringkasan: z.string().min(20).max(420),
+  opsi: z
+    .array(
+      z.object({
+        id: z.string().min(3).max(40),
+        alasan: z.string().min(10).max(260),
+        langkahPertama: z.string().min(10).max(200),
+      }),
+    )
+    .min(1)
+    .max(3),
+});
+export type KeputusanIklimKeluaranT = z.infer<typeof KeputusanIklimKeluaran>;

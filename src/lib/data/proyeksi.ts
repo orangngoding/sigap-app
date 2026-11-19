@@ -1,4 +1,4 @@
-// Mesin Waktu Iklim: proyeksi iklim harian 1991-2050 dari model CMIP6 resolusi tinggi (HighResMIP, Open-Meteo
+// Siaga Iklim (sebelumnya Mesin Waktu Iklim): proyeksi iklim harian 1991-2050 dari model CMIP6 resolusi tinggi (HighResMIP, Open-Meteo
 // Climate API, dikoreksi bias terhadap ERA5), diringkas KODE menjadi metrik per periode. Bukan ramalan cuaca:
 // angka adalah rata-rata per tahun dalam periode 20 tahun, dari dua model, dengan rentang antar-model.
 import type { ApiBase } from "@/types";
@@ -14,8 +14,8 @@ export const NAMA_MODEL: Record<ModelProyeksi, string> = {
 
 export const PERIODE = [
   { id: "dulu", label: "1990-an", awal: 1991, akhir: 2010 },
-  { id: "kini", label: "Kini", awal: 2011, akhir: 2030 },
-  { id: "2050", label: "Menuju 2050", awal: 2031, akhir: 2050 },
+  { id: "kini", label: "Saat ini", awal: 2011, akhir: 2030 },
+  { id: "2050", label: "10-25 tahun lagi", awal: 2031, akhir: 2050 },
 ] as const;
 export type IdPeriode = (typeof PERIODE)[number]["id"];
 
@@ -31,6 +31,16 @@ export interface Nilai {
   maks: number;
 }
 
+/** Rata-rata per bulan kalender (indeks 0 = Januari) dalam satu periode 20 tahun. */
+export interface MetrikBulan {
+  hariSangatPanas: number;
+  hariHujanEkstrem: number;
+  hujanMm: number;
+}
+export type Bulanan = Record<IdPeriode, MetrikBulan[]>;
+/** Hari berturut-turut tanpa hujan pada tahun terburuk dalam periode itu (rata-rata antar-model). */
+export type KemarauTerburuk = Record<IdPeriode, number>;
+
 export interface ProyeksiResponse extends ApiBase {
   grid: { lat: number; lon: number };
   model: string[];
@@ -38,6 +48,9 @@ export interface ProyeksiResponse extends ApiBase {
   periode: Array<{ id: IdPeriode; label: string; awal: number; akhir: number; metrik: Record<KunciMetrik, Nilai> }>;
   /** Perubahan "Menuju 2050" dibanding "1990-an" (rata-rata ensemble). */
   perubahan: Record<KunciMetrik, number>;
+  /** Pola per bulan untuk Kalender Risiko dan Uji Ketahanan Rumah. */
+  bulanan: Bulanan;
+  kemarauTerburuk: KemarauTerburuk;
   /** Deret tahunan rata-rata ensemble untuk grafik. */
   tahunan: Array<{ tahun: number; suhuMaks: number | null; hariSangatPanas: number; hujan: number }>;
   catatan: string;
@@ -118,6 +131,25 @@ function tahunanModel(dm: DeretModel, sangatPanas: number, hujanEkstrem: number)
   }));
 }
 
+/** Hitungan per bulan kalender untuk tiap tahun: hari sangat panas, hari hujan ekstrem, dan total hujan. */
+function bulanTahunan(dm: DeretModel, sangatPanas: number, hujanEkstrem: number): Map<number, MetrikBulan[]> {
+  const per = new Map<number, MetrikBulan[]>();
+  for (let i = 0; i < dm.time.length; i++) {
+    const tahun = Number(dm.time[i].slice(0, 4));
+    const bulan = Number(dm.time[i].slice(5, 7)) - 1;
+    let y = per.get(tahun);
+    if (!y) per.set(tahun, (y = Array.from({ length: 12 }, () => ({ hariSangatPanas: 0, hariHujanEkstrem: 0, hujanMm: 0 }))));
+    const t = dm.tmax[i];
+    const h = dm.hujan[i];
+    if (typeof t === "number" && t > sangatPanas) y[bulan].hariSangatPanas++;
+    if (typeof h === "number") {
+      y[bulan].hujanMm += h;
+      if (h > hujanEkstrem) y[bulan].hariHujanEkstrem++;
+    }
+  }
+  return per;
+}
+
 const KUNCI: KunciMetrik[] = ["suhuMaksRata", "hariPanas", "hariSangatPanas", "hujanTahunan", "hariHujanEkstrem", "keringTerpanjang"];
 const ambilMetrik = (y: TahunModel, k: KunciMetrik): number | null =>
   k === "suhuMaksRata" ? y.suhuMaks : k === "hujanTahunan" ? y.hujanTahunan : y[k];
@@ -158,6 +190,27 @@ export function hitungProyeksi(raw: Raw, lat: number, lon: number, now = new Dat
     perubahan[k] = k === "hujanTahunan" ? Math.round(d) : r1(d);
   }
 
+  // Pola per bulan: rata-rata atas tahun dalam periode, lalu atas model.
+  const bulanModel = deret.map(({ d }, i) => bulanTahunan(d, ambangModel[i].sangatPanas, ambangModel[i].hujanEkstrem));
+  const bulanan = {} as Bulanan;
+  const kemarauTerburuk = {} as KemarauTerburuk;
+  for (const pr of PERIODE) {
+    const perM = bulanModel.map((m) => {
+      const tahunTerisi = [...m.entries()].filter(([t]) => t >= pr.awal && t <= pr.akhir).map(([, v]) => v);
+      return Array.from({ length: 12 }, (_, b) => ({
+        hariSangatPanas: rata(tahunTerisi.map((v) => v[b].hariSangatPanas)),
+        hariHujanEkstrem: rata(tahunTerisi.map((v) => v[b].hariHujanEkstrem)),
+        hujanMm: rata(tahunTerisi.map((v) => v[b].hujanMm)),
+      }));
+    });
+    bulanan[pr.id] = Array.from({ length: 12 }, (_, b) => ({
+      hariSangatPanas: r1(rata(perM.map((m) => m[b].hariSangatPanas))),
+      hariHujanEkstrem: r1(rata(perM.map((m) => m[b].hariHujanEkstrem))),
+      hujanMm: Math.round(rata(perM.map((m) => m[b].hujanMm))),
+    }));
+    kemarauTerburuk[pr.id] = Math.round(rata(perModel.map((tahun) => Math.max(0, ...tahun.filter((y) => y.tahun >= pr.awal && y.tahun <= pr.akhir).map((y) => y.keringTerpanjang)))));
+  }
+
   const semuaTahun = [...new Set(perModel.flatMap((t) => t.map((y) => y.tahun)))].sort((a, b) => a - b);
   const tahunan = semuaTahun.map((tahun) => {
     const ys = perModel.map((t) => t.find((y) => y.tahun === tahun)).filter((y): y is TahunModel => Boolean(y));
@@ -177,6 +230,8 @@ export function hitungProyeksi(raw: Raw, lat: number, lon: number, now = new Dat
     },
     periode,
     perubahan,
+    bulanan,
+    kemarauTerburuk,
     tahunan,
     catatan:
       "Proyeksi model iklim global resolusi tinggi (sekitar 25 km) dengan skenario emisi tinggi, dikoreksi bias terhadap data ERA5. Angka adalah rata-rata per tahun dalam periode 20 tahun, bukan ramalan cuaca untuk hari atau tahun tertentu.",

@@ -54,12 +54,17 @@ function kumpulkanData(): Record<string, unknown> {
 }
 
 const ukuranKb = (data: Record<string, unknown>) => Math.max(1, Math.round(new Blob([JSON.stringify(data)]).size / 1024));
-const namaFile = () => `cadangan-sigap-${new Date().toISOString().slice(0, 10)}.json`;
+const NAMA_BULAN = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"];
+// Ekstensi .sigap (isinya tetap teks biasa) agar tidak tampak seperti berkas teknis di galeri atau WhatsApp.
+const namaFile = () => {
+  const d = new Date();
+  return `Data-SIGAP-${d.getDate()}-${NAMA_BULAN[d.getMonth()]}-${d.getFullYear()}.sigap`;
+};
 
 function berkasCadangan(): File {
   const isi = {
     aplikasi: "SIGAP",
-    catatan: "File cadangan khusus SIGAP. Tidak perlu dibuka. Untuk memulihkan: buka SIGAP > Data & privasi > Pulihkan dari file.",
+    catatan: "Data SIGAP Anda. Tidak perlu dibuka. Untuk memasukkannya ke HP baru: buka SIGAP > Data & privasi > Ambil data dari HP lama.",
     diekspor: new Date().toISOString(),
     data: kumpulkanData(),
   };
@@ -143,16 +148,16 @@ export function DataSayaView() {
     a.download = namaFile();
     a.click();
     setTimeout(() => URL.revokeObjectURL(url), 1000); // dicabut langsung dapat membatalkan unduhan di Safari
-    toast("File cadangan tersimpan di folder Unduhan. Kirim file ini ke HP baru Anda.");
+    toast("Data Anda tersimpan di folder Unduhan. Kirim ke HP baru Anda, lalu ambil lewat “Ambil data dari HP lama”.");
   };
 
-  // Di HP: langsung kirim file cadangan lewat menu Bagikan (WhatsApp, Drive, email) bila peramban mendukung.
+  // Di HP: langsung kirim data lewat menu Bagikan (WhatsApp, Drive, email) bila peramban mendukung.
   const bisaBagikan = useSyncExternalStore(() => () => {}, () => "canShare" in navigator, () => false);
   const bagikan = async () => {
     const f = berkasCadangan();
     try {
       if (navigator.canShare?.({ files: [f] })) {
-        await navigator.share({ files: [f], title: "Cadangan data SIGAP", text: "File cadangan SIGAP. Buka SIGAP > Data & privasi > Pulihkan dari file." });
+        await navigator.share({ files: [f], title: "Data SIGAP saya", text: "Data SIGAP saya. Di HP baru, buka SIGAP > Data & privasi > Ambil data dari HP lama, lalu pilih berkas ini." });
         return;
       }
     } catch (e) {
@@ -177,10 +182,10 @@ export function DataSayaView() {
       // Data lama dibersihkan dulu agar tidak tercampur, lalu halaman dimuat ulang supaya semua store membaca data baru.
       hapusSisaKunci();
       for (const [k, v] of Object.entries(cadangan.kunci)) localStorage.setItem(k, v);
-      toast("Data dipulihkan dari cadangan.");
+      toast("Data Anda sudah dimasukkan.");
       window.location.reload();
     } catch {
-      setGalatPulih("Penyimpanan perangkat penuh atau diblokir, data belum dapat dipulihkan.");
+      setGalatPulih("Penyimpanan perangkat penuh atau diblokir, data belum dapat dimasukkan.");
     }
   };
 
@@ -263,13 +268,13 @@ export function DataSayaView() {
         <div className="p-6 sm:p-8">
           <h2 id="judul-cadangan" className="flex items-center gap-2 text-2xl font-extrabold tracking-tight"><Smartphone className="size-6 text-primary" aria-hidden="true" /> Pindahkan data ke HP lain</h2>
           <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-            Karena SIGAP tidak memakai akun, data tidak ikut pindah sendiri. Simpan <strong className="text-foreground">file cadangan</strong>, lalu buka di HP baru. File ini khusus untuk SIGAP; Anda tidak perlu membukanya.
+            Rencana siaga, kontak darurat, dan titik kumpul Anda hanya tersimpan di HP ini, karena SIGAP tidak memakai akun. Agar tidak hilang saat ganti HP atau data peramban terhapus, <strong className="text-foreground">simpan data Anda</strong> lalu masukkan lagi di HP baru. Anda tidak perlu membuka berkasnya.
           </p>
           <ol className="mt-6 grid gap-4 sm:grid-cols-3">
             {[
-              { n: 1, Ikon: Download, judul: "Simpan cadangan", isi: "Di HP lama, ketuk tombol di bawah." },
-              { n: 2, Ikon: Share2, judul: "Kirim filenya", isi: "Lewat WhatsApp ke diri sendiri, Google Drive, atau email." },
-              { n: 3, Ikon: Upload, judul: "Pulihkan di HP baru", isi: "Buka halaman ini di HP baru, lalu “Pulihkan dari file”." },
+              { n: 1, Ikon: Download, judul: "Simpan data", isi: "Di HP lama, ketuk tombol di bawah." },
+              { n: 2, Ikon: Share2, judul: "Kirim ke diri sendiri", isi: "Lewat WhatsApp ke nomor sendiri, Google Drive, atau email." },
+              { n: 3, Ikon: Upload, judul: "Ambil di HP baru", isi: "Buka halaman ini di HP baru, ketuk “Ambil data dari HP lama”, lalu pilih berkas tadi." },
             ].map(({ n, Ikon, judul, isi }) => (
               <li key={n} className="relative rounded-2xl border border-border bg-background p-4">
                 <span className="absolute right-4 top-4 text-3xl font-extrabold text-primary/15" aria-hidden="true">{n}</span>
@@ -282,15 +287,15 @@ export function DataSayaView() {
           <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             {bisaBagikan && (
               <button type="button" onClick={() => void bagikan()} disabled={!adaData} className={`${BTN_UTAMA} disabled:opacity-50`}>
-                <Share2 className="size-4" aria-hidden="true" /> Kirim cadangan (WhatsApp, Drive, email)
+                <Share2 className="size-4" aria-hidden="true" /> Kirim data saya (WhatsApp, Drive, email)
               </button>
             )}
             <button type="button" onClick={unduh} disabled={!adaData} className={`${bisaBagikan ? BTN : BTN_UTAMA} disabled:opacity-50`}>
-              <Download className="size-4" aria-hidden="true" /> Simpan file cadangan
+              <Download className="size-4" aria-hidden="true" /> Simpan data ke HP ini
             </button>
-            <label className={`${BTN} cursor-pointer`}>
-              <Upload className="size-4" aria-hidden="true" /> Pulihkan dari file
-              <input ref={pemilihFile} type="file" accept="application/json,.json" className="sr-only" onChange={(e) => void pilihFile(e.target.files?.[0])} />
+            <label className={`${BTN} cursor-pointer has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-primary`}>
+              <Upload className="size-4" aria-hidden="true" /> Ambil data dari HP lama
+              <input ref={pemilihFile} type="file" accept=".sigap,.json,application/json" className="sr-only" onChange={(e) => void pilihFile(e.target.files?.[0])} />
             </label>
           </div>
           {siap && !adaData && <p className="mt-3 text-sm text-muted-foreground">Belum ada data untuk dicadangkan. Mulai dari <Link href="/lokasi" className="font-semibold text-primary underline">memilih lokasi</Link>.</p>}
@@ -301,13 +306,13 @@ export function DataSayaView() {
               {cadangan && (
                 <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} role="alertdialog" aria-labelledby="judul-pulih" className="mt-4 rounded-2xl border border-primary/30 bg-primary/5 p-4">
                   <p id="judul-pulih" className="flex items-center gap-2 font-semibold text-foreground">
-                    <FileCheck2 className="size-5 text-primary" aria-hidden="true" /> Pulihkan cadangan{cadangan.diekspor ? ` dari ${waktuMutlak(cadangan.diekspor)}` : ""}?
+                    <FileCheck2 className="size-5 text-primary" aria-hidden="true" /> Masukkan data{cadangan.diekspor ? ` yang disimpan ${waktuMutlak(cadangan.diekspor)}` : ""}?
                   </p>
                   <p className="mt-1 text-sm text-muted-foreground">
-                    Berisi: {ringkasIsi(cadangan).join(", ")}. Data SIGAP yang ada di perangkat ini sekarang akan diganti.
+                    Berisi: {ringkasIsi(cadangan).join(", ")}. Data SIGAP yang ada di HP ini sekarang akan diganti.
                   </p>
                   <div className="mt-3 flex flex-wrap gap-2">
-                    <button type="button" onClick={pulihkan} className={BTN_UTAMA}>Ya, pulihkan</button>
+                    <button type="button" onClick={pulihkan} className={BTN_UTAMA}>Ya, masukkan data</button>
                     <button type="button" onClick={() => setCadangan(null)} className={BTN}>Batal</button>
                   </div>
                 </motion.div>
@@ -317,7 +322,7 @@ export function DataSayaView() {
         </div>
         <p className="flex items-start gap-2 border-t border-border bg-muted/40 px-6 py-3 text-xs text-muted-foreground sm:px-8">
           <Lock className="mt-0.5 size-3.5 shrink-0" aria-hidden="true" />
-          File cadangan berisi kontak darurat dan titik kumpul Anda. Simpan di tempat pribadi dan jangan unggah ke grup umum.
+          Berkas ini berisi kontak darurat dan titik kumpul Anda. Simpan di tempat pribadi dan jangan kirim ke grup umum.
         </p>
       </section>
 
@@ -329,7 +334,7 @@ export function DataSayaView() {
             <button type="button" onClick={() => setKonfirmasi(true)} className={BTN}><Trash2 className="size-4" aria-hidden="true" /> Hapus semua data saya</button>
           ) : (
             <div role="alertdialog" aria-labelledby="judul-hapus" className="rounded-2xl border border-red-200 bg-surface p-4">
-              <p id="judul-hapus" className="font-semibold text-red-900">Hapus semua data SIGAP dari perangkat ini? Tindakan ini tidak bisa dibatalkan. Simpan cadangan dulu bila masih diperlukan.</p>
+              <p id="judul-hapus" className="font-semibold text-red-900">Hapus semua data SIGAP dari perangkat ini? Tindakan ini tidak bisa dibatalkan. Simpan data Anda dulu bila masih diperlukan.</p>
               <div className="mt-3 flex flex-wrap gap-2">
                 <button type="button" onClick={hapusSemua} className="inline-flex min-h-12 items-center gap-2 rounded-xl bg-destructive px-5 text-sm font-semibold text-white hover:bg-red-800">Ya, hapus semua</button>
                 <button type="button" onClick={() => setKonfirmasi(false)} className={BTN}>Batal</button>

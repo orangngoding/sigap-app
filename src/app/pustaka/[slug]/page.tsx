@@ -3,13 +3,14 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, BookOpenCheck, Clock, ExternalLink, Siren } from "lucide-react";
+import { ArrowLeft, ArrowRight, BookOpenCheck, Clock, ExternalLink, Siren } from "lucide-react";
 import { fotoArtikel } from "@/lib/gambar";
 import { Foto } from "@/components/global/foto";
 import { TombolTanya } from "@/components/tanya/tombol-tanya";
 import { notFound } from "next/navigation";
 import { DisclaimerBox } from "@/components/global/disclaimer-box";
 import { CetakArtikel } from "@/components/pustaka/cetak-artikel";
+import { BilahArtikel, DaftarIsiSamping } from "@/components/pustaka/navigasi-artikel";
 import { ARTIKEL_BY_SLUG, SEMUA_ARTIKEL, artikelTerkait } from "@/lib/pustaka/data";
 
 type ArtikelPageProps = {
@@ -44,6 +45,10 @@ async function ArtikelPageIsi({
   if (!a) notFound();
   const foto = fotoArtikel(a.slug, a.hazards);
   const terkait = artikelTerkait(a);
+  const isi = a.bagian.map((b) => ({ id: idBagian(b.judul), judul: b.judul }));
+  const urutan = SEMUA_ARTIKEL.findIndex((x) => x.slug === a.slug);
+  const sebelumnya = urutan > 0 ? SEMUA_ARTIKEL[urutan - 1] : null;
+  const berikutnya = urutan >= 0 && urutan < SEMUA_ARTIKEL.length - 1 ? SEMUA_ARTIKEL[urutan + 1] : null;
   const jumlahButir = a.bagian.reduce((n, b) => n + b.butir.length, 0);
 
   return (
@@ -55,7 +60,7 @@ async function ArtikelPageIsi({
           <Image src={foto.src} alt={foto.alt} fill loading="eager" fetchPriority="high" sizes="100vw" className="ken-burns -z-20 object-cover" />
           <div className="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/60 to-ink/10" aria-hidden="true" />
           <div className="mx-auto w-full max-w-7xl px-4 pb-10 pt-24 sm:px-6 lg:px-8">
-            <Link href="/pustaka" data-masuk className="tanpa-cetak inline-flex min-h-10 items-center gap-1.5 rounded-full border border-white/25 bg-white/10 px-4 text-sm font-semibold backdrop-blur hover:bg-white/20">
+            <Link href="/pustaka" data-masuk className="tanpa-cetak inline-flex min-h-11 items-center gap-1.5 rounded-full border border-white/25 bg-white/10 px-4 text-sm font-semibold backdrop-blur hover:bg-white/20">
               <ArrowLeft className="size-4" aria-hidden="true" /> Pustaka
             </Link>
             <p data-masuk className="mt-5 text-sm font-semibold uppercase tracking-wider text-emerald-300">{a.kategori}</p>
@@ -66,13 +71,15 @@ async function ArtikelPageIsi({
           </div>
         </header>
 
+        <BilahArtikel bagian={isi} />
+
         <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[minmax(0,1fr)_18rem] lg:px-8 print:block print:max-w-none print:px-0 print:py-4">
           <div className="min-w-0 max-w-3xl">
             <p className="hidden text-sm print:block">Dicetak dari SIGAP · Pustaka · panduan dari sumber resmi BNPB dan BMKG</p>
             <p className="text-xl leading-relaxed text-foreground">{a.intro}</p>
 
             {a.bagian.map((b) => (
-              <section key={b.judul} className="mt-12 scroll-mt-24" id={idBagian(b.judul)} aria-labelledby={`${idBagian(b.judul)}-j`}>
+              <section key={b.judul} className="mt-12" id={idBagian(b.judul)} aria-labelledby={`${idBagian(b.judul)}-j`}>
                 <h2 id={`${idBagian(b.judul)}-j`} className="text-2xl font-extrabold tracking-tight">{b.judul}</h2>
                 <ol className="mt-5 space-y-3">
                   {b.butir.map((x, i) => (
@@ -103,7 +110,7 @@ async function ArtikelPageIsi({
                 <ul className="mt-3 space-y-2 text-sm">
                   {a.sumber.map((s) => (
                     <li key={s.url}>
-                      <a href={s.url} target="_blank" rel="noreferrer" className="inline-flex items-start gap-1.5 text-primary underline-offset-2 hover:underline">
+                      <a href={s.url} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center gap-1.5 text-primary underline-offset-2 hover:underline">
                         <ExternalLink className="mt-0.5 size-3.5 shrink-0" aria-hidden="true" /> {s.judul}
                       </a>
                     </li>
@@ -116,24 +123,32 @@ async function ArtikelPageIsi({
             )}
 
             <div className="mt-8"><DisclaimerBox /></div>
+
+            {(sebelumnya || berikutnya) && (
+              <nav aria-label="Artikel lainnya" className="tanpa-cetak mt-10 grid gap-3 sm:grid-cols-2">
+                {sebelumnya ? (
+                  <Link href={`/pustaka/${sebelumnya.slug}`} rel="prev" className="angkat group flex min-h-20 flex-col justify-center rounded-2xl border border-border bg-surface p-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+                    <span className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground"><ArrowLeft className="size-3.5" aria-hidden="true" /> Sebelumnya</span>
+                    <span className="mt-1 font-bold leading-snug text-foreground group-hover:text-primary">{sebelumnya.title}</span>
+                  </Link>
+                ) : <span className="hidden sm:block" />}
+                {berikutnya && (
+                  <Link href={`/pustaka/${berikutnya.slug}`} rel="next" className="angkat group flex min-h-20 flex-col justify-center rounded-2xl border border-border bg-surface p-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:items-end sm:text-right">
+                    <span className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Berikutnya <ArrowRight className="size-3.5" aria-hidden="true" /></span>
+                    <span className="mt-1 font-bold leading-snug text-foreground group-hover:text-primary">{berikutnya.title}</span>
+                  </Link>
+                )}
+              </nav>
+            )}
           </div>
 
           {/* Samping: daftar isi, tanya, cetak */}
-          <aside className="tanpa-cetak space-y-4 lg:sticky lg:top-24 lg:self-start">
-            <nav aria-label="Daftar isi" className="rounded-3xl border border-border bg-surface p-5">
-              <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Daftar isi</p>
-              <ol className="mt-3 space-y-1">
-                {a.bagian.map((b) => (
-                  <li key={b.judul}>
-                    <a href={`#${idBagian(b.judul)}`} className="flex min-h-9 items-center rounded-lg px-2 text-sm font-medium text-foreground hover:bg-muted hover:text-primary">{b.judul}</a>
-                  </li>
-                ))}
-              </ol>
-            </nav>
+          <aside className="tanpa-cetak space-y-4 lg:sticky lg:top-32 lg:self-start">
+            <DaftarIsiSamping bagian={isi} />
             <div className="rounded-3xl bg-primary/5 p-5">
               <p className="text-sm font-semibold text-foreground">Masih ada yang ingin ditanyakan?</p>
               <p className="mt-1 text-sm text-muted-foreground">Asisten SIGAP menjawab dengan panduan resmi dan menyesuaikan dengan keluarga Anda.</p>
-              <TombolTanya className="mt-3" label="Tanya tentang artikel ini" pertanyaan={`Saya membaca artikel "${a.title}". Apa hal terpenting yang perlu keluarga saya siapkan?`} />
+              <TombolTanya className="mt-3" label="Tanya tentang artikel ini" pertanyaan={`Saya membaca artikel “${a.title}”. Apa hal terpenting yang perlu keluarga saya siapkan?`} />
             </div>
             <CetakArtikel />
           </aside>

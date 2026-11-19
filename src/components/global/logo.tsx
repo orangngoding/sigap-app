@@ -1,3 +1,5 @@
+import { WARNA_MEREK } from "@/lib/gambar/warna-merek";
+
 /**
  * Logo SIGAP: perisai (siaga dan perlindungan) berisi daun (iklim dan lingkungan) yang tumbuh di atas
  * gelombang air (bencana hidrometeorologi, paling sering di Indonesia). Satu warna teal ke hijau, tetap
@@ -14,15 +16,15 @@ export function LogoMark({ className = "size-9", judul }: { className?: string; 
     <svg viewBox="0 0 64 64" className={className} role={judul ? "img" : undefined} aria-hidden={judul ? undefined : true} aria-label={judul}>
       <defs>
         <linearGradient id={id} x1="12" y1="4" x2="54" y2="60" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stopColor="#14B8A6" />
-          <stop offset=".55" stopColor="#0F766E" />
-          <stop offset="1" stopColor="#065F46" />
+          <stop offset="0" stopColor={WARNA_MEREK.terang} />
+          <stop offset=".55" stopColor={WARNA_MEREK.utama} />
+          <stop offset="1" stopColor={WARNA_MEREK.gelap} />
         </linearGradient>
       </defs>
       <path d={LOGO_PERISAI} fill={`url(#${id})`} />
       <path d={LOGO_DAUN} fill="#fff" />
-      <path d={LOGO_TULANG} fill="none" stroke="#0F766E" strokeWidth="2.1" strokeLinecap="round" />
-      <path d={LOGO_OMBAK} fill="none" stroke="#A7F3D0" strokeWidth="2.6" strokeLinecap="round" />
+      <path d={LOGO_TULANG} fill="none" stroke={WARNA_MEREK.utama} strokeWidth="2.1" strokeLinecap="round" />
+      <path d={LOGO_OMBAK} fill="none" stroke={WARNA_MEREK.ombak} strokeWidth="2.6" strokeLinecap="round" />
     </svg>
   );
 }
@@ -34,7 +36,7 @@ export function Logo({ terang = false, ringkas = false }: { terang?: boolean; ri
       <LogoMark className="size-10 shrink-0 drop-shadow-sm transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-105 motion-reduce:transition-none" />
       <span className="flex flex-col leading-tight">
         <span className={`text-lg font-extrabold tracking-tight ${terang ? "text-white" : "text-foreground"}`}>SIGAP</span>
-        {!ringkas && <span className={`hidden text-[11px] font-medium sm:block ${terang ? "text-ink-muted" : "text-muted-foreground"}`}>Siaga Bencana &amp; Iklim</span>}
+        {!ringkas && <span className={`hidden text-xs font-medium sm:block ${terang ? "text-ink-muted" : "text-muted-foreground"}`}>Siaga Bencana &amp; Iklim</span>}
       </span>
     </span>
   );

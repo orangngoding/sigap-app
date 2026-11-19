@@ -38,7 +38,7 @@ export function TanyaView() {
         <header className="flex shrink-0 items-center gap-3 border-b border-border/70 py-4">
           <Dialog.Root open={laci} onOpenChange={setLaci}>
             <Dialog.Trigger asChild>
-              <button type="button" className="inline-flex size-10 shrink-0 items-center justify-center rounded-xl border border-border bg-surface hover:bg-muted focus-visible:outline-2 focus-visible:outline-primary lg:hidden" aria-label="Buka riwayat percakapan">
+              <button type="button" className="inline-flex size-11 shrink-0 items-center justify-center rounded-xl border border-border bg-surface hover:bg-muted focus-visible:outline-2 focus-visible:outline-primary lg:hidden" aria-label="Buka riwayat percakapan">
                 <PanelLeft className="size-5" aria-hidden="true" />
               </button>
             </Dialog.Trigger>
@@ -47,7 +47,7 @@ export function TanyaView() {
               <Dialog.Content className="fixed inset-y-0 left-0 z-50 flex w-[86vw] max-w-sm flex-col bg-background p-4 shadow-2xl data-[state=open]:animate-in data-[state=open]:slide-in-from-left" aria-describedby={undefined}>
                 <div className="mb-3 flex items-center justify-between">
                   <Dialog.Title className="text-base font-bold">Riwayat percakapan</Dialog.Title>
-                  <Dialog.Close className="inline-flex size-10 items-center justify-center rounded-lg hover:bg-muted" aria-label="Tutup riwayat"><X className="size-5" aria-hidden="true" /></Dialog.Close>
+                  <Dialog.Close className="inline-flex size-11 items-center justify-center rounded-lg hover:bg-muted" aria-label="Tutup riwayat"><X className="size-5" aria-hidden="true" /></Dialog.Close>
                 </div>
                 <div className="min-h-0 flex-1"><DaftarSesi onPilih={() => setLaci(false)} /></div>
               </Dialog.Content>
@@ -57,7 +57,7 @@ export function TanyaView() {
             <h1 className="truncate text-lg font-extrabold tracking-tight sm:text-xl">{judul ?? "Asisten SIGAP"}</h1>
             <p className="truncate text-xs text-muted-foreground sm:text-sm">Ketik atau ucapkan pertanyaan, atau tempel teks peringatan BMKG.</p>
           </div>
-          <button type="button" onClick={() => useTanyaStore.getState().sesiBaru()} className="inline-flex min-h-10 shrink-0 items-center gap-1.5 rounded-xl border border-border bg-surface px-3 text-sm font-semibold hover:bg-muted focus-visible:outline-2 focus-visible:outline-primary lg:hidden" aria-label="Percakapan baru">
+          <button type="button" onClick={() => useTanyaStore.getState().sesiBaru()} className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center gap-1.5 rounded-xl border border-border bg-surface px-3 text-sm font-semibold hover:bg-muted focus-visible:outline-2 focus-visible:outline-primary lg:hidden" aria-label="Percakapan baru">
             <Plus className="size-4" aria-hidden="true" /> <span className="hidden sm:inline">Baru</span>
           </button>
         </header>

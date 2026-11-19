@@ -7,6 +7,7 @@ const ALLOWED_HOSTS = new Set([
   "archive-api.open-meteo.com",
   "climate-api.open-meteo.com", // proyeksi iklim CMIP6 (Mesin Waktu Iklim)
   "www.bmkg.go.id", // umpan peringatan dini (RSS/CAP)
+  "news.google.com", // umpan RSS berita bencana (Pustaka)
 ]);
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));

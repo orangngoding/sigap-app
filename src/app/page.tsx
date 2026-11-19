@@ -27,7 +27,7 @@ export default function Home() {
               <ShieldCheck className="size-4 text-emerald-300" aria-hidden="true" /> Kesiapsiagaan dimulai dari keluarga
             </p>
             <h1 id="judul-hero" data-masuk style={tunda(80)} className="mt-6 text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
-              Dari peringatan resmi menjadi <span className="teks-kilau">rencana siaga keluargamu.</span>
+              Dari peringatan resmi menjadi <span className="teks-sorot">rencana siaga keluargamu.</span>
             </h1>
             <p data-masuk style={tunda(160)} className="mt-6 max-w-xl text-base leading-relaxed text-white/80 sm:text-lg">
               SIGAP membaca data BMKG di wilayahmu, lalu menyusun rencana, isi tas siaga, latihan, dan Kartu Siaga sesuai kebutuhan keluargamu. Semua dari panduan resmi BNPB dan BMKG.

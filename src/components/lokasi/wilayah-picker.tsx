@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowRight, LocateFixed } from "lucide-react";
 import type { Lokasi } from "@/types";
 import { kabKotaTerdekat, type KabKotaRingkas } from "@/lib/geo/terdekat";
+import { PESAN_TIDAK_AMAN, pesanGalatLokasi } from "@/lib/geo/galat-lokasi";
 import { Combobox, type Opsi } from "./combobox";
 
 /**
@@ -66,6 +67,10 @@ export function WilayahPicker({ onSubmit }: { onSubmit: (l: Lokasi) => void }) {
       setError("Peramban ini tidak mendukung lokasi. Pilih wilayah secara manual.");
       return;
     }
+    if (!window.isSecureContext) {
+      setError(`${PESAN_TIDAK_AMAN} Pilih wilayah secara manual.`);
+      return;
+    }
     setMencari(true);
     navigator.geolocation.getCurrentPosition(
       async (pos) => {
@@ -87,9 +92,7 @@ export function WilayahPicker({ onSubmit }: { onSubmit: (l: Lokasi) => void }) {
       },
       (err) => {
         setMencari(false);
-        setError(err.code === err.PERMISSION_DENIED
-          ? "Izin lokasi ditolak. Tidak apa-apa, pilih wilayah secara manual di bawah."
-          : "Lokasi belum dapat ditentukan. Pilih wilayah secara manual.");
+        void pesanGalatLokasi(err, "Atau pilih wilayah secara manual di bawah.").then(setError);
       },
       { enableHighAccuracy: false, timeout: 10_000, maximumAge: 60_000 },
     );

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { motion } from "motion/react";
 import { Bar, CartesianGrid, ComposedChart, Line, ReferenceArea, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import type { ProyeksiResponse } from "@/lib/data/proyeksi";
+import { LABEL_PERIODE } from "@/lib/iklim/ketahanan";
 
 type KunciGrafik = "hariSangatPanas" | "suhuMaks" | "hujan";
 const PILIHAN: Array<{ id: KunciGrafik; label: string; satuan: string; judul: (p: ProyeksiResponse) => string }> = [
@@ -28,7 +29,8 @@ export function GrafikProyeksi({ data }: { data: ProyeksiResponse }) {
   const nilai = data.tahunan.map((t) => t[kunci]);
   const tren = rataBergerak(nilai);
   const rows = data.tahunan.map((t, i) => ({ tahun: t.tahun, nilai: nilai[i], tren: tren[i] }));
-  const [dulu, kini, depan] = data.periode;
+  // Label dari konstanta klien: data tersimpan lama masih membawa label "Menuju 2050".
+  const [dulu, kini, depan] = data.periode.map((pr) => ({ ...pr, label: LABEL_PERIODE[pr.id] ?? pr.label }));
   const suhu = kunci === "suhuMaks";
 
   return (

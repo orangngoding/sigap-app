@@ -42,6 +42,13 @@ export function bersihkanTeks(teks: string): string {
     .trim();
 }
 
+/** Ejaan dasar untuk keluaran model yang kadang menulis huruf kecil semua: awal kalimat kapital, "anda" -> "Anda". */
+export function rapikanKapital(teks: string): string {
+  return teks
+    .replace(/\banda\b/g, "Anda")
+    .replace(/(^|[.!?]\s+)(\p{Ll})/gu, (_, awal: string, huruf: string) => awal + huruf.toUpperCase());
+}
+
 /**
  * Untuk jawaban percakapan: seperti `bersihkanTeks`, tetapi format ringan dipertahankan (baris baru, poin "- ",
  * langkah "1. ", dan **tebal**) agar UI dapat merendernya sebagai teks yang aman.

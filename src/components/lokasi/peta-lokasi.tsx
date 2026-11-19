@@ -1,6 +1,7 @@
 "use client";
 import "leaflet/dist/leaflet.css";
 import { CircleMarker, MapContainer, TileLayer } from "react-leaflet";
+import { WARNA_MEREK } from "@/lib/gambar/warna-merek";
 
 /**
  * Peta lokasi terpilih (Blueprint 6.1): Leaflet + ubin OpenStreetMap, tanpa kunci API.
@@ -15,7 +16,7 @@ export default function PetaLokasiLeaflet({ lat, lon, label }: { lat: number; lo
         url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
         maxZoom={18}
       />
-      <CircleMarker center={[lat, lon]} radius={10} pathOptions={{ color: "#0F766E", fillColor: "#0F766E", fillOpacity: 0.6 }} aria-label={label} />
+      <CircleMarker center={[lat, lon]} radius={10} pathOptions={{ color: WARNA_MEREK.utama, fillColor: WARNA_MEREK.utama, fillOpacity: 0.6 }} aria-label={label} />
     </MapContainer>
   );
 }

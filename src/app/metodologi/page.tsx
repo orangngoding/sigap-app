@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { AMBANG_BULAN_KERING_MM, BATAS_RASIO_KEMARAU, HARI_GANGGUAN_AIR, HEMAT_AIR_PERSEN, KATALOG, KURANG_AIR_WASPADA_HARI, LITER_PER_ORANG_HARI, MIN_HARI_CADANGAN_AIR, MIN_PUNCAK, SELISIH_HUJAN, SELISIH_PANAS } from "@/lib/iklim/ketahanan";
 import Link from "next/link";
 import { BadgeCheck, BookOpenCheck, Calculator, CheckCircle2, Code2, Database, History, Info, Lock, MessageSquareHeart, ShieldCheck, Sparkles, UserCheck } from "lucide-react";
 import { DaftarIsi } from "@/components/metodologi/daftar-isi";
@@ -81,7 +82,7 @@ const PAGAR = [
 
 function Bagian({ id, judul, Ikon, children }: { id: string; judul: string; Ikon: typeof Database; children: React.ReactNode }) {
   return (
-    <section id={id} aria-labelledby={`${id}-j`} className="scroll-mt-24 rounded-3xl border border-border bg-surface p-6 sm:p-8">
+    <section id={id} aria-labelledby={`${id}-j`} className="rounded-3xl border border-border bg-surface p-6 sm:p-8">
       <h2 id={`${id}-j`} className="flex items-center gap-3 text-xl font-extrabold tracking-tight sm:text-2xl">
         <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary print:hidden"><Ikon className="size-5" aria-hidden="true" /></span>
         {judul}
@@ -164,7 +165,7 @@ export default function MetodologiPage() {
                   ["Gempa terbaru, M5+, dan dirasakan", "BMKG", "Disimpan sementara 2 menit"],
                   ["Peringatan dini cuaca", "BMKG (RSS dan CAP)", "Disimpan sementara 2 menit"],
                   ["Tren hujan lebat dan hari kering", "Open-Meteo, model ERA5 (CC BY 4.0)", "Disimpan sementara 7 hari"],
-                  ["Proyeksi iklim 1991-2050 (Iklim 2050)", "Open-Meteo Climate API, model CMIP6 HighResMIP EC-Earth3P-HR dan MRI-AGCM3-2-S (CC BY 4.0)", "Disimpan sementara 30 hari per grid 0,25°"],
+                  ["Proyeksi iklim 1991-2050 (Siaga Iklim)", "Open-Meteo Climate API, model CMIP6 HighResMIP EC-Earth3P-HR dan MRI-AGCM3-2-S (CC BY 4.0)", "Disimpan sementara 30 hari per grid 0,25°"],
                   ["Kode dan nama wilayah", "Kepmendagri No 300.2.2-2138 Tahun 2025, lewat dataset cahyadsn/wilayah (MIT)", "Tetap, dikemas di aplikasi"],
                   ["Peta", "OpenStreetMap", "Langsung dari server ubin OSM"],
                 ]}
@@ -204,10 +205,25 @@ export default function MetodologiPage() {
               </details>
             </Bagian>
 
-            <section id="iklim-2050" aria-labelledby="iklim-2050-j" className="scroll-mt-24 rounded-3xl border border-border bg-surface p-6 sm:p-8">
-              <h2 id="iklim-2050-j" className="text-xl font-bold">Cara kerja Iklim 2050 (Mesin Waktu Iklim)</h2>
+            <section id="iklim-2050" aria-labelledby="iklim-2050-j" className="rounded-3xl border border-border bg-surface p-6 sm:p-8">
+              <h2 id="iklim-2050-j" className="text-xl font-bold">Cara kerja Siaga Iklim</h2>
               <p className={P}>Server mengambil suhu maksimum dan curah hujan harian 1991-2050 untuk grid sekitar 25 km di lokasi Anda dari dua model iklim global resolusi tinggi (CMIP6 HighResMIP, skenario emisi tinggi, dikoreksi bias terhadap ERA5). Kode lalu menghitung rata-rata per tahun untuk tiga periode 20 tahun (1991-2010, 2011-2030, 2031-2050): rata-rata suhu siang, hari 35&deg;C atau lebih, hari sangat panas (di atas persentil 95 suhu maksimum 1991-2010 di lokasi itu), curah hujan tahunan, hari hujan ekstrem (di atas persentil 99 hari hujan 1991-2010), dan kemarau terpanjang (hari berturut-turut dengan hujan di bawah 1 mm). Angka utama adalah rata-rata kedua model; rentang model ditampilkan sebagai ukuran ketidakpastian.</p>
-              <p className={P}>AI menerima angka itu (tanpa koordinat) beserta profil keluarga anonim, lalu menyusun 2-3 dampak dan 4-6 langkah adaptasi berkategori rumah, air, kesehatan, ekonomi, dan komunitas. Kode menolak keluaran yang memuat angka di luar data proyeksi, angka rupiah, atau kalimat ramalan pasti, lalu memakai templat berbasis aturan (misalnya hari sangat panas naik &rarr; langkah menyejukkan rumah dan jadwal aktivitas; kemarau memanjang &rarr; menampung air hujan). Proyeksi bukan prakiraan cuaca dan tidak memprediksi bencana.</p>
+              <p className={P}>Dari data itu kode menyusun <strong>Kalender Risiko</strong> 12 bulan (hari sangat panas, hari hujan ekstrem, dan curah hujan per bulan) serta <strong>Uji Ketahanan Rumah</strong>: berapa hari air simpanan Anda cukup dibanding hari air perlu ditutup, dan tingkat risiko panas serta hujan lebat untuk rumah Anda. Semua angka, tingkat, dan efek tiap tindakan dihitung kode di perangkat Anda dan bisa diuji.</p>
+              <p className={P}><strong>Acuan waktu.</strong> Angka utama di layar memakai periode saat ini (2011-2030), yang mencakup tahun ini. Periode 2031-2050 ditampilkan sebagai arah tren (&ldquo;10-25 tahun lagi&rdquo;), karena tandon, atap, dan saluran air dipakai selama itu; tingkat risiko dan urutan tindakan ikut mempertimbangkannya. Model iklim hanya andal sebagai rata-rata 20 tahun, jadi SIGAP tidak menampilkan angka untuk tahun tertentu. Untuk perkiraan musim tahun berjalan, SIGAP menautkan <a href="https://www.bmkg.go.id/iklim/prakiraan-musim.bmkg" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline underline-offset-2">Prediksi Musim BMKG</a> tanpa menyalin angkanya.</p>
+              <p className={P}><strong>Yang sudah terjadi.</strong> Sebagai pembanding, SIGAP menampilkan kemarau terpanjang yang tercatat dalam 5 tahun penuh terakhir di grid yang sama, dari data reanalisis ERA5 (Open-Meteo, ambang yang sama: hujan di bawah 1 mm). Angka ini tidak mengubah hitungan; bila kemarau nyata lebih panjang dari proyeksi tahun terburuk saat ini (selisih lebih dari 15 persen atau 3 hari), layar menyarankan agar angka proyeksi dianggap batas bawah.</p>
+              <p className={P}><strong>Penasihat Keputusan</strong> memilih tindakan dari katalog tetap ({KATALOG.length} tindakan). Urutan awal dihitung kode dan tampil tanpa AI. Bila Anda menekan &ldquo;Sesuaikan dengan AI&rdquo;, AI menerima hasil uji rumah (tanpa koordinat, nama, atau kontak) dan kendala yang Anda tulis, lalu memilih 2-3 id tindakan dari katalog dan menulis alasan serta langkah pertama. Kode membuang id di luar katalog, menolak keluaran yang memuat angka di luar data, rupiah, atau kalimat ramalan pasti, lalu menghitung sendiri efek tiap tindakan; bila gagal, urutan dari kode dipakai. Harga tidak ditampilkan karena berbeda di tiap daerah.</p>
+              <details className="mt-4 rounded-2xl border border-border p-4 text-sm">
+                <summary className="cursor-pointer font-semibold">Asumsi Siaga Iklim (nilai awal, perlu verifikasi)</summary>
+                <ul className="mt-3 list-disc space-y-1.5 pl-5 leading-relaxed">
+                  <li>Kebutuhan air dasar {LITER_PER_ORANG_HARI} liter per orang per hari (mengacu pada standar kemanusiaan Sphere; belum diverifikasi tim).</li>
+                  <li>Bulan kering: hujan di bawah {AMBANG_BULAN_KERING_MM} mm per bulan; bila tidak ada, tiga bulan terkering di bawah rata-rata ditandai &ldquo;paling kering&rdquo;.</li>
+                  <li>Lama air sulit memakai pengalaman Anda ({HARI_GANGGUAN_AIR.hari} hari untuk &ldquo;beberapa hari&rdquo;, {HARI_GANGGUAN_AIR.minggu} hari untuk &ldquo;beberapa minggu&rdquo;), untuk saat ini; untuk 2031-2050 disesuaikan dengan perubahan kemarau terpanjang (dibatasi {BATAS_RASIO_KEMARAU.min} sampai {BATAS_RASIO_KEMARAU.maks} kali), dengan cadangan minimal {MIN_HARI_CADANGAN_AIR} hari.</li>
+                  <li>Tingkat panas: selisih hari sangat panas per tahun di bawah {SELISIH_PANAS.sedikit} = aman, di atas {SELISIH_PANAS.banyak} = waspada, naik satu tingkat bila ada anggota rentan atau atap seng.</li>
+                  <li>Tingkat hujan lebat: selisih hari hujan ekstrem di bawah {SELISIH_HUJAN.sedikit} = aman, di atas {SELISIH_HUJAN.banyak} = waspada, naik satu tingkat bila rumah pernah tergenang.</li>
+                  <li>Tingkat air: kekurangan lebih dari {KURANG_AIR_WASPADA_HARI} hari = waspada. Skenario &ldquo;hemat air&rdquo; mengandaikan pemakaian turun {HEMAT_AIR_PERSEN} persen; itu skenario hitungan, bukan janji hasil.</li>
+                  <li>Puncak bulan: tiga bulan tertinggi yang melewati nilai minimum ({MIN_PUNCAK.panas} hari panas, {MIN_PUNCAK.hujan} hari hujan ekstrem).</li>
+                </ul>
+              </details>
             </section>
 
             <Bagian id="m5" judul="Rumus skor dan Tas Siaga" Ikon={Calculator}>
@@ -268,7 +284,7 @@ export default function MetodologiPage() {
                 <li>Panduan: BNPB, BAKORNAS PB, Kemenkes, BMKG, dan Kementerian ESDM (daftar lengkap di bagian 3).</li>
                 <li>Perangkat lunak terbuka: Next.js, React, Tailwind CSS, Motion, Zustand, TanStack Query, Zod, Recharts, Lucide, dan qrcode. Daftar dan versinya ada di berkas docs/attribution.md di repositori.</li>
               </ul>
-              <h3 id="kredit-foto" className="mt-6 scroll-mt-24 text-lg font-bold">Kredit foto</h3>
+              <h3 id="kredit-foto" className="mt-6 text-lg font-bold">Kredit foto</h3>
               <p className={P}>Foto dari Wikimedia Commons dengan lisensi bebas, disimpan di server SIGAP agar tetap tampil tanpa internet. Foto ini ilustrasi jenis bencana, bukan lokasi pengguna.</p>
               <ul className="mt-3 grid gap-3 sm:grid-cols-2">
                 {SEMUA_FOTO.map((f) => (

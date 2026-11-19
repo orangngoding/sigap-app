@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import type { ApiBase, ApiErrorBody } from "@/types";
 import { readCache, writeCache } from "@/lib/storage/safe-storage";
 
-export const TTL = { cuaca: 5 * 60_000, gempa: 5 * 60_000, peringatan: 5 * 60_000, iklim: 24 * 3600_000 };
+export const TTL = { cuaca: 5 * 60_000, gempa: 5 * 60_000, peringatan: 5 * 60_000, berita: 10 * 60_000, iklim: 24 * 3600_000 };
 
 /**
  * Ambil data kartu; bila jaringan/hulu gagal dan ada cache lokal, tampilkan sebagai data lama

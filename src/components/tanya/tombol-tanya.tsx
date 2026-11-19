@@ -9,7 +9,7 @@ export function TombolTanya({ pertanyaan, label = "Tanya Asisten", className = "
     <button
       type="button"
       onClick={() => tanyakan(pertanyaan)}
-      className={`tanpa-cetak inline-flex min-h-8 items-center gap-1.5 rounded-full border border-primary/25 bg-primary/5 px-3 text-xs font-semibold text-primary transition-colors hover:bg-primary/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${className}`}
+      className={`tanpa-cetak inline-flex min-h-8 items-center any-pointer-coarse:min-h-11 gap-1.5 rounded-full border border-primary/25 bg-primary/5 px-3 text-xs font-semibold text-primary transition-colors hover:bg-primary/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${className}`}
     >
       <Sparkles className="size-3.5" aria-hidden="true" /> {label}
     </button>

@@ -38,7 +38,7 @@ const navigation = [
 
 const moreNavigation = [
   {
-    label: "Iklim 2050",
+    label: "Siaga Iklim",
     href: "/iklim",
   },
   {

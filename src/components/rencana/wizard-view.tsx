@@ -101,7 +101,7 @@ export function WizardView() {
 
       {!lokasi && (
         <div className="mt-4">
-          <StatusBanner tone="info" action={<Link href="/lokasi" className="font-semibold underline">Pilih lokasi</Link>}>
+          <StatusBanner tone="info" action={<Link href="/lokasi" className="inline-flex min-h-11 items-center font-semibold underline">Pilih lokasi</Link>}>
             Lokasi belum dipilih. Anda tetap bisa mengisi profil, tetapi rencana perlu lokasi.
           </StatusBanner>
         </div>
