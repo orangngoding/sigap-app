@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion } from "motion/react";
-import { Backpack, BookOpen, Check, ChevronRight, Dumbbell, FileText, HardDriveDownload, LayoutDashboard, ListChecks, Share2, Target, Loader2, MapPin, MessageCircleQuestion, Pencil, Printer, RefreshCw, Sparkles, UserRound } from "lucide-react";
+import { Backpack, BookOpen, Check, ChevronRight, FileText, HardDriveDownload, LayoutDashboard, ListChecks, Share2, Target, Loader2, MapPin, MessageCircleQuestion, Pencil, Printer, RefreshCw, Sparkles, UserRound } from "lucide-react";
 import type { Progres } from "@/types/rencana";
 import { DisclaimerBox } from "@/components/global/disclaimer-box";
 import { StatusBanner } from "@/components/global/status-banner";
@@ -12,7 +12,7 @@ import { StorageBanner } from "@/components/global/storage-banner";
 import { useHydrate } from "@/hooks/use-hydrate";
 import { useSusunRencana } from "@/hooks/use-susun-rencana";
 import { ARTIKEL_BY_SLUG } from "@/lib/pustaka/data";
-import { bacaRingkasanLokal } from "@/lib/rencana/klien";
+import { bacaRingkasanLokal, ringkasRisiko } from "@/lib/rencana/klien";
 import { HAZARD_BY_ID } from "@/lib/hazards/hazards";
 import { LOKASI_CONTOH, buatProfilContoh } from "@/lib/preparedness/profil-awal";
 import { finalisasiProfil } from "@/lib/preparedness/profil-schema";
@@ -27,25 +27,33 @@ import { useProgresStore } from "@/stores/progres-store";
 import { SkorPanel } from "./skor-panel";
 import { TasSiaga } from "./tas-siaga";
 import { TindakanDaftar } from "./tindakan-daftar";
+import { AksiIklimDaftar } from "./aksi-iklim-daftar";
+import { SiapDarurat } from "./siap-darurat";
+import { useAksiIklimStore } from "@/stores/aksi-iklim-store";
 import { TombolBagikan } from "./tombol-bagikan";
 import { Foto } from "@/components/global/foto";
 import { fotoArtikel, fotoBahaya } from "@/lib/gambar";
 import { AMBANG_LULUS } from "@/lib/latihan/mesin";
 import { SKENARIO } from "@/lib/latihan/skenario";
 import { useLatihanStore } from "@/stores/latihan-store";
-import { LatihanDaftar } from "@/components/latihan/latihan-daftar";
+
 import { hazardLatihan } from "@/lib/latihan/mesin";
 import { useTasStore } from "@/stores/tas-store";
+import { ProfilRisiko } from "@/components/risiko/profil-risiko";
+import { useRisikoLokasi } from "@/hooks/use-risiko-lokasi";
 
-type TabId = "ringkasan" | "tindakan" | "tas" | "latihan" | "bagikan";
+import { tambahkanBahaya } from "@/lib/preparedness/saran-bahaya";
+
+type TabId = "ringkasan" | "tindakan" | "tas" | "bagikan";
 const TAB: Array<{ id: TabId; label: string; Ikon: typeof LayoutDashboard }> = [
   { id: "ringkasan", label: "Ringkasan", Ikon: LayoutDashboard },
   { id: "tindakan", label: "Tindakan", Ikon: ListChecks },
   { id: "tas", label: "Tas Siaga", Ikon: Backpack },
-  { id: "latihan", label: "Latihan", Ikon: Dumbbell },
   { id: "bagikan", label: "Bagikan", Ikon: Share2 },
 ];
 const tabSah = (x: string | null): x is TabId => TAB.some((t) => t.id === x);
+/** Tab dari alamat; tab lama yang sudah tidak ada (mis. `latihan`) membuka Ringkasan. */
+const tabDari = (x: string | null): TabId => (tabSah(x) ? x : "ringkasan");
 
 /** Penjaga rute (Blueprint 4.2): arahkan ke langkah yang kurang dengan pesan jelas. */
 function LangkahKurang({ ikon, pesan, href, tombol }: { ikon: React.ReactNode; pesan: string; href: string; tombol: string }) {
@@ -117,7 +125,7 @@ export function RencanaView() {
   const params = useSearchParams();
   const contoh = params.get("contoh") === "1";
   const tabAwal = params.get("tab");
-  const [tab, setTab] = useState<TabId>(tabSah(tabAwal) ? tabAwal : "ringkasan");
+  const [tab, setTab] = useState<TabId>(tabDari(tabAwal));
   const tabRef = useRef<HTMLDivElement>(null);
   // Tab tersimpan di URL (bisa dibagikan dan bertahan saat dimuat ulang) tanpa navigasi ulang.
   const pilihTab = (t: TabId) => {
@@ -128,7 +136,7 @@ export function RencanaView() {
     const atas = tabRef.current?.getBoundingClientRect().top ?? 0;
     if (atas < 64) tabRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
-  const siap = useHydrate(useLokasiStore, useProfilStore, useProgresStore, useRencanaStore, useTasStore, useLatihanStore);
+  const siap = useHydrate(useLokasiStore, useProfilStore, useProgresStore, useRencanaStore, useTasStore, useLatihanStore, useAksiIklimStore);
 
   const lokasiTersimpan = useLokasiStore((s) => s.lokasi);
   const draft = useProfilStore((s) => s.profil);
@@ -154,11 +162,14 @@ export function RencanaView() {
   const simpanRencana = useRencanaStore((s) => s.setRencana);
   const sorotan = useMemo(() => (siap && lokasi ? bacaRingkasanLokal(lokasi).sorotan : []), [siap, lokasi]);
   const { status, alasan, pulihMenit, susun, batal } = useSusunRencana(contoh ? null : lokasi, anon);
+  const ubahProfil = useProfilStore((s) => s.ubah);
+  const risikoQ = useRisikoLokasi(contoh ? null : lokasi);
+  const risiko = useMemo(() => ringkasRisiko(risikoQ.data?.nilai), [risikoQ.data]);
 
   // Templat deterministik: dasar tampilan, cadangan, dan satu-satunya sumber pada mode contoh.
   const templat = useMemo(
-    () => (anon && lokasi ? bangunRencanaTemplat({ adm4: lokasi.adm4, namaLokasi: lokasi.kelurahan, profil: anon, kb: SEMUA_CHUNK, sorotan }) : null),
-    [anon, lokasi, sorotan],
+    () => (anon && lokasi ? bangunRencanaTemplat({ adm4: lokasi.adm4, namaLokasi: lokasi.kelurahan, profil: anon, kb: SEMUA_CHUNK, sorotan, risiko }) : null),
+    [anon, lokasi, sorotan, risiko],
   );
   const hashSekarang = useMemo(() => (anon && lokasi ? hashMasukan(lokasi.adm4, anon) : null), [anon, lokasi]);
   const ada = !contoh && !!tersimpan && !!lokasi && tersimpan.lokasiAdm4 === lokasi.adm4;
@@ -185,6 +196,7 @@ export function RencanaView() {
     [rencana?.tindakan, tas, latihan, progres],
   );
   const hasilLatihan = useLatihanStore((s) => s.hasil);
+
   const hitung = useMemo(() => {
     const t = (rencana?.tindakan ?? []).filter((x) => x.phase !== "sesudah");
     return {
@@ -205,6 +217,8 @@ export function RencanaView() {
       <>
         <StepIndicator current="rencana" />
         <LangkahKurang ikon={<MapPin className="size-6" aria-hidden="true" />} pesan="Pilih lokasi dulu supaya rencana sesuai tempat Anda." href="/lokasi" tombol="Pilih lokasi" />
+        {/* Info medis dan pemasangan tidak bergantung pada rencana: tetap bisa disiapkan (tautan dari Mode Darurat). */}
+        {tab === "bagikan" && <div className="mt-6"><SiapDarurat /></div>}
       </>
     );
   }
@@ -213,6 +227,7 @@ export function RencanaView() {
       <>
         <StepIndicator current="rencana" done={["lokasi"]} />
         <LangkahKurang ikon={<UserRound className="size-6" aria-hidden="true" />} pesan="Lengkapi profil keluarga dulu supaya rencana sesuai kebutuhan Anda." href="/rencana/profil" tombol="Isi profil keluarga" />
+        {tab === "bagikan" && <div className="mt-6"><SiapDarurat /></div>}
       </>
     );
   }
@@ -262,8 +277,7 @@ export function RencanaView() {
         <div role="tablist" aria-label="Bagian rencana" className="kaca isolate flex gap-1 overflow-x-auto rounded-2xl border border-border/70 p-1 shadow-sm">
           {TAB.map(({ id, label, Ikon }) => {
             const aktif = tab === id;
-            const badge = id === "tindakan" ? `${hitung.tindakanSiap}/${hitung.tindakan}` : id === "tas" ? `${hitung.tasSiap}/${hitung.tas}` : id === "latihan" && latihan.length ? `${hitung.latihanLulus}/${latihan.length}` : null;
-            if (id === "latihan" && (contoh || latihan.length === 0)) return null;
+            const badge = id === "tindakan" ? `${hitung.tindakanSiap}/${hitung.tindakan}` : id === "tas" ? `${hitung.tasSiap}/${hitung.tas}` : null;
             return (
               <button
                 key={id} type="button" role="tab" id={`tab-${id}`} aria-selected={aktif} aria-controls={`panel-${id}`} onClick={() => pilihTab(id)}
@@ -281,14 +295,13 @@ export function RencanaView() {
       {/* Ringkasan */}
       <div id="panel-ringkasan" role="tabpanel" aria-labelledby="tab-ringkasan" className={tab === "ringkasan" ? "panel-masuk space-y-6" : "hidden space-y-6 print:block"}>
         <div className="grid gap-6 lg:grid-cols-[1.1fr_1fr]">
-          <SkorPanel hasil={hasil} tanpaLangkah catatan="Skor dihitung dari tindakan Sebelum, tindakan Saat, Tas Siaga, dan Latihan Siaga yang lulus." />
+          <SkorPanel hasil={hasil} tanpaLangkah catatan="Skor dihitung dari tindakan Sebelum, tindakan Saat, Tas Siaga, dan simulasi di Simulator Bencana AI yang lulus." />
           <section aria-labelledby="judul-kemajuan" className="rounded-2xl border border-border bg-surface p-5 sm:p-6">
             <h2 id="judul-kemajuan" className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">Kemajuan per bagian</h2>
             <ul className="mt-4 space-y-3">
               {[
                 { id: "tindakan" as const, label: "Tindakan sebelum dan saat", siap: hitung.tindakanSiap, total: hitung.tindakan, Ikon: ListChecks },
                 { id: "tas" as const, label: "Isi tas siaga", siap: hitung.tasSiap, total: hitung.tas, Ikon: Backpack },
-                ...(latihan.length && !contoh ? [{ id: "latihan" as const, label: "Latihan Siaga lulus", siap: hitung.latihanLulus, total: latihan.length, Ikon: Dumbbell }] : []),
               ].map((b) => (
                 <li key={b.id}>
                   <button type="button" onClick={() => pilihTab(b.id)} className="group w-full rounded-xl p-2 text-left hover:bg-muted focus-visible:outline-2 focus-visible:outline-primary">
@@ -308,13 +321,31 @@ export function RencanaView() {
               <div className="mt-4 flex items-center gap-3 rounded-xl border border-primary/25 bg-primary/5 p-3">
                 <Target className="size-5 shrink-0 text-primary" aria-hidden="true" />
                 <p className="min-w-0 flex-1 text-sm"><span className="font-semibold">Langkah berikutnya:</span> {hasil.langkahBerikutnya.judul}</p>
-                <button type="button" onClick={() => toggle(hasil.langkahBerikutnya!.key)} className="inline-flex min-h-10 shrink-0 items-center gap-1 rounded-lg bg-primary px-3 text-xs font-bold text-primary-foreground hover:bg-primary/90">
-                  <Check className="size-3.5" aria-hidden="true" /> Tandai selesai
-                </button>
+                {hasil.langkahBerikutnya.phase === "latihan" ? (
+                  // Butir simulasi hanya tercentang dengan lulus simulasi, bukan dicentang manual.
+                  <Link href={`/latihan?bahaya=${hasil.langkahBerikutnya.key.replace("latihan:", "")}`} className="inline-flex min-h-10 shrink-0 items-center gap-1 rounded-lg bg-primary px-3 text-xs font-bold text-primary-foreground hover:bg-primary/90">
+                    Mulai simulasi <ChevronRight className="size-3.5" aria-hidden="true" />
+                  </Link>
+                ) : (
+                  <button type="button" onClick={() => toggle(hasil.langkahBerikutnya!.key)} className="inline-flex min-h-10 shrink-0 items-center gap-1 rounded-lg bg-primary px-3 text-xs font-bold text-primary-foreground hover:bg-primary/90">
+                    <Check className="size-3.5" aria-hidden="true" /> Tandai selesai
+                  </button>
+                )}
               </div>
             )}
           </section>
         </div>
+
+        {!contoh && lokasi && (
+          <ProfilRisiko
+            lokasi={lokasi}
+            terpilih={draft.bahaya}
+            ringkas
+            idJudul="judul-risiko-rencana"
+            judul="Mengapa bahaya ini ada di rencana Anda"
+            onTambah={(ids, varian) => ubahProfil(tambahkanBahaya(draft, ids, varian))}
+          />
+        )}
 
         {rencana && (
           <section aria-labelledby="judul-ringkasan" className="rounded-2xl border border-border bg-surface p-5 sm:p-6">
@@ -337,6 +368,7 @@ export function RencanaView() {
 
       {/* Tindakan */}
       <div id="panel-tindakan" role="tabpanel" aria-labelledby="tab-tindakan" className={tab === "tindakan" ? "panel-masuk" : "hidden print:mt-8 print:block"}>
+        <AksiIklimDaftar progres={progres} onToggle={toggle} />
         {rencana && <TindakanDaftar tindakan={rencana.tindakan} hazardUrut={[...profil.bahaya, "umum"]} progres={progres} onToggle={toggle} />}
       </div>
 
@@ -345,13 +377,7 @@ export function RencanaView() {
         <TasSiaga tas={tas} progres={progres} onToggle={toggle} kedaluwarsa={contoh ? undefined : kedaluwarsa} onKedaluwarsa={contoh ? undefined : setKedaluwarsa} />
       </div>
 
-      {/* Latihan */}
-      {latihan.length > 0 && !contoh && (
-        <div id="panel-latihan" role="tabpanel" aria-labelledby="tab-latihan" className={tab === "latihan" ? "panel-masuk" : "hidden"}>
-          <p className="mb-4 text-sm text-muted-foreground">Uji keputusan Anda dalam simulasi singkat. Latihan yang lulus (nilai 70 ke atas) dihitung dalam skor.</p>
-          <LatihanDaftar hanya={latihan} />
-        </div>
-      )}
+
 
       {/* Bagikan dan cetak */}
       <div id="panel-bagikan" role="tabpanel" aria-labelledby="tab-bagikan" className={tab === "bagikan" ? "panel-masuk space-y-6" : "hidden"}>
@@ -377,6 +403,7 @@ export function RencanaView() {
             </Link>
           )}
         </div>
+        <SiapDarurat />
         {rencana && !contoh && (
           <div className="flex flex-wrap gap-3">
             <TombolBagikan lokasi={lokasi} bahaya={profil.bahaya} tindakan={rencana.tindakan} tas={tas} titikKumpul={draft.titikKumpul} />

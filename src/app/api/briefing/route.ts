@@ -7,6 +7,11 @@ import { cacheBriefing, susunBriefing } from "@/lib/ai/briefing";
 import { penyediaDariEnv } from "@/lib/ai/provider";
 import { ambilCuaca, ambilGempa, ambilPeringatan } from "@/lib/data/ambil";
 import { SEMUA_CHUNK } from "@/lib/kb/data";
+import { ambilRisikoLokasi } from "@/lib/risiko/ambil";
+
+/** Profil Risiko Lokasi dibatasi 6 detik: briefing tidak menunggu lokasi yang baru pertama dihitung. */
+const risikoBerbatas = (lat: number, lon: number, provinsi: string) =>
+  Promise.race([ambilRisikoLokasi(lat, lon, provinsi).then((r) => r.nilai), new Promise<null>((r) => setTimeout(() => r(null), 6_000))]);
 
 export const maxDuration = 30;
 
@@ -22,13 +27,14 @@ export async function POST(req: Request) {
     const { lokasi, bahaya, konteks } = p.data;
 
     // Data yang gagal tidak menggagalkan briefing; bagian itu dilaporkan sebagai catatan.
-    const [cuaca, gempa, peringatan] = await Promise.allSettled([
+    const [cuaca, gempa, peringatan, risiko] = await Promise.allSettled([
       ambilCuaca(lokasi.adm4),
       ambilGempa({ lat: lokasi.lat, lon: lokasi.lon }),
       ambilPeringatan({ provinsi: lokasi.provinsi, kabKota: lokasi.kabKota, kecamatan: lokasi.kecamatan }),
+      risikoBerbatas(lokasi.lat, lokasi.lon, lokasi.provinsi),
     ]);
     const hasil = await susunBriefing(
-      { cuaca: nilai(cuaca), gempa: nilai(gempa), peringatan: nilai(peringatan) },
+      { cuaca: nilai(cuaca), gempa: nilai(gempa), peringatan: nilai(peringatan), risiko: nilai(risiko) },
       { kelurahan: lokasi.kelurahan, kecamatan: lokasi.kecamatan, kabKota: lokasi.kabKota, provinsi: lokasi.provinsi },
       { ...konteks, bahaya },
       { kb: SEMUA_CHUNK, providers: penyediaDariEnv(), cache: cacheBriefing },

@@ -13,6 +13,7 @@ import { bangunRencanaTemplat, chunkKeTindakan, kelompokProfil, relevan, ringkas
 import { GalatProvider, type LlmProvider } from "./provider";
 import { RencanaSiaga, type RencanaRequestT } from "./schema";
 import { bersihkanTeks, lolosPenyaring } from "./guardrails";
+import { angkaBaru } from "./terjemah";
 import { SISTEM_RENCANA, blokData } from "./prompts";
 import { AnggaranHarian, CacheTtl, anggaranGlobal, kunciHari } from "./runtime";
 
@@ -49,7 +50,7 @@ export interface DepsRencana {
   anggaran?: AnggaranHarian;
   cache?: CacheTtl<HasilRencana>;
   sekarang?: () => Date;
-  /** Batas waktu server seluruh pemrosesan (Blueprint 13.1: 20 detik). */
+  /** Batas waktu server seluruh pemrosesan (26 detik: rencana 9 bahaya butuh waktu lebih lama). */
   batasWaktuMs?: number;
 }
 
@@ -142,14 +143,25 @@ export function susunPrompt(m: RencanaRequestT, faktor: string[], passages: Chun
     faktorKerentanan: faktor,
     kondisiTerkini: sorotanDariRingkasan(m.ringkasanData),
   };
+  const risiko = teksRisikoLokasi(m);
   const daftar = passages
     .map((c) => `[${c.id}] (${c.hazard}; ${c.phase}; prioritas ${c.priority}; untuk ${c.audience.join("/")}) ${c.title}: ${c.body}`)
     .join("\n");
   return [
     "Susun Rencana Siaga untuk keluarga berikut. Kutip id passage persis di sourceIds.",
     blokData("PROFIL", JSON.stringify(data, null, 1)),
+    ...(risiko ? [blokData("RISIKO_LOKASI", risiko)] : []),
     blokData("PASSAGE", daftar),
   ].join("\n\n");
+}
+
+/** Fakta Profil Risiko Lokasi untuk bahaya di rencana (tingkat dan alasan berangka); satu-satunya sumber angka lokasi yang sah. */
+export function teksRisikoLokasi(m: RencanaRequestT): string {
+  const pilih = new Set(m.profil.bahaya);
+  return (m.risiko ?? [])
+    .filter((r) => pilih.has(r.id) && r.alasan.length > 0)
+    .map((r) => `- ${HAZARD_BY_ID[r.id].label} (tingkat ${r.tingkat}): ${r.alasan.join(" ")}`)
+    .join("\n");
 }
 
 // ---------- Pasca-proses ----------
@@ -239,13 +251,13 @@ export async function susunRencana(m: RencanaRequestT, d: DepsRencana): Promise<
   const profil = m.profil as ProfilAnonim;
   const cache = d.cache ?? cacheBawaan;
   const anggaran = d.anggaran ?? anggaranGlobal;
-  const batasWaktu = d.batasWaktuMs ?? 20_000;
+  const batasWaktu = d.batasWaktuMs ?? 26_000;
 
   const faktor = hitungFaktorKerentanan(profil);
   const tas = hitungTas(profil);
   const sorotan = sorotanDariRingkasan(m.ringkasanData);
   const kunci = hashMasukan(
-    `${m.lokasi.provinsi}|${m.lokasi.kabKota}|${m.lokasi.kecamatan}|${m.lokasi.kelurahan}|${kunciHari(sekarang)}|hujan:${Number(!!m.ringkasanData?.hujanLebat48j)}|gempa:${Number(!!m.ringkasanData?.gempaDekat24j)}`,
+    `${m.lokasi.provinsi}|${m.lokasi.kabKota}|${m.lokasi.kecamatan}|${m.lokasi.kelurahan}|${kunciHari(sekarang)}|hujan:${Number(!!m.ringkasanData?.hujanLebat48j)}|gempa:${Number(!!m.ringkasanData?.gempaDekat24j)}|risiko:${(m.risiko ?? []).map((r) => `${r.id}${r.tingkat[0]}`).join("")}`,
     profil,
   );
 
@@ -294,7 +306,9 @@ export async function susunRencana(m: RencanaRequestT, d: DepsRencana): Promise<
             continue;
           }
           let ringkasan = bersihkanTeks(v.data.ringkasanRisiko).slice(0, 600);
-          if (ringkasan.length < 10 || !lolosPenyaring(ringkasan)) ringkasan = ringkasanTemplat(namaLokasi(m.lokasi), profil.bahaya, faktor);
+          // Angka di ringkasan wajib berasal dari data (profil, risiko lokasi); angka karangan = ringkasan templat.
+          const sumberAngka = `${JSON.stringify(m.profil)} ${teksRisikoLokasi(m)}`;
+          if (ringkasan.length < 10 || !lolosPenyaring(ringkasan) || angkaBaru(sumberAngka, ringkasan)) ringkasan = ringkasanTemplat(namaLokasi(m.lokasi), profil.bahaya, faktor, m.risiko);
           const hasil: HasilRencana = {
             mode: "ai",
             dibuatPada: sekarang.toISOString(),
@@ -322,7 +336,7 @@ export async function susunRencana(m: RencanaRequestT, d: DepsRencana): Promise<
   }
 
   // Cadangan deterministik (Blueprint 9.4): hasil identik untuk masukan yang sama.
-  const t = bangunRencanaTemplat({ adm4: "", namaLokasi: namaLokasi(m.lokasi), profil, kb: d.kb, sorotan, sekarang });
+  const t = bangunRencanaTemplat({ adm4: "", namaLokasi: namaLokasi(m.lokasi), profil, kb: d.kb, sorotan, sekarang, risiko: m.risiko });
   return {
     mode: "cadangan",
     dibuatPada: t.dibuatPada,

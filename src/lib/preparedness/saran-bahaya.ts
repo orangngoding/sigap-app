@@ -58,3 +58,18 @@ export function terapkanPerubahanJawaban(
 
   return { bahaya: urutanHazard(bahaya), varianBanjir: [...varian] };
 }
+
+/**
+ * Tambahkan bahaya dan varian banjir yang disarankan data lokasi ke pilihan saat ini (tanpa menghapus apa pun),
+ * dalam urutan baku. Bahaya yang belum aktif dilewati.
+ */
+export function tambahkanBahaya(
+  saat: { bahaya: HazardId[]; varianBanjir: VarianBanjir[] },
+  ids: HazardId[],
+  varian: VarianBanjir[] = [],
+): { bahaya: HazardId[]; varianBanjir: VarianBanjir[] } {
+  const bahaya = urutanHazard([...saat.bahaya, ...ids.filter(isHazardAktif)]);
+  const v = new Set(saat.varianBanjir);
+  if (bahaya.includes("banjir")) for (const x of varian) v.add(x);
+  return { bahaya, varianBanjir: [...v] };
+}

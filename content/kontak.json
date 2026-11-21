@@ -23,5 +23,24 @@
       "nama": "Ambulans",
       "nomor": "119"
     }
-  ]
+  ],
+  "lainnya": [
+    {
+      "nama": "BNPB: informasi dan laporan bencana, mencari kerabat",
+      "nomor": "117"
+    },
+    {
+      "nama": "Gangguan listrik PLN",
+      "nomor": "123"
+    },
+    {
+      "nama": "Keracunan (Sentra Informasi Keracunan BPOM)",
+      "nomor": "1500533"
+    }
+  ],
+  "sumberLainnya": {
+    "nama": "Indonesia Baik (Kementerian Komunikasi dan Digital): Nomor Penting Darurat Bencana",
+    "url": "https://indonesiabaik.id/infografis/nomor-penting-darurat-bencana",
+    "diperiksa": "2026-11-19"
+  }
 }

@@ -1,3 +1,5 @@
+import { HAZARD_BY_ID } from "@/lib/hazards/hazards";
+import type { NilaiBahaya } from "@/lib/risiko/nilai";
 import type { HazardId } from "@/types";
 import type { ItemTas, Tindakan } from "@/types/rencana";
 import { langkahSaat } from "@/lib/rencana/ringkas-saat";
@@ -33,4 +35,12 @@ export function tasRingkasKartu(tas: ItemTas[]): ItemTas[] {
     .sort((a, b) => b.t.bobot - a.t.bobot || a.i - b.i)
     .slice(0, BATAS_KARTU.itemTas)
     .map((x) => x.t);
+}
+
+/** Fakta risiko tinggi untuk bahaya yang disiapkan (Profil Risiko Lokasi): "Gunung Api: Gunung api terdekat: Merapi, ...". */
+export function faktaRisikoKartu(nilai: NilaiBahaya[] | undefined, bahaya: HazardId[], maks = 3): string[] {
+  return (nilai ?? [])
+    .filter((n) => n.tingkat === "tinggi" && bahaya.includes(n.id) && n.alasan[0])
+    .slice(0, maks)
+    .map((n) => `${HAZARD_BY_ID[n.id].label}: ${n.alasan[0]}`);
 }

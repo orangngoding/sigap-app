@@ -49,3 +49,6 @@ next-env.d.ts
 # Alat bantu pengembangan (skill AI), bukan bagian aplikasi
 .claude/
 skills-lock.json
+
+# Konfigurasi alat pribadi
+.mcp.json

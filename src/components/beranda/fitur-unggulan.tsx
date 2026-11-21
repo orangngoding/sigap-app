@@ -22,9 +22,9 @@ const FITUR = [
   {
     href: "/latihan",
     Ikon: Dumbbell,
-    judul: "Latihan Siaga",
-    isi: "Hadapi gempa, banjir, tsunami, petir, asap, dan longsor dalam simulasi singkat. Setiap pilihan dijelaskan dari panduan BNPB.",
-    ciri: ["6 skenario bercabang", "Menaikkan skor"],
+    judul: "Simulator Bencana AI",
+    isi: "AI menyusun simulasi untuk keluarga, rumah, lokasi, dan prakiraan nyata minggu ini, termasuk bencana beruntun. Uji awal dan akhir mengukur peningkatan pemahaman Anda.",
+    ciri: ["Bencana beruntun", "Dampak terukur"],
   },
   {
     href: "/rencana",
@@ -53,20 +53,21 @@ export function FiturUnggulan() {
             <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-400/15 px-3 py-1 text-xs font-semibold text-amber-200">
               <Thermometer className="size-3.5" aria-hidden="true" /> Baru: Siaga Iklim
             </span>
-            <span className="mt-4 block text-2xl font-bold text-white sm:text-3xl">Bulan mana yang rawan bagi rumahmu, dan apa yang perlu disiapkan?</span>
+            <span className="mt-4 block text-2xl font-bold text-white sm:text-3xl">Hujan lebat, panas, karhutla, atau asap minggu ini? Siapkan keluargamu lebih dulu.</span>
             <span className="mt-3 block max-w-xl text-sm leading-relaxed text-ink-muted sm:text-base">
-              Lihat bulan paling rawan panas, hujan lebat, dan kemarau di wilayahmu saat ini dan 10-25 tahun lagi, uji seberapa siap rumahmu, lalu dapatkan tindakan yang perlu dilakukan lebih dulu, lengkap dengan pengingat kalender.
+              Lihat bahaya cuaca dan kualitas udara 16 hari ke depan di wilayahmu, bulan rawan musim ini, dan kesiapan rumahmu menghadapi iklim 10-25 tahun lagi. AI menyusun rencana 7 hari yang sesuai keluargamu.
             </span>
             <span className="mt-6 flex flex-wrap gap-1.5">
-              {["Kalender risiko 12 bulan", "Uji ketahanan rumah", "Saran tindakan dari AI"].map((c) => (
+              {["Prakiraan 16 hari", "Kualitas udara & karhutla", "Rencana 7 hari dari AI"].map((c) => (
                 <span key={c} className="rounded-full bg-white/10 px-2.5 py-1 text-xs font-medium text-white">{c}</span>
               ))}
             </span>
             <span className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-amber-200">
-              Mulai uji rumah <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 motion-reduce:transition-none" aria-hidden="true" />
+              Lihat minggu ini <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 motion-reduce:transition-none" aria-hidden="true" />
             </span>
           </span>
-          <span className="relative block min-h-48 md:min-h-full">
+          {/* overflow-hidden: zoom saat disorot tetap di dalam bingkai (tanpanya tepi foto meluber ke kolom teks dan tampak "patah"). */}
+          <span className="relative block min-h-48 overflow-hidden md:min-h-full">
             <Image src={FOTO.kekeringan.src} alt="" fill sizes="(min-width: 768px) 45vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.03] motion-reduce:transition-none" />
             <span className="absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-transparent md:bg-gradient-to-r" aria-hidden="true" />
           </span>

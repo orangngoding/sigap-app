@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "motion/react";
-import { Activity, AlertTriangle, ArrowRight, BellRing, CheckCircle2, CloudSun, ExternalLink, Eye, MapPin, RefreshCw, Sparkles, type LucideIcon } from "lucide-react";
+import { Activity, AlertTriangle, ArrowRight, BellRing, CheckCircle2, CloudSun, Database, ExternalLink, Eye, MapPin, RefreshCw, Sparkles, type LucideIcon } from "lucide-react";
 import type { HasilBriefing } from "@/lib/ai/briefing";
 import type { Sinyal, Tingkat } from "@/lib/briefing/sinyal";
 import { useHydrate } from "@/hooks/use-hydrate";
@@ -18,7 +18,7 @@ const TINGKAT: Record<Tingkat, { label: string; cls: string; Ikon: LucideIcon }>
   perhatikan: { label: "Perhatikan", cls: "bg-warning text-warning-foreground", Ikon: Eye },
   waspada: { label: "Waspada", cls: "bg-danger text-danger-foreground", Ikon: AlertTriangle },
 };
-const IKON_SUMBER: Record<Sinyal["sumber"], LucideIcon> = { cuaca: CloudSun, gempa: Activity, peringatan: BellRing };
+const IKON_SUMBER: Record<Sinyal["sumber"], LucideIcon> = { cuaca: CloudSun, gempa: Activity, peringatan: BellRing, risiko: Database };
 const TOMBOL_SEKUNDER =
   "inline-flex min-h-10 items-center gap-2 rounded-lg border border-border bg-surface px-3 text-sm font-medium hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:opacity-50";
 
@@ -168,7 +168,7 @@ export function BriefingHarian({ varian = "beranda" }: { varian?: "beranda" | "l
             <p className="text-base leading-relaxed text-foreground">{d.ringkasan}</p>
 
             {d.sinyal.length > 0 && (
-              <ul className="grid gap-2 sm:grid-cols-2" aria-label="Sinyal dari data resmi BMKG">
+              <ul className="grid gap-2 sm:grid-cols-2" aria-label="Sinyal dari data resmi BMKG dan profil risiko lokasi">
                 {d.sinyal.map((s) => {
                   const Ikon = IKON_SUMBER[s.sumber];
                   const warna = s.tingkat === "waspada" ? "border-danger-foreground/30 bg-danger/40" : s.tingkat === "perhatikan" ? "border-warning-foreground/30 bg-warning/40" : "border-border bg-background";
@@ -179,9 +179,15 @@ export function BriefingHarian({ varian = "beranda" }: { varian?: "beranda" | "l
                         <p className="font-semibold text-foreground">{s.judul}</p>
                         <p className="text-muted-foreground">
                           {s.fakta}{" "}
-                          <a href={s.url} target="_blank" rel="noopener noreferrer" className="whitespace-nowrap text-xs font-medium text-primary underline underline-offset-2">
-                            BMKG<span className="sr-only"> (sumber, buka di tab baru)</span>
-                          </a>
+                          {s.sumber === "risiko" ? (
+                            <Link href={s.url} className="whitespace-nowrap text-xs font-medium text-primary underline underline-offset-2">
+                              Profil risiko<span className="sr-only"> (data lokasi Anda)</span>
+                            </Link>
+                          ) : (
+                            <a href={s.url} target="_blank" rel="noopener noreferrer" className="whitespace-nowrap text-xs font-medium text-primary underline underline-offset-2">
+                              BMKG<span className="sr-only"> (sumber, buka di tab baru)</span>
+                            </a>
+                          )}
                         </p>
                       </div>
                     </li>

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { TeksMengetik } from "./teks-mengetik";
-import {
+import { Database,
   ArrowRight, ArrowUp, BellRing, BookOpenCheck, Check, CloudSun, Copy, Globe, Mic, MicOff, Backpack, Pencil, RefreshCw, RotateCcw, Sparkles, Square,
   Volume2, VolumeX, Activity, Leaf,
 } from "lucide-react";
@@ -160,6 +160,11 @@ function Gelembung({
             {p.hasil.kondisi && (
               <span className="inline-flex items-center gap-1.5 rounded-full bg-sky-50 px-2.5 py-1 text-xs font-semibold text-sky-800">
                 <CloudSun className="size-3.5" aria-hidden="true" /> Data BMKG terkini di lokasi Anda
+              </span>
+            )}
+            {p.hasil.risiko && (
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-2.5 py-1 text-xs font-semibold text-primary">
+                <Database className="size-3.5" aria-hidden="true" /> Profil risiko lokasi Anda
               </span>
             )}
           </div>

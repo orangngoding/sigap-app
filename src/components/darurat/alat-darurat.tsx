@@ -1,10 +1,10 @@
 "use client";
 import { createPortal } from "react-dom";
-// Alat darurat yang bekerja tanpa internet: peluit SOS (Web Audio), layar senter (layar putih + wake lock),
-// dan kirim lokasi (GPS perangkat; dikirim lewat WhatsApp/SMS/menu Bagikan oleh pengguna sendiri).
+// Alat darurat yang bekerja tanpa internet: peluit SOS (Web Audio), layar senter (layar putih + wake lock), dan
+// ketukan RJP. Urusan lokasi ada di satu tempat: Kabari keluarga (SMS dengan GPS dan koordinat untuk petugas 112).
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Flashlight, LocateFixed, Loader2, Megaphone, Square, X } from "lucide-react";
-import { PESAN_TIDAK_AMAN, pesanGalatLokasi } from "@/lib/geo/galat-lokasi";
+import { Flashlight, Megaphone, Square, X } from "lucide-react";
+import { KetukanRjp } from "./ketukan-rjp";
 
 const FOKUS = "focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-white";
 const KARTU = `flex min-h-24 flex-col items-start justify-between gap-2 rounded-2xl border-2 p-4 text-left transition-colors ${FOKUS}`;
@@ -17,7 +17,7 @@ export const POLA_SOS: Array<[number, number]> = [
   [200, 200], [200, 200], [200, 1400],
 ];
 
-function usePeluit() {
+export function usePeluit() {
   const [aktif, setAktif] = useState(false);
   const ctx = useRef<AudioContext | null>(null);
   const henti = useRef(false);
@@ -83,83 +83,6 @@ function LayarSenter({ onTutup }: { onTutup: () => void }) {
   );
 }
 
-// ---------- Kirim lokasi ----------
-type Lok = { lat: number; lon: number; akurasi: number };
-
-export function teksLokasi(l: Lok): string {
-  const k = `${l.lat.toFixed(5)},${l.lon.toFixed(5)}`;
-  return `DARURAT. Saya butuh bantuan. Lokasi saya: https://maps.google.com/?q=${k} (koordinat ${k}, akurasi sekitar ${Math.round(l.akurasi)} m). Dikirim dari SIGAP.`;
-}
-
-function KirimLokasi() {
-  const [status, setStatus] = useState<"diam" | "mencari" | "ok" | "galat">("diam");
-  const [lok, setLok] = useState<Lok | null>(null);
-  const [pesan, setPesan] = useState("");
-
-  const cari = () => {
-    if (!("geolocation" in navigator)) {
-      setStatus("galat");
-      setPesan("Perangkat ini tidak mendukung lokasi.");
-      return;
-    }
-    if (!window.isSecureContext) {
-      setStatus("galat");
-      setPesan(PESAN_TIDAK_AMAN);
-      return;
-    }
-    setStatus("mencari");
-    navigator.geolocation.getCurrentPosition(
-      (p) => {
-        setLok({ lat: p.coords.latitude, lon: p.coords.longitude, akurasi: p.coords.accuracy });
-        setStatus("ok");
-      },
-      (e) => {
-        setStatus("galat");
-        void pesanGalatLokasi(e).then(setPesan);
-      },
-      { enableHighAccuracy: true, timeout: 20_000, maximumAge: 30_000 },
-    );
-  };
-
-  const bagikan = async () => {
-    if (!lok) return;
-    const teks = teksLokasi(lok);
-    try {
-      if (navigator.share) {
-        await navigator.share({ title: "Lokasi darurat", text: teks });
-        return;
-      }
-    } catch (e) {
-      if (e instanceof DOMException && e.name === "AbortError") return;
-    }
-    window.location.href = `https://wa.me/?text=${encodeURIComponent(teks)}`;
-  };
-
-  return (
-    <div className="rounded-2xl border-2 border-white/80 p-4">
-      <p className="flex items-center gap-2 text-lg font-bold"><LocateFixed className="size-6 text-yellow-300" aria-hidden="true" /> Kirim lokasi saya</p>
-      <p className="mt-1 text-base text-white/80">GPS tetap bekerja tanpa internet. Bacakan koordinat ke petugas 112, atau kirim ke keluarga.</p>
-      <div aria-live="polite" className="mt-3">
-        {status === "ok" && lok ? (
-          <div className="space-y-3">
-            <p className="rounded-xl bg-white px-4 py-3 font-mono text-xl font-bold text-black">{lok.lat.toFixed(5)}, {lok.lon.toFixed(5)}</p>
-            <p className="text-base text-white/80">Akurasi sekitar {Math.round(lok.akurasi)} meter.</p>
-            <div className="flex flex-wrap gap-2">
-              <button type="button" onClick={() => void bagikan()} className={`inline-flex min-h-14 items-center gap-2 rounded-xl bg-yellow-300 px-5 text-lg font-extrabold text-black ${FOKUS}`}>Kirim ke keluarga</button>
-              <a href={`sms:?body=${encodeURIComponent(teksLokasi(lok))}`} className={`inline-flex min-h-14 items-center rounded-xl border-2 border-white px-5 text-lg font-bold ${FOKUS}`}>Kirim lewat SMS</a>
-            </div>
-          </div>
-        ) : (
-          <button type="button" onClick={cari} disabled={status === "mencari"} className={`inline-flex min-h-14 items-center gap-2 rounded-xl border-2 border-white px-5 text-lg font-bold disabled:opacity-60 ${FOKUS}`}>
-            {status === "mencari" ? <><Loader2 className="size-5 animate-spin motion-reduce:animate-none" aria-hidden="true" /> Mencari lokasi…</> : "Ambil lokasi saya"}
-          </button>
-        )}
-        {status === "galat" && <p className="mt-2 text-base text-yellow-200">{pesan}</p>}
-      </div>
-    </div>
-  );
-}
-
 /** Kumpulan alat darurat. */
 export function AlatDarurat() {
   const peluit = usePeluit();
@@ -189,7 +112,9 @@ export function AlatDarurat() {
           </span>
         </button>
       </div>
-      <div className="mt-3"><KirimLokasi /></div>
+      <div className="mt-3">
+        <KetukanRjp />
+      </div>
       {senter && <LayarSenter onTutup={tutupSenter} />}
     </section>
   );

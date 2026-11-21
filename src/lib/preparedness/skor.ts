@@ -35,7 +35,7 @@ export function bangunButir(tindakan: Tindakan[], tas: ItemTas[], latihan: Hazar
     butir.push({ key: `tas:${i.id}`, judul: `Siapkan ${i.nama.toLowerCase()}`, bobot: i.bobot, phase: "tas", urutan: butir.length });
   }
   for (const h of latihan) {
-    butir.push({ key: `latihan:${h}`, judul: `Selesaikan Latihan Siaga ${HAZARD_BY_ID[h].label.toLowerCase()}`, bobot: 2, phase: "latihan", urutan: butir.length });
+    butir.push({ key: `latihan:${h}`, judul: `Lulus simulasi ${HAZARD_BY_ID[h].label.toLowerCase()} di Simulator Bencana AI`, bobot: 2, phase: "latihan", urutan: butir.length });
   }
   return butir;
 }

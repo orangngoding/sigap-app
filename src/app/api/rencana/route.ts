@@ -9,7 +9,7 @@ import { isHazardAktif } from "@/lib/hazards/pack-status";
 import { SEMUA_CHUNK } from "@/lib/kb/data";
 import { ARTIKEL_RINGKAS } from "@/lib/pustaka/data";
 
-export const maxDuration = 30; // lebih besar dari batas server 20 dtk agar jalur cadangan sempat berjalan
+export const maxDuration = 40; // lebih besar dari batas server 26 dtk agar jalur cadangan sempat berjalan
 
 export async function POST(req: Request) {
   const started = Date.now();

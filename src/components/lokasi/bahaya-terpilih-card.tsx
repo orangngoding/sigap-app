@@ -50,7 +50,7 @@ export function BahayaTerpilihCard() {
         </ul>
       )}
       <p className="mt-3 text-xs text-muted-foreground">
-        Saran bahaya berasal dari jawaban Anda, bukan peta risiko resmi.{" "}
+        Saran bahaya berasal dari data lokasi dan jawaban Anda, bukan peta risiko resmi.{" "}
         <a href={URL_INARISK_RESMI} target="_blank" rel="noopener noreferrer" className="underline">Cek peta risiko resmi di InaRISK (BNPB)</a>. Tautan diperiksa {KANAL_DIVERIFIKASI}.
       </p>
     </section>

@@ -16,7 +16,7 @@ const Query = z.object({
 export async function GET(req: Request) {
   const started = Date.now();
   try {
-    enforceRateLimit(req, "proyeksi", 6, 60_000);
+    enforceRateLimit(req, "proyeksi", 12, 60_000);
     const sp = new URL(req.url).searchParams;
     const q = Query.safeParse({ lat: sp.get("lat"), lon: sp.get("lon") });
     if (!q.success) throw new ApiError("MASUKAN_TIDAK_VALID");

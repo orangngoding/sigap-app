@@ -72,10 +72,10 @@ t("mesin: nilai persen dan ambang lulus", () => {
 });
 t("skor: latihan lulus menambah butir dan menaikkan skor", () => {
   const tindakan = [{ actionId: "a", hazard: "banjir", phase: "sebelum", title: "x", detail: "y", priority: "sedang", forGroups: ["umum"], sourceIds: ["banjir-saat-001"] }] as Tindakan[];
-  const lat = hazardLatihan([...tindakan, { hazard: "umum" }, { hazard: "kekeringan" }]);
-  assert.deepEqual(lat, ["banjir"]); // kekeringan belum punya skenario
+  const lat = hazardLatihan([...tindakan, { hazard: "umum" }, { hazard: "gelombang_abrasi" }]);
+  assert.deepEqual(lat, ["banjir", "gelombang_abrasi"]); // "umum" tidak punya skenario; semua 9 bahaya kini punya
   const butir = bangunButir(tindakan, [], lat);
-  assert.equal(butir.length, 2);
+  assert.equal(butir.length, 3); // 1 tindakan + 2 latihan
   assert.ok(hitungSkor(butir, { "latihan:banjir": true }).skor > hitungSkor(butir, {}).skor);
   assert.equal(bangunButir(tindakan, []).length, 1); // pemanggil lama tetap sama
 });

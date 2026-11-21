@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { KepalaHalaman } from "@/components/global/kepala-halaman";
 import { SiagaIklim } from "@/components/iklim/siaga-iklim";
 import { FOTO } from "@/lib/gambar";
 
 export const metadata: Metadata = {
   title: "Siaga Iklim",
-  description: "Lihat bulan mana yang paling rawan panas, hujan lebat, dan kemarau di wilayah Anda, uji seberapa siap rumah Anda, lalu dapatkan tindakan yang perlu dilakukan lebih dulu.",
+  description: "Siaga cuaca dan iklim untuk keluarga: hujan lebat, panas, kekeringan, karhutla, dan kualitas udara 16 hari ke depan, bulan rawan musim ini, sampai kesiapan rumah 10-25 tahun lagi.",
 };
 
 export default function IklimPage() {
@@ -13,12 +14,15 @@ export default function IklimPage() {
     <main id="konten" tabIndex={-1} className="flex-1 focus:outline-none">
       <KepalaHalaman
         label="Siaga Iklim"
-        judul="Bersiap sebelum bulan rawan tiba"
-        deskripsi="Lihat dampak perubahan iklim pada rumah Anda, dan langkah paling berarti yang bisa dimulai hari ini."
+        judul="Siaga cuaca dan iklim, dari minggu ini sampai 25 tahun lagi"
+        deskripsi="Hujan lebat, panas berbahaya, kekeringan, karhutla, dan asap di wilayah Anda: kapan datangnya, apa dampaknya bagi keluarga, dan apa yang perlu dilakukan sekarang."
         foto={FOTO.kekeringan}
       />
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-        <SiagaIklim />
+        {/* useSearchParams() (tab ?tab=) di komponen klien wajib dibungkus Suspense */}
+        <Suspense fallback={<div className="h-80 animate-pulse rounded-3xl bg-muted" aria-busy="true" />}>
+          <SiagaIklim />
+        </Suspense>
       </div>
     </main>
   );

@@ -1,3 +1,4 @@
+import { HAZARD_BY_ID } from "@/lib/hazards/hazards";
 // Aksi aplikasi yang boleh disarankan Asisten di bawah jawaban (tombol "Buka tab Tas Siaga", "Mulai latihan").
 // Model hanya memilih id dari daftar ini; tautan dibuat kode, jadi AI tidak bisa mengarang URL.
 import { SKENARIO } from "@/lib/latihan/skenario";
@@ -17,13 +18,13 @@ const DASAR: AksiAplikasi[] = [
   { id: "profil", label: "Ubah profil keluarga", href: "/rencana/profil" },
   { id: "lokasi", label: "Lihat cuaca dan peringatan di lokasi", href: "/lokasi" },
   { id: "darurat", label: "Buka Mode Darurat", href: "/darurat" },
-  { id: "latihan", label: "Lihat semua Latihan Siaga", href: "/latihan" },
+  { id: "latihan", label: "Buka Simulator Bencana AI", href: "/latihan" },
   { id: "pustaka", label: "Buka Pustaka", href: "/pustaka" },
 ];
 
 export const SEMUA_AKSI: AksiAplikasi[] = [
   ...DASAR,
-  ...SKENARIO.map((s) => ({ id: `latihan-${s.id}`, label: `Latihan: ${s.judul}`, href: `/latihan/${s.id}` })),
+  ...SKENARIO.map((s) => ({ id: `latihan-${s.id}`, label: `Simulasi AI: ${HAZARD_BY_ID[s.hazard].label}`, href: `/latihan?bahaya=${s.hazard}` })),
   ...SEMUA_ARTIKEL.map((a) => ({ id: `pustaka-${a.slug}`, label: `Baca: ${a.title}`, href: `/pustaka/${a.slug}` })),
 ];
 

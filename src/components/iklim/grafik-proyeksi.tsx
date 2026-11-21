@@ -39,7 +39,7 @@ export function GrafikProyeksi({ data }: { data: ProyeksiResponse }) {
         <div>
           <h3 className="text-lg font-bold">{pilihan.judul(data)}</h3>
           <p className="mt-1 text-sm text-muted-foreground">
-            {suhu ? "Titik" : "Batang"} = nilai tiap tahun (rata-rata dua model). Garis tebal = rata-rata 10 tahun terakhir.
+            {suhu ? "Titik" : "Batang"} = nilai tiap tahun ({data.metode ? "pengamatan NASA POWER" : "rata-rata dua model"}). Garis tebal = rata-rata 10 tahun terakhir.
           </p>
         </div>
         <div role="tablist" aria-label="Pilih data grafik" className="tanpa-cetak isolate flex rounded-xl border border-border bg-muted/60 p-1">

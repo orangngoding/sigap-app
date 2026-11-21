@@ -70,7 +70,7 @@ t("ringkasan rencana masuk blok DATA; model berpikir dulu dengan anggaran kecil"
 t("aksi dari model divalidasi: id karangan dibuang, maksimal 2, tanpa duplikat", async () => {
   const { p, diminta } = rekam(jawabanModel({ aksi: ["situs-palsu", "rencana-tas", "rencana-tas", "latihan-banjir-kiriman", "darurat"] }));
   const h = await jawabPertanyaan("Bagaimana menyiapkan tas siaga untuk banjir?", {}, deps(p));
-  assert.deepEqual(h.aksi?.map((a) => a.href), ["/rencana?tab=tas", "/latihan/banjir-kiriman"]);
+  assert.deepEqual(h.aksi?.map((a) => a.href), ["/rencana?tab=tas", "/latihan?bahaya=banjir"]);
   assert.match(diminta[0].user, /AKSI/);
   assert.ok(SEMUA_AKSI.every((a) => a.href.startsWith("/")));
   assert.deepEqual(aksiSah(["https://jahat.example"]), []);

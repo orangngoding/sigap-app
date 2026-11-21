@@ -7,6 +7,7 @@ import { ArrowLeft, ArrowRight, BookOpenCheck, Clock, ExternalLink, Siren } from
 import { fotoArtikel } from "@/lib/gambar";
 import { Foto } from "@/components/global/foto";
 import { TombolTanya } from "@/components/tanya/tombol-tanya";
+import { BeritaTerkait } from "@/components/pustaka/berita-terkait";
 import { notFound } from "next/navigation";
 import { DisclaimerBox } from "@/components/global/disclaimer-box";
 import { CetakArtikel } from "@/components/pustaka/cetak-artikel";
@@ -150,6 +151,7 @@ async function ArtikelPageIsi({
               <p className="mt-1 text-sm text-muted-foreground">Asisten SIGAP menjawab dengan panduan resmi dan menyesuaikan dengan keluarga Anda.</p>
               <TombolTanya className="mt-3" label="Tanya tentang artikel ini" pertanyaan={`Saya membaca artikel “${a.title}”. Apa hal terpenting yang perlu keluarga saya siapkan?`} />
             </div>
+            <BeritaTerkait hazards={a.hazards} />
             <CetakArtikel />
           </aside>
         </div>

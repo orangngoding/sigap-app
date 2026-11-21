@@ -5,7 +5,7 @@
 // - Halaman lain: jaringan dulu, simpan salinan, pakai salinan saat offline.
 // - API dan data pribadi tidak pernah disimpan di cache ini (data pengguna ada di localStorage).
 // Ganti VERSI tiap rilis agar cache lama dibersihkan.
-const VERSI = "sigap-v4";
+const VERSI = "sigap-v5";
 const HALAMAN_INTI = ["/darurat", "/rencana/kartu", "/"];
 const POLA_ASET = /\/_next\/static\/[^"'\s)\\]+/g;
 
@@ -60,7 +60,7 @@ self.addEventListener("fetch", (e) => {
   }
 
   // Halaman dan berkas publik lain: jaringan dulu, salinan saat offline. Navigasi yang belum pernah disimpan
-  // diarahkan ke Mode Darurat (Blueprint 8.7: halaman offline menautkan Mode Darurat dan Kartu Siaga).
+  // dialihkan (redirect) ke Mode Darurat (Blueprint 8.7: halaman offline menautkan Mode Darurat dan Kartu Siaga).
   e.respondWith(
     fetch(r)
       .then((res) => {
@@ -73,7 +73,12 @@ self.addEventListener("fetch", (e) => {
       .catch(() =>
         caches
           .match(r, { ignoreSearch: r.mode === "navigate" })
-          .then((m) => m || (r.mode === "navigate" ? caches.match("/darurat") : undefined)),
+          .then(async (m) => {
+            if (m || r.mode !== "navigate") return m;
+            // Halaman belum tersimpan: ARAHKAN ke Mode Darurat (bukan menyajikan isinya di alamat lain, yang membuat
+            // JavaScript halaman asal bentrok dengan HTML Mode Darurat). Bila Mode Darurat juga belum tersimpan, galat biasa.
+            return (await caches.match("/darurat")) ? Response.redirect(new URL("/darurat", self.location.origin).href, 302) : undefined;
+          }),
       ),
   );
 });

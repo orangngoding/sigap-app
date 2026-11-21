@@ -33,20 +33,39 @@ Setiap dependency atau aset baru yang digunakan harus diperiksa lisensinya dan d
 ## 6. Data Wilayah
 
 - **cahyadsn/wilayah** (MIT, Copyright (c) 2017-2025 Cahya DSN): kode dan nama wilayah administrasi serta koordinat pusat kab/kota, sesuai Kepmendagri No 300.2.2-2138 Tahun 2025. Diolah oleh `scripts/bangun-wilayah.ts` menjadi `public/data/wilayah/`. https://github.com/cahyadsn/wilayah
-- **Leaflet 1.9.4** (BSD-2-Clause) dan **react-leaflet 5.0.0** (Hippocratic-2.1): peta lokasi. Ubin peta dari **OpenStreetMap** (c) kontributor OpenStreetMap, ODbL.
+- **Leaflet 1.9.4** (BSD-2-Clause): peta lokasi. Ubin peta dari **OpenStreetMap** (c) kontributor OpenStreetMap, ODbL.
 
 ## 7. Data Iklim
 
-- **Open-Meteo** (CC BY 4.0, https://open-meteo.com/): Historical Weather API (ERA5) untuk tren hujan lebat di `/lokasi`, dan Climate API (https://open-meteo.com/en/docs/climate-api) untuk proyeksi 1991-2050 di `/iklim`.
+- **Open-Meteo** (CC BY 4.0, https://open-meteo.com/): Forecast API (prakiraan 16 hari) dan Air Quality API (PM2.5 dari model **CAMS**, Copernicus Atmosphere Monitoring Service, Uni Eropa) untuk tab Minggu ini di `/iklim`; Historical Weather API (ERA5) untuk tren hujan lebat di `/lokasi`; dan Climate API (https://open-meteo.com/en/docs/climate-api) untuk proyeksi 1991-2050 di `/iklim`.
+- **NOAA Climate Prediction Center** (indeks ONI, https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/ensostuff/ONI_v5.php) dan **NOAA Physical Sciences Laboratory** (indeks Niño 3.4 dan Dipole Mode Index/DMI dari HadISST, https://psl.noaa.gov/): status El Niño/La Niña dan IOD di Siaga Iklim. Data pemerintah AS, domain publik.
+- **NASA FIRMS** (Fire Information for Resource Management System, https://firms.modaps.eosdis.nasa.gov/): deteksi titik panas aktif VIIRS 375 m (NOAA-20 dan NOAA-21), kami mengakui penggunaan data dari NASA FIRMS, bagian dari NASA Earth Science Data and Information System (ESDIS). Data terbuka.
+- **NASA POWER** (Prediction Of Worldwide Energy Resources, NASA Langley Research Center, https://power.larc.nasa.gov/): data harian pengamatan T2M_MAX dan PRECTOTCORR sebagai cadangan tanpa kuota. "These data were obtained from the NASA Langley Research Center (LaRC) POWER Project funded through the NASA Earth Science/Applied Science Program."
+- **MET Norway** (Norwegian Meteorological Institute, Locationforecast 2.0, https://api.met.no/): cadangan prakiraan sekitar 9 hari, lisensi CC BY 4.0 / NLOD; permintaan memakai User-Agent yang mengidentifikasi aplikasi dan di-cache 1 jam sesuai ketentuan layanan.
+- **World Bank Climate Change Knowledge Portal** (https://climateknowledgeportal.worldbank.org/): anomali suhu maksimum dan persentase hujan CMIP6 x0.25, SSP5-8.5, persentil 10/median/90, agregat Indonesia, untuk proyeksi metode delta; lisensi CC BY 4.0.
+- **Smithsonian Institution, Global Volcanism Program** (https://volcano.si.edu/): Volcanoes of the World, daftar gunung api Holosen Indonesia (nama, koordinat, tahun erupsi terakhir) untuk Profil Risiko Lokasi. Global Volcanism Program, Volcanoes of the World (v5), Smithsonian Institution.
+- **U.S. Geological Survey Earthquake Catalog** (https://earthquake.usgs.gov/fdsnws/event/1/): jumlah dan gempa terkuat di sekitar lokasi; data USGS berstatus domain publik.
+- **NOAA NCEI Global Historical Tsunami Database** (https://www.ngdc.noaa.gov/hazard/tsu_db.shtml, doi:10.7289/V5PN93H7): titik runup tsunami di Indonesia sejak 1800.
+- **Natural Earth** (https://www.naturalearthdata.com/): garis pantai 1:10m, domain publik.
+- **OpenTopoData** (https://www.opentopodata.org/) dengan data **SRTM 90 m** (NASA/USGS): ketinggian dan beda tinggi untuk lereng dan dataran rendah.
+- **Mode Darurat, situasi kritis**: Ready.gov (FEMA, pemerintah AS): Earthquakes, Home Fires, Floods (https://www.ready.gov/); Kemenkes RI, Bantuan Hidup Dasar dan Pertolongan Pertama (https://keslan.kemkes.go.id/); MSD Manual versi Indonesia, Pertolongan pertama dan Resusitasi jantung paru (https://www.msdmanuals.com/id/); BNPB, Buku Saku Menghadapi Bencana (2019); BMKG, Antisipasi gempa bumi. Langkah ditulis ulang tim secara ringkas tanpa obat atau dosis.
+- **Nomor penting tambahan** (BNPB 117, gangguan listrik PLN 123, Sentra Informasi Keracunan BPOM 1500-533): Indonesia Baik, Kementerian Komunikasi dan Digital (https://indonesiabaik.id/infografis/nomor-penting-darurat-bencana), diperiksa 19 November 2026.
+- **Open-Meteo Historical Weather API** (reanalisis ERA5, Copernicus Climate Change Service): pola bulanan iklim saat ini periode 1991-2020 di tab Musim ini.
 - Model proyeksi CMIP6 HighResMIP yang dipakai lewat Open-Meteo: **EC-Earth3P-HR** (konsorsium EC-Earth) dan **MRI-AGCM3-2-S** (Meteorological Research Institute, Japan Meteorological Agency). Data dikoreksi bias oleh Open-Meteo terhadap ERA5.
 
-## 8. Basis Pengetahuan dari Buku Saku BNPB
+## 8. Berita Bencana (Pustaka)
+
+- **Google Berita** (RSS pencarian, https://news.google.com/): judul, nama media, waktu, dan tautan keluar; isi berita tidak disalin.
+- **ANTARA** (RSS terkini, https://www.antaranews.com/rss/terkini.xml): judul, waktu, tautan, dan foto dari umpan, ditampilkan apa adanya dengan tautan ke berita aslinya.
+- **GDACS**, Global Disaster Alert and Coordination System (PBB dan Komisi Eropa, https://www.gdacs.org/): peringatan untuk Indonesia; judul berbahasa Inggris diterjemahkan oleh kode dari pola tetapnya.
+
+## 9. Basis Pengetahuan dari Buku Saku BNPB
 
 - **Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh** (BNPB, Pusat Data Informasi dan Humas, cetakan keempat Maret 2019, ISBN 978-602-5693-05-2). Sumber utama potongan KB tsunami, gunung api, kekeringan, karhutla, dan tambahan longsor serta umum (draf 2026-11-17). Setiap potongan memuat nomor halaman cetak di `sourceTitle`.
 - Seluruh kalimat adalah parafrase, bukan salinan. Draf disusun dengan bantuan asisten AI. Sesuai revisi tim (2026-11-17), proyek tidak mewajibkan peninjau dan `reviewedBy` dibiarkan kosong; karena itu potongan belum diverifikasi manusia terhadap buku, dan halaman Metodologi menyatakan hal ini terus terang.
 - Nomor telepon dan alamat BPBD dalam buku (cetakan 2019) sengaja tidak disalin ke aplikasi karena dapat sudah berubah; `content/kontak.json` hanya memuat nomor darurat nasional (112, 110, 113, 115, 119) yang dikonfirmasi tim pada 2026-11-17.
 
-## 9. Sumber Tambahan Gelombang Tinggi, Abrasi, Rob, dan Longsor (2026-11-17)
+## 10. Sumber Tambahan Gelombang Tinggi, Abrasi, Rob, dan Longsor (2026-11-17)
 
 Disusun dari rekapan tim `SIGAP_Basis_Pengetahuan_Rujukan.md`, lalu halaman yang dikutip dicocokkan langsung ke PDF aslinya:
 
@@ -58,7 +77,7 @@ Catatan penting:
 - Tidak ada sumber resmi yang memuat langkah Saat dan Sesudah khusus gelombang tinggi, abrasi, atau rob. Langkah Saat (selain "jauhi pantai dan naik ke tempat tinggi") dan seluruh Sesudah pada `gelombang_abrasi` adalah TURUNAN dari panduan banjir umum, ditandai lewat kolom `turunan` dan ditampilkan ke pengguna (Rencana dan Mode Darurat).
 - Rekapan tim juga memuat bahan dari sumber lain (BMKG, Badan Geologi, S3/S4, S9) yang BELUM dijadikan potongan KB karena tautan resmi sumbernya belum tersedia; lihat bagian 10 rekapan untuk angka yang meragukan.
 
-## 10. Sumber Rujukan Tim yang Dibuka Langsung (2026-11-17)
+## 11. Sumber Rujukan Tim yang Dibuka Langsung (2026-11-17)
 
 Dari dokumen tim "Sumber Rujukan SIGAP", setiap tautan dibuka dan halaman yang dikutip dicocokkan ke berkas aslinya:
 
@@ -72,7 +91,7 @@ Dari dokumen tim "Sumber Rujukan SIGAP", setiap tautan dibuka dan halaman yang d
 | BNPB Buku Saku 2017/2018, salinan Kemdikbud | Tidak dapat dijangkau | Isinya setara buku 2019 yang sudah dipakai |
 | BNPB, berita kekeringan meteorologis (1 Sep 2021) | 404 (halaman dipindah) | Tidak dipakai |
 
-## 11. Sumber Karhutla dan Kekeringan Hasil Pencarian (2026-11-17)
+## 12. Sumber Karhutla dan Kekeringan Hasil Pencarian (2026-11-17)
 
 Dicari di web, lalu setiap halaman diunduh dan kalimatnya dicocokkan sebelum dipakai:
 

@@ -10,9 +10,9 @@
     "darurat": false,
     "title": "Hindari lereng rawan",
     "body": "Hindari membangun rumah di daerah rawan longsor.",
-    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
-    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
-    "accessedAt": "2026-11-16",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 43",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-21",
     "reviewedBy": []
   },
   {
@@ -26,9 +26,9 @@
     "darurat": false,
     "title": "Kurangi kemiringan lereng",
     "body": "Kurangi kemiringan lereng di sekitar rumah bila memungkinkan, sebaiknya dengan arahan ahli.",
-    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
-    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
-    "accessedAt": "2026-11-16",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 41",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-21",
     "reviewedBy": []
   },
   {
@@ -42,9 +42,9 @@
     "darurat": false,
     "title": "Jaga drainase tidak tersumbat",
     "body": "Pastikan saluran air dan drainase di sekitar lereng tidak tersumbat.",
-    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
-    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
-    "accessedAt": "2026-11-16",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 41",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-21",
     "reviewedBy": []
   },
   {
@@ -58,9 +58,9 @@
     "darurat": false,
     "title": "Tanam pohon berakar kuat",
     "body": "Tanam pohon berakar kuat di lereng dan jangan menebang hutan sembarangan.",
-    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
-    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
-    "accessedAt": "2026-11-16",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 43",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-21",
     "reviewedBy": []
   },
   {
@@ -74,9 +74,9 @@
     "darurat": false,
     "title": "Waspada saat hujan lebat",
     "body": "Tingkatkan kewaspadaan saat hujan lebat, terutama bila tinggal di dekat lereng atau tebing.",
-    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
-    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
-    "accessedAt": "2026-11-16",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 43",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-21",
     "reviewedBy": []
   },
   {
@@ -390,8 +390,8 @@
     "audience": [
       "umum"
     ],
-    "priority": "tinggi",
-    "darurat": true,
+    "priority": "rendah",
+    "darurat": false,
     "title": "Tetap tenang agar bisa bertindak tepat",
     "body": "Berusaha tenang, karena kondisi panik membuat kita tidak dapat bertindak tepat.",
     "sourceTitle": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak), hlm. 44",

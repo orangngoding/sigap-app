@@ -2,14 +2,15 @@
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import {
-  Activity, Ambulance, ChevronDown, CloudLightning, Download, Droplets, Flame, LifeBuoy, MapPin, Mountain, MountainSnow,
-  Phone, PlayCircle, ShieldHalf, Siren, Sun, Volume2, VolumeX, Waves, Wifi, WifiOff, Wind, type LucideIcon,
+  Ambulance, CheckCircle2, ChevronDown, Flame, LifeBuoy, MapPin,
+  Phone, PlayCircle, ShieldHalf, Siren, Volume2, VolumeX, Wifi, WifiOff, X, type LucideIcon,
 } from "lucide-react";
+import { IKON_BAHAYA } from "@/lib/hazards/ikon";
 import { useBacakan } from "@/hooks/use-suara";
 import { useHydrate } from "@/hooks/use-hydrate";
 import { HAZARDS } from "@/lib/hazards/hazards";
 import { isHazardAktif } from "@/lib/hazards/pack-status";
-import { langkahDaruratBahaya } from "@/lib/darurat/langkah";
+import { langkahDaruratBahaya, teksLengkap } from "@/lib/darurat/langkah";
 import { SEMUA_CHUNK } from "@/lib/kb/data";
 import kontak from "@/generated/kontak.json";
 import { useProfilStore } from "@/stores/profil-store";
@@ -17,21 +18,18 @@ import { finalisasiProfil } from "@/lib/preparedness/profil-schema";
 import type { HazardId } from "@/types";
 import { AlatDarurat } from "./alat-darurat";
 import { PanduanLangkah } from "./panduan-langkah";
+import { SituasiKritis } from "./situasi-kritis";
+import { KabariKeluarga } from "./kabari-keluarga";
+import { InfoMedis } from "./info-medis";
+import { useLokasiStore } from "@/stores/lokasi-store";
+import { KUNCI_RISIKO, bacaRisikoTersimpan } from "@/hooks/use-risiko-lokasi";
+import type { TingkatRisiko } from "@/lib/risiko/nilai";
 
 const FOKUS = "focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-white";
 
-const IKON_BAHAYA: Record<HazardId, LucideIcon> = {
-  banjir: Droplets,
-  longsor: Mountain,
-  gempa: Activity,
-  cuaca_ekstrem: CloudLightning,
-  tsunami: Waves,
-  kekeringan: Sun,
-  karhutla: Flame,
-  gunung_api: MountainSnow,
-  gelombang_abrasi: Wind,
-};
 const IKON_NOMOR: Record<string, LucideIcon> = { "110": ShieldHalf, "113": Flame, "115": LifeBuoy, "119": Ambulance };
+/** Label singkat agar muat tiga kolom di layar HP; nama lengkap tetap dibacakan pembaca layar. */
+const SINGKAT_LAIN: Record<string, string> = { "117": "BNPB", "123": "Listrik PLN", "1500533": "Keracunan BPOM" };
 
 /** Bacakan langkah darurat: membantu saat tangan sibuk, panik, atau penglihatan terbatas. Tanpa internet. */
 function TombolBacakan({ id, teks }: { id: string; teks: string }) {
@@ -60,38 +58,61 @@ function useOnline(): boolean {
   );
 }
 
-interface PromptPasang extends Event {
-  prompt: () => Promise<void>;
+/** Ringkasan Profil Risiko tersimpan di perangkat (tetap terbaca offline). */
+function useRisikoMentah(): string | null {
+  return useSyncExternalStore(
+    (cb) => {
+      window.addEventListener("storage", cb);
+      return () => window.removeEventListener("storage", cb);
+    },
+    () => {
+      try {
+        return localStorage.getItem(KUNCI_RISIKO);
+      } catch {
+        return null;
+      }
+    },
+    () => null,
+  );
 }
+
+/** Apakah Mode Darurat sudah tersimpan di perangkat untuk dibuka tanpa internet (null = belum diperiksa). */
+function useSiapOffline(): boolean | null {
+  const [siap, setSiap] = useState<boolean | null>(null);
+  useEffect(() => {
+    if (typeof caches === "undefined") return;
+    let batal = false;
+    caches.match("/darurat").then((r) => { if (!batal) setSiap(Boolean(r)); }).catch(() => {});
+    return () => { batal = true; };
+  }, []);
+  return siap;
+}
+
+const BOBOT_RISIKO: Record<TingkatRisiko, number> = { tinggi: 3, sedang: 2, rendah: 0, "belum-diketahui": 0 };
 
 /**
  * Mode Darurat (Blueprint 8.2): kontras tinggi, huruf 18-20 px, sasaran sentuh 56 px, animasi seperlunya.
  * Langkah berasal dari KB yang ikut terkemas di aplikasi, jadi tetap tampil tanpa rencana dan tanpa internet.
  */
 export function DaruratView() {
-  const siap = useHydrate(useProfilStore);
+  const siap = useHydrate(useProfilStore, useLokasiStore);
   const draft = useProfilStore((s) => s.profil);
+  const lokasi = useLokasiStore((s) => s.lokasi);
+  const risiko = bacaRisikoTersimpan(useRisikoMentah(), siap ? lokasi : null);
+  const siapOffline = useSiapOffline();
   const profil = useMemo(() => finalisasiProfil(draft), [draft]);
   const online = useOnline();
   const [dipilih, setDipilih] = useState<HazardId | null>(null);
-  const [pasang, setPasang] = useState<PromptPasang | null>(null);
   const [panduan, setPanduan] = useState(false);
   const tutupPanduan = useCallback(() => setPanduan(false), []);
 
-  useEffect(() => {
-    const tangkap = (e: Event) => {
-      e.preventDefault();
-      setPasang(e as PromptPasang);
-    };
-    window.addEventListener("beforeinstallprompt", tangkap);
-    return () => window.removeEventListener("beforeinstallprompt", tangkap);
-  }, []);
-
-  // Bahaya terpilih di profil tampil lebih dulu (Blueprint 8.2).
+  // Bahaya berisiko tinggi di lokasi (Profil Risiko tersimpan) lalu bahaya pilihan profil tampil lebih dulu.
+  const tingkatRisiko = useMemo(() => new Map((risiko?.nilai ?? []).map((n) => [n.id, n.tingkat])), [risiko]);
   const urutan = useMemo(() => {
     const milik = new Set<HazardId>(draft.bahaya);
-    return HAZARDS.filter((h) => isHazardAktif(h.id)).sort((a, b) => Number(milik.has(b.id)) - Number(milik.has(a.id)));
-  }, [draft.bahaya]);
+    const bobot = (id: HazardId) => BOBOT_RISIKO[tingkatRisiko.get(id) ?? "belum-diketahui"] + (milik.has(id) ? 1 : 0);
+    return HAZARDS.filter((h) => isHazardAktif(h.id)).sort((a, b) => bobot(b.id) - bobot(a.id));
+  }, [draft.bahaya, tingkatRisiko]);
   const aktif = dipilih ?? urutan[0]?.id ?? null;
   const paket = useMemo(() => (aktif ? langkahDaruratBahaya(SEMUA_CHUNK, aktif) : null), [aktif]);
   const labelAktif = HAZARDS.find((h) => h.id === aktif)?.label ?? "";
@@ -103,18 +124,29 @@ export function DaruratView() {
   const [utama, ...lain] = kontak.kontak;
 
   return (
-    <div className="min-h-screen bg-black px-4 py-6 text-[19px] leading-snug text-white sm:py-8">
+    <div data-mode-darurat className="min-h-screen bg-black px-4 py-6 text-[19px] leading-snug text-white sm:py-8">
       <div className="mx-auto max-w-5xl">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <h1 className="flex items-center gap-3 text-3xl font-extrabold">
             <Siren className="size-8 text-red-500" aria-hidden="true" /> Mode Darurat
           </h1>
-          <p role="status" className={`inline-flex items-center gap-2 rounded-full border-2 px-3 py-1 text-base font-bold ${online ? "border-emerald-400 text-emerald-300" : "border-yellow-300 text-yellow-300"}`}>
-            {online ? <Wifi className="size-5" aria-hidden="true" /> : <WifiOff className="size-5" aria-hidden="true" />}
-            {online ? "Online" : "Offline: tetap bisa dipakai"}
-          </p>
+          <div className="flex items-center gap-2">
+            <p role="status" className={`inline-flex items-center gap-2 rounded-full border-2 px-3 py-1 text-base font-bold ${online ? "border-emerald-400 text-emerald-300" : "border-yellow-300 text-yellow-300"}`}>
+              {online ? <Wifi className="size-5" aria-hidden="true" /> : <WifiOff className="size-5" aria-hidden="true" />}
+              {online ? "Online" : "Offline: tetap bisa dipakai"}
+            </p>
+            <Link href="/" aria-label="Keluar dari Mode Darurat" className={`inline-flex min-h-11 items-center gap-1.5 rounded-full border-2 border-white/60 px-3 text-base font-bold hover:border-white ${FOKUS}`}>
+              <X className="size-5" aria-hidden="true" /> Keluar
+            </Link>
+          </div>
         </div>
         <p className="mt-1 text-white/85">Tetap tenang. Lindungi diri dulu, lalu hubungi bantuan.</p>
+        {siapOffline !== null && (
+          <p className={`mt-2 inline-flex items-center gap-2 text-base ${siapOffline ? "text-emerald-300" : "text-yellow-200"}`}>
+            {siapOffline ? <CheckCircle2 className="size-5" aria-hidden="true" /> : <WifiOff className="size-5" aria-hidden="true" />}
+            {siapOffline ? "Halaman ini tersimpan di ponsel: tetap terbuka tanpa internet." : "Belum tersimpan untuk offline. Biarkan halaman ini terbuka sebentar selagi ada internet."}
+          </p>
+        )}
 
         {/* Blok 1: nomor penting, 112 paling besar */}
         <section aria-labelledby="d-nomor" className="mt-6 grid gap-3 md:grid-cols-[1.2fr_1fr]">
@@ -142,6 +174,20 @@ export function DaruratView() {
               );
             })}
           </ul>
+          {/* 112 dikelola tiap kabupaten/kota; per September 2026 baru 198 dari 514 daerah (Kemendagri). */}
+          <p className="text-base leading-snug text-white/90 md:col-span-2">
+            <strong className="text-yellow-300">Bila 112 tidak tersambung</strong> (belum semua daerah punya layanan 112), langsung telepon 110, 113, 115, atau 119 di atas sesuai keadaannya.
+          </p>
+          <ul className="grid grid-cols-3 gap-2 md:col-span-2" aria-label="Nomor penting lain">
+            {kontak.lainnya.map((k) => (
+              <li key={k.nomor}>
+                <a href={`tel:${k.nomor}`} aria-label={`${k.nomor === "1500533" ? "1500-533" : k.nomor}, ${k.nama}`} className={`flex h-full min-h-16 flex-col justify-center rounded-2xl border-2 border-white/60 px-3 py-2 hover:border-white ${FOKUS}`}>
+                  <span className="text-lg font-black leading-tight sm:text-xl">{k.nomor === "1500533" ? "1500-533" : k.nomor}</span>
+                  <span className="text-sm font-semibold leading-tight text-white/80">{SINGKAT_LAIN[k.nomor] ?? k.nama}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
         </section>
 
         {/* Blok 2: pilih bahaya */}
@@ -151,6 +197,7 @@ export function DaruratView() {
             {urutan.map((h) => {
               const Ikon = IKON_BAHAYA[h.id];
               const pilih = aktif === h.id;
+              const tinggi = tingkatRisiko.get(h.id) === "tinggi";
               return (
                 <button
                   key={h.id} type="button" aria-pressed={pilih} onClick={() => setDipilih(h.id)}
@@ -158,6 +205,7 @@ export function DaruratView() {
                 >
                   <Ikon className="size-8" aria-hidden="true" />
                   {h.label}
+                  {tinggi && <span className={`rounded-full px-2 py-0.5 text-xs font-extrabold ${pilih ? "bg-red-600 text-white" : "bg-red-500/90 text-white"}`}>Risiko tinggi di sini</span>}
                 </button>
               );
             })}
@@ -172,16 +220,28 @@ export function DaruratView() {
               <button type="button" onClick={() => setPanduan(true)} className={`inline-flex min-h-16 items-center justify-center gap-3 rounded-2xl bg-yellow-300 px-5 text-xl font-extrabold text-black hover:bg-yellow-200 ${FOKUS}`}>
                 <PlayCircle className="size-7" aria-hidden="true" /> Pandu saya langkah demi langkah
               </button>
-              <TombolBacakan id={`darurat-${aktif}`} teks={`Saat kejadian. ${paket.saat.map((l, i) => `${i + 1}. ${l.teks}`).join(". ")}`} />
+              <TombolBacakan id={`darurat-${aktif}`} teks={`Saat kejadian. ${paket.saat.map((l, i) => `${i + 1}. ${teksLengkap(l)}`).join(" ")}`} />
             </div>
-            <ol className="mt-4 space-y-2">
-              {paket.saat.map((l, i) => (
-                <li key={l.id} className="flex gap-4 rounded-2xl bg-white/10 p-4 text-xl font-bold">
-                  <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-yellow-300 text-lg font-black text-black" aria-hidden="true">{i + 1}</span>
-                  <span className="pt-1">{l.teks}{l.turunan ? " *" : ""}</span>
-                </li>
-              ))}
-            </ol>
+            {/* Langkah dikelompokkan menurut keadaan (di dalam bangunan, di mobil, ...): orang panik langsung menemukan yang berlaku. */}
+            {paket.kelompok.map((k, ki) => {
+              const awal = paket.kelompok.slice(0, ki).reduce((n, x) => n + x.langkah.length, 0);
+              return (
+                <div key={k.keadaan ?? "umum"} className="mt-4">
+                  {k.keadaan && <h3 className="mb-2 text-lg font-extrabold text-yellow-300">{k.keadaan}</h3>}
+                  <ol className="space-y-2" start={awal + 1}>
+                    {k.langkah.map((l, i) => (
+                      <li key={l.id} className="flex gap-4 rounded-2xl bg-white/10 p-4">
+                        <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-yellow-300 text-lg font-black text-black" aria-hidden="true">{awal + i + 1}</span>
+                        <span className="pt-1">
+                          <span className="block text-xl font-bold">{l.teks}{l.turunan ? " *" : ""}</span>
+                          {l.detail && <span className="mt-1 block text-lg leading-snug text-white/85">{l.detail}</span>}
+                        </span>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+              );
+            })}
             {[...paket.saat, ...paket.sesudah].some((l) => l.turunan) && (
               <p className="mt-3 text-base text-white/85">* Turunan dari panduan banjir umum. Belum ada panduan resmi khusus untuk bahaya ini; ikuti arahan petugas.</p>
             )}
@@ -193,16 +253,26 @@ export function DaruratView() {
                 <ol className="space-y-2 px-4 pb-4">
                   {paket.sesudah.map((l, i) => (
                     <li key={l.id} className="flex gap-3 text-lg">
-                      <span className="font-black text-yellow-300">{i + 1}.</span> <span>{l.teks}{l.turunan ? " *" : ""}</span>
+                      <span className="font-black text-yellow-300">{i + 1}.</span>
+                      <span><span className="font-bold">{l.teks}{l.turunan ? " *" : ""}</span>{l.detail && <span className="block text-base leading-snug text-white/80">{l.detail}</span>}</span>
                     </li>
                   ))}
                 </ol>
               </details>
             )}
+            <p className="mt-4 text-sm leading-relaxed text-white/75">
+              Sumber: {paket.sumber.map((s, i) => <span key={`${s.judul}|${s.url}`}>{i > 0 && "; "}<a href={s.url} target="_blank" rel="noreferrer" className="underline underline-offset-2">{s.judul}</a></span>)}. Ikuti arahan petugas di lokasi.
+            </p>
           </section>
         )}
 
+        <SituasiKritis onKabari={() => document.getElementById("d-kabari")?.scrollIntoView({ behavior: "smooth", block: "start" })} />
+
+        <KabariKeluarga kontak={siap ? kerabat : []} titikKumpul={siap ? titik : undefined} jumlahOrang={siap ? profil?.jumlahAnggota : undefined} />
+
         <AlatDarurat />
+
+        <InfoMedis />
 
         {/* Blok 4: keluarga saya */}
         <section aria-labelledby="d-keluarga" className="mt-8 rounded-3xl border-2 border-white/80 p-5 sm:p-6">
@@ -229,22 +299,10 @@ export function DaruratView() {
           </p>
         </section>
 
-        {/* Pasang di layar utama */}
-        <section aria-labelledby="d-pasang" className="mt-8">
-          <h2 id="d-pasang" className="text-xl font-bold">Pasang di layar utama</h2>
-          {pasang ? (
-            <button type="button" onClick={() => void pasang.prompt()} className={`mt-2 inline-flex min-h-14 items-center gap-2 rounded-2xl border-2 border-white px-5 text-lg font-bold ${FOKUS}`}>
-              <Download className="size-5" aria-hidden="true" /> Pasang SIGAP
-            </button>
-          ) : (
-            <p className="mt-1 text-base text-white/85">Android Chrome: menu titik tiga lalu &ldquo;Tambahkan ke layar utama&rdquo;. iPhone Safari: tombol Bagikan lalu &ldquo;Tambah ke Layar Utama&rdquo;.</p>
-          )}
-        </section>
-
-        <p className="mt-6 text-base text-white/70">Versi panduan {kontak.diperbarui}. Panduan ini bukan pengganti arahan BNPB, BPBD, dan BMKG. Ikuti petugas di lokasi.</p>
+        <p className="mt-6 text-base text-white/70">Nomor telepon diperiksa tim pada {new Date(`${kontak.diperbarui}T00:00:00+07:00`).toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric", timeZone: "Asia/Jakarta" })}. Langkah disusun dari panduan BNPB, BPBD, BMKG, dan Kemenkes (sumbernya tertulis di tiap bagian). Panduan ini bukan pengganti arahan petugas; ikuti petugas di lokasi.</p>
       </div>
 
-      {panduan && paket && <PanduanLangkah judul={`Saat ${labelAktif.toLowerCase()}`} langkah={paket.saat.map((l) => l.teks)} onTutup={tutupPanduan} />}
+      {panduan && paket && <PanduanLangkah judul={`Saat ${labelAktif.toLowerCase()}`} langkah={paket.saat.map((l) => ({ teks: l.teks, detail: l.detail, keadaan: l.keadaan }))} onTutup={tutupPanduan} />}
     </div>
   );
 }

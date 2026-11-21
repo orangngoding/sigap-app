@@ -8,14 +8,22 @@ import type { Atap, GangguanAir, SumberAir } from "@/lib/iklim/ketahanan";
 export interface JawabanRumah {
   anggota: number | null;
   adaRentan: boolean | null;
-  litersTersimpan: number;
-  atap: Atap;
+  /** null = belum dijawab. */
+  litersTersimpan: number | null;
+  /** null = belum dijawab (dihitung sebagai genteng, atap paling umum). */
+  atap: Atap | null;
   sumberAir: SumberAir;
-  gangguanAir: GangguanAir;
+  /** null = belum dijawab (dipakai cadangan dasar, bukan tebakan). */
+  gangguanAir: GangguanAir | null;
   pernahTergenang: boolean;
 }
 
-export const JAWABAN_AWAL: JawabanRumah = { anggota: null, adaRentan: null, litersTersimpan: 0, atap: "genteng", sumberAir: "pdam", gangguanAir: "hari", pernahTergenang: false };
+export const JAWABAN_AWAL: JawabanRumah = { anggota: null, adaRentan: null, litersTersimpan: null, atap: null, sumberAir: "pdam", gangguanAir: null, pernahTergenang: false };
+
+/** Kedua soal air sudah dijawab pengguna sendiri. */
+export const airDijawab = (j: JawabanRumah) => j.litersTersimpan !== null && j.gangguanAir !== null;
+/** Tiga pertanyaan utama (air sulit, air simpanan, atap) sudah dijawab. */
+export const rumahDijawab = (j: JawabanRumah) => airDijawab(j) && j.atap !== null;
 
 interface State {
   jawaban: JawabanRumah;
@@ -34,12 +42,22 @@ export function bersihkanJawaban(x: unknown): JawabanRumah {
   return {
     anggota: bil(o.anggota, 1, 12),
     adaRentan: typeof o.adaRentan === "boolean" ? o.adaRentan : null,
-    litersTersimpan: bil(o.litersTersimpan, 0, 50_000) ?? 0,
-    atap: ATAP.includes(o.atap as Atap) ? (o.atap as Atap) : JAWABAN_AWAL.atap,
+    litersTersimpan: bil(o.litersTersimpan, 0, 50_000),
+    atap: ATAP.includes(o.atap as Atap) ? (o.atap as Atap) : null,
     sumberAir: SUMBER.includes(o.sumberAir as SumberAir) ? (o.sumberAir as SumberAir) : JAWABAN_AWAL.sumberAir,
-    gangguanAir: GANGGUAN.includes(o.gangguanAir as GangguanAir) ? (o.gangguanAir as GangguanAir) : JAWABAN_AWAL.gangguanAir,
+    gangguanAir: GANGGUAN.includes(o.gangguanAir as GangguanAir) ? (o.gangguanAir as GangguanAir) : null,
     pernahTergenang: o.pernahTergenang === true,
   };
+}
+
+/**
+ * Versi 1 menyimpan isian bawaan (0 liter, "beberapa hari") seolah jawaban. Pasangan persis itu hampir pasti belum
+ * pernah diubah, jadi dianggap belum dijawab; jawaban lain tetap dipakai.
+ */
+export function migrasiJawaban(x: unknown, versi: number): JawabanRumah {
+  const j = bersihkanJawaban(x);
+  if (versi < 2 && j.litersTersimpan === 0 && j.gangguanAir === "hari") return { ...j, litersTersimpan: null, gangguanAir: null, atap: j.atap === "genteng" ? null : j.atap };
+  return j;
 }
 
 export const useIklimRumahStore = create<State>()(
@@ -51,11 +69,11 @@ export const useIklimRumahStore = create<State>()(
     }),
     {
       name: "sigap:v1:iklimrumah",
-      version: 1,
+      version: 2,
       skipHydration: true,
       storage: createJSONStorage(() => safeStorage),
       partialize: (s) => ({ jawaban: s.jawaban }),
-      migrate: (p) => ({ jawaban: bersihkanJawaban((p as { jawaban?: unknown } | undefined)?.jawaban) }),
+      migrate: (p, versi) => ({ jawaban: migrasiJawaban((p as { jawaban?: unknown } | undefined)?.jawaban, versi) }),
       merge: (p, cur) => ({ ...cur, jawaban: bersihkanJawaban((p as { jawaban?: unknown } | undefined)?.jawaban) }),
     },
   ),

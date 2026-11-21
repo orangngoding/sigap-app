@@ -88,11 +88,11 @@
     ],
     "priority": "tinggi",
     "darurat": true,
-    "title": "Lindungi kepala di dalam bangunan",
-    "body": "Lindungi kepala dan badan, misalnya dengan berlindung di bawah meja, lalu keluar bila memungkinkan.",
-    "sourceTitle": "Antisipasi Gempa Bumi (BMKG)",
-    "sourceUrl": "https://www.bmkg.go.id/gempabumi/mitigasi/antisipasi-gempabumi",
-    "accessedAt": "2026-11-16",
+    "title": "Setelah guncangan berhenti, keluar dengan hati-hati",
+    "body": "Bila sudah terasa aman, segera keluar rumah. Waspadai pecahan kaca, genteng, atau material lain, tetap lindungi kepala, dan menuju lapangan terbuka.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 16",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-21",
     "reviewedBy": []
   },
   {
@@ -104,11 +104,11 @@
     ],
     "priority": "sedang",
     "darurat": true,
-    "title": "Matikan kompor",
-    "body": "Jika tidak ada meja, lindungi kepala dengan bantal. Matikan kompor bila aman melakukannya.",
-    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
-    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
-    "accessedAt": "2026-11-16",
+    "title": "Bila sedang memasak, matikan kompor",
+    "body": "Jika sedang memasak, segera matikan kompor dan cabut peralatan listrik untuk mencegah kebakaran. Lakukan hanya bila bisa dijangkau dengan aman.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 16",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-21",
     "reviewedBy": []
   },
   {
@@ -136,11 +136,11 @@
     ],
     "priority": "sedang",
     "darurat": true,
-    "title": "Berhenti di tempat terbuka",
-    "body": "Jika di dalam mobil, berhenti di tempat terbuka dan jauh dari persimpangan.",
-    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
-    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
-    "accessedAt": "2026-11-16",
+    "title": "Menepi, berhenti, dan tetap di dalam mobil",
+    "body": "Jauhi persimpangan, menepi ke bahu jalan, lalu berhenti dan tetap di dalam mobil. Jangan berhenti di bawah atau di atas jembatan.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 17",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-21",
     "reviewedBy": []
   },
   {
@@ -154,9 +154,9 @@
     "darurat": true,
     "title": "Jangan pakai lift",
     "body": "Jangan menggunakan lift saat atau segera setelah gempa.",
-    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
-    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
-    "accessedAt": "2026-11-16",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 16",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-21",
     "reviewedBy": []
   },
   {
@@ -168,11 +168,11 @@
     ],
     "priority": "tinggi",
     "darurat": true,
-    "title": "Menuju dataran tinggi bila ada tanda tsunami",
-    "body": "Di pantai, segera menuju dataran tinggi jika tanda tsunami muncul.",
-    "sourceTitle": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
-    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf",
-    "accessedAt": "2026-11-16",
+    "title": "Gempa kuat di pantai: segera ke tempat tinggi",
+    "body": "Tanda tsunami: gempa terasa kuat dan lama, air laut tiba-tiba surut, atau bunyi gemuruh dari tengah laut. Cepat berlari ke tempat tinggi dan bertahan di sana untuk sementara.",
+    "sourceTitle": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019), hlm. 20",
+    "sourceUrl": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf",
+    "accessedAt": "2026-11-21",
     "reviewedBy": []
   },
   {
@@ -253,6 +253,22 @@
     "sourceTitle": "Antisipasi Gempa Bumi (BMKG)",
     "sourceUrl": "https://www.bmkg.go.id/gempabumi/mitigasi/antisipasi-gempabumi",
     "accessedAt": "2026-11-16",
+    "reviewedBy": []
+  },
+  {
+    "id": "gempa-saat-008",
+    "hazard": "gempa",
+    "phase": "saat",
+    "audience": [
+      "umum"
+    ],
+    "priority": "tinggi",
+    "darurat": true,
+    "title": "Merunduk, berlindung, bertahan sampai guncangan berhenti",
+    "body": "Bila di dalam rumah atau bangunan, segera merunduk, berlindung di bawah meja yang kuat, lindungi kepala dan leher belakang, lalu bertahan sampai guncangan selesai (Drop, Cover, Hold On).",
+    "sourceTitle": "Kesiapsiagaan Menghadapi Gempa Bumi di Provinsi DKI Jakarta untuk Masyarakat (BPBD Provinsi DKI Jakarta, 2024), hlm. 15",
+    "sourceUrl": "https://bpbd.jakarta.go.id/data/files/perpustakaan/2024/12/10/295/173379279870-kesiapsiagaan-menghadapi-gempa-bumi-di-provinsi-dki-jakarta-untuk-masyarakat.pdf",
+    "accessedAt": "2026-11-21",
     "reviewedBy": []
   }
 ]

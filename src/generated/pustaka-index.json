@@ -141,7 +141,7 @@
           {
             "id": "banjir-saat-002",
             "judul": "Matikan listrik",
-            "isi": "Matikan listrik atau minta PLN memutusnya di wilayah yang terdampak banjir.",
+            "isi": "Matikan semua jaringan listrik bila ada instruksi dari pihak berwenang, dan cabut alat yang masih tersambung listrik.",
             "darurat": true
           },
           {
@@ -158,8 +158,8 @@
           },
           {
             "id": "banjir-saat-007",
-            "judul": "Waspada banjir bandang tanpa peringatan",
-            "isi": "Banjir bandang dapat datang tanpa peringatan, juga saat hujan biasa. Waspadai saluran air dan tempat lewat arus deras.",
+            "judul": "Jauhi sungai saat hujan deras: banjir bandang bisa tiba-tiba",
+            "isi": "Banjir bandang dapat datang tanpa peringatan, juga saat hujan biasa. Menjauh dari tepi sungai, saluran air, dan tempat lewat arus deras.",
             "darurat": true
           }
         ]
@@ -283,15 +283,15 @@
             "darurat": true
           },
           {
-            "id": "longsor-saat-005",
-            "judul": "Tetap tenang agar bisa bertindak tepat",
-            "isi": "Berusaha tenang, karena kondisi panik membuat kita tidak dapat bertindak tepat.",
-            "darurat": true
-          },
-          {
             "id": "longsor-saat-006",
             "judul": "Segera tinggalkan rumah bila longsor di sekitar",
             "isi": "Bila longsor terjadi di sekitar rumah, cepat tinggalkan rumah dan berlindunglah di tempat aman. Jangan mendekati daerah longsoran karena longsor susulan masih mungkin.",
+            "darurat": true
+          },
+          {
+            "id": "longsor-saat-007",
+            "judul": "Mengungsi bila kondisi sekitar membahayakan",
+            "isi": "Bila kondisi di sekitar tempat tinggal membahayakan, mengungsilah.",
             "darurat": true
           }
         ]
@@ -334,16 +334,16 @@
     ],
     "sumber": [
       {
+        "judul": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019)",
+        "url": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf"
+      },
+      {
         "judul": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
         "url": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf"
       },
       {
         "judul": "Pengenalan Karakteristik Bencana dan Upaya Mitigasinya di Indonesia, Edisi II (BNPB/BAKORNAS PB, 2007)",
         "url": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/470.pdf"
-      },
-      {
-        "judul": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019)",
-        "url": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf"
       },
       {
         "judul": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak)",
@@ -360,7 +360,7 @@
     ],
     "kategori": "Bencana",
     "intro": "Gempa tidak dapat diprediksi, sehingga kesiapan sebelumnya sangat menentukan. Rangkuman dari sumber resmi.",
-    "menit": 1,
+    "menit": 2,
     "bagian": [
       {
         "judul": "Sebelum gempa",
@@ -402,8 +402,8 @@
         "butir": [
           {
             "id": "gempa-saat-001",
-            "judul": "Lindungi kepala di dalam bangunan",
-            "isi": "Lindungi kepala dan badan, misalnya dengan berlindung di bawah meja, lalu keluar bila memungkinkan.",
+            "judul": "Setelah guncangan berhenti, keluar dengan hati-hati",
+            "isi": "Bila sudah terasa aman, segera keluar rumah. Waspadai pecahan kaca, genteng, atau material lain, tetap lindungi kepala, dan menuju lapangan terbuka.",
             "darurat": true
           },
           {
@@ -420,14 +420,14 @@
           },
           {
             "id": "gempa-saat-006",
-            "judul": "Menuju dataran tinggi bila ada tanda tsunami",
-            "isi": "Di pantai, segera menuju dataran tinggi jika tanda tsunami muncul.",
+            "judul": "Gempa kuat di pantai: segera ke tempat tinggi",
+            "isi": "Tanda tsunami: gempa terasa kuat dan lama, air laut tiba-tiba surut, atau bunyi gemuruh dari tengah laut. Cepat berlari ke tempat tinggi dan bertahan di sana untuk sementara.",
             "darurat": true
           },
           {
-            "id": "gempa-saat-002",
-            "judul": "Matikan kompor",
-            "isi": "Jika tidak ada meja, lindungi kepala dengan bantal. Matikan kompor bila aman melakukannya.",
+            "id": "gempa-saat-008",
+            "judul": "Merunduk, berlindung, bertahan sampai guncangan berhenti",
+            "isi": "Bila di dalam rumah atau bangunan, segera merunduk, berlindung di bawah meja yang kuat, lindungi kepala dan leher belakang, lalu bertahan sampai guncangan selesai (Drop, Cover, Hold On).",
             "darurat": true
           }
         ]
@@ -470,6 +470,14 @@
       {
         "judul": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
         "url": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf"
+      },
+      {
+        "judul": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019)",
+        "url": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf"
+      },
+      {
+        "judul": "Kesiapsiagaan Menghadapi Gempa Bumi di Provinsi DKI Jakarta untuk Masyarakat (BPBD Provinsi DKI Jakarta, 2024)",
+        "url": "https://bpbd.jakarta.go.id/data/files/perpustakaan/2024/12/10/295/173379279870-kesiapsiagaan-menghadapi-gempa-bumi-di-provinsi-dki-jakarta-untuk-masyarakat.pdf"
       }
     ]
   },
@@ -766,8 +774,8 @@
         "butir": [
           {
             "id": "cuaca_ekstrem-saat-001",
-            "judul": "Posisi aman saat petir dekat",
-            "isi": "Jika petir sudah dekat, membungkuk, duduk, dan peluk lutut. Jangan tiarap di tanah.",
+            "judul": "Petir dekat: membungkuk, duduk, peluk lutut",
+            "isi": "Jika petir berpotensi menyambar, segera membungkuk, duduk, dan peluk lutut ke dada. Jangan tiarap di atas tanah.",
             "darurat": true
           },
           {
@@ -786,6 +794,12 @@
             "id": "cuaca_ekstrem-saat-004",
             "judul": "Jangan berteduh di bawah pohon besar atau papan reklame",
             "isi": "Jangan berlindung di bawah pohon besar dan papan reklame karena bisa tumbang atau jatuh.",
+            "darurat": true
+          },
+          {
+            "id": "cuaca_ekstrem-saat-005",
+            "judul": "Bawa masuk barang di luar rumah",
+            "isi": "Saat angin kencang atau puting beliung, bawa masuk barang-barang ke dalam rumah agar tidak terbawa angin.",
             "darurat": true
           }
         ]

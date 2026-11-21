@@ -2,7 +2,7 @@
 // tipe hasil, perakitan opsi dari katalog, dan urutan cadangan. Dipakai sebagai tampilan awal yang langsung
 // muncul (juga saat offline) dan sebagai cadangan bila AI gagal.
 import type { ProyeksiResponse } from "@/lib/data/proyeksi";
-import { bulanMulai, efekAir, hitungAir, urutkanIntervensi, type BulanMulai, type EfekAir, type HasilUji, type InputRumah, type Intervensi } from "./ketahanan";
+import { MIN_HARI_CADANGAN_AIR, bulanMulai, efekAir, hitungAir, kemarauDepanStabil, urutkanIntervensi, type BulanMulai, type EfekAir, type HasilUji, type InputRumah, type Intervensi } from "./ketahanan";
 
 export interface OpsiKeputusan {
   id: string;
@@ -61,9 +61,9 @@ export interface Keyakinan {
 }
 
 const METRIK_SASARAN = {
-  air: { k: "keringTerpanjang", apa: "kemarau terpanjang", naik: "bertambah panjang" },
-  panas: { k: "hariSangatPanas", apa: "hari sangat panas", naik: "bertambah" },
-  hujan: { k: "hariHujanEkstrem", apa: "hari hujan ekstrem", naik: "bertambah" },
+  air: { k: "keringTerpanjang", apa: "kemarau panjang", naik: "makin panjang" },
+  panas: { k: "hariSangatPanas", apa: "hari panas terik", naik: "makin sering" },
+  hujan: { k: "hariHujanEkstrem", apa: "hujan sangat deras", naik: "makin sering" },
 } as const;
 
 /**
@@ -71,20 +71,47 @@ const METRIK_SASARAN = {
  * di atas nilai kedua model pada 1990-an. Sedang: rata-rata naik, tetapi kedua model belum sepakat. Rendah: data tidak
  * menunjukkan kenaikan, jadi saran bertumpu pada keadaan rumah. Tindakan umum: sedang (efeknya tidak dihitung).
  */
+/** Jawaban pengguna tentang air, ditulis ulang apa adanya (bukan diklaim sebagai fakta). */
+const JAWABAN_AIR = { jarang: "jarang sulit", hari: "biasanya sulit beberapa hari", minggu: "biasanya sulit beberapa minggu", kemarau: "sulit hampir sepanjang kemarau" } as const;
+
 export function keyakinan(target: Intervensi["target"], p: ProyeksiResponse, i?: InputRumah): Keyakinan {
-  if (target === "umum") return { tingkat: "sedang", alasan: "Tindakan umum yang membantu menghadapi semua risiko; efeknya tidak bisa dihitung untuk rumah Anda." };
-  // Air saat ini bertumpu pada pengalaman pengguna sendiri (bukan model), jadi bila sudah ada kekurangan, dasarnya kuat.
+  if (target === "umum") return { tingkat: "sedang", alasan: "Berguna untuk semua jenis cuaca ekstrem, tetapi manfaatnya tidak bisa dihitung pasti untuk rumah Anda." };
+  // Air saat ini bertumpu pada JAWABAN pengguna (bukan model): disebut sebagai jawaban dan perkiraan, bukan fakta.
   if (target === "air" && i) {
     const air = hitungAir(i, p);
-    if (air.kurangKini > 0) return { tingkat: "tinggi", alasan: `Berdasarkan pengalaman Anda sendiri: air di rumah ini sulit sekitar ${air.perluKini} hari saat kemarau, lebih lama dari air simpanan Anda.` };
+    if (air.kurangKini > 0 && i.airDiketahui !== false)
+      return { tingkat: "tinggi", alasan: `Anda menjawab air di rumah ${JAWABAN_AIR[i.gangguanAir]} saat kemarau. Kami perkirakan itu sekitar ${air.perluKini} hari, ${air.hariCukup > 0 ? `sedangkan air simpanan Anda baru cukup ${fmt(air.hariCukup)} hari` : "padahal rumah Anda belum punya air simpanan"}.` };
   }
   const m = METRIK_SASARAN[target];
   const dulu = p.periode[0]?.metrik[m.k];
   const depan = p.periode[p.periode.length - 1]?.metrik[m.k];
-  const keadaan = target === "hujan" && i?.pernahTergenang ? "rumah Anda pernah tergenang" : target === "panas" && i && (i.rentan > 0 || i.atap === "seng") ? "keadaan rumah Anda (anggota rentan atau atap seng)" : target === "air" ? "jawaban Anda tentang air di rumah" : "keadaan rumah Anda";
-  if (!dulu || !depan || depan.rata <= dulu.rata) return { tingkat: "rendah", alasan: `Data tidak menunjukkan ${m.apa} ${m.naik}; saran ini bertumpu pada ${keadaan}.` };
-  if (depan.min > dulu.maks) return { tingkat: "tinggi", alasan: `Kedua model iklim sepakat ${m.apa} ${m.naik} dalam 10-25 tahun ke depan.` };
-  return { tingkat: "sedang", alasan: `Rata-rata ${m.apa} ${m.naik}, tetapi kedua model iklim belum sepakat besarnya.` };
+  const keadaan =
+    target === "hujan" && i?.pernahTergenang ? "rumah Anda pernah tergenang"
+    : target === "panas" && i && i.rentan > 0 && i.atap === "seng" ? "ada anggota rentan dan atap rumah dari seng"
+    : target === "panas" && i?.atap === "seng" ? "atap rumah Anda dari seng"
+    : target === "panas" && i && i.rentan > 0 ? "ada lansia, balita, atau ibu hamil di rumah"
+    : target === "air" ? (i?.airDiketahui === false ? `setiap rumah sebaiknya punya cadangan air minimal ${MIN_HARI_CADANGAN_AIR} hari` : "jawaban Anda tentang air di rumah")
+    : "keadaan rumah Anda";
+  const asal = p.perkiraan ? ` (memakai data ${p.perkiraan.kota}, sekitar ${p.perkiraan.km} km dari lokasi Anda)` : "";
+  // Air: angka di layar memakai kemarau TAHUN TERBURUK; dasar saran harus sejalan dengannya.
+  if (target === "air" && p.kemarauTerburuk) {
+    const kini = p.kemarauTerburuk.kini;
+    const nanti = kemarauDepanStabil(kini, p.kemarauTerburuk["2050"]);
+    const naikRata = Boolean(dulu && depan && depan.rata > dulu.rata);
+    if (nanti <= kini) return { tingkat: "rendah", alasan: `Kemarau panjang diperkirakan tidak bertambah. Saran ini tetap berguna karena ${keadaan}.` };
+    if (!naikRata) return { tingkat: "sedang", alasan: `Di tahun yang paling kering, kemarau bisa sedikit lebih panjang (sekitar ${kini} menjadi ${nanti} hari), tetapi di tahun biasa tidak banyak berubah${asal}.${i?.airDiketahui === false ? ` Saran ini mengikuti anjuran bahwa ${keadaan}.` : ""}` };
+  }
+  if (!dulu || !depan || depan.rata <= dulu.rata) return { tingkat: "rendah", alasan: `Data belum menunjukkan ${m.apa} ${m.naik}. Saran ini tetap berguna karena ${keadaan}.` };
+  // Metode delta: pembanding 1990-an adalah pengamatan, dan rentang masa depan adalah persentil 10-90 ansambel CMIP6.
+  const delta = p.metode?.id === "pengamatan-delta";
+  if (depan.min > dulu.maks)
+    return {
+      tingkat: "tinggi",
+      alasan: delta
+        ? `Catatan cuaca di lokasi Anda dan perkiraan iklim dunia sama-sama menunjukkan ${m.apa} ${m.naik}.`
+        : `${p.model.length >= 2 ? `${p.model.length === 2 ? "Dua" : "Semua"} model iklim dunia sama-sama memperkirakan` : "Model iklim memperkirakan"} ${m.apa} ${m.naik}${asal}.`,
+    };
+  return { tingkat: "sedang", alasan: `Kemungkinan ${m.apa} ${m.naik}, tetapi seberapa banyak belum pasti${asal}.` };
 }
 
 /** Teks rentang bulan: "Mei–Juli", "Desember–Februari" (berputar tahun), atau "Maret dan Mei". */

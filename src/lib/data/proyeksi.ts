@@ -3,7 +3,7 @@
 // angka adalah rata-rata per tahun dalam periode 20 tahun, dari dua model, dengan rentang antar-model.
 import type { ApiBase } from "@/types";
 import { fetchUpstreamJson } from "@/lib/http/fetch-upstream";
-import { snapGrid } from "./iklim-math";
+import { snapProyeksi } from "./iklim-math";
 
 export const MODEL_PROYEKSI = ["EC_Earth3P_HR", "MRI_AGCM3_2_S"] as const;
 export type ModelProyeksi = (typeof MODEL_PROYEKSI)[number];
@@ -54,12 +54,19 @@ export interface ProyeksiResponse extends ApiBase {
   /** Deret tahunan rata-rata ensemble untuk grafik. */
   tahunan: Array<{ tahun: number; suhuMaks: number | null; hariSangatPanas: number; hujan: number }>;
   catatan: string;
+  /** Bila diisi, data berasal dari kota bawaan terdekat (bukan dihitung untuk lokasi ini); antarmuka wajib menjelaskannya. */
+  perkiraan?: { kota: string; km: number; alasan: "kota-terdekat" | "cadangan-kuota" };
+  /**
+   * Bila diisi, proyeksi dibuat dengan metode delta (pengamatan lokal NASA POWER + perubahan ansambel CMIP6 nasional),
+   * bukan model resolusi tinggi; "kini" berisi pengamatan sampai `akhirAmati`. Antarmuka wajib menjelaskannya.
+   */
+  metode?: { id: "pengamatan-delta"; akhirAmati: number; perubahanSuhuC: number; perubahanHujanPersen: number };
 }
 
 type Raw = { daily?: Record<string, Array<number | string | null>> };
 
-const r1 = (v: number) => Math.round(v * 10) / 10;
-const rata = (a: number[]) => (a.length ? a.reduce((x, y) => x + y, 0) / a.length : 0);
+export const r1 = (v: number) => Math.round(v * 10) / 10;
+export const rata = (a: number[]) => (a.length ? a.reduce((x, y) => x + y, 0) / a.length : 0);
 
 /** Persentil dengan interpolasi linear (p 0-100). */
 export function persentil(nilai: number[], p: number): number {
@@ -71,7 +78,7 @@ export function persentil(nilai: number[], p: number): number {
   return a[lo] + (a[hi] - a[lo]) * (i - lo);
 }
 
-interface DeretModel {
+export interface DeretModel {
   time: string[];
   tmax: Array<number | null>;
   hujan: Array<number | null>;
@@ -98,7 +105,7 @@ interface TahunModel {
   keringTerpanjang: number;
 }
 
-function tahunanModel(dm: DeretModel, sangatPanas: number, hujanEkstrem: number): TahunModel[] {
+export function tahunanModel(dm: DeretModel, sangatPanas: number, hujanEkstrem: number): TahunModel[] {
   const per = new Map<number, { t: number[]; panas: number; sangat: number; hujan: number; ekstrem: number; deret: number; terpanjang: number }>();
   for (let i = 0; i < dm.time.length; i++) {
     const tahun = Number(dm.time[i].slice(0, 4));
@@ -132,7 +139,7 @@ function tahunanModel(dm: DeretModel, sangatPanas: number, hujanEkstrem: number)
 }
 
 /** Hitungan per bulan kalender untuk tiap tahun: hari sangat panas, hari hujan ekstrem, dan total hujan. */
-function bulanTahunan(dm: DeretModel, sangatPanas: number, hujanEkstrem: number): Map<number, MetrikBulan[]> {
+export function bulanTahunan(dm: DeretModel, sangatPanas: number, hujanEkstrem: number): Map<number, MetrikBulan[]> {
   const per = new Map<number, MetrikBulan[]>();
   for (let i = 0; i < dm.time.length; i++) {
     const tahun = Number(dm.time[i].slice(0, 4));
@@ -159,6 +166,24 @@ export function hitungProyeksi(raw: Raw, lat: number, lon: number, now = new Dat
   const tunggal = (MODEL_PROYEKSI as readonly string[]).length === 1;
   const deret = MODEL_PROYEKSI.map((m) => ({ m, d: deretDariRaw(raw, m, tunggal) })).filter((x): x is { m: ModelProyeksi; d: DeretModel } => x.d !== null);
   if (deret.length === 0) throw new Error("Data proyeksi tidak berisi kolom yang diharapkan");
+  return ringkasDeret(deret.map(({ m, d }) => ({ nama: NAMA_MODEL[m], d })), {
+    sumber: { nama: "Open-Meteo Climate API (CMIP6 HighResMIP)", url: "https://open-meteo.com/en/docs/climate-api", diambilPada: now.toISOString(), lisensi: "CC BY 4.0" },
+    grid: { lat: snapProyeksi(lat), lon: snapProyeksi(lon) },
+    catatan:
+      "Proyeksi model iklim global resolusi tinggi (sekitar 25 km) dengan skenario emisi tinggi, dikoreksi bias terhadap data ERA5. Angka adalah rata-rata per tahun dalam periode 20 tahun, bukan ramalan cuaca untuk hari atau tahun tertentu.",
+  });
+}
+
+/**
+ * Ringkas beberapa deret harian ("anggota": model iklim, atau skenario perubahan) menjadi metrik per periode: rata-rata
+ * antar-anggota dan rentangnya. Ambang relatif dihitung dari 1991-2010 per anggota.
+ */
+export function ringkasDeret(
+  deret: Array<{ nama: string; d: DeretModel }>,
+  info: Pick<ProyeksiResponse, "sumber" | "grid" | "catatan"> & { periode?: Partial<Record<IdPeriode, { awal: number; akhir: number }>> },
+): ProyeksiResponse {
+  if (deret.length === 0) throw new Error("Tidak ada deret untuk diringkas");
+  const rentang = PERIODE.map((pr) => ({ ...pr, ...info.periode?.[pr.id] }));
 
   // Ambang relatif dari masa lalu (1991-2010), dihitung per model lalu dirata-rata.
   const ambangModel = deret.map(({ d }) => {
@@ -166,7 +191,7 @@ export function hitungProyeksi(raw: Raw, lat: number, lon: number, now = new Dat
     const basah: number[] = [];
     for (let i = 0; i < d.time.length; i++) {
       const th = Number(d.time[i].slice(0, 4));
-      if (th < PERIODE[0].awal || th > PERIODE[0].akhir) continue;
+      if (th < rentang[0].awal || th > rentang[0].akhir) continue;
       if (typeof d.tmax[i] === "number") t.push(d.tmax[i] as number);
       if (typeof d.hujan[i] === "number" && (d.hujan[i] as number) >= AMBANG_BASAH_MM) basah.push(d.hujan[i] as number);
     }
@@ -174,7 +199,7 @@ export function hitungProyeksi(raw: Raw, lat: number, lon: number, now = new Dat
   });
   const perModel = deret.map(({ d }, i) => tahunanModel(d, ambangModel[i].sangatPanas, ambangModel[i].hujanEkstrem));
 
-  const periode = PERIODE.map((pr) => {
+  const periode = rentang.map((pr) => {
     const metrik = {} as Record<KunciMetrik, Nilai>;
     for (const k of KUNCI) {
       const perM = perModel.map((tahun) => rata(tahun.filter((y) => y.tahun >= pr.awal && y.tahun <= pr.akhir).map((y) => ambilMetrik(y, k)).filter((v): v is number => v !== null)));
@@ -194,7 +219,7 @@ export function hitungProyeksi(raw: Raw, lat: number, lon: number, now = new Dat
   const bulanModel = deret.map(({ d }, i) => bulanTahunan(d, ambangModel[i].sangatPanas, ambangModel[i].hujanEkstrem));
   const bulanan = {} as Bulanan;
   const kemarauTerburuk = {} as KemarauTerburuk;
-  for (const pr of PERIODE) {
+  for (const pr of rentang) {
     const perM = bulanModel.map((m) => {
       const tahunTerisi = [...m.entries()].filter(([t]) => t >= pr.awal && t <= pr.akhir).map(([, v]) => v);
       return Array.from({ length: 12 }, (_, b) => ({
@@ -219,10 +244,10 @@ export function hitungProyeksi(raw: Raw, lat: number, lon: number, now = new Dat
   });
 
   return {
-    sumber: { nama: "Open-Meteo Climate API (CMIP6 HighResMIP)", url: "https://open-meteo.com/en/docs/climate-api", diambilPada: now.toISOString(), lisensi: "CC BY 4.0" },
+    sumber: info.sumber,
     stale: false,
-    grid: { lat: snapGrid(lat), lon: snapGrid(lon) },
-    model: deret.map(({ m }) => NAMA_MODEL[m]),
+    grid: info.grid,
+    model: deret.map(({ nama }) => nama),
     ambang: {
       panasC: AMBANG_PANAS_C,
       sangatPanasC: r1(rata(ambangModel.map((a) => a.sangatPanas))),
@@ -233,15 +258,14 @@ export function hitungProyeksi(raw: Raw, lat: number, lon: number, now = new Dat
     bulanan,
     kemarauTerburuk,
     tahunan,
-    catatan:
-      "Proyeksi model iklim global resolusi tinggi (sekitar 25 km) dengan skenario emisi tinggi, dikoreksi bias terhadap data ERA5. Angka adalah rata-rata per tahun dalam periode 20 tahun, bukan ramalan cuaca untuk hari atau tahun tertentu.",
+    catatan: info.catatan,
   };
 }
 
 export async function fetchProyeksi(lat: number, lon: number): Promise<ProyeksiResponse> {
   const q = new URLSearchParams({
-    latitude: String(snapGrid(lat)),
-    longitude: String(snapGrid(lon)),
+    latitude: String(snapProyeksi(lat)),
+    longitude: String(snapProyeksi(lon)),
     start_date: `${PERIODE[0].awal}-01-01`,
     end_date: `${PERIODE[2].akhir}-12-31`,
     models: MODEL_PROYEKSI.join(","),

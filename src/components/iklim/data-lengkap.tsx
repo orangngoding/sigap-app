@@ -28,7 +28,7 @@ export function DataLengkap({ p }: { p: ProyeksiResponse }) {
             <tr className="border-b border-border text-left text-xs text-muted-foreground">
               <th scope="col" className="px-4 py-2.5 font-semibold">Metrik</th>
               {p.periode.map((pr) => <th key={pr.id} scope="col" className="px-3 py-2.5 font-semibold">{LABEL_PERIODE[pr.id] ?? pr.label} <span className="font-normal">({pr.awal}-{pr.akhir})</span></th>)}
-              <th scope="col" className="px-3 py-2.5 font-semibold">Rentang model 2031-2050</th>
+              <th scope="col" className="px-3 py-2.5 font-semibold">{p.metode ? "Rentang ansambel 2031-2050" : "Rentang model 2031-2050"}</th>
             </tr>
           </thead>
           <tbody>
@@ -44,7 +44,17 @@ export function DataLengkap({ p }: { p: ProyeksiResponse }) {
       </div>
 
       <div>
-        <h3 className="text-lg font-bold">Enam puluh tahun dalam satu grafik</h3>
+        {p.metode ? (
+          <>
+            <h3 className="text-lg font-bold">Yang sudah tercatat, tahun demi tahun</h3>
+            <p className="mt-1 text-sm text-muted-foreground">Grafik ini pengamatan nyata NASA POWER 1991-{p.metode.akhirAmati} di lokasi Anda (kemarau El Niño 2015, 2019, dan 2023 ikut terbaca). Angka 2031-2050 ada di tabel di atas, bukan di grafik, karena dihitung per periode, bukan per tahun.</p>
+          </>
+        ) : (
+          <>
+            <h3 className="text-lg font-bold">Enam puluh tahun simulasi dalam satu grafik</h3>
+            <p className="mt-1 text-sm text-muted-foreground">Ini simulasi model, bukan rekaman kejadian: batang pada tahun tertentu tidak sama dengan cuaca nyata tahun itu (misalnya kemarau panjang 2015). Yang bermakna adalah arah dan rata-rata antar-periode.</p>
+          </>
+        )}
         <div className="mt-3"><GrafikProyeksi data={p} /></div>
       </div>
 
@@ -52,7 +62,12 @@ export function DataLengkap({ p }: { p: ProyeksiResponse }) {
         <h3 id="judul-catatan-iklim" className="flex items-center gap-2 font-bold"><Info className="size-4 text-primary" aria-hidden="true" /> Cara membaca proyeksi ini dengan jujur</h3>
         <ul className="mt-3 list-disc space-y-1.5 pl-5 text-muted-foreground">
           <li>{p.catatan}</li>
-          <li>Model: {p.model.join(" dan ")}. Angka utama adalah rata-rata keduanya; rentang model menunjukkan seberapa besar ketidakpastian.</li>
+          <li>Model iklim tidak mengetahui El Niño, La Niña, atau kejadian ekstrem pada tahun tertentu; ia menggambarkan iklim rata-rata dan arah perubahannya. Kondisi tahun berjalan ada di tab Musim ini dan Minggu ini.</li>
+          {p.metode ? (
+            <li>Perubahan 2031-2050 berasal dari ansambel puluhan model CMIP6 (World Bank Climate Change Knowledge Portal), rata-rata wilayah Indonesia. Angka utama memakai median ansambel; rentang memakai persentil 10 sampai 90. Pemanasan lokal bisa sedikit berbeda dari rata-rata nasional.</li>
+          ) : (
+            <li>Model: {p.model.join(" dan ")}. Angka utama adalah rata-rata keduanya; rentang model menunjukkan seberapa besar ketidakpastian.</li>
+          )}
           <li>Kemarau terpanjang pada Uji Rumah memakai tahun terburuk dalam 20 tahun, bukan rata-rata, agar persiapan tidak terlalu optimistis.</li>
           <li>Ini bukan prakiraan cuaca dan bukan status resmi. Untuk cuaca dan peringatan hari ini, gunakan BMKG di halaman <Link href="/lokasi" className="font-semibold text-primary underline underline-offset-2">Lokasi</Link>.</li>
           <li>

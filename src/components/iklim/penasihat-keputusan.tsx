@@ -1,16 +1,18 @@
 "use client";
 import { useMemo, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { CalendarPlus, Clock, Loader2, RefreshCw, Sparkles } from "lucide-react";
+import { ChevronDown, Clock, Loader2, RefreshCw, Sparkles } from "lucide-react";
 import type { ProyeksiResponse } from "@/lib/data/proyeksi";
 import type { Lokasi } from "@/types";
-import { buatIcsIklim, type HasilUji, type InputRumah } from "@/lib/iklim/ketahanan";
+import { buatIcsIklim, intervensiById, type HasilUji, type InputRumah } from "@/lib/iklim/ketahanan";
 import { fmt, keputusanCadangan, keyakinan, type HasilKeputusan, type OpsiKeputusan, type TingkatYakin } from "@/lib/iklim/keputusan";
 import { TombolTanya } from "@/components/tanya/tombol-tanya";
+import { TombolMasukRencana } from "./tombol-masuk-rencana";
 
 const BIAYA = { rendah: "Biaya rendah", sedang: "Biaya sedang", tinggi: "Biaya tinggi" } as const;
 const RUANG = { tidak: "tanpa lahan", kecil: "lahan kecil", sedang: "perlu lahan", besar: "perlu lahan luas" } as const;
-const YAKIN: Record<TingkatYakin, string> = { tinggi: "Keyakinan tinggi", sedang: "Keyakinan sedang", rendah: "Keyakinan rendah" };
+/** "Seberapa kuat dasar saran ini", dalam kata sehari-hari. */
+const YAKIN: Record<TingkatYakin, string> = { tinggi: "Dasarnya kuat", sedang: "Dasarnya cukup", rendah: "Dasarnya terbatas" };
 
 const CONTOH_KENDALA = ["Lahan di rumah sempit", "Anggaran saya terbatas", "Saya mengontrak, tidak bisa mengubah bangunan"];
 
@@ -53,7 +55,7 @@ export function usePenasihat(p: ProyeksiResponse | undefined, lokasi: LokasiAi |
       const res = await fetch("/api/keputusan-iklim", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ lokasi: { lat: lokasi.lat, lon: lokasi.lon, kabKota: lokasi.kabKota, provinsi: lokasi.provinsi }, rumah: { anggota: input.anggota, rentan: input.rentan, litersTersimpan: input.litersTersimpan, atap: input.atap, sumberAir: input.sumberAir, gangguanAir: input.gangguanAir, pernahTergenang: input.pernahTergenang }, kendala: kendala.trim() || undefined }),
+        body: JSON.stringify({ lokasi: { lat: lokasi.lat, lon: lokasi.lon, kabKota: lokasi.kabKota, provinsi: lokasi.provinsi }, rumah: { anggota: input.anggota, rentan: input.rentan, litersTersimpan: input.litersTersimpan, atap: input.atap, sumberAir: input.sumberAir, gangguanAir: input.gangguanAir, pernahTergenang: input.pernahTergenang, airDiketahui: input.airDiketahui }, kendala: kendala.trim() || undefined }),
       });
       if (!res.ok) throw new Error(String(res.status));
       return (await res.json()) as HasilKeputusan;
@@ -100,23 +102,21 @@ function StatusAi({ ps }: { ps: Penasihat }) {
   return null;
 }
 
-/** Penasihat Keputusan: daftar tindakan (selalu ada) dan panel AI yang menjelaskan apa yang dikerjakannya. */
+/** Penasihat Keputusan: daftar tindakan (selalu ada); penyesuaian AI dilipat karena hanya perlu bila ada batasan. */
 export function PenasihatKeputusan({ p, lokasi, input, uji, ps }: Props) {
   const { kendala, setKendala, tampil, minta, kunci } = ps;
   if (!tampil) return null;
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:items-start">
-      <DaftarTindakan p={p} lokasi={lokasi} input={input} uji={uji} ps={ps} />
-      <div className="lg:sticky lg:top-24">
-        <div className="rounded-2xl border border-border bg-surface p-5">
-          <h3 className="flex items-center gap-2 text-base font-bold"><Sparkles className="size-4 text-primary" aria-hidden="true" /> Sesuaikan dengan AI</h3>
-          <ul className="mt-2 space-y-1 text-sm leading-relaxed text-muted-foreground">
-            <li>AI membaca hasil uji rumah Anda dan batasan yang Anda tulis.</li>
-            <li>AI memilih tiga dari 11 tindakan yang paling cocok, lalu menjelaskan alasannya.</li>
-            <li>AI tidak mengubah angka. Efek tiap tindakan tetap dihitung di perangkat ini.</li>
-          </ul>
-          <label htmlFor="pk-kendala" className="mt-4 block text-sm font-semibold">Ada batasan? Tulis dengan kata sendiri</label>
+    <div className="space-y-4">
+      <details className="group rounded-2xl border border-border bg-surface" open={minta.isPending || ps.dariAi || undefined}>
+        <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 px-4 py-2 text-sm font-semibold text-primary focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-primary">
+          <span className="inline-flex items-center gap-2"><Sparkles className="size-4" aria-hidden="true" /> Punya batasan (lahan sempit, anggaran, mengontrak)? Sesuaikan dengan AI</span>
+          <ChevronDown className="size-4 shrink-0 transition-transform group-open:rotate-180" aria-hidden="true" />
+        </summary>
+        <div className="border-t border-border p-4">
+          <p className="text-sm leading-relaxed text-muted-foreground">AI memilih ulang tiga dari 11 tindakan yang paling cocok dengan batasan Anda dan menjelaskan alasannya. Angka tetap dihitung di perangkat ini.</p>
+          <label htmlFor="pk-kendala" className="mt-3 block text-sm font-semibold">Tulis batasan Anda dengan kata sendiri</label>
           <textarea
             id="pk-kendala" name="kendala" rows={2} maxLength={300} value={kendala} onChange={(e) => setKendala(e.target.value)} autoComplete="off"
             placeholder="Contoh: lahan sempit, anggaran terbatas, saya mengontrak…"
@@ -129,14 +129,15 @@ export function PenasihatKeputusan({ p, lokasi, input, uji, ps }: Props) {
           </div>
           <button
             type="button" onClick={() => minta.mutate(kunci)} disabled={minta.isPending}
-            className="press mt-4 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-primary px-5 text-sm font-semibold text-primary-foreground hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:opacity-60 sm:w-auto"
+            className="press mt-3 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-primary px-5 text-sm font-semibold text-primary-foreground hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:opacity-60 sm:w-auto"
           >
             {minta.isPending ? <Loader2 className="size-4 animate-spin motion-reduce:animate-none" aria-hidden="true" /> : <Sparkles className="size-4" aria-hidden="true" />}
             {minta.isPending ? "Menganalisis…" : "Sesuaikan dengan AI"}
           </button>
-          <p className="mt-3 text-xs leading-relaxed text-muted-foreground">Yang dikirim ke AI hanya jawaban uji rumah, batasan di atas, dan nama kota. Tanpa nama atau kontak.</p>
+          <p className="mt-3 text-xs leading-relaxed text-muted-foreground">Yang dikirim ke AI hanya jawaban tentang rumah, batasan di atas, dan nama kota. Tanpa nama atau kontak.</p>
         </div>
-      </div>
+      </details>
+      <DaftarTindakan p={p} lokasi={lokasi} input={input} uji={uji} ps={ps} />
     </div>
   );
 }
@@ -147,17 +148,15 @@ function DaftarTindakan({ p, lokasi, input, uji, ps }: Props) {
   return (
       <div className="min-w-0">
         <div aria-live="polite" className="mb-4 empty:hidden"><StatusAi ps={ps} /></div>
-        {!dariAi && !ps.aiGagalDiServer && !minta.isPending && !minta.isError && (
-          <a href="#pk-kendala" className="mb-4 inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-primary underline underline-offset-2 lg:hidden">
-            <Sparkles className="size-4" aria-hidden="true" /> Lahan sempit atau anggaran terbatas? Sesuaikan dengan AI
-          </a>
-        )}
         {/* Ringkasan cadangan sama dengan kartu dampak di atas; hanya ringkasan AI yang menambah penjelasan baru. */}
         {dariAi && <p className="mb-5 max-w-3xl text-base leading-relaxed">{tampil.ringkasan}</p>}
 
         <ol className={`space-y-4 transition-opacity ${minta.isPending ? "opacity-60" : ""}`} aria-busy={minta.isPending}>
           {tampil.opsi.map((o, i) => {
             const y = keyakinan(o.target, p, input);
+            // Alasan keyakinan yang sama persis dengan tindakan sebelumnya tidak diulang kata per kata.
+            const sama = tampil.opsi.slice(0, i).findIndex((x) => { const yx = keyakinan(x.target, p, input); return yx.tingkat === y.tingkat && yx.alasan === y.alasan; });
+            const biaya = intervensiById(o.id)?.kisaranBiaya;
             return (
               <li key={o.id} className="rounded-2xl border border-border bg-surface p-5">
                 <div className="flex items-start gap-3">
@@ -171,15 +170,23 @@ function DaftarTindakan({ p, lokasi, input, uji, ps }: Props) {
 
                     {o.efekAir && (o.efekAir.tutupKini > 0 || o.efekAir.tutup > 0) && (
                       <p className="mt-3 text-sm">
-                        <strong>Dampak untuk rumah Anda:</strong> air simpanan cukup {fmt(o.efekAir.hariCukupBaru)} hari.
-                        {o.efekAir.tutupKini > 0 && <> Kekurangan air saat ini turun dari {uji.air.kurangKini} menjadi {o.efekAir.kurangKiniBaru} hari.</>}
-                        {" "}<span className="text-muted-foreground">Bila tren berlanjut (2031-2050): dari {uji.air.kurangDepan} menjadi {o.efekAir.kurangDepanBaru} hari.</span>
+                        <strong>Hasilnya untuk rumah Anda:</strong> air simpanan jadi cukup sekitar {fmt(o.efekAir.hariCukupBaru)} hari
+                        {!uji.air.dariPengguna
+                          ? ", memenuhi cadangan dasar yang dianjurkan."
+                          : o.efekAir.tutupKini > 0
+                            ? (o.efekAir.kurangKiniBaru === 0 ? ", jadi kekurangan air saat kemarau bisa tertutup." : `, jadi kekurangan air saat kemarau berkurang dari ${uji.air.kurangKini} menjadi ${o.efekAir.kurangKiniBaru} hari.`)
+                            : `, cukup untuk perkiraan 10-25 tahun lagi.`}
+                        {uji.air.dariPengguna && o.efekAir.tutupKini > 0 && uji.air.kurangDepan > 0 && <span className="text-muted-foreground"> (10-25 tahun lagi: dari {uji.air.kurangDepan} menjadi {o.efekAir.kurangDepanBaru} hari.)</span>}
                       </p>
                     )}
                     <p className="mt-3 text-sm leading-relaxed"><strong>Kenapa disarankan:</strong> <span className="text-muted-foreground">{o.alasan}</span></p>
-                    <p className="mt-2 text-sm leading-relaxed"><strong>{YAKIN[y.tingkat]}:</strong> <span className="text-muted-foreground">{y.alasan}</span></p>
+                    <p className="mt-2 text-sm leading-relaxed"><strong>{YAKIN[y.tingkat]}:</strong> <span className="text-muted-foreground">{sama >= 0 ? `alasannya sama dengan tindakan ${sama + 1}.` : y.alasan}</span></p>
+                    {biaya && <p className="mt-2 text-sm leading-relaxed"><strong>Perkiraan biaya:</strong> <span className="text-muted-foreground">{biaya}.</span></p>}
                     <p className="mt-3 rounded-xl bg-muted px-3 py-2 text-sm"><strong>Bisa dimulai hari ini:</strong> {o.langkahPertama}</p>
                     {waktuMulai(o) && <p className="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold text-primary"><Clock className="size-4" aria-hidden="true" /> {waktuMulai(o)}</p>}
+                    <div className="tanpa-cetak mt-3">
+                      <TombolMasukRencana aksi={{ id: o.id, judul: o.judul, langkahPertama: o.langkahPertama, waktu: waktuMulai(o), wilayah: lokasi.kabKota }} onKalender={o.mulai ? () => unduhIcs([o]) : undefined} />
+                    </div>
                 </div>
               </li>
             );
@@ -187,18 +194,12 @@ function DaftarTindakan({ p, lokasi, input, uji, ps }: Props) {
         </ol>
 
         <div className="tanpa-cetak mt-5 flex flex-wrap items-center gap-3">
-          <button
-            type="button" onClick={() => unduhIcs(tampil.opsi)}
-            className="inline-flex min-h-12 items-center gap-2 rounded-xl border border-border bg-surface px-5 text-sm font-semibold hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-          >
-            <CalendarPlus className="size-4" aria-hidden="true" /> Tambahkan pengingat ke kalender
-          </button>
           <TombolTanya
             label="Tanya Asisten tentang saran ini"
-            pertanyaan={`Rumah saya di ${lokasi.kabKota} diproyeksikan mengalami kemarau terpanjang sekitar ${uji.air.kemarauKini} hari pada tahun terburuk saat ini dan air simpanan saya cukup ${fmt(uji.air.hariCukup)} hari. Bagaimana cara memulai langkah "${tampil.opsi[0]?.judul ?? "adaptasi"}" dengan murah?`}
+            pertanyaan={`Rumah saya di ${lokasi.kabKota}: kemarau terpanjang pada tahun terburuk diproyeksikan sekitar ${uji.air.kemarauKini} hari${uji.air.dariPengguna ? ` dan air simpanan saya cukup ${fmt(uji.air.hariCukup)} hari` : ""}. Jelaskan dengan bahasa sederhana: bagaimana cara memulai langkah "${tampil.opsi[0]?.judul ?? "adaptasi"}" dengan murah?`}
           />
         </div>
-        <p className="mt-3 text-xs leading-relaxed text-muted-foreground">Ini bukan pengganti arahan petugas, dan angka adalah proyeksi model, bukan kepastian. Harga tidak dicantumkan karena berbeda di tiap daerah.</p>
+        <p className="mt-3 text-xs leading-relaxed text-muted-foreground">Ini bukan pengganti arahan petugas. Angka-angka di sini perkiraan kasar, bukan kepastian. Perkiraan biaya adalah kisaran kasar harga toko daring (November 2026); harga di daerah Anda bisa berbeda.</p>
       </div>
   );
 }

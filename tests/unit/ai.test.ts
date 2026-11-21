@@ -61,7 +61,8 @@ t("pencarian Tanya: panduan inti masuk tiga besar", () => {
     const f = faseDitanya(q);
     return ix.cari(q, { maks: 3, bobot: f ? (c) => (c.phase === f ? 1.6 : 1) : undefined }).map((x) => x.chunk.id);
   };
-  assert.ok(atas("Apa yang harus dilakukan saat gempa terjadi dan saya berada di dalam rumah?").includes("gempa-saat-001"));
+  const gempaRumah = atas("Apa yang harus dilakukan saat gempa terjadi dan saya berada di dalam rumah?");
+  assert.ok(gempaRumah.includes("gempa-saat-008") || gempaRumah.includes("gempa-saat-001"), gempaRumah.join()); // merunduk-berlindung-bertahan atau keluar setelah guncangan
   assert.ok(atas("Bagaimana melindungi keluarga dari kabut asap kebakaran hutan?").every((id) => id.startsWith("karhutla-saat")));
 });
 t("BM25: kueri tak terkait tidak mengembalikan apa pun", () => {

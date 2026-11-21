@@ -9,6 +9,7 @@ import { IklimCard } from "./iklim-card";
 import { PeringatanCard } from "./peringatan-card";
 import { PetaLokasi } from "./peta-lokasi.client";
 import { BahayaTerpilihCard } from "./bahaya-terpilih-card";
+import { RisikoLokasiCard } from "./risiko-lokasi-card";
 import { BriefingHarian } from "@/components/beranda/briefing-harian";
 
 export function ProfilLokasi({ lokasi, onGanti }: { lokasi: Lokasi; onGanti: () => void }) {
@@ -39,14 +40,17 @@ export function ProfilLokasi({ lokasi, onGanti }: { lokasi: Lokasi; onGanti: () 
 
       <BriefingHarian varian="lokasi" />
 
-      <PetaLokasi lat={lokasi.lat} lon={lokasi.lon} label={`Peta ${lokasi.kelurahan}`} />
+      <PetaLokasi lat={lokasi.lat} lon={lokasi.lon} label={`Peta ${lokasi.kelurahan}`} presisi={lokasi.presisi} nama={lokasi.kelurahan} />
+
+      <CuacaCard adm4={lokasi.adm4} lat={lokasi.lat} lon={lokasi.lon} provinsi={lokasi.provinsi} nama={lokasi.kelurahan} />
 
       <div className="grid gap-4 lg:grid-cols-2">
-        <CuacaCard adm4={lokasi.adm4} />
         <PeringatanCard lokasi={lokasi} />
         <GempaCard lat={lokasi.lat} lon={lokasi.lon} />
-        <IklimCard lat={lokasi.lat} lon={lokasi.lon} />
+        <div className="lg:col-span-2"><IklimCard lat={lokasi.lat} lon={lokasi.lon} /></div>
       </div>
+
+      <RisikoLokasiCard lokasi={lokasi} />
 
       <BahayaTerpilihCard />
 

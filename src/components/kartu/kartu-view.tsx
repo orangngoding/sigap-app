@@ -6,7 +6,8 @@ import { buatPdfKartu, namaBerkasKartu } from "@/lib/kartu/pdf";
 import { toast } from "@/lib/toast";
 import { useHydrate } from "@/hooks/use-hydrate";
 import { HAZARD_BY_ID } from "@/lib/hazards/hazards";
-import { langkahKunciKartu, tasRingkasKartu } from "@/lib/kartu/isi";
+import { faktaRisikoKartu, langkahKunciKartu, tasRingkasKartu } from "@/lib/kartu/isi";
+import { useRisikoLokasi } from "@/hooks/use-risiko-lokasi";
 import kontak from "@/generated/kontak.json";
 import { useKartuStore, NAMA_KELUARGA_MAKS } from "@/stores/kartu-store";
 import { useLokasiStore } from "@/stores/lokasi-store";
@@ -34,6 +35,7 @@ export function KartuView() {
   const { namaKeluarga, ukuran, tampilkanCatatan, ubah } = useKartuStore();
   const [qr, setQr] = useState<string | null>(null);
   const profil = useMemo(() => finalisasiProfil(draft), [draft]);
+  const risikoQ = useRisikoLokasi(siap ? lokasi : null);
 
   useEffect(() => {
     let batal = false;
@@ -57,6 +59,7 @@ export function KartuView() {
   }
 
   const grup = langkahKunciKartu(rencana.tindakan, profil.bahaya);
+  const faktaRisiko = faktaRisikoKartu(risikoQ.data?.nilai, profil.bahaya, ukuran === "A5" ? 2 : 3);
   const tas = tasRingkasKartu(rencana.tas);
   const catatan = profil.catatanKhusus?.trim();
   const kecil = ukuran === "A5";
@@ -112,6 +115,7 @@ export function KartuView() {
                   dibuat: tanggal(rencana.dibuatPada),
                   lokasi: `${lokasi.kelurahan}, Kec. ${lokasi.kecamatan}, ${lokasi.kabKota}`,
                   bahaya: profil.bahaya.map((h) => HAZARD_BY_ID[h].label),
+                  faktaRisiko,
                   kontakNasional: kontak.kontak,
                   kontakKeluarga: profil.kontakDarurat,
                   titikKumpul: profil.titikKumpul ?? "",
@@ -161,6 +165,11 @@ export function KartuView() {
         <section className="mt-2">
           <h2 className="font-bold">Bahaya yang disiapkan</h2>
           <p>{profil.bahaya.map((h) => HAZARD_BY_ID[h].label).join(", ")}</p>
+          {faktaRisiko.length > 0 && (
+            <ul className="mt-0.5 list-disc pl-5">
+              {faktaRisiko.map((f) => <li key={f}>{f}</li>)}
+            </ul>
+          )}
         </section>
 
         <section className="mt-2">

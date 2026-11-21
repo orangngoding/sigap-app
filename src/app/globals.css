@@ -545,3 +545,22 @@
 @media print {
   .kemajuan-baca { display: none !important; }
 }
+
+/* Mode Darurat: denyut lingkaran metronom RJP pada tiap ketukan (dimatikan oleh aturan reduced-motion global). */
+@keyframes ketuk-rjp {
+  from { transform: scale(1.18); }
+  to { transform: scale(1); }
+}
+.ketuk-rjp { animation: ketuk-rjp 180ms ease-out; }
+
+/* Mode Darurat: tanpa header, menu bawah, dan footer situs agar tidak ada yang salah diketuk saat panik.
+   Murni CSS (:has) sehingga juga berlaku saat halaman dibuka offline sebelum JavaScript termuat. Next.js menyimpan
+   halaman yang ditinggalkan dalam pembungkus tersembunyi (display: none), jadi aturan hanya berlaku bila Mode Darurat
+   benar-benar sedang tampil. */
+body:has([data-mode-darurat]):not(:has([style*="display: none"] [data-mode-darurat])) [data-bingkai-situs] {
+  display: none !important;
+}
+body:has([data-mode-darurat]):not(:has([style*="display: none"] [data-mode-darurat])) {
+  padding-bottom: 0 !important;
+  background: #000;
+}

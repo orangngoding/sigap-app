@@ -1,12 +1,13 @@
 "use client";
 import { ExternalLink, Lightbulb } from "lucide-react";
-import type { HazardId, VarianBanjir } from "@/types";
+import type { HazardId, Lokasi, VarianBanjir } from "@/types";
 import type { ErrorMap, JawabanPemicu, ProfilDraft } from "@/types/rencana";
 import { HazardChip } from "@/components/global/hazard-chip";
 import { HAZARDS, HAZARD_BY_ID } from "@/lib/hazards/hazards";
 import { HAZARD_DESKRIPSI, isHazardAktif } from "@/lib/hazards/pack-status";
 import { PERTANYAAN_PEMICU, URL_INARISK } from "@/lib/hazards/pertanyaan";
-import { sarankanBahaya, terapkanPerubahanJawaban, varianDisarankan } from "@/lib/preparedness/saran-bahaya";
+import { sarankanBahaya, tambahkanBahaya, terapkanPerubahanJawaban, varianDisarankan } from "@/lib/preparedness/saran-bahaya";
+import { ProfilRisiko } from "@/components/risiko/profil-risiko";
 import { CheckboxGroup, FieldError, RadioGroup, fieldId } from "./form-kit";
 
 const JAWABAN = [
@@ -26,9 +27,11 @@ interface Props {
   profil: ProfilDraft;
   ubah: (patch: Partial<ProfilDraft>) => void;
   errors: ErrorMap;
+  /** Bila ada, bahaya disarankan dari DATA lokasi (gunung api, gempa, tsunami, pantai, lereng, iklim). */
+  lokasi?: Lokasi | null;
 }
 
-export function LangkahBahaya({ profil, ubah, errors }: Props) {
+export function LangkahBahaya({ profil, ubah, errors, lokasi }: Props) {
   const saran = sarankanBahaya(profil.jawabanPemicu);
 
   const jawab = (id: string, nilai: JawabanPemicu) => {
@@ -51,10 +54,19 @@ export function LangkahBahaya({ profil, ubah, errors }: Props) {
 
   return (
     <div className="space-y-8">
+      {lokasi && (
+        <ProfilRisiko
+          lokasi={lokasi}
+          terpilih={profil.bahaya}
+          ringkas
+          judul="Langkah 1: risiko di lokasi Anda menurut data"
+          onTambah={(ids, varian) => ubah(tambahkanBahaya(profil, ids, varian))}
+        />
+      )}
       <section aria-labelledby="judul-pertanyaan">
         <h2 id="judul-pertanyaan" className="text-lg font-bold text-foreground">Kenali lingkungan tempat tinggal Anda</h2>
         <p className="mt-1 text-sm text-muted-foreground">
-          Jawab tujuh pertanyaan singkat. Jawaban hanya dipakai untuk menyarankan bahaya yang perlu dipersiapkan.
+          Data tidak bisa melihat sungai kecil, tebing, atau saluran di dekat rumah. Jawab tujuh pertanyaan singkat ini untuk melengkapinya.
         </p>
         <div className="mt-5 space-y-6">
           {PERTANYAAN_PEMICU.map((q) => (
@@ -100,7 +112,7 @@ export function LangkahBahaya({ profil, ubah, errors }: Props) {
         <fieldset id={fieldId("bahaya")} tabIndex={-1} className="min-w-0 focus:outline-none">
           <legend id="judul-picker" className="text-lg font-bold text-foreground">Pilih bahaya untuk rencana Anda</legend>
           <p className="mt-1 text-sm text-muted-foreground">
-            Pilih minimal satu. Gempa dan cuaca ekstrem disarankan untuk semua pengguna. Anda bebas menambah atau mengurangi.
+            Pilih minimal satu. Semua 9 bahaya tersedia dan masing-masing punya langkah sebelum, saat, dan sesudah. Anda bebas menambah atau mengurangi.
           </p>
           <div className="mt-3 flex flex-wrap gap-2">
             {HAZARDS.map((h) => (

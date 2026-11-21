@@ -9,6 +9,8 @@ export interface IsiKartuPdf {
   dibuat: string; // tanggal sudah diformat
   lokasi: string;
   bahaya: string[];
+  /** Fakta risiko tinggi di lokasi (Profil Risiko Lokasi), maksimal 3 baris. */
+  faktaRisiko?: string[];
   kontakNasional: Array<{ nomor: string; nama: string }>;
   kontakKeluarga: Array<{ nama: string; telepon: string }>;
   titikKumpul: string;
@@ -94,6 +96,7 @@ export async function buatPdfKartu(isi: IsiKartuPdf): Promise<HasilPdfKartu> {
 
   judulBagian("Bahaya yang disiapkan");
   tulis(isi.bahaya.join(", "));
+  for (const f of (isi.faktaRisiko ?? []).slice(0, 3)) tulis(`- ${f}`);
 
   judulBagian("Nomor darurat nasional");
   duaKolom(isi.kontakNasional.map((k) => `${k.nomor}  ${k.nama}`));

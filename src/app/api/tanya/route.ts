@@ -8,6 +8,8 @@ import { penyediaDariEnv } from "@/lib/ai/provider";
 import { SEMUA_CHUNK } from "@/lib/kb/data";
 import { ambilCuaca, ambilGempa, ambilPeringatan } from "@/lib/data/ambil";
 import { teksKondisi } from "@/lib/briefing/kondisi-teks";
+import { ambilRisikoLokasi } from "@/lib/risiko/ambil";
+import { teksProfilRisiko } from "@/lib/risiko/teks";
 
 export const maxDuration = 30;
 
@@ -25,6 +27,14 @@ async function kondisiTerkini(l: LokasiTanya): Promise<string | null> {
   return teksKondisi(data);
 }
 
+/** Profil Risiko Lokasi (cache sama dengan halaman Lokasi dan Rencana). Koordinat tidak dikirim ke AI. */
+async function risikoLokasi(l: LokasiTanya): Promise<string | null> {
+  // Lokasi baru bisa butuh beberapa detik (USGS, SRTM, iklim): dibatasi agar jawaban tetap cepat; lain kali dari cache.
+  const batas = new Promise<null>((r) => setTimeout(() => r(null), 8_000));
+  const r = await Promise.race([ambilRisikoLokasi(l.lat, l.lon, l.provinsi), batas]);
+  return r ? teksProfilRisiko(r.nilai) : null;
+}
+
 export async function POST(req: Request) {
   const started = Date.now();
   try {
@@ -36,9 +46,9 @@ export async function POST(req: Request) {
     const hasil = await jawabPertanyaan(
       pertanyaan,
       { bahaya, riwayat, konteks, rencana, lokasi },
-      { kb: SEMUA_CHUNK, providers: penyediaDariEnv(), cache: cacheTanya, kondisi: kondisiTerkini, batasWaktuMs: 22_000 },
+      { kb: SEMUA_CHUNK, providers: penyediaDariEnv(), cache: cacheTanya, kondisi: kondisiTerkini, risiko: risikoLokasi, batasWaktuMs: 22_000 },
     );
-    console.info(JSON.stringify({ route: "/api/tanya", status: 200, ms: Date.now() - started, mode: hasil.mode, dasar: hasil.dasar, kondisi: hasil.kondisi, aksi: hasil.aksi?.length ?? 0, refused: hasil.refused, kategori: hasil.kategori }));
+    console.info(JSON.stringify({ route: "/api/tanya", status: 200, ms: Date.now() - started, mode: hasil.mode, dasar: hasil.dasar, kondisi: hasil.kondisi, risiko: hasil.risiko, aksi: hasil.aksi?.length ?? 0, refused: hasil.refused, kategori: hasil.kategori }));
     return NextResponse.json(hasil);
   } catch (err) {
     return errorResponse(err, "/api/tanya", started);

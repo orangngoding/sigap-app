@@ -5,6 +5,24 @@ export function snapGrid(v: number): number {
   return Math.round(v / 0.25) * 0.25;
 }
 
+/**
+ * Grid kasar 0,5° untuk proyeksi iklim. Model iklim beresolusi 25-50 km, jadi hasil dua lokasi yang berdekatan
+ * praktis sama; membulatkan lebih kasar membuat lokasi berdekatan berbagi satu permintaan (dan satu cache) ke penyedia
+ * data yang kuota gratisnya kecil, dan membuat daftar kota bawaan lebih sering terpakai.
+ */
+export function snapKasar(v: number): number {
+  return Math.round(v / 0.5) * 0.5;
+}
+
+/**
+ * Grid proyeksi model iklim 0,25°, sesuai resolusi model HighResMIP (sekitar 25 km). Grid 0,5° terlalu kasar untuk
+ * wilayah berbukit atau pesisir: Kota Yogyakarta jatuh ke sel pantai selatan Gunungkidul yang jauh lebih kering, sehingga
+ * kemarau tahun terburuk tampil 129 hari padahal sel terdekatnya sekitar 45-55 hari (sejalan dengan pengamatan).
+ */
+export function snapProyeksi(v: number): number {
+  return snapGrid(v);
+}
+
 /** Regresi linear sederhana; mengembalikan kemiringan per satuan x. */
 export function slope(xs: number[], ys: number[]): number {
   const n = xs.length;

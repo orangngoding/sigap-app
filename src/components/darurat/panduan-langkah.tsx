@@ -11,14 +11,18 @@ const FOKUS = "focus-visible:outline-4 focus-visible:outline-offset-2 focus-visi
  * Satu langkah per layar dengan huruf sangat besar: lebih mudah diikuti saat panik daripada daftar panjang.
  * Bisa dibacakan otomatis setiap pindah langkah. Panah kiri/kanan dan Esc untuk papan ketik.
  */
-export function PanduanLangkah({ judul, langkah, onTutup }: { judul: string; langkah: string[]; onTutup: () => void }) {
+/** Satu langkah: teks biasa (situasi kritis) atau perintah dengan keadaan dan penjelasan (langkah per bencana). */
+export type ItemPanduan = string | { teks: string; detail?: string; keadaan?: string };
+const teksItem = (x: ItemPanduan) => (typeof x === "string" ? x : `${x.keadaan ? `${x.keadaan}: ` : ""}${x.teks}.${x.detail ? ` ${x.detail}` : ""}`);
+
+export function PanduanLangkah({ judul, langkah, onTutup }: { judul: string; langkah: ItemPanduan[]; onTutup: () => void }) {
   const [i, setI] = useState(0);
   const [baca, setBaca] = useState(false);
   const suara = useBacakan();
   const terakhir = i === langkah.length - 1;
 
   useEffect(() => {
-    if (baca && suara.didukung) suara.baca(`langkah-${i}`, `Langkah ${i + 1}. ${langkah[i]}`);
+    if (baca && suara.didukung) suara.baca(`langkah-${i}`, `Langkah ${i + 1}. ${teksItem(langkah[i])}`);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [i, baca]);
 
@@ -53,7 +57,15 @@ export function PanduanLangkah({ judul, langkah, onTutup }: { judul: string; lan
         <AnimatePresence mode="wait">
           <motion.div key={i} initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.22 }}>
             <p className="text-2xl font-bold text-yellow-300">Langkah {i + 1} dari {langkah.length}</p>
-            <p className="mt-4 text-4xl font-extrabold leading-tight sm:text-5xl">{langkah[i]}</p>
+            {typeof langkah[i] === "string" ? (
+              <p className="mt-4 text-4xl font-extrabold leading-tight sm:text-5xl">{langkah[i] as string}</p>
+            ) : (
+              <>
+                {(langkah[i] as Exclude<ItemPanduan, string>).keadaan && <p className="mt-3 inline-block rounded-full border-2 border-white/70 px-3 py-1 text-lg font-bold">{(langkah[i] as Exclude<ItemPanduan, string>).keadaan}</p>}
+                <p className="mt-4 text-4xl font-extrabold leading-tight sm:text-5xl">{(langkah[i] as Exclude<ItemPanduan, string>).teks}</p>
+                {(langkah[i] as Exclude<ItemPanduan, string>).detail && <p className="mt-5 text-2xl leading-snug text-white/90">{(langkah[i] as Exclude<ItemPanduan, string>).detail}</p>}
+              </>
+            )}
           </motion.div>
         </AnimatePresence>
       </div>

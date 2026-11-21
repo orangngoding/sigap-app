@@ -12,6 +12,8 @@ const CATALOG = {
   ADM4_TIDAK_VALID: { status: 400, message: "Pilih ulang lokasi", retryable: false },
   BATAS_LAJU: { status: 429, message: "Terlalu banyak permintaan. Coba lagi dalam beberapa saat", retryable: true },
   SUMBER_GAGAL: { status: 502, message: "Data belum dapat dimuat", retryable: true },
+  // Penyedia data pihak ketiga menolak karena batas pemakaian (mis. kuota harian gratis habis): mengulang segera tidak berguna.
+  BATAS_HULU: { status: 503, message: "Penyedia data sedang melebihi batas pemakaiannya. Coba lagi nanti", retryable: false },
   SUMBER_TIMEOUT: { status: 504, message: "Layanan sedang lambat. Coba lagi", retryable: true },
   GALAT_INTERNAL: { status: 500, message: "Terjadi kesalahan. Coba lagi", retryable: true },
 } as const;
@@ -41,6 +43,6 @@ export function errorResponse(err: unknown, route: string, startedAt?: number) {
   };
   return NextResponse.json(body, {
     status: def.status,
-    headers: code === "BATAS_LAJU" ? { "Retry-After": "30" } : undefined,
+    headers: code === "BATAS_LAJU" ? { "Retry-After": "30" } : code === "BATAS_HULU" ? { "Retry-After": "3600" } : undefined,
   });
 }

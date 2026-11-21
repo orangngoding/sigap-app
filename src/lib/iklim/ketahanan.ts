@@ -23,6 +23,31 @@ export const MIN_HARI_CADANGAN_AIR = 3;
 export const HARI_GANGGUAN_AIR = { jarang: 0, hari: 7, minggu: 21 } as const;
 /** Gangguan air diperkirakan memanjang atau memendek sebanding dengan kemarau terpanjang, dibatasi agar tidak ekstrem. */
 export const BATAS_RASIO_KEMARAU = { min: 0.5, maks: 2 } as const;
+/**
+ * "Tahun terburuk dalam 20 tahun" bergantung pada satu tahun ekstrem, jadi naik-turun kecilnya bukan sinyal. Perubahan
+ * kemarau 2031-2050 dalam batas ini (10 persen, paling sedikit 3 hari) dianggap tidak berubah berarti.
+ */
+export const TOLERANSI_KEMARAU = { persen: 10, minHari: 3 } as const;
+
+/** Kemarau 2031-2050 setelah perubahan kecil (dalam batas ketidakpastian) diratakan ke nilai saat ini. */
+export function kemarauDepanStabil(kini: number, depan: number): number {
+  const batas = Math.max(TOLERANSI_KEMARAU.minHari, (kini * TOLERANSI_KEMARAU.persen) / 100);
+  return Math.abs(depan - kini) <= batas ? kini : depan;
+}
+
+/** Kalimat perubahan kemarau terpanjang, jujur bila perubahannya tidak berarti. */
+export function teksPerubahanKemarau(kini: number, depan: number): string {
+  if (depan === kini) return `sekitar ${kini} hari tanpa hujan, dan diperkirakan tidak banyak berubah 10-25 tahun lagi`;
+  return `sekitar ${kini} hari tanpa hujan, dan 10-25 tahun lagi sekitar ${depan} hari (${depan > kini ? "lebih panjang" : "lebih pendek"})`;
+}
+
+/** Arah jumlah hari 10-25 tahun lagi dalam bahasa sehari-hari; perubahan kecil (10 persen, paling sedikit 1 hari) = tidak banyak berubah. */
+export function teksKeDepan(kini: number, depan: number): string {
+  if (Math.abs(depan - kini) <= Math.max(1, kini * 0.1)) return "10-25 tahun lagi diperkirakan tidak banyak berubah";
+  const d = Math.round(depan);
+  return `10-25 tahun lagi bisa sekitar ${d < 1 ? "kurang dari 1" : d} hari`;
+}
+
 /** Kekurangan air (hari) di atas ini = waspada. */
 export const KURANG_AIR_WASPADA_HARI = 7;
 /** Bulan dianggap puncak bila termasuk 3 tertinggi DAN melewati nilai minimum ini (agar bulan "nol hari" tidak ditandai). */
@@ -53,6 +78,8 @@ export interface InputRumah {
   sumberAir: SumberAir;
   gangguanAir: GangguanAir;
   pernahTergenang: boolean;
+  /** false = pengguna belum menjawab soal air: dipakai cadangan dasar, dan tidak disebut "pengalaman Anda". */
+  airDiketahui?: boolean;
 }
 
 const r1 = (v: number) => Math.round(v * 10) / 10;
@@ -92,12 +119,16 @@ function palingKering(hujan: number[]): boolean[] {
   return hujan.map((_, i) => ya.has(i));
 }
 
-export function kalenderRisiko(p: ProyeksiResponse, periode: Periode): BarisBulan[] {
-  const m: MetrikBulan[] = p.bulanan[periode];
+/** Kalender dari 12 nilai bulanan mana pun (pengamatan atau proyeksi). */
+export function kalenderDariBulanan(m: MetrikBulan[]): BarisBulan[] {
   const pk = palingKering(m.map((x) => x.hujanMm));
   const pp = puncak(m.map((x) => x.hariSangatPanas), MIN_PUNCAK.panas);
   const ph = puncak(m.map((x) => x.hariHujanEkstrem), MIN_PUNCAK.hujan);
   return m.map((x, i) => ({ bulan: i, nama: NAMA_BULAN[i], ...x, puncakPanas: pp[i], puncakHujan: ph[i], kering: x.hujanMm < AMBANG_BULAN_KERING_MM, palingKering: pk[i] }));
+}
+
+export function kalenderRisiko(p: ProyeksiResponse, periode: Periode): BarisBulan[] {
+  return kalenderDariBulanan(p.bulanan[periode]);
 }
 
 // ---------- 2. Uji ketahanan rumah ----------
@@ -112,8 +143,12 @@ export interface HasilAir {
   kurangKini: number;
   kurangDepan: number;
   tingkat: Tingkat;
+  /** Lama air sulit berasal dari jawaban pengguna (bukan cadangan dasar). */
+  dariPengguna: boolean;
 }
 export interface HasilPanas {
+  /** Ambang "hari sangat panas" (°C): suhu siang tertinggi 5 persen hari 1991-2010 di grid ini. */
+  ambangC: number;
   hariDulu: number;
   hariKini: number;
   hariDepan: number;
@@ -124,6 +159,8 @@ export interface HasilPanas {
   atapPanas: boolean;
 }
 export interface HasilHujan {
+  /** Ambang "hari hujan sangat deras" (mm/hari): 1 persen hari basah terderas 1991-2010 di grid ini. */
+  ambangMm: number;
   hariDulu: number;
   hariKini: number;
   hariDepan: number;
@@ -154,7 +191,7 @@ export function hitungAir(i: InputRumah, p: ProyeksiResponse, tambahLiter = 0, h
   const kebutuhan = Math.max(1, i.anggota) * LITER_PER_ORANG_HARI * (1 - hematPersen / 100);
   const hariCukup = r1((i.litersTersimpan + tambahLiter) / kebutuhan);
   const kemarauKini = p.kemarauTerburuk.kini;
-  const kemarauDepan = p.kemarauTerburuk["2050"];
+  const kemarauDepan = kemarauDepanStabil(kemarauKini, p.kemarauTerburuk["2050"]);
   const perlu = hariPerluAir(i.gangguanAir, kemarauKini, kemarauDepan);
   const kurangDepan = kurang(perlu.depan, hariCukup);
   return {
@@ -167,6 +204,7 @@ export function hitungAir(i: InputRumah, p: ProyeksiResponse, tambahLiter = 0, h
     kurangKini: kurang(perlu.kini, hariCukup),
     kurangDepan,
     tingkat: kurangDepan === 0 ? "aman" : kurangDepan <= KURANG_AIR_WASPADA_HARI ? "perhatikan" : "waspada",
+    dariPengguna: i.airDiketahui !== false,
   };
 }
 
@@ -182,6 +220,7 @@ export function ujiKetahanan(i: InputRumah, p: ProyeksiResponse): HasilUji {
   // Bulan puncak dari iklim saat ini: itulah bulan yang perlu disiapkan tahun ini (dan dipakai jadwal tindakan).
   const kalKini = kalenderRisiko(p, "kini");
   const panas: HasilPanas = {
+    ambangC: p.ambang.sangatPanasC,
     hariDulu: dulu.metrik.hariSangatPanas.rata,
     hariKini: kini.metrik.hariSangatPanas.rata,
     hariDepan: depan.metrik.hariSangatPanas.rata,
@@ -197,6 +236,7 @@ export function ujiKetahanan(i: InputRumah, p: ProyeksiResponse): HasilUji {
   // Rumah yang pernah tergenang tidak pernah "aman" hanya karena hujan ekstrem diproyeksikan berkurang.
   if (i.pernahTergenang) th = th === "aman" ? "perhatikan" : naik(th);
   const hujan: HasilHujan = {
+    ambangMm: p.ambang.hujanEkstremMm,
     hariDulu: dulu.metrik.hariHujanEkstrem.rata,
     hariKini: kini.metrik.hariHujanEkstrem.rata,
     hariDepan: depan.metrik.hariHujanEkstrem.rata,
@@ -232,43 +272,48 @@ export interface Intervensi {
   hematPersen?: number;
   /** Mulai sebelum puncak risiko apa; null = kapan saja. */
   sebelum: "kering" | "panas" | "hujan" | null;
+  /**
+   * Perkiraan biaya kasar, ditulis tim dari harga toko daring (Tokopedia, Indotrading) November 2026. Bukan harga
+   * resmi; ditampilkan dengan catatan bahwa harga di daerah pengguna bisa berbeda. AI tidak menulis angka rupiah.
+   */
+  kisaranBiaya: string;
   berlaku: (i: InputRumah, u: HasilUji) => boolean;
 }
 
 export const KATALOG: Intervensi[] = [
   { id: "tandon-500", judul: "Pasang tandon air 500 liter", kategori: "air", target: "air", biaya: "sedang", ruang: "sedang", tambahLiter: 500, sebelum: "kering",
     deskripsi: "Menambah air simpanan sendiri 500 liter untuk bertahan saat pasokan terganggu.",
-    langkahPertama: "Ukur lahan di samping atau belakang rumah, lalu tanyakan harga tandon 500 liter di toko bangunan terdekat.", berlaku: () => true },
+    langkahPertama: "Ukur lahan di samping atau belakang rumah, lalu tanyakan harga tandon 500 liter di toko bangunan terdekat.", kisaranBiaya: "sekitar Rp600 ribu sampai Rp1,5 juta untuk tandon plastik 500-550 liter, belum termasuk pipa dan ongkos pasang", berlaku: () => true },
   { id: "tandon-1000", judul: "Pasang tandon air 1.000 liter", kategori: "air", target: "air", biaya: "tinggi", ruang: "besar", tambahLiter: 1000, sebelum: "kering",
     deskripsi: "Menambah air simpanan 1.000 liter; cocok bila masih ada kekurangan air dan ada tempat.",
-    langkahPertama: "Pastikan ada lahan datar dan kuat, lalu bandingkan satu tandon besar dengan dua tandon kecil.", berlaku: (_i, u) => u.air.kurangDepan > 0 },
+    langkahPertama: "Pastikan ada lahan datar dan kuat, lalu bandingkan satu tandon besar dengan dua tandon kecil.", kisaranBiaya: "sekitar Rp1 juta sampai Rp2,2 juta untuk tandon plastik 1.000 liter, belum termasuk dudukan dan ongkos pasang", berlaku: (_i, u) => u.air.kurangDepan > 0 },
   { id: "drum-hujan", judul: "Tampung air hujan di drum 200 liter", kategori: "air", target: "air", biaya: "rendah", ruang: "kecil", tambahLiter: 200, sebelum: null,
     deskripsi: "Satu drum di bawah talang menambah air simpanan 200 liter untuk menyiram, mencuci, dan cadangan.",
-    langkahPertama: "Pasang satu drum bertutup di bawah talang, dan tutup rapat agar tidak jadi sarang nyamuk.", berlaku: () => true },
+    langkahPertama: "Pasang satu drum bertutup di bawah talang, dan tutup rapat agar tidak jadi sarang nyamuk.", kisaranBiaya: "sekitar Rp300 ribu sampai Rp450 ribu untuk drum plastik 200 liter bertutup", berlaku: () => true },
   { id: "hemat-air", judul: "Hemat air di rumah", kategori: "air", target: "air", biaya: "rendah", ruang: "tidak", hematPersen: HEMAT_AIR_PERSEN, sebelum: "kering",
-    deskripsi: `Skenario bila pemakaian air turun ${HEMAT_AIR_PERSEN} persen: mandi dengan gayung, perbaiki kran bocor, pakai ulang air cucian untuk menyiram.`,
-    langkahPertama: "Periksa semua kran dan toilet yang bocor hari ini, lalu sepakati satu kebiasaan hemat air bersama keluarga.", berlaku: () => true },
+    deskripsi: `Kalau pemakaian air turun ${HEMAT_AIR_PERSEN} persen, air simpanan bertahan lebih lama: mandi dengan gayung, perbaiki kran bocor, pakai ulang air cucian untuk menyiram.`,
+    langkahPertama: "Periksa semua kran dan toilet yang bocor hari ini, lalu sepakati satu kebiasaan hemat air bersama keluarga.", kisaranBiaya: "hampir tanpa biaya; karet atau kran pengganti biasanya puluhan ribu rupiah", berlaku: () => true },
   { id: "peneduh-ventilasi", judul: "Peneduh jendela dan ventilasi silang", kategori: "panas", target: "panas", biaya: "rendah", ruang: "tidak", sebelum: "panas",
     deskripsi: "Menahan panas matahari di jendela dan membuka aliran udara agar rumah lebih sejuk tanpa banyak listrik.",
-    langkahPertama: "Pasang tirai tebal atau tanaman rambat di sisi barat, dan buka dua jendela berhadapan setiap pagi.", berlaku: () => true },
+    langkahPertama: "Pasang tirai tebal atau tanaman rambat di sisi barat, dan buka dua jendela berhadapan setiap pagi.", kisaranBiaya: "puluhan sampai ratusan ribu rupiah untuk tirai tebal, atau bibit tanaman rambat", berlaku: () => true },
   { id: "atap-terang", judul: "Cat atap dengan warna terang", kategori: "panas", target: "panas", biaya: "sedang", ruang: "tidak", sebelum: "panas",
     deskripsi: "Atap seng gelap memanaskan seisi rumah; cat terang atau lapisan pemantul panas membantu mengurangi panas di bawahnya.",
-    langkahPertama: "Tanyakan cat atap pemantul panas di toko cat, dan pilih hari kering untuk mengecat.", berlaku: (i) => i.atap === "seng" },
+    langkahPertama: "Tanyakan cat atap pemantul panas di toko cat, dan pilih hari kering untuk mengecat.", kisaranBiaya: "ratusan ribu sampai jutaan rupiah, tergantung luas atap dan jenis cat", berlaku: (i) => i.atap === "seng" },
   { id: "jadwal-panas", judul: "Atur aktivitas saat siang terik dan jaga anggota rentan", kategori: "panas", target: "panas", biaya: "rendah", ruang: "tidak", sebelum: "panas",
     deskripsi: "Hindari kerja berat di luar saat terik, sediakan air minum, dan cek lansia, balita, atau ibu hamil lebih sering.",
-    langkahPertama: "Tulis jadwal: kerja luar di pagi atau sore, dan tentukan siapa yang mengecek anggota rentan tiap siang.", berlaku: (i, u) => i.rentan > 0 || u.panas.tingkat !== "aman" },
+    langkahPertama: "Tulis jadwal: kerja luar di pagi atau sore, dan tentukan siapa yang mengecek anggota rentan tiap siang.", kisaranBiaya: "tanpa biaya", berlaku: (i, u) => i.rentan > 0 || u.panas.tingkat !== "aman" },
   { id: "biopori-saluran", judul: "Buat lubang biopori dan bersihkan saluran air", kategori: "hujan", target: "hujan", biaya: "rendah", ruang: "kecil", sebelum: "hujan",
     deskripsi: "Biopori membantu air hujan meresap, dan saluran yang bersih mencegah luapan saat hujan lebat.",
-    langkahPertama: "Bersihkan saluran di depan rumah dari sampah dan lumpur, lalu buat dua lubang biopori di halaman.", berlaku: () => true },
+    langkahPertama: "Bersihkan saluran di depan rumah dari sampah dan lumpur, lalu buat dua lubang biopori di halaman.", kisaranBiaya: "puluhan sampai ratusan ribu rupiah untuk bor biopori; tanyakan apakah bisa dipinjam dari RT atau kelurahan", berlaku: () => true },
   { id: "naikkan-barang", judul: "Naikkan dokumen dan colokan listrik dari lantai", kategori: "hujan", target: "hujan", biaya: "rendah", ruang: "tidak", sebelum: "hujan",
     deskripsi: "Rumah yang pernah tergenang perlu menaruh dokumen, obat, dan alat listrik di tempat yang lebih tinggi.",
-    langkahPertama: "Pindahkan dokumen penting ke kantong kedap air di rak atas, dan catat letak sakelar utama listrik.", berlaku: (i) => i.pernahTergenang },
+    langkahPertama: "Pindahkan dokumen penting ke kantong kedap air di rak atas, dan catat letak sakelar utama listrik.", kisaranBiaya: "tanpa biaya sampai puluhan ribu rupiah untuk kantong kedap air", berlaku: (i) => i.pernahTergenang },
   { id: "dana-iklim", judul: "Sisihkan dana darurat iklim keluarga", kategori: "ekonomi", target: "umum", biaya: "rendah", ruang: "tidak", sebelum: null,
     deskripsi: "Tabungan kecil rutin membantu saat harga air, listrik, atau pangan naik ketika cuaca ekstrem.",
-    langkahPertama: "Tentukan jumlah kecil yang bisa disisihkan tiap minggu dan simpan terpisah dari uang harian.", berlaku: () => true },
+    langkahPertama: "Tentukan jumlah kecil yang bisa disisihkan tiap minggu dan simpan terpisah dari uang harian.", kisaranBiaya: "sesuai kemampuan keluarga", berlaku: () => true },
   { id: "pohon-warga", judul: "Tanam pohon peneduh bersama warga", kategori: "komunitas", target: "umum", biaya: "rendah", ruang: "besar", sebelum: "hujan",
     deskripsi: "Pohon di lingkungan menurunkan suhu sekitar dan membantu resapan air; ajak RT atau RW.",
-    langkahPertama: "Bicarakan di pertemuan RT: pilih satu lahan umum dan tanggal tanam di awal musim hujan.", berlaku: () => true },
+    langkahPertama: "Bicarakan di pertemuan RT: pilih satu lahan umum dan tanggal tanam di awal musim hujan.", kisaranBiaya: "bibit pohon umumnya murah; tanyakan program bibit gratis di kelurahan", berlaku: () => true },
 ];
 
 export const intervensiById = (id: string): Intervensi | undefined => KATALOG.find((k) => k.id === id);

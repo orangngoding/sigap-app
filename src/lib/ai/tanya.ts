@@ -50,6 +50,8 @@ export interface HasilTanya {
   aksi?: AksiAplikasi[];
   /** true bila jawaban memakai data BMKG terkini di lokasi pengguna. */
   kondisi?: boolean;
+  /** true bila jawaban memakai Profil Risiko Lokasi (gunung api, gempa, tsunami, lereng, iklim) untuk titik pengguna. */
+  risiko?: boolean;
 }
 
 export interface DepsTanya {
@@ -60,6 +62,8 @@ export interface DepsTanya {
   batasWaktuMs?: number;
   /** Ambil ringkasan kondisi BMKG terkini untuk lokasi (disediakan rute; null bila gagal). */
   kondisi?: (l: LokasiTanya) => Promise<string | null>;
+  /** Ambil teks Profil Risiko Lokasi (disediakan rute; null bila gagal). */
+  risiko?: (l: LokasiTanya) => Promise<string | null>;
 }
 
 export interface MasukanTanya {
@@ -74,6 +78,11 @@ export interface MasukanTanya {
 const POLA_KONDISI =
   /\b(hari ini|sekarang|saat ini|malam ini|nanti (malam|sore|siang)|sore ini|pagi ini|besok|lusa|minggu ini|cuaca|hujan|panas|gerah|angin|petir|badai|peringatan|waspada|aman(kah)?|bahaya(kah)?|keluar rumah|bepergian|berangkat|mudik|jemuran|gempa (tadi|barusan|terbaru|baru)|kondisi|situasi|prakiraan|bmkg)\b/i;
 export const butuhKondisi = (q: string): boolean => POLA_KONDISI.test(q);
+
+/** Pertanyaan tentang risiko tempat tinggal (memakai Profil Risiko Lokasi bila lokasi ada). */
+const POLA_RISIKO =
+  /\b(risiko|resiko|rawan|ancaman|bahaya apa|bencana apa|aman(kah)? (tinggal|di sini|untuk tinggal)|rumah (saya|kami|ku|kita)|rumahku|lokasi (saya|kami|ini)|wilayah (saya|kami|ini|sini)|daerah (saya|kami|sini|ini)|tempat tinggal|lingkungan (saya|kami|sini)|dekat (gunung|pantai|laut|sungai|tebing)|gunung( api)?|merapi|semeru|erupsi|tsunami|longsor|kekeringan|kemarau|karhutla|kebakaran hutan|abrasi|rob|gempa|lereng|pesisir|pindah rumah|beli rumah|perlu (disiapkan|siapkan)|siapkan apa|persiapan apa|harus siap)\b/i;
+export const butuhRisiko = (q: string): boolean => POLA_RISIKO.test(q);
 
 /** Ringkasan rencana keluarga yang aman dikirim ke model (tanpa identitas). */
 export function teksRencana(r: RingkasRencana | undefined): string {
@@ -137,8 +146,8 @@ export function teksKonteks(k: KonteksTanya | undefined, bahaya: HazardId[] | un
   return baris.join("\n");
 }
 
-const kunciCache = (q: string, m: MasukanTanya, kondisi: string | null) =>
-  JSON.stringify([q.toLowerCase().trim(), m.bahaya ?? [], rapikanRiwayat(m.riwayat).map((g) => g.teks), m.konteks ?? {}, m.rencana ?? null, kondisi]);
+const kunciCache = (q: string, m: MasukanTanya, kondisi: string | null, risiko: string | null) =>
+  JSON.stringify([q.toLowerCase().trim(), m.bahaya ?? [], rapikanRiwayat(m.riwayat).map((g) => g.teks), m.konteks ?? {}, m.rencana ?? null, kondisi, risiko]);
 
 async function panggilModel(p: LlmProvider, system: string, user: string, riwayat: GiliranChat[], timeoutMs: number): Promise<HasilChat> {
   // Anggaran berpikir kecil: jawaban lebih runtut dan personal, tetap sekitar 3 detik pada model flash-lite.
@@ -164,7 +173,16 @@ export async function jawabPertanyaan(pertanyaan: string, bahayaAtauMasukan: Haz
       kondisi = null;
     }
   }
-  const kunci = kunciCache(pertanyaan, m, kondisi);
+  // Profil Risiko Lokasi hanya bila pertanyaan (atau sebelumnya) menyangkut risiko tempat tinggal; dihitung dari data, di-cache.
+  let risiko: string | null = null;
+  if (m.lokasi && d.risiko && (butuhRisiko(pertanyaan) || butuhRisiko(sebelumnyaUntukKondisi))) {
+    try {
+      risiko = await d.risiko(m.lokasi);
+    } catch {
+      risiko = null;
+    }
+  }
+  const kunci = kunciCache(pertanyaan, m, kondisi, risiko);
   const dariCache = d.cache?.get(kunci);
   if (dariCache) return dariCache;
 
@@ -209,6 +227,7 @@ export async function jawabPertanyaan(pertanyaan: string, bahayaAtauMasukan: Haz
     blokData("PERTANYAAN", pertanyaan),
     konteks ? blokData("KONTEKS KELUARGA", konteks) : "",
     kondisi ? blokData("KONDISI TERKINI DI LOKASI PENGGUNA (BMKG)", kondisi) : "",
+    risiko ? blokData("PROFIL RISIKO LOKASI PENGGUNA (data SIGAP)", risiko) : "",
     rencana ? blokData("RENCANA KELUARGA", rencana) : "",
     blokData("AKSI", teksDaftarAksi()),
     passages.length ? blokData("PASSAGE", passages.map((c) => `[${c.id}] (${c.hazard}; ${c.phase}) ${c.title}: ${c.body}`).join("\n")) : "",
@@ -232,7 +251,7 @@ export async function jawabPertanyaan(pertanyaan: string, bahayaAtauMasukan: Haz
       const dasar: DasarJawaban = sumber.length === 0 ? "umum" : sumberWeb.length > 0 ? "campuran" : "panduan";
       const saran = v.data.saranLanjutan.map((s) => bersihkanTeksChat(s).replace(/\*\*/g, "")).filter((s) => s.length >= 4 && lolosPenyaring(s)).slice(0, 3);
       const aksi = aksiSah(v.data.aksi);
-      const hasil: HasilTanya = { mode: "ai", jawaban: jawab, refused: false, sumber, sumberWeb, dasar, saran, aksi, kondisi: Boolean(kondisi) };
+      const hasil: HasilTanya = { mode: "ai", jawaban: jawab, refused: false, sumber, sumberWeb, dasar, saran, aksi, kondisi: Boolean(kondisi), risiko: Boolean(risiko) };
       d.cache?.set(kunci, hasil);
       return hasil;
     } catch (e) {

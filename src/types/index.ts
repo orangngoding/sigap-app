@@ -21,6 +21,11 @@ export interface Lokasi {
   provinsi: string;
   lat: number;
   lon: number;
+  /**
+   * Ketelitian titik: "desa" = koordinat kelurahan/desa dari BMKG; "kabkota" = pusat kabupaten/kota (cadangan).
+   * Tidak ada (data lama) = dianggap pusat kab/kota dan diperbarui otomatis sekali.
+   */
+  presisi?: "desa" | "kabkota";
 }
 
 export interface ProfilRumahTangga {
@@ -168,12 +173,31 @@ export interface BeritaItem {
   waktu: string;
   /** Tautan keluar (https) ke berita. */
   url: string;
+  /** Jenis bencana hasil klasifikasi judul (kata kunci); "umum" bila tidak spesifik. */
+  jenis?: HazardId | "umum";
+  /** Foto dari umpan penerbit (hanya Antara), ditampilkan apa adanya dengan tautan ke beritanya. */
+  gambar?: string;
+}
+
+/** Peringatan resmi internasional GDACS (PBB dan Komisi Eropa) untuk Indonesia, judul diterjemahkan kode. */
+export interface PeringatanGlobal {
+  id: string;
+  jenis: "gempa" | "banjir" | "kekeringan" | "siklon" | "gunung_api" | "kebakaran" | "tsunami" | "lainnya";
+  judul: string;
+  /** Tingkat dampak GDACS: hijau (rendah), oranye (sedang), merah (tinggi). */
+  level: "hijau" | "oranye" | "merah";
+  waktu: string;
+  url: string;
 }
 
 export interface BeritaResponse extends ApiBase {
   /** false = umpan tidak terbaca; UI tidak boleh menyatakan "tidak ada berita". */
   tersedia: boolean;
   daftar: BeritaItem[];
+  /** Peringatan GDACS 30 hari terakhir (kosong bila tidak ada atau umpan gagal). */
+  resmi?: PeringatanGlobal[];
+  /** Penerbit/umpan yang berhasil dibaca pada pengambilan ini. */
+  umpan?: string[];
 }
 
 export interface ApiErrorBody {

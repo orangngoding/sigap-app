@@ -4,6 +4,7 @@ import { ArrowRight, LocateFixed } from "lucide-react";
 import type { Lokasi } from "@/types";
 import { kabKotaTerdekat, type KabKotaRingkas } from "@/lib/geo/terdekat";
 import { PESAN_TIDAK_AMAN, pesanGalatLokasi } from "@/lib/geo/galat-lokasi";
+import { ambilKoordinatDesa } from "@/lib/geo/koordinat-desa";
 import { Combobox, type Opsi } from "./combobox";
 
 /**
@@ -29,6 +30,7 @@ export function WilayahPicker({ onSubmit }: { onSubmit: (l: Lokasi) => void }) {
   const [loadingProv, setLoadingProv] = useState(false);
   const [mencari, setMencari] = useState(false);
   const [info, setInfo] = useState<string | null>(null);
+  const [menyimpan, setMenyimpan] = useState(false);
   const permintaanProv = useRef(0);
 
   useEffect(() => {
@@ -105,18 +107,23 @@ export function WilayahPicker({ onSubmit }: { onSubmit: (l: Lokasi) => void }) {
   return (
     <form
       className="space-y-4"
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         e.preventDefault();
-        if (!prov || !kabO || !kecO || !kelO) return;
+        if (!prov || !kabO || !kecO || !kelO || menyimpan) return;
         const lat = kelO.lat ?? kabO.lat;
         const lon = kelO.lon ?? kabO.lon;
         if (lat === undefined || lon === undefined) {
           setError("Koordinat wilayah ini belum tersedia. Pilih wilayah lain di sekitarnya.");
           return;
         }
+        // Titik kelurahan/desa dari BMKG; bila tidak terjangkau, pusat kab/kota dipakai dan diperbarui nanti.
+        setMenyimpan(true);
+        const desa = await ambilKoordinatDesa(kelO.kode, { lat, lon });
+        setMenyimpan(false);
         onSubmit({
           adm4: kelO.kode, kelurahan: kelO.nama, kecamatan: kecO.nama,
-          kabKota: kabO.nama, provinsi: prov.nama, lat, lon,
+          kabKota: kabO.nama, provinsi: prov.nama,
+          ...(desa ? { lat: desa.lat, lon: desa.lon, presisi: "desa" as const } : { lat, lon, presisi: "kabkota" as const }),
         });
       }}
     >
@@ -141,10 +148,10 @@ export function WilayahPicker({ onSubmit }: { onSubmit: (l: Lokasi) => void }) {
       </div>
       {error && <p role="alert" className="text-sm text-destructive">{error}</p>}
       <button
-        type="submit" disabled={!kelO}
+        type="submit" disabled={!kelO || menyimpan}
         className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-primary px-6 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-not-allowed disabled:opacity-50"
       >
-        Lihat Profil Lokasi <ArrowRight className="size-4" aria-hidden="true" />
+        {menyimpan ? "Mencari titik kelurahan…" : "Lihat Profil Lokasi"} <ArrowRight className="size-4" aria-hidden="true" />
       </button>
     </form>
   );

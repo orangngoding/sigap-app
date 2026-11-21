@@ -2,6 +2,8 @@ import type { IklimResponse, IklimTahunan } from "@/types";
 import { ApiError } from "@/lib/http/api-error";
 import { fetchUpstreamJson } from "@/lib/http/fetch-upstream";
 import { slope, snapGrid } from "./iklim-math";
+import { SUMBER_POWER } from "./nasa-power";
+import type { DeretModel } from "./proyeksi";
 
 export { slope, snapGrid };
 
@@ -98,4 +100,13 @@ export async function fetchIklim(lat: number, lon: number, now = new Date()): Pr
   });
   if (!raw.daily?.time) throw new ApiError("SUMBER_GAGAL");
   return buildIklim(raw.daily, akhir, now);
+}
+
+/** Cadangan tanpa kuota: deret tahunan yang sama dari pengamatan NASA POWER (bila layanan ERA5 Open-Meteo penuh). */
+export function iklimDariPower(d: DeretModel, now = new Date()): IklimResponse {
+  const akhir = now.getUTCFullYear() - 1;
+  const r = buildIklim({ time: d.time, precipitation_sum: d.hujan, temperature_2m_max: d.tmax }, akhir, now);
+  r.sumber = { ...SUMBER_POWER, diambilPada: now.toISOString() };
+  r.catatan = "Gambaran tren dari data pengamatan NASA POWER (MERRA-2 dan hujan terkoreksi satelit, resolusi sekitar 50 km). Bukan pengukuran stasiun dan bukan prediksi.";
+  return r;
 }

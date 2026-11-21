@@ -3,12 +3,14 @@
 import assert from "node:assert/strict";
 import { hitungProyeksi, type ProyeksiResponse } from "@/lib/data/proyeksi";
 import {
-  KATALOG, LITER_PER_ORANG_HARI, hariPerluAir, bacaKendala, bulanMulai, buatIcsIklim, efekAir, hitungAir, intervensiById, kalenderRisiko, ujiKetahanan, urutkanIntervensi,
+  KATALOG, LITER_PER_ORANG_HARI, hariPerluAir, kemarauDepanStabil, teksPerubahanKemarau, bacaKendala, bulanMulai, buatIcsIklim, efekAir, hitungAir, intervensiById, kalenderRisiko, ujiKetahanan, urutkanIntervensi,
   type InputRumah,
 } from "@/lib/iklim/ketahanan";
-import { susunKeputusan, teksUji } from "@/lib/ai/keputusan-iklim";
+import { periksaKeputusan, susunKeputusan, teksUji } from "@/lib/ai/keputusan-iklim";
 import { alasanCadangan, keputusanCadangan, keyakinan, rentangBulan, type HasilKeputusan } from "@/lib/iklim/keputusan";
 import { kemarauTerjadi } from "@/lib/iklim/pengamatan";
+import { snapProyeksi } from "@/lib/data/iklim-math";
+import { JAWABAN_AWAL, airDijawab, bersihkanJawaban, migrasiJawaban, rumahDijawab } from "@/stores/iklim-rumah-store";
 import { rapikanKapital } from "@/lib/ai/guardrails";
 import type { IklimResponse } from "@/types";
 import { KeputusanIklimRequest } from "@/lib/ai/schema";
@@ -82,6 +84,20 @@ t("air: tanpa simpanan kurang seluruh kemarau; simpanan besar -> aman; batas 7 h
   const a = hitungAir({ ...RUMAH, litersTersimpan: 1980 }, proyeksi());
   assert.equal(a.kurangDepan, 7);
   assert.equal(a.tingkat, "perhatikan");
+});
+
+t("kemarau 2031-2050: perubahan kecil (<=10%, min 3 hari) dianggap tidak berubah; kalimat jujur", () => {
+  assert.equal(kemarauDepanStabil(129, 113), 113); // turun 12% tetap dilaporkan
+  assert.equal(kemarauDepanStabil(46, 51), 51); // 5 hari dari 46 (>4,6) -> berubah
+  assert.equal(kemarauDepanStabil(46, 50), 46); // 4 hari <= 4,6 -> tidak berubah berarti
+  assert.equal(kemarauDepanStabil(20, 22), 20); // minimal 3 hari
+  assert.match(teksPerubahanKemarau(46, 46), /tidak banyak berubah/);
+  assert.match(teksPerubahanKemarau(40, 60), /lebih panjang/);
+});
+
+t("grid proyeksi 0,25° (resolusi model): Kota Yogyakarta tidak lagi jatuh ke sel pantai Gunungkidul", () => {
+  assert.deepEqual([snapProyeksi(-7.7736), snapProyeksi(110.35719)], [-7.75, 110.25]);
+  assert.notDeepEqual([snapProyeksi(-7.7736), snapProyeksi(110.35719)], [-8, 110.5]);
 });
 
 t("hari air perlu ditutup: 'kemarau' = apa adanya; selain itu pengalaman pengguna diskalakan dengan perubahan kemarau (0,5x sampai 2x), minimal 3 hari", () => {
@@ -202,12 +218,48 @@ t("keyakinan dihitung kode: kedua model sepakat = tinggi, rata naik tapi rentang
   assert.equal(keyakinan("panas", proyeksi((p) => set(p, [18, 15, 21], [22, 17, 27]))).tingkat, "sedang");
   const rendah = keyakinan("panas", proyeksi((p) => set(p, [18, 15, 21], [17, 14, 20])), { ...RUMAH, atap: "seng" });
   assert.equal(rendah.tingkat, "rendah");
-  assert.match(rendah.alasan, /atap seng/);
+  assert.match(rendah.alasan, /atap rumah Anda dari seng/);
   assert.equal(keyakinan("umum", proyeksi()).tingkat, "sedang");
   // air: kekurangan saat ini = pengalaman pengguna sendiri -> tinggi, apa pun arah model
   const air = keyakinan("air", proyeksi(), RUMAH); // 16,7 hari simpanan < 30 hari air sulit
   assert.equal(air.tingkat, "tinggi");
-  assert.match(air.alasan, /pengalaman Anda sendiri.*30 hari/);
+  assert.match(air.alasan, /Anda menjawab air di rumah .*sekitar 30 hari/);
+  assert.doesNotMatch(air.alasan, /pengalaman Anda sendiri/);
+});
+
+t("soal air belum dijawab: tidak disebut 'pengalaman Anda', dan keyakinan air selaras dengan kemarau tahun terburuk", () => {
+  const belum = { ...RUMAH, litersTersimpan: 0, gangguanAir: "jarang" as const, airDiketahui: false };
+  const air = hitungAir(belum, proyeksi());
+  assert.equal(air.dariPengguna, false);
+  assert.equal(air.perluKini, 3); // hanya cadangan dasar
+  assert.equal(hitungAir(RUMAH, proyeksi()).dariPengguna, true);
+  const y = keyakinan("air", proyeksi(), belum);
+  assert.doesNotMatch(y.alasan, /pengalaman Anda/);
+  assert.match(y.alasan, /cadangan air minimal 3 hari/);
+  // Tahun terburuk 30 -> 40 hari naik, tetapi rata-rata kemarau per tahun tidak naik -> sedang, bukan "tidak bertambah"
+  const datar = proyeksi((p) => { p.periode[2].metrik.keringTerpanjang = { ...p.periode[0].metrik.keringTerpanjang }; });
+  assert.equal(keyakinan("air", datar, belum).tingkat, "sedang");
+  // Tahun terburuk tidak berubah berarti (30 -> 31) -> rendah
+  assert.equal(keyakinan("air", proyeksi((p) => { p.kemarauTerburuk["2050"] = 31; }), belum).tingkat, "rendah");
+});
+
+t("jawaban lama (versi 1): isian bawaan 0 liter + 'beberapa hari' dianggap belum dijawab; jawaban lain dipertahankan", () => {
+  assert.deepEqual([migrasiJawaban({ litersTersimpan: 0, gangguanAir: "hari" }, 1).litersTersimpan, migrasiJawaban({ litersTersimpan: 0, gangguanAir: "hari" }, 1).gangguanAir], [null, null]);
+  assert.equal(migrasiJawaban({ litersTersimpan: 500, gangguanAir: "hari" }, 1).gangguanAir, "hari");
+  assert.equal(migrasiJawaban({ litersTersimpan: 0, gangguanAir: "hari" }, 2).gangguanAir, "hari");
+  assert.equal(bersihkanJawaban({}).gangguanAir, null);
+  assert.equal(migrasiJawaban({ litersTersimpan: 0, gangguanAir: "hari", atap: "genteng" }, 1).atap, null);
+  assert.equal(migrasiJawaban({ litersTersimpan: 0, gangguanAir: "hari", atap: "seng" }, 1).atap, "seng");
+  assert.ok(!rumahDijawab({ ...JAWABAN_AWAL, litersTersimpan: 0, gangguanAir: "hari" }));
+  assert.ok(rumahDijawab({ ...JAWABAN_AWAL, litersTersimpan: 0, gangguanAir: "hari", atap: "seng" }));
+  assert.ok(!airDijawab(JAWABAN_AWAL));
+});
+
+t("setiap tindakan punya perkiraan biaya yang ditulis tim; tindakan berbiaya rendah tidak menyebut jutaan", () => {
+  for (const k of KATALOG) {
+    assert.ok(k.kisaranBiaya.length >= 8, k.id);
+    if (k.biaya === "rendah") assert.doesNotMatch(k.kisaranBiaya, /juta/, k.id);
+  }
 });
 
 t("alasan cadangan tidak mengulang angka efek (sudah tampil di baris Dampak)", () => {
@@ -279,13 +331,13 @@ const palsu = (keluaran: unknown, panggilan: PermintaanLlm[] = []): LlmProvider 
   hasilJson: async (req) => { panggilan.push(req); return typeof keluaran === "string" ? keluaran : JSON.stringify(keluaran); },
 });
 const deps = (providers: LlmProvider[], cache?: CacheTtl<HasilKeputusan>) => ({ providers, anggaran: new AnggaranHarian(() => 100), cache, sekarang: NOW });
-const OPSI_SAH = (alasan = "Air simpanan Anda cukup 16,7 hari, sedangkan kemarau diproyeksikan 40 hari menuju 2050.") => ({
-  ringkasan: "Yang paling perlu disiapkan lebih dulu adalah air bersih. Ini hasil perhitungan dari proyeksi model, bukan kepastian.",
+const OPSI_SAH = (alasan = "Air simpanan Anda cukup 16,7 hari, sedangkan kemarau diperkirakan 40 hari, 10-25 tahun lagi.") => ({
+  ringkasan: "Yang paling perlu disiapkan lebih dulu adalah air bersih. Ini perkiraan kasar, bukan kepastian.",
   opsi: [{ id: "tandon-500", alasan, langkahPertama: "Ukur lahan samping rumah lalu tanyakan harga tandon di toko bangunan." }, { id: "hemat-air", alasan: "Kebiasaan hemat air menutup sebagian kekurangan tanpa biaya.", langkahPertama: "Periksa kran bocor hari ini dan sepakati satu kebiasaan hemat." }],
 });
 
 t("AI sah: opsi dari katalog, efek air DIHITUNG KODE (bukan dari AI), waktu mulai dihitung kode", async () => {
-  const hasil = await susunKeputusan(proyeksi(), WIL, RUMAH, "ruang sempit", deps([palsu(OPSI_SAH())]));
+  const hasil = await susunKeputusan(proyeksi(), WIL, RUMAH, "ingin yang awet", deps([palsu(OPSI_SAH())]));
   assert.equal(hasil.mode, "ai");
   assert.deepEqual(hasil.opsi.map((o) => o.id), ["tandon-500", "hemat-air"]);
   assert.deepEqual(hasil.opsi[0].efekAir, { hariCukupBaru: 25, kurangDepanBaru: 15, tutup: 9, kurangKiniBaru: 5, tutupKini: 9 });
@@ -342,12 +394,42 @@ t("injeksi: isi kendala dibungkus blok data, penanda blok di dalamnya dibuang, d
   assert.ok(user.includes("air simpanan cukup 16,7 hari") && user.includes("menutup 9 hari"));
 });
 
+t("pagar mutu AI: batasan pengguna, istilah teknis, kata berlebihan, sebab-akibat keliru, kalimat panjang", () => {
+  const layak = KATALOG;
+  const o = (id: string, alasan = "Air simpanan Anda masih kurang.") => ({ id, alasan, langkahPertama: "Periksa kran bocor hari ini." });
+  const baik = "Hari panas terik makin sering, dan ini paling berat bagi lansia dan balita. Ini perkiraan kasar.";
+  assert.equal(periksaKeputusan(baik, [o("drum-hujan")], "", layak), null);
+  assert.match(periksaKeputusan(baik, [o("tandon-500")], "Lahan di rumah sempit", layak) ?? "", /lahan sempit.*drum-hujan/);
+  assert.equal(periksaKeputusan(baik, [o("tandon-500")], "Anggaran saya terbatas", layak), null); // biaya sedang masih boleh
+  assert.match(periksaKeputusan(baik, [o("tandon-1000")], "Anggaran saya terbatas", layak) ?? "", /anggaran terbatas/);
+  assert.match(periksaKeputusan("Menurut proyeksi model, air sulit.", [o("drum-hujan")], "", layak) ?? "", /istilah teknis/);
+  assert.match(periksaKeputusan(baik, [o("drum-hujan", "Berdasarkan pengalaman Anda sendiri air sulit.")], "", layak) ?? "", /berlebihan/);
+  assert.match(periksaKeputusan("Hari panas terik terjadi karena ada anggota rentan di rumah.", [o("drum-hujan")], "", layak) ?? "", /sebab-akibat/);
+  assert.match(periksaKeputusan(baik, [o("drum-hujan", Array(40).fill("kata").join(" ") + ".")], "", layak) ?? "", /kalimat lebih dari/);
+});
+
+t("AI ditolak pagar mutu -> diminta memperbaiki dengan catatan alasannya; jawaban perbaikan dipakai", async () => {
+  const panggilan: PermintaanLlm[] = [];
+  let ke = 0;
+  const salah = { ringkasan: "Menurut proyeksi model, air bersih perlu disiapkan. Ini perkiraan kasar.", opsi: OPSI_SAH().opsi };
+  const prov: LlmProvider = { nama: "palsu", hasilJson: async (req) => { panggilan.push(req); return JSON.stringify(ke++ === 0 ? salah : OPSI_SAH()); } };
+  const hasil = await susunKeputusan(proyeksi(), WIL, RUMAH, "", deps([prov]));
+  assert.equal(hasil.mode, "ai");
+  assert.equal(panggilan.length, 2);
+  assert.match(panggilan[1].user, /CATATAN: jawaban sebelumnya ditolak karena ada istilah teknis/);
+  // Selalu salah -> paling banyak 3 percobaan, lalu urutan dari kode.
+  const terus: PermintaanLlm[] = [];
+  const h2 = await susunKeputusan(proyeksi(), WIL, RUMAH, "", deps([palsu(salah, terus)]));
+  assert.equal(h2.mode, "cadangan");
+  assert.equal(terus.length, 3);
+});
+
 t("cache: masukan yang sama tidak memanggil model dua kali; kendala berbeda memanggil lagi", async () => {
   const panggilan: PermintaanLlm[] = [];
   const cache = new CacheTtl<HasilKeputusan>(60_000, 10);
   const d = deps([palsu(OPSI_SAH(), panggilan)], cache);
-  await susunKeputusan(proyeksi(), WIL, RUMAH, "ruang sempit", d);
-  await susunKeputusan(proyeksi(), WIL, RUMAH, "  ruang   sempit ", d);
+  await susunKeputusan(proyeksi(), WIL, RUMAH, "ingin yang awet", d);
+  await susunKeputusan(proyeksi(), WIL, RUMAH, "  ingin   yang awet ", d);
   assert.equal(panggilan.length, 1);
   await susunKeputusan(proyeksi(), WIL, RUMAH, "anggaran kecil", d);
   assert.equal(panggilan.length, 2);
@@ -356,7 +438,7 @@ t("cache: masukan yang sama tidak memanggil model dua kali; kendala berbeda mema
 t("teks uji memuat angka yang dihitung kode agar AI hanya menyalin", () => {
   const u = ujiKetahanan(RUMAH, proyeksi());
   const teks = teksUji(RUMAH, u);
-  for (const frasa of ["4 orang", "1000 liter", "60 liter per hari", "cukup 16,7 hari", "40 hari (10-25 tahun lagi, 2031-2050)", "14 hari (saat ini)", "24 hari (2031-2050)", "utamakan angka saat ini", "Tingkat: waspada", "Prioritas utama: air bersih"]) assert.ok(teks.includes(frasa), frasa);
+  for (const frasa of ["4 orang", "1000 liter", "60 liter per hari", "cukup 16,7 hari", "40 hari (10-25 tahun lagi)", "14 hari (sekarang)", "24 hari (10-25 tahun lagi)", "utamakan angka sekarang", "Tingkat: waspada", "Prioritas utama: air bersih"]) assert.ok(teks.includes(frasa), frasa);
 });
 
 t("permintaan divalidasi: anggota 1-12, liter tidak negatif, kendala maks 300, atap hanya nilai yang dikenal", () => {

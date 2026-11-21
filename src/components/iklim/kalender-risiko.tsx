@@ -1,24 +1,19 @@
 "use client";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { ExternalLink } from "lucide-react";
-import type { ProyeksiResponse } from "@/lib/data/proyeksi";
-import { NAMA_BULAN, bulanWib, kalenderRisiko } from "@/lib/iklim/ketahanan";
+import type { KlimatologiResponse } from "@/lib/data/klimatologi";
+import { NAMA_BULAN, bulanWib, kalenderDariBulanan } from "@/lib/iklim/ketahanan";
 import { rentangBulan } from "@/lib/iklim/keputusan";
+import type { KondisiGlobal } from "@/lib/data/iklim-global";
 
 const fmt = (v: number, d = 1) => v.toLocaleString("id-ID", { maximumFractionDigits: d });
 
 /** Halaman resmi Prediksi Musim BMKG (diperiksa aktif 19 November 2026; rilis terbaru: Prediksi Musim Hujan 2026/2027). */
 export const URL_PREDIKSI_MUSIM_BMKG = "https://www.bmkg.go.id/iklim/prakiraan-musim.bmkg";
 
-type Pilihan = "kini" | "2050";
-const PILIHAN: Array<{ id: Pilihan; label: string; rentang: string }> = [
-  { id: "kini", label: "Saat ini", rentang: "2011-2030" },
-  { id: "2050", label: "10-25 tahun lagi", rentang: "2031-2050" },
-];
-
-/** Ringkasan satu kalimat per jenis risiko dari kalender (tanpa angka besar yang dipamerkan). */
-export function RingkasanKalender({ p, namaWilayah }: { p: ProyeksiResponse; namaWilayah: string }) {
-  const kal = useMemo(() => kalenderRisiko(p, "kini"), [p]);
+/** Ringkasan satu kalimat per jenis risiko dari pola pengamatan 1991-2020, dengan peringatan bila tahun ini menyimpang (El Niño/La Niña). */
+export function RingkasanKalender({ k, namaWilayah, global }: { k: KlimatologiResponse; namaWilayah: string; global?: KondisiGlobal | null }) {
+  const kal = useMemo(() => kalenderDariBulanan(k.bulanan), [k]);
   const adaKering = kal.some((b) => b.kering);
   const idx = (f: (b: (typeof kal)[number]) => boolean) => kal.filter(f).map((b) => b.bulan);
   const baris = [
@@ -28,19 +23,27 @@ export function RingkasanKalender({ p, namaWilayah }: { p: ProyeksiResponse; nam
       ? { k: "Bulan kering", v: rentangBulan([...NAMA_BULAN], idx((b) => b.kering)) }
       : { k: "Paling kering", v: rentangBulan([...NAMA_BULAN], idx((b) => b.palingKering)) },
   ];
+  const menyimpang = global && global.pengaruh !== "netral";
   return (
     <div>
       <p className="text-base leading-relaxed text-foreground">
-        Menurut iklim saat ini (rata-rata 2011-2030), ini bulan yang paling rawan di <strong>{namaWilayah}</strong>. Siapkan rumah sebelum bulan-bulan itu tiba.
+        Menurut pengamatan iklim {k.periode.label} (periode normal standar), ini bulan yang paling rawan di <strong>{namaWilayah}</strong> pada tahun biasa. Siapkan rumah sebelum bulan-bulan itu tiba.
       </p>
       <dl className="mt-4 grid gap-x-8 gap-y-2 sm:grid-cols-[auto_1fr]">
-        {baris.map(({ k, v }) => (
-          <div key={k} className="contents">
-            <dt className="text-sm font-semibold text-muted-foreground">{k}</dt>
+        {baris.map(({ k: label, v }) => (
+          <div key={label} className="contents">
+            <dt className="text-sm font-semibold text-muted-foreground">{label}</dt>
             <dd className="text-base font-semibold text-foreground">{v}</dd>
           </div>
         ))}
       </dl>
+      {menyimpang && (
+        <p className="mt-4 max-w-3xl rounded-2xl bg-warning px-4 py-3 text-sm leading-relaxed text-warning-foreground">
+          <strong>Tahun ini tidak biasa:</strong> karena {global.enso.fase === "el_nino" ? "El Niño" : "La Niña"}
+          {global.enso.kekuatan ? ` ${global.enso.kekuatan.replace("_", " ")}` : ""}, hujan tahun ini cenderung {global.pengaruh === "kering" ? "di bawah" : "di atas"} pola rata-rata ini
+          {global.pengaruh === "kering" ? " dan awal musim hujan bisa mundur, sehingga bulan kering terasa lebih panjang." : ", sehingga risiko banjir dan longsor di bulan basah lebih tinggi."}
+        </p>
+      )}
       <p className="mt-4 max-w-3xl text-sm leading-relaxed text-muted-foreground">
         Ini pola rata-rata, bukan ramalan tahun ini. Untuk perkiraan kapan kemarau atau musim hujan tahun ini dimulai di zona Anda, lihat{" "}
         <a href={URL_PREDIKSI_MUSIM_BMKG} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-semibold text-primary underline underline-offset-2">
@@ -52,9 +55,8 @@ export function RingkasanKalender({ p, namaWilayah }: { p: ProyeksiResponse; nam
 }
 
 /** Tabel 12 bulan. Angka selalu tertulis; batang hanya pelengkap, dan label teks menandai bulan puncak. */
-export function KalenderRisiko({ p }: { p: ProyeksiResponse }) {
-  const [periode, setPeriode] = useState<Pilihan>("kini");
-  const baris = useMemo(() => kalenderRisiko(p, periode), [p, periode]);
+export function KalenderRisiko({ k }: { k: KlimatologiResponse }) {
+  const baris = useMemo(() => kalenderDariBulanan(k.bulanan), [k]);
   const sekarang = bulanWib(new Date());
   const adaKering = baris.some((b) => b.kering);
   const maks = {
@@ -65,27 +67,9 @@ export function KalenderRisiko({ p }: { p: ProyeksiResponse }) {
 
   return (
     <div>
-      <div role="group" aria-label="Pilih periode kalender" className="tanpa-cetak inline-flex rounded-full border border-border bg-surface p-1">
-        {PILIHAN.map((x) => (
-          <button
-            key={x.id} type="button" aria-pressed={periode === x.id} onClick={() => setPeriode(x.id)}
-            className={`min-h-11 rounded-full px-4 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-primary ${periode === x.id ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
-          >
-            {x.label} <span className="text-xs font-medium opacity-80">{x.rentang}</span>
-          </button>
-        ))}
-      </div>
-
-      {periode === "2050" && (
-        <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-          Mengapa 10-25 tahun lagi? Tandon, atap, dan saluran air dipakai selama itu, jadi keputusan hari ini juga untuk masa tersebut. Model iklim hanya andal sebagai rata-rata 20 tahun, bukan untuk tahun tertentu.
-        </p>
-      )}
-      <div className="mt-4 overflow-x-auto rounded-2xl border border-border bg-surface">
+      <div className="overflow-x-auto rounded-2xl border border-border bg-surface">
         <table className="w-full min-w-120 border-collapse text-sm">
-          <caption className="sr-only">
-            Rata-rata per bulan untuk periode {periode === "2050" ? "10-25 tahun lagi (2031-2050)" : "saat ini (2011-2030)"}: hari sangat panas, hari hujan ekstrem, dan total hujan.
-          </caption>
+          <caption className="sr-only">Rata-rata pengamatan per bulan {k.periode.label}: hari sangat panas, hari hujan lebat, dan total hujan.</caption>
           <thead>
             <tr className="border-b border-border text-left text-xs text-muted-foreground">
               <th scope="col" className="px-3 py-2.5 font-semibold sm:px-4">Bulan</th>
@@ -116,8 +100,9 @@ export function KalenderRisiko({ p }: { p: ProyeksiResponse }) {
         </table>
       </div>
       <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
-        Rata-rata per bulan dalam periode 20 tahun, dari dua model iklim. Hari sangat panas: suhu siang di atas {fmt(p.ambang.sangatPanasC)}°C (5% hari terpanas 1991-2010).
-        Hari hujan lebat: di atas {fmt(p.ambang.hujanEkstremMm, 0)} mm per hari. Bulan kering: hujan kurang dari 60 mm; bila tak ada, tiga bulan terkering ditandai “paling kering”. Puncak: tiga bulan tertinggi.
+        Rata-rata per bulan dari pengamatan {k.periode.label} ({k.sumber.nama}). Hari sangat panas: suhu siang di atas {fmt(k.ambang.sangatPanasC)}°C (5% hari terpanas).
+        Hari hujan lebat: di atas {fmt(k.ambang.hujanEkstremMm, 0)} mm per hari. Bulan kering: hujan kurang dari 60 mm (kriteria BMKG); bila tak ada, tiga bulan terkering ditandai “paling kering”. Puncak: tiga bulan tertinggi.
+        {k.sumber.nama.startsWith("NASA") && " Data cadangan NASA POWER (grid sekitar 50 km) dipakai karena layanan ERA5 sedang penuh: suhu siangnya bisa beberapa derajat di bawah suhu stasiun kota, tetapi ambang sangat panas dihitung dari grid yang sama sehingga jumlah harinya tetap sebanding."}
       </p>
     </div>
   );

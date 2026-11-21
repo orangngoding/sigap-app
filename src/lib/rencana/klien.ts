@@ -5,6 +5,8 @@ import type { HasilRencana } from "@/lib/ai/rencana";
 import { readCache } from "@/lib/storage/safe-storage";
 import { bangunSorotan } from "./sorotan";
 import { hashMasukan } from "./hash";
+import type { NilaiBahaya } from "@/lib/risiko/nilai";
+import type { RisikoRingkas } from "@/lib/ai/schema";
 
 const KUNCI_LOG = "sigap:v1:ai-log";
 const BATAS_PER_JAM = 3; // Blueprint: Susun ulang dibatasi 3 kali per jam di klien
@@ -43,12 +45,20 @@ export function bacaRingkasanLokal(l: Pick<Lokasi, "adm4" | "lat" | "lon">) {
   };
 }
 
-export function bangunPermintaan(l: Lokasi, profil: ProfilAnonim, ringkasanData: { hujanLebat48j: boolean; gempaDekat24j: boolean }, abaikanCache: boolean) {
+/** Ringkas Profil Risiko Lokasi untuk dikirim ke AI: tanpa koordinat, teks dibersihkan agar lolos validasi. */
+export function ringkasRisiko(nilai: NilaiBahaya[] | undefined): RisikoRingkas | undefined {
+  if (!nilai?.length) return undefined;
+  const bersih = (t: string) => t.replace(/[^\p{L}\p{N} .,;:()%°'/+-]/gu, " ").replace(/\s+/g, " ").trim().slice(0, 260);
+  return nilai.map((n) => ({ id: n.id, tingkat: n.tingkat, alasan: n.alasan.map(bersih).filter((a) => a.length >= 5).slice(0, 4) }));
+}
+
+export function bangunPermintaan(l: Lokasi, profil: ProfilAnonim, ringkasanData: { hujanLebat48j: boolean; gempaDekat24j: boolean }, abaikanCache: boolean, risiko?: RisikoRingkas) {
   return {
     lokasi: { kelurahan: l.kelurahan, kecamatan: l.kecamatan, kabKota: l.kabKota, provinsi: l.provinsi },
     profil,
     ringkasanData,
     abaikanCache,
+    ...(risiko ? { risiko } : {}),
   };
 }
 

@@ -5,6 +5,7 @@ import { hitungTas } from "@/lib/preparedness/tas";
 import type { Chunk } from "@/lib/kb/schema";
 import { hashMasukan } from "./hash";
 import { HAZARD_BY_ID } from "@/lib/hazards/hazards";
+import type { RisikoRingkas } from "@/lib/ai/schema";
 
 const BOBOT = { tinggi: 3, sedang: 2, rendah: 1 } as const;
 const URUT_FASE: Phase[] = ["sebelum", "saat", "sesudah"];
@@ -75,10 +76,13 @@ export function chunkKeTindakan(c: Chunk): Tindakan {
 }
 
 /** Ringkasan risiko templat (Blueprint 9.4 butir 5). Tanpa prediksi. */
-export function ringkasanTemplat(namaLokasi: string, bahaya: HazardId[], faktor: string[]): string {
+export function ringkasanTemplat(namaLokasi: string, bahaya: HazardId[], faktor: string[], risiko?: RisikoRingkas): string {
   const namaBahaya = bahaya.map((h) => HAZARD_BY_ID[h].label.toLowerCase()).join(", ");
   const bagianFaktor = faktor.length > 0 ? ` Faktor yang perlu diperhatikan: ${faktor.join(", ").toLowerCase()}.` : "";
-  return `Untuk ${namaLokasi}, rencana ini berfokus pada ${namaBahaya}.${bagianFaktor} Rencana disusun dari panduan umum dan jawaban Anda; periksa peringatan resmi BMKG dan arahan BPBD.`;
+  // Dua fakta risiko tinggi pertama dari data lokasi (untuk bahaya yang ada di rencana), apa adanya.
+  const fakta = (risiko ?? []).filter((r) => r.tingkat === "tinggi" && bahaya.includes(r.id) && r.alasan[0]).slice(0, 2).map((r) => r.alasan[0]);
+  const bagianData = fakta.length > 0 ? ` Menurut data lokasi: ${fakta.join(" ")}` : "";
+  return `Untuk ${namaLokasi}, rencana ini berfokus pada ${namaBahaya}.${bagianData}${bagianFaktor} Rencana disusun dari panduan resmi dan jawaban Anda; periksa peringatan resmi BMKG dan arahan BPBD.`;
 }
 
 export interface MasukanTemplat {
@@ -89,6 +93,8 @@ export interface MasukanTemplat {
   kb: Chunk[];
   sorotan?: string[];
   sekarang?: Date;
+  /** Profil Risiko Lokasi: fakta risiko tinggi disebut di ringkasan. */
+  risiko?: RisikoRingkas;
 }
 
 /** Rencana cadangan tanpa AI: deterministik, hanya memakai potongan KB terverifikasi (Blueprint 9.4). */
@@ -96,7 +102,7 @@ export function bangunRencanaTemplat(m: MasukanTemplat): RencanaTersimpan {
   const tindakan = pilihChunk(m.kb, m.profil).map(chunkKeTindakan);
   const faktor = hitungFaktorKerentanan(m.profil);
   const sorotan = m.sorotan ?? [];
-  const dasar = ringkasanTemplat(m.namaLokasi ?? "lokasi Anda", m.profil.bahaya, faktor);
+  const dasar = ringkasanTemplat(m.namaLokasi ?? "lokasi Anda", m.profil.bahaya, faktor, m.risiko);
   const ringkasan = [dasar, ...sorotan].join(" ");
   return {
     versi: 1,

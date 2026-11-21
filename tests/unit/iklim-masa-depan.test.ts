@@ -80,7 +80,7 @@ t("deret tahunan 60 tahun untuk grafik; sumber dan lisensi tercatat", () => {
   assert.equal(P.tahunan[0].tahun, 1991);
   assert.equal(P.sumber.lisensi, "CC BY 4.0");
   assert.equal(P.model.length, 2);
-  assert.equal(P.grid.lat, -6.25);
+  assert.equal(P.grid.lat, -6.25); // grid proyeksi 0,25° (resolusi model): sel terdekat, bukan sel pesisir 0,5°
 });
 
 t("teks proyeksi memuat angka periode yang dihitung kode", () => {

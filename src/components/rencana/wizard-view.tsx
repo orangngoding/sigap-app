@@ -108,7 +108,7 @@ export function WizardView() {
       )}
 
       <div className="mt-8 rounded-2xl border border-border bg-surface p-5 sm:p-6">
-        {langkah === 1 && <LangkahBahaya profil={profil} ubah={ubah} errors={errors} />}
+        {langkah === 1 && <LangkahBahaya profil={profil} ubah={ubah} errors={errors} lokasi={lokasi} />}
         {langkah === 2 && <LangkahKeluarga profil={profil} ubah={ubah} errors={errors} />}
         {langkah === 3 && <LangkahRumah profil={profil} ubah={ubah} errors={errors} />}
         {langkah === 4 && <RingkasanProfil profil={profil} lokasi={lokasi} onUbah={pindah} />}

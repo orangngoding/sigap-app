@@ -42,13 +42,17 @@ const moreNavigation = [
     href: "/iklim",
   },
   {
-    label: "Latihan Siaga",
+    label: "Simulator Bencana AI",
     href: "/latihan",
   },
   {
     label: "Pustaka",
     href: "/pustaka",
     icon: BookOpen,
+  },
+  {
+    label: "Berita bencana",
+    href: "/pustaka/berita",
   },
   {
     label: "Metodologi",
@@ -98,6 +102,7 @@ export function MobileBottomNav() {
   return (
     <nav
       ref={navRef}
+      data-bingkai-situs
       aria-label="Navigasi bawah"
       className="tanpa-cetak kaca fixed inset-x-0 bottom-0 z-50 border-t border-border/70 pb-[env(safe-area-inset-bottom)] md:hidden"
     >

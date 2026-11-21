@@ -6,7 +6,7 @@ import { Logo } from "./logo";
 
 export function SiteHeader() {
   return (
-    <header className="tanpa-cetak kaca sticky top-0 z-50 w-full border-b border-border/70">
+    <header data-bingkai-situs className="tanpa-cetak kaca sticky top-0 z-50 w-full border-b border-border/70">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
         <Link href="/" className="group flex min-h-11 shrink-0 items-center rounded-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary" aria-label="SIGAP - Beranda">
           <Logo />

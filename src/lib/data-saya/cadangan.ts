@@ -7,7 +7,7 @@ export const AWALAN = "sigap:v1:";
 export const MAKS_BYTE_CADANGAN = 2 * 1024 * 1024;
 
 /** Kunci yang boleh dipulihkan. Cache respons data dan antrean toast tidak ikut (bisa dibuat ulang). */
-const POLA_KUNCI = /^sigap:v1:(lokasi|profil|progres|rencana|kartu|tanya|latihan|tas|iklimrumah)$/;
+const POLA_KUNCI = /^sigap:v1:(lokasi|profil|progres|rencana|kartu|tanya|latihan|tas|iklimrumah|medis|simulasi|aksiiklim)$/;
 
 export interface IsiCadangan {
   diekspor: string | null;
@@ -59,6 +59,7 @@ const LABEL: Record<string, string> = {
   latihan: "hasil Latihan Siaga",
   tas: "kedaluwarsa tas siaga",
   iklimrumah: "jawaban Siaga Iklim",
+  aksiiklim: "tindakan dari Siaga Iklim",
 };
 
 /** Daftar isi cadangan yang mudah dibaca, untuk konfirmasi sebelum memulihkan. */

@@ -9,7 +9,7 @@ const KOLOM = [
       ["Profil wilayah", "/lokasi"],
       ["Siaga Iklim", "/iklim"],
       ["Rencana Siaga", "/rencana"],
-      ["Latihan Siaga", "/latihan"],
+      ["Simulator Bencana AI", "/latihan"],
       ["Asisten SIGAP", "/tanya"],
       ["Mode Darurat", "/darurat"],
     ],
@@ -18,6 +18,7 @@ const KOLOM = [
     judul: "Informasi",
     tautan: [
       ["Pustaka", "/pustaka"],
+      ["Berita bencana", "/pustaka/berita"],
       ["Metodologi", "/metodologi"],
       ["Kredit foto", "/metodologi#kredit-foto"],
       ["Data & privasi", "/data-saya"],
@@ -37,7 +38,7 @@ const TAUTAN = "inline-flex min-h-8 items-center rounded text-sm any-pointer-coa
 
 export function SiteFooter() {
   return (
-    <footer className="tanpa-cetak mt-auto bg-ink text-ink-foreground">
+    <footer data-bingkai-situs className="tanpa-cetak mt-auto bg-ink text-ink-foreground">
       <div className="mx-auto max-w-7xl px-4 pb-28 pt-14 sm:px-6 md:pb-10 lg:px-8">
         <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
           <div>

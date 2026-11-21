@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { TINGKAT_SIMULASI } from "@/lib/simulasi/tingkat";
 
 // Kontrak keluaran dan masukan AI (Blueprint 10.4 dan 13.3).
 
@@ -94,11 +95,19 @@ export const LokasiAnonimSchema = z.object({
   provinsi: teks(80),
 });
 
+/** Ringkasan Profil Risiko Lokasi yang dikirim klien (dihitung server SIGAP sendiri; teks dibersihkan di klien). */
+const teksRisiko = z.string().trim().min(5).max(260).regex(/^[\p{L}\p{N} .,;:()%°'/+-]+$/u);
+export const RisikoRingkasSchema = z
+  .array(z.object({ id: HazardId, tingkat: z.enum(["tinggi", "sedang", "rendah", "belum-diketahui"]), alasan: z.array(teksRisiko).max(4) }))
+  .max(9);
+export type RisikoRingkas = z.infer<typeof RisikoRingkasSchema>;
+
 export const RencanaRequest = z.object({
   lokasi: LokasiAnonimSchema,
   profil: ProfilAnonimSchema,
   ringkasanData: z.object({ hujanLebat48j: z.boolean().default(false), gempaDekat24j: z.boolean().default(false) }).optional(),
   abaikanCache: z.boolean().optional(),
+  risiko: RisikoRingkasSchema.optional(),
 });
 export type RencanaRequestT = z.infer<typeof RencanaRequest>;
 
@@ -236,6 +245,7 @@ export const KeputusanIklimRequest = z.object({
     sumberAir: z.enum(["pdam", "sumur", "beli", "lainnya"]),
     gangguanAir: z.enum(["jarang", "hari", "minggu", "kemarau"]),
     pernahTergenang: z.boolean(),
+    airDiketahui: z.boolean().optional(),
   }),
   /** Keinginan atau batasan pengguna dengan kata sendiri (ruang, anggaran, status rumah). Diperlakukan sebagai data. */
   kendala: z.string().trim().max(300).optional(),
@@ -255,3 +265,84 @@ export const KeputusanIklimKeluaran = z.object({
     .max(3),
 });
 export type KeputusanIklimKeluaranT = z.infer<typeof KeputusanIklimKeluaran>;
+
+// ---------- Siaga Iklim "Minggu ini": rencana 7 hari keluarga ----------
+export const RencanaPekanRequest = z.object({
+  lokasi: z.object({
+    lat: z.number().min(-12).max(7),
+    lon: z.number().min(94).max(142),
+    kabKota: namaWilayahTanya,
+    provinsi: namaWilayahTanya,
+  }),
+  bahaya: z.array(HazardId).max(9).optional(),
+  konteks: KonteksTanyaSchema.omit({ wilayah: true }).optional(),
+});
+
+export const RencanaPekanKeluaran = z.object({
+  ringkasan: z.string().min(20).max(420),
+  langkah: z
+    .array(
+      z.object({
+        kapan: z.string().min(3).max(40),
+        tindakan: z.string().min(8).max(160),
+        alasan: z.string().min(8).max(240),
+      }),
+    )
+    .min(2)
+    .max(5),
+});
+export type RencanaPekanKeluaranT = z.infer<typeof RencanaPekanKeluaran>;
+
+// ---------- Simulator Bencana AI ----------
+/** Konsep yang terlewat di uji awal (teks tindakan terbaik + id sumber), dikirim agar simulasi menyasarnya. */
+const teksFokus = z.string().trim().min(5).max(160).regex(/^[\p{L}\p{N} .,;:()%°'/+-]+$/u);
+export const SimulasiRequest = z.object({
+  hazard: HazardId,
+  lokasi: LokasiAnonimSchema,
+  profil: ProfilAnonimSchema,
+  risiko: RisikoRingkasSchema.optional(),
+  fokus: z.array(z.object({ teks: teksFokus, sumber: z.string().regex(/^[a-z_]+-(sebelum|saat|sesudah)-\d{3}$/) })).max(6).default([]),
+  /** Nomor variasi agar "Simulasi lagi" memberi skenario berbeda. */
+  varian: z.number().int().min(0).max(20).default(0),
+  tingkat: z.enum(TINGKAT_SIMULASI).default("dasar"),
+  /** Bencana kedua untuk tingkat "beruntun" (dihitung klien dengan aturan yang sama; diperiksa server). */
+  kedua: HazardId.optional(),
+  /** Titik lokasi hanya untuk mengambil prakiraan nyata di server; tidak pernah diteruskan ke AI. */
+  titik: z.object({ lat: z.number().min(-12).max(7), lon: z.number().min(94).max(142) }).optional(),
+});
+export type SimulasiRequestT = z.infer<typeof SimulasiRequest>;
+
+const JenisPesanSim = z.enum(["resmi", "keluarga", "warga", "radio", "medsos"]);
+export const SimulasiKeluaran = z.object({
+  judul: z.string().min(5).max(80),
+  ringkas: z.string().min(10).max(200),
+  langkah: z
+    .array(
+      z.object({
+        situasi: z.string().min(20).max(560),
+        pesan: z
+          .object({
+            dari: z.string().min(2).max(40),
+            jenis: JenisPesanSim,
+            jam: z.string().regex(/^\d{2}\.\d{2}$/),
+            teks: z.string().min(10).max(320),
+            // Model kadang menulis null untuk "tidak ada": diterima sebagai tidak ada.
+            hoaks: z.string().min(30).max(360).nullish(),
+          })
+          .nullish(),
+        pilihan: z
+          .array(
+            z.object({
+              teks: z.string().min(5).max(170),
+              nilai: z.union([z.literal(0), z.literal(1), z.literal(2)]),
+              umpanBalik: z.string().min(20).max(480),
+              sourceIds: z.array(z.string()).min(1).max(3),
+            }),
+          )
+          .length(3),
+      }),
+    )
+    .min(4)
+    .max(6),
+});
+export type SimulasiKeluaranT = z.infer<typeof SimulasiKeluaran>;

@@ -3,6 +3,7 @@
 import type { CuacaResponse, GempaItem, GempaResponse, HazardId, PeringatanResponse } from "@/types";
 import type { KonteksTanya } from "@/lib/ai/schema";
 import { jamLokal, namaHari, waktuRelatif } from "@/lib/utils/format";
+import type { NilaiBahaya } from "@/lib/risiko/nilai";
 
 /** Tingkat perhatian versi SIGAP. BUKAN status resmi BMKG/BNPB. */
 export type Tingkat = "tenang" | "perhatikan" | "waspada";
@@ -18,7 +19,13 @@ export type JenisSinyal =
   | "cuaca"
   | "gempa_dekat"
   | "gempa_terasa"
-  | "tsunami";
+  | "tsunami"
+  // Gabungan: cuaca/gempa HARI INI bertemu risiko jangka panjang di titik lokasi (Profil Risiko Lokasi).
+  | "risiko_longsor"
+  | "risiko_banjir"
+  | "risiko_lahar"
+  | "risiko_pesisir"
+  | "risiko_api";
 
 export interface Sinyal {
   jenis: JenisSinyal;
@@ -27,7 +34,7 @@ export interface Sinyal {
   judul: string;
   /** Fakta dari data resmi, ditulis kode. Satu-satunya sumber angka yang boleh dipakai AI. */
   fakta: string;
-  sumber: "cuaca" | "peringatan" | "gempa";
+  sumber: "cuaca" | "peringatan" | "gempa" | "risiko";
   url: string;
 }
 
@@ -35,6 +42,8 @@ export interface DataBriefing {
   cuaca: CuacaResponse | null;
   gempa: GempaResponse | null;
   peringatan: PeringatanResponse | null;
+  /** Profil Risiko Lokasi (opsional): memicu sinyal gabungan bila cuaca hari ini bertemu risiko di titik ini. */
+  risiko?: NilaiBahaya[] | null;
 }
 
 /** Atribut anonim keluarga (tanpa nama, kontak, catatan). */
@@ -181,10 +190,73 @@ function sinyalGempa(g: GempaResponse | null, now: Date): Sinyal[] {
   return out;
 }
 
+const URL_RISIKO = "/lokasi";
+
+/**
+ * Sinyal gabungan: hanya muncul bila ada pemicu HARI INI (hujan lebat, gempa terasa, panas) DAN risiko jangka panjang
+ * di titik itu tinggi atau perlu disiapkan. Faktanya menyalin alasan Profil Risiko Lokasi (angka dari data).
+ */
+export function sinyalGabungan(dasar: Sinyal[], risiko: NilaiBahaya[] | null | undefined): Sinyal[] {
+  if (!risiko?.length) return [];
+  const r = (id: HazardId) => risiko.find((n) => n.id === id && (n.tingkat === "tinggi" || n.tingkat === "sedang") && n.alasan.length > 0 && !n.umum);
+  const ada = (j: JenisSinyal) => dasar.find((s) => s.jenis === j);
+  const peringatanLokal = Boolean(ada("peringatan_lokasi"));
+  const hujanLebat = ada("hujan_lebat") ?? (peringatanLokal ? ada("peringatan_lokasi") : undefined);
+  const gempa = ada("gempa_dekat") ?? ada("gempa_terasa");
+  const out: Sinyal[] = [];
+
+  const longsor = r("longsor");
+  if (hujanLebat && longsor) {
+    out.push({
+      jenis: "risiko_longsor", tingkat: longsor.tingkat === "tinggi" && peringatanLokal ? "waspada" : "perhatikan", bahaya: "longsor",
+      judul: "Hujan lebat di lokasi berlereng",
+      fakta: `${longsor.alasan[0]} Hujan lebat yang diprakirakan hari ini dapat memicu longsor.`,
+      sumber: "risiko", url: URL_RISIKO,
+    });
+  }
+  const banjir = r("banjir");
+  if (hujanLebat && banjir) {
+    out.push({
+      jenis: "risiko_banjir", tingkat: "perhatikan", bahaya: "banjir",
+      judul: "Hujan lebat di dataran rendah",
+      fakta: banjir.alasan[0],
+      sumber: "risiko", url: URL_RISIKO,
+    });
+  }
+  const gunung = r("gunung_api");
+  if (hujanLebat && gunung && gunung.tingkat === "tinggi") {
+    out.push({
+      jenis: "risiko_lahar", tingkat: "perhatikan", bahaya: "gunung_api",
+      judul: "Hujan lebat di sekitar gunung api",
+      fakta: `${gunung.alasan[0]} Hujan lebat dapat memicu lahar di aliran sungai yang berhulu di gunung.`,
+      sumber: "risiko", url: URL_RISIKO,
+    });
+  }
+  const tsunami = r("tsunami");
+  if (gempa && tsunami && tsunami.tingkat === "tinggi" && !ada("tsunami")) {
+    out.push({
+      jenis: "risiko_pesisir", tingkat: "perhatikan", bahaya: "tsunami",
+      judul: "Gempa terasa dan Anda tinggal di pesisir rendah",
+      fakta: `${tsunami.alasan[0]} Pantau informasi BMKG tentang potensi tsunami.`,
+      sumber: "risiko", url: URL_RISIKO,
+    });
+  }
+  const api = r("karhutla");
+  if (ada("panas") && api && api.tingkat === "tinggi") {
+    out.push({
+      jenis: "risiko_api", tingkat: "perhatikan", bahaya: "karhutla",
+      judul: "Cuaca panas di wilayah rawan kebakaran lahan",
+      fakta: api.alasan.slice(0, 2).join(" "),
+      sumber: "risiko", url: URL_RISIKO,
+    });
+  }
+  return out;
+}
+
 /** Semua sinyal, diurutkan dari tingkat tertinggi. */
 export function hitungSinyal(d: DataBriefing, now = new Date()): Sinyal[] {
-  return [...sinyalPeringatan(d.peringatan), ...sinyalGempa(d.gempa, now), ...sinyalCuaca(d.cuaca, now)]
-    .sort((a, b) => URUTAN_TINGKAT[b.tingkat] - URUTAN_TINGKAT[a.tingkat]);
+  const dasar = [...sinyalPeringatan(d.peringatan), ...sinyalGempa(d.gempa, now), ...sinyalCuaca(d.cuaca, now)];
+  return [...dasar, ...sinyalGabungan(dasar, d.risiko)].sort((a, b) => URUTAN_TINGKAT[b.tingkat] - URUTAN_TINGKAT[a.tingkat]);
 }
 
 export function tingkatKeseluruhan(sinyal: Sinyal[]): Tingkat {
@@ -238,6 +310,28 @@ const T: Record<JenisSinyal, TindakanBriefing | null> = {
     judul: "Ingat kembali langkah saat gempa",
     alasan: "Kenali tempat berlindung di setiap ruangan: di bawah meja kokoh, jauh dari kaca dan lemari tinggi.",
     tautan: { href: "/darurat", label: "Langkah saat gempa" },
+  },
+  risiko_longsor: {
+    judul: "Amati lereng dan tebing di sekitar rumah",
+    alasan: "Waspadai retakan tanah, rembesan air baru, atau batu kecil berjatuhan. Bila hujan deras berhari-hari, menjauhlah dari tebing.",
+    tautan: { href: "/darurat", label: "Langkah saat longsor" },
+  },
+  risiko_banjir: {
+    judul: "Pindahkan barang penting ke tempat tinggi",
+    alasan: "Rumah di dataran rendah lebih cepat tergenang. Siapkan tas siaga dan matikan listrik dari meteran bila air mulai masuk.",
+  },
+  risiko_lahar: {
+    judul: "Jauhi aliran sungai yang berhulu di gunung",
+    alasan: "Hujan lebat di lereng gunung api dapat membawa lahar. Jangan beraktivitas di sungai atau menyeberang jembatan rendah.",
+  },
+  risiko_pesisir: {
+    judul: "Kenali jalur ke tempat tinggi terdekat",
+    alasan: "Bila guncangan kuat dan lama terasa di pantai, segera menuju tempat tinggi tanpa menunggu sirene. Ikuti BMKG dan BPBD.",
+    tautan: { href: "/darurat", label: "Buka Mode Darurat" },
+  },
+  risiko_api: {
+    judul: "Jangan membakar sampah atau lahan",
+    alasan: "Cuaca panas di wilayah rawan membuat api cepat menjalar. Laporkan asap atau api ke petugas setempat.",
   },
   tsunami: {
     judul: "Bila di dekat pantai, ikuti arahan evakuasi resmi",

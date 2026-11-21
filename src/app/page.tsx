@@ -3,6 +3,7 @@ import Image from "next/image";
 import { ArrowRight, PlayCircle, ShieldCheck } from "lucide-react";
 import { KartuLanjutkan } from "@/components/global/kartu-lanjutkan";
 import { BriefingHarian } from "@/components/beranda/briefing-harian";
+import { RisikoTeratas } from "@/components/beranda/risiko-teratas";
 import { HeroVisual } from "@/components/beranda/hero-visual";
 import { FiturUnggulan } from "@/components/beranda/fitur-unggulan";
 import { BencanaDicakup, CaraKerja, KartuModeDarurat, PratinjauKartu, SumberResmi, TransparansiAi } from "@/components/beranda/beranda-blok";
@@ -60,6 +61,7 @@ export default function Home() {
 
       <SumberResmi />
       <BriefingHarian />
+      <RisikoTeratas />
       <FiturUnggulan />
       <CaraKerja />
       <BencanaDicakup />

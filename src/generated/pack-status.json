@@ -12,11 +12,11 @@
     "minimum": 12
   },
   "gempa": {
-    "jumlah": 16,
+    "jumlah": 17,
     "minimum": 12
   },
   "cuaca_ekstrem": {
-    "jumlah": 13,
+    "jumlah": 16,
     "minimum": 12
   },
   "tsunami": {
