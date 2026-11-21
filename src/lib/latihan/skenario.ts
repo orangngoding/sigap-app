@@ -75,7 +75,7 @@ export const SKENARIO: Skenario[] = [
       },
       {
         id: "g5",
-        situasi: "Pesan berantai itu masuk ke grup keluarga Anda, dan beberapa kerabat mulai panik.",
+        situasi: "Beredar pesan berantai yang mengatasnamakan BMKG: gempa lebih besar akan datang pukul 23.00 malam ini. Beberapa kerabat mulai panik.",
         pilihan: [
           { teks: "Teruskan ke semua kontak agar mereka waspada", nilai: 0, umpanBalik: "Gempa tidak dapat diprediksi jamnya. Menyebarkan kabar yang tidak jelas sumbernya menambah kepanikan.", sumber: "umum-sesudah-002" },
           { teks: "Cek kanal resmi BMKG dan jangan mudah percaya kabar tanpa sumber", nilai: 2, umpanBalik: "Tepat. Dengarkan informasi dari sumber resmi dan jangan percaya kabar yang tidak jelas asalnya.", sumber: "umum-sesudah-002" },

@@ -2,7 +2,6 @@
 import type { HazardId } from "@/types";
 import type { Tindakan } from "@/types/rencana";
 import { SKENARIO, type Langkah, type Pilihan, type Skenario } from "./skenario";
-import { PESAN, type Pesan } from "./pesan";
 
 /** Nilai minimal (persen) agar latihan dianggap lulus dan ikut dihitung di skor kesiapsiagaan. */
 export const AMBANG_LULUS = 70;
@@ -78,18 +77,6 @@ export function pelajaranDari(s: Skenario, jawaban: Jawaban[], tindakan: Tindaka
     hasil.push({ langkahId: l.id, situasi: l.situasi, dipilih, terbaik, tindakan: tindakan.filter((t) => t.sourceIds.includes(terbaik.sumber)) });
   }
   return hasil;
-}
-
-/** Hoaks dalam simulasi: berapa yang dihadapi dan berapa yang ditanggapi dengan tepat (jawaban bernilai 2). */
-export function hoaksDikenali(jawaban: Jawaban[], s: Skenario, peta: Record<string, Pesan[]> = PESAN): { total: number; dikenali: number } {
-  let total = 0;
-  let dikenali = 0;
-  for (const j of jawaban) {
-    if (!(peta[j.langkahId] ?? []).some((p) => p.hoaks)) continue;
-    total++;
-    if (cariLangkah(s, j.langkahId)?.pilihan[j.pilihan]?.nilai === 2) dikenali++;
-  }
-  return { total, dikenali };
 }
 
 /** Teks ringkas untuk dibagikan ke grup keluarga: hal yang perlu diingat dari simulasi (tanpa data pribadi). */

@@ -6,6 +6,7 @@ import type { IklimResponse } from "@/types";
 import { useDataCard, TTL } from "@/hooks/use-data-card";
 import { snapGrid, slope } from "@/lib/data/iklim-math";
 import { DataCard } from "./data-card";
+import { TeksPihak } from "@/components/rencana/teks-pihak";
 
 export function takeawayIklim(d: IklimResponse): string {
   const { awal, akhir } = d.pembanding;
@@ -48,7 +49,7 @@ export function IklimCard({ lat, lon }: { lat: number; lon: number }) {
             </p>
             <p className="text-xs text-muted-foreground">{d.catatan}</p>
             <Link href="/iklim" className="inline-flex min-h-9 items-center gap-1 text-sm font-semibold text-primary underline underline-offset-2">
-              Lihat bulan rawan dan uji kesiapan rumah Anda <ArrowRight className="size-4" aria-hidden="true" />
+              <TeksPihak>Lihat bulan rawan dan uji kesiapan rumah Anda</TeksPihak> <ArrowRight className="size-4" aria-hidden="true" />
             </Link>
           </div>
         );

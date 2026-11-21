@@ -5,6 +5,7 @@ import { Geist_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/global/site-header";
 import { SiteFooter } from "@/components/global/site-footer";
+import { SpandukKeluarga } from "@/components/rencana/pemilih-keluarga";
 import { MobileBottomNav } from "@/components/global/mobile-bottom-nav";
 import { Providers } from "@/components/providers";
 import { Toaster } from "@/components/global/toaster";
@@ -51,6 +52,7 @@ export default function RootLayout({
           Lewati ke konten utama
         </a>
         <SiteHeader />
+        <SpandukKeluarga />
         <Providers>{children}</Providers>
         {/* usePathname pada rute dinamis (mis. /latihan/[id]) memerlukan Suspense saat Cache Components aktif. */}
         <Suspense fallback={null}>

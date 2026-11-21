@@ -5,6 +5,7 @@ import { useDataCard, TTL } from "@/hooks/use-data-card";
 import { waktuMutlak } from "@/lib/utils/format";
 import { DataCard } from "./data-card";
 import { useAsistenUi } from "@/stores/asisten-ui-store";
+import { TeksPihak } from "@/components/rencana/teks-pihak";
 
 /** Buka panel Asisten dan jelaskan teks peringatan resmi ini dengan bahasa sederhana. */
 function TombolJelaskan({ teks }: { teks: string }) {
@@ -48,7 +49,7 @@ export function PeringatanCard({ lokasi }: { lokasi: Pick<Lokasi, "adm4" | "prov
             <article key={p.id} className="rounded-xl border border-border p-3">
               <h3 className="font-semibold">{p.judul}</h3>
               <p className="text-xs text-muted-foreground">
-                {p.cakupan === "lokasi" ? "Menyebut wilayah Anda" : "Tingkat provinsi"}
+                <TeksPihak>{p.cakupan === "lokasi" ? "Menyebut wilayah Anda" : "Tingkat provinsi"}</TeksPihak>
                 {p.waktuTerbit ? ` · terbit ${waktuMutlak(p.waktuTerbit)}` : ""}
                 {p.berlakuSampai ? ` · berlaku sampai ${waktuMutlak(p.berlakuSampai)}` : ""}
               </p>

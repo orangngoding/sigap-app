@@ -1,6 +1,6 @@
 // Simulator Bencana AI (server). Urutan: passage KB untuk bahaya + konsep yang terlewat di uji awal -> model menulis
 // simulasi yang dipersonalisasi (keluarga, rumah, lokasi) -> KODE memvalidasi dan mengacak pilihan -> skenario siap
-// dimainkan oleh mesin Latihan yang sama (notifikasi, hitung mundur, meter keselamatan, hoaks, "Terapkan di rumah").
+// dimainkan oleh mesin Latihan yang sama (hitung mundur, meter keselamatan, "Terapkan di rumah").
 // Gagal di titik mana pun -> skenario bank yang ditulis tim (mode cadangan), jadi pengguna selalu bisa berlatih.
 import type { HazardId, ProfilAnonim } from "@/types";
 import type { Chunk } from "@/lib/kb/schema";
@@ -8,7 +8,6 @@ import { HAZARD_BY_ID } from "@/lib/hazards/hazards";
 import { relevan } from "@/lib/rencana/templat";
 import { hashMasukan } from "@/lib/rencana/hash";
 import { skenarioUntuk } from "@/lib/latihan/mesin";
-import { PESAN, type Pesan } from "@/lib/latihan/pesan";
 import type { Langkah, Skenario } from "@/lib/latihan/skenario";
 import { acak } from "@/lib/simulasi/uji";
 import { LABEL_TINGKAT, PASANGAN_BERUNTUN, bencanaKedua, tantanganUntuk } from "@/lib/simulasi/tingkat";
@@ -23,7 +22,6 @@ export interface HasilSimulasi {
   mode: "ai" | "cadangan";
   dibuatPada: string;
   skenario: Skenario;
-  pesan: Record<string, Pesan[]>;
   /** Hal yang dipakai untuk personalisasi (ditulis kode, ditampilkan agar pengguna tahu mengapa skenarionya begini). */
   personalisasi: string[];
   meta: { cache: boolean; durasiMs: number; alasanCadangan?: string; /** Aturan validasi terakhir yang menolak (untuk log). */ ditolak?: string };
@@ -151,8 +149,8 @@ export function susunPromptSimulasi(m: SimulasiRequestT, passages: Chunk[], e: E
 
 /**
  * Validasi keluaran model menjadi skenario siap main, atau alasan penolakan. Aturan: tepat satu pilihan bernilai 2
- * dan minimal satu bernilai 0 per langkah; kutipan hanya id passage yang diberikan; tepat satu hoaks (medsos/keluarga)
- * yang jawaban terbaiknya tidak meneruskan kabar; angka hanya dari data; teks lolos penyaring ramalan dan jaminan.
+ * dan minimal satu bernilai 0 per langkah; kutipan hanya id passage yang diberikan; angka hanya dari data; teks lolos
+ * penyaring ramalan dan jaminan. Kolom "pesan" dari model (format lama) diabaikan: situasi harus berdiri sendiri.
  */
 export function validasiSimulasi(
   k: SimulasiKeluaranT,
@@ -160,7 +158,7 @@ export function validasiSimulasi(
   m: SimulasiRequestT,
   idUnik: string,
   e: EkstraSimulasi = ekstraDari(m),
-): { skenario: Skenario; pesan: Record<string, Pesan[]> } | { galat: string } {
+): { skenario: Skenario } | { galat: string } {
   const idOk = new Set(passages.map((c) => c.id));
   const sumberAngka = [JSON.stringify(DATA_PROFIL(m.profil)), teksRisikoSimulasi(m), m.lokasi.kelurahan, m.lokasi.kabKota, e.kondisi ?? "", ...e.tantangan, ...passages.map((c) => `${c.title} ${c.body}`), ...m.fokus.map((f) => f.teks)].join(" ");
   /** null = lolos; selain itu alasan singkat yang dikirim balik ke model sebagai catatan perbaikan. */
@@ -171,8 +169,6 @@ export function validasiSimulasi(
   };
   const cek = (t: string) => masalah(t) === null;
   const b = (t: string) => bersihkanTeks(t);
-  let hoaks = 0;
-  const pesan: Record<string, Pesan[]> = {};
   const langkah: Langkah[] = [];
 
   for (const [i, l] of k.langkah.entries()) {
@@ -197,22 +193,10 @@ export function validasiSimulasi(
       if (/\((benar|salah|tepat|keliru)\)|^(benar|salah|tepat|keliru)\b|\b(jawaban|pilihan) (yang )?(benar|salah|tepat|keliru)\b/i.test(teks)) return { galat: `langkah ${i + 1}: teks pilihan membocorkan jawaban` };
       pilihan.push({ teks: teks.slice(0, 170), nilai: p.nilai, umpanBalik: umpanBalik.slice(0, 480), sumber: src[0] });
     }
-    if (l.pesan) {
-      const ps = l.pesan;
-      const teks = b(ps.teks);
-      if (ps.hoaks) {
-        if (!["medsos", "keluarga"].includes(ps.jenis)) return { galat: "hoaks harus dari medsos atau keluarga" };
-        const terbaik = pilihan.find((p) => p.nilai === 2)!;
-        if (/teruskan|sebarkan|bagikan/i.test(terbaik.teks)) return { galat: "jawaban terbaik di langkah hoaks tidak boleh meneruskan kabar" };
-        hoaks++;
-      } else if (!cek(teks)) return { galat: `langkah ${i + 1}: pesan memuat ${masalah(teks)}` };
-      if (ps.jenis === "resmi" && /https?:|www\.|\b0\d{8,}/.test(teks)) return { galat: "pesan resmi tidak boleh memuat tautan atau nomor telepon" };
-      pesan[id] = [{ dari: b(ps.dari).slice(0, 40), jenis: ps.jenis, jam: ps.jam, teks: teks.slice(0, 320), ...(ps.hoaks ? { hoaks: b(ps.hoaks).slice(0, 360) } : {}) }];
-    }
+    if (/https?:|www\./.test(situasi)) return { galat: `langkah ${i + 1}: situasi tidak boleh memuat tautan` };
     // Urutan diacak kode (benih tetap) agar jawaban terbaik tidak selalu di posisi yang sama.
     langkah.push({ id, situasi: situasi.slice(0, 560), pilihan: acak(pilihan, `${idUnik}:${i}`) });
   }
-  if (hoaks !== 1) return { galat: `harus tepat satu pesan hoaks, ada ${hoaks}` };
   if (e.kedua) {
     const sumberKedua = langkah.flatMap((l) => l.pilihan.map((p) => p.sumber)).filter((id) => id.startsWith(`${e.kedua}-`));
     if (sumberKedua.length === 0) return { galat: `mode beruntun: belum ada pilihan yang mengutip passage ${e.kedua}` };
@@ -220,14 +204,13 @@ export function validasiSimulasi(
   const judul = b(k.judul);
   const ringkas = b(k.ringkas);
   if (!cek(judul) || !cek(ringkas)) return { galat: `judul atau ringkasan memuat ${masalah(judul) ?? masalah(ringkas)}` };
-  return { skenario: { id: idUnik, hazard: m.hazard, judul: judul.slice(0, 80), ringkas: ringkas.slice(0, 200), langkah }, pesan };
+  return { skenario: { id: idUnik, hazard: m.hazard, judul: judul.slice(0, 80), ringkas: ringkas.slice(0, 200), langkah } };
 }
 
 /** Cadangan: skenario bank yang ditulis tim untuk bahaya ini (selalu tersedia, tanpa AI). */
 export function simulasiCadangan(m: SimulasiRequestT, alasan: string, mulai: number, sekarang: Date, ditolak?: string, e: EkstraSimulasi = ekstraDari(m)): HasilSimulasi {
   const s = skenarioUntuk(m.hazard)!;
-  const pesan = Object.fromEntries(s.langkah.flatMap((l) => (PESAN[l.id] ? [[l.id, PESAN[l.id]]] : [])));
-  return { mode: "cadangan", dibuatPada: sekarang.toISOString(), skenario: s, pesan, personalisasi: personalisasiDari(m, { ...e, kondisi: null }), meta: { cache: false, durasiMs: Date.now() - mulai, alasanCadangan: alasan, ...(ditolak ? { ditolak } : {}) } };
+  return { mode: "cadangan", dibuatPada: sekarang.toISOString(), skenario: s, personalisasi: personalisasiDari(m, { ...e, kondisi: null }), meta: { cache: false, durasiMs: Date.now() - mulai, alasanCadangan: alasan, ...(ditolak ? { ditolak } : {}) } };
 }
 
 export async function susunSimulasi(m: SimulasiRequestT, d: DepsSimulasi): Promise<HasilSimulasi> {

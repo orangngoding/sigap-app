@@ -23,8 +23,8 @@ const FITUR = [
     href: "/latihan",
     Ikon: Dumbbell,
     judul: "Simulator Bencana AI",
-    isi: "AI menyusun simulasi untuk keluarga, rumah, lokasi, dan prakiraan nyata minggu ini, termasuk bencana beruntun. Uji awal dan akhir mengukur peningkatan pemahaman Anda.",
-    ciri: ["Bencana beruntun", "Dampak terukur"],
+    isi: "AI menyusun simulasi untuk keluarga, rumah, lokasi, dan prakiraan nyata minggu ini, termasuk bencana beruntun. Uji awal 5 soal acak menunjukkan hal yang perlu dipelajari, lalu simulasi menyasarnya.",
+    ciri: ["Bencana beruntun", "Soal berganti tiap sesi"],
   },
   {
     href: "/rencana",

@@ -8,6 +8,7 @@ import { buatIcsIklim, intervensiById, type HasilUji, type InputRumah } from "@/
 import { fmt, keputusanCadangan, keyakinan, type HasilKeputusan, type OpsiKeputusan, type TingkatYakin } from "@/lib/iklim/keputusan";
 import { TombolTanya } from "@/components/tanya/tombol-tanya";
 import { TombolMasukRencana } from "./tombol-masuk-rencana";
+import { TeksPihak } from "@/components/rencana/teks-pihak";
 
 const BIAYA = { rendah: "Biaya rendah", sedang: "Biaya sedang", tinggi: "Biaya tinggi" } as const;
 const RUANG = { tidak: "tanpa lahan", kecil: "lahan kecil", sedang: "perlu lahan", besar: "perlu lahan luas" } as const;
@@ -81,7 +82,7 @@ function StatusAi({ ps }: { ps: Penasihat }) {
     return (
       <div role="status" className="flex items-start gap-3 rounded-xl bg-muted px-4 py-3 text-sm">
         <Loader2 className="mt-0.5 size-4 shrink-0 animate-spin text-primary motion-reduce:animate-none" aria-hidden="true" />
-        <p><strong>AI sedang menganalisis.</strong> Membaca hasil uji rumah dan batasan Anda, lalu memilih tindakan yang paling cocok. Biasanya 5-20 detik.</p>
+        <p><strong>AI sedang menganalisis.</strong> <TeksPihak>Membaca hasil uji rumah dan batasan Anda</TeksPihak>, lalu memilih tindakan yang paling cocok. Biasanya 5-20 detik.</p>
       </div>
     );
   if (minta.isError)
@@ -115,8 +116,8 @@ export function PenasihatKeputusan({ p, lokasi, input, uji, ps }: Props) {
           <ChevronDown className="size-4 shrink-0 transition-transform group-open:rotate-180" aria-hidden="true" />
         </summary>
         <div className="border-t border-border p-4">
-          <p className="text-sm leading-relaxed text-muted-foreground">AI memilih ulang tiga dari 11 tindakan yang paling cocok dengan batasan Anda dan menjelaskan alasannya. Angka tetap dihitung di perangkat ini.</p>
-          <label htmlFor="pk-kendala" className="mt-3 block text-sm font-semibold">Tulis batasan Anda dengan kata sendiri</label>
+          <p className="text-sm leading-relaxed text-muted-foreground"><TeksPihak>AI memilih ulang tiga dari 11 tindakan yang paling cocok dengan batasan Anda dan menjelaskan alasannya. Angka tetap dihitung di perangkat ini.</TeksPihak></p>
+          <label htmlFor="pk-kendala" className="mt-3 block text-sm font-semibold"><TeksPihak>Tulis batasan Anda dengan kata sendiri</TeksPihak></label>
           <textarea
             id="pk-kendala" name="kendala" rows={2} maxLength={300} value={kendala} onChange={(e) => setKendala(e.target.value)} autoComplete="off"
             placeholder="Contoh: lahan sempit, anggaran terbatas, saya mengontrak…"
@@ -149,7 +150,7 @@ function DaftarTindakan({ p, lokasi, input, uji, ps }: Props) {
       <div className="min-w-0">
         <div aria-live="polite" className="mb-4 empty:hidden"><StatusAi ps={ps} /></div>
         {/* Ringkasan cadangan sama dengan kartu dampak di atas; hanya ringkasan AI yang menambah penjelasan baru. */}
-        {dariAi && <p className="mb-5 max-w-3xl text-base leading-relaxed">{tampil.ringkasan}</p>}
+        {dariAi && <p className="mb-5 max-w-3xl text-base leading-relaxed"><TeksPihak>{tampil.ringkasan}</TeksPihak></p>}
 
         <ol className={`space-y-4 transition-opacity ${minta.isPending ? "opacity-60" : ""}`} aria-busy={minta.isPending}>
           {tampil.opsi.map((o, i) => {
@@ -170,7 +171,7 @@ function DaftarTindakan({ p, lokasi, input, uji, ps }: Props) {
 
                     {o.efekAir && (o.efekAir.tutupKini > 0 || o.efekAir.tutup > 0) && (
                       <p className="mt-3 text-sm">
-                        <strong>Hasilnya untuk rumah Anda:</strong> air simpanan jadi cukup sekitar {fmt(o.efekAir.hariCukupBaru)} hari
+                        <strong><TeksPihak>Hasilnya untuk rumah Anda:</TeksPihak></strong> air simpanan jadi cukup sekitar {fmt(o.efekAir.hariCukupBaru)} hari
                         {!uji.air.dariPengguna
                           ? ", memenuhi cadangan dasar yang dianjurkan."
                           : o.efekAir.tutupKini > 0
@@ -179,8 +180,8 @@ function DaftarTindakan({ p, lokasi, input, uji, ps }: Props) {
                         {uji.air.dariPengguna && o.efekAir.tutupKini > 0 && uji.air.kurangDepan > 0 && <span className="text-muted-foreground"> (10-25 tahun lagi: dari {uji.air.kurangDepan} menjadi {o.efekAir.kurangDepanBaru} hari.)</span>}
                       </p>
                     )}
-                    <p className="mt-3 text-sm leading-relaxed"><strong>Kenapa disarankan:</strong> <span className="text-muted-foreground">{o.alasan}</span></p>
-                    <p className="mt-2 text-sm leading-relaxed"><strong>{YAKIN[y.tingkat]}:</strong> <span className="text-muted-foreground">{sama >= 0 ? `alasannya sama dengan tindakan ${sama + 1}.` : y.alasan}</span></p>
+                    <p className="mt-3 text-sm leading-relaxed"><strong>Kenapa disarankan:</strong> <span className="text-muted-foreground"><TeksPihak>{o.alasan}</TeksPihak></span></p>
+                    <p className="mt-2 text-sm leading-relaxed"><strong>{YAKIN[y.tingkat]}:</strong> <span className="text-muted-foreground"><TeksPihak>{sama >= 0 ? `alasannya sama dengan tindakan ${sama + 1}.` : y.alasan}</TeksPihak></span></p>
                     {biaya && <p className="mt-2 text-sm leading-relaxed"><strong>Perkiraan biaya:</strong> <span className="text-muted-foreground">{biaya}.</span></p>}
                     <p className="mt-3 rounded-xl bg-muted px-3 py-2 text-sm"><strong>Bisa dimulai hari ini:</strong> {o.langkahPertama}</p>
                     {waktuMulai(o) && <p className="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold text-primary"><Clock className="size-4" aria-hidden="true" /> {waktuMulai(o)}</p>}

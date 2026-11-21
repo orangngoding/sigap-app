@@ -171,7 +171,7 @@ export function blokData(nama: string, isi: string): string {
 
 /**
  * Simulator Bencana AI: skenario keputusan yang dipersonalisasi untuk satu keluarga. AI menulis cerita dan pilihan;
- * KODE memvalidasi (satu jawaban terbaik per langkah, kutipan sah, angka dari data, satu hoaks) dan mengacak urutan.
+ * KODE memvalidasi (satu jawaban terbaik per langkah, kutipan sah, angka dari data) dan mengacak urutan.
  */
 export const SISTEM_SIMULASI = `${ATURAN_UMUM}
 
@@ -182,12 +182,11 @@ TUGAS: susun SIMULASI pengambilan keputusan saat bencana untuk keluarga di blok 
 - Semua situasi dan pilihan harus KONSISTEN dengan PROFIL: tanpa kendaraan berarti tidak ada pilihan mengemudi; jumlah orang sesuai jumlahAnggota; rumah satu lantai berarti tidak ada lantai atas (yang ada: atap, loteng, atau tempat tinggi di luar rumah).
 - Setiap langkah TEPAT 3 pilihan: satu tindakan terbaik (nilai 2), satu kurang tepat (nilai 1), satu berbahaya (nilai 0). Pilihan ditulis sebagai tindakan singkat yang masuk akal (pilihan keliru harus terdengar menggoda, bukan konyol). Jangan menulis kata "benar" atau "salah" di teks pilihan.
 - "umpanBalik" tiap pilihan ditujukan langsung ke pengguna ("Anda"), jangan pernah menyalin atau menyebut aturan tugas ini. Isinya 1-2 kalimat yang menjelaskan AKIBAT pilihan itu bagi keluarga ini dan tindakan yang dianjurkan panduan. Kutip id passage persis di "sourceIds"; jawaban terbaik harus didukung passage yang dikutipnya.
-- Tepat satu langkah memuat "pesan" berupa kabar bohong yang khas saat bencana dari jenis "medsos" atau "keluarga", dengan "hoaks" berisi penjelasan ciri yang konkret (mis. tanpa sumber resmi, mengatasnamakan lembaga, huruf kapital dan tanda seru, ajakan menyebarkan) dan apa yang seharusnya diperiksa. Jawaban terbaik di langkah itu adalah memeriksa ke sumber resmi, bukan meneruskan atau mengikuti kabar itu. Langkah lain boleh memuat "pesan" biasa (resmi, warga, keluarga, radio) tanpa "hoaks".
-- "pesan.dari" adalah nama pengirim yang realistis, misalnya "Info BMKG", "BPBD Kota", "Grup RT 05", "Ibu", "Pak RW", "Radio lokal", atau "Diteruskan berkali-kali" untuk pesan berantai.
-- "pesan.jam" berformat HH.MM. Di luar "pesan.jam", JANGAN menulis angka apa pun kecuali yang disalin persis dari blok DATA dan nomor darurat 112, 110, 113, 115, 117, 119. Tanpa jam di "situasi".
-- Pesan resmi tidak mengutip peringatan nyata, tanpa tautan dan nomor telepon. Jangan menyebut nama tempat evakuasi, rumah sakit, atau jalan tertentu: tulis "jalur evakuasi resmi", "titik kumpul keluarga", atau "tempat pengungsian yang ditetapkan petugas".
+- Setiap "situasi" lengkap dan berdiri sendiri: bila ada peringatan, pengumuman petugas, atau kabar dari keluarga, tuliskan isinya langsung di "situasi" (tanpa kolom pesan atau notifikasi terpisah). Satu langkah boleh berisi kabar bohong yang khas saat bencana; jawaban terbaiknya memeriksa ke sumber resmi, bukan meneruskan atau mengikutinya.
+- JANGAN menulis angka apa pun kecuali yang disalin persis dari blok DATA dan nomor darurat 112, 110, 113, 115, 117, 119. Tanpa jam di "situasi".
+- Jangan mengutip peringatan resmi yang nyata, tautan, atau nomor telepon. Jangan menyebut nama tempat evakuasi, rumah sakit, atau jalan tertentu: tulis "jalur evakuasi resmi", "titik kumpul keluarga", atau "tempat pengungsian yang ditetapkan petugas".
 - Tanpa nama obat atau dosis. Jangan menjanjikan keselamatan.
 - "judul" maksimal 80 karakter, menarik dan spesifik; "ringkas" satu kalimat gambaran simulasi.
 
 BENTUK JSON:
-{"judul":"...","ringkas":"...","langkah":[{"situasi":"...","pesan":{"dari":"...","jenis":"resmi|keluarga|warga|radio|medsos","jam":"HH.MM","teks":"...","hoaks":"(hanya untuk kabar bohong)"},"pilihan":[{"teks":"...","nilai":2,"umpanBalik":"...","sourceIds":["id-passage"]},{"teks":"...","nilai":1,"umpanBalik":"...","sourceIds":["id-passage"]},{"teks":"...","nilai":0,"umpanBalik":"...","sourceIds":["id-passage"]}]}]}`;
+{"judul":"...","ringkas":"...","langkah":[{"situasi":"...","pilihan":[{"teks":"...","nilai":2,"umpanBalik":"...","sourceIds":["id-passage"]},{"teks":"...","nilai":1,"umpanBalik":"...","sourceIds":["id-passage"]},{"teks":"...","nilai":0,"umpanBalik":"...","sourceIds":["id-passage"]}]}]}`;

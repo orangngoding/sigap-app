@@ -45,13 +45,19 @@ t("rencana: hanya hazard terpilih + umum, actionId sesuai format", () => {
   assert.equal(new Set(r.tindakan.map((x) => x.actionId)).size, r.tindakan.length);
   assert.equal(r.mode, "cadangan");
 });
-t("batas per hazard per fase: 5 (<=2 bahaya) dan 3 (>2 bahaya)", () => {
+t("batas per hazard per fase: Saat 5/3, Sebelum 6/4, Sesudah 7/4 (<=2 / >2 bahaya); umum 6/8/8", () => {
   const hit = (cs: ReturnType<typeof pilihChunk>, h: string, f: string) => cs.filter((c) => c.hazard === h && c.phase === f).length;
   const dua = pilihChunk(SEMUA_CHUNK, { ...anon, bahaya: ["gempa", "banjir"] });
-  assert.ok(hit(dua, "gempa", "saat") <= 5 && hit(dua, "gempa", "saat") === 5);
+  assert.equal(hit(dua, "gempa", "saat"), 5);
+  assert.equal(hit(dua, "gempa", "sebelum"), 6);
+  assert.equal(hit(dua, "gempa", "sesudah"), 7);
+  assert.equal(hit(dua, "banjir", "sesudah"), 7);
   const tiga = pilihChunk(SEMUA_CHUNK, { ...anon, bahaya: ["gempa", "banjir", "longsor"] });
   assert.equal(hit(tiga, "gempa", "saat"), 3);
-  for (const f of ["sebelum", "saat", "sesudah"]) assert.ok(hit(tiga, "umum", f) <= 6);
+  assert.equal(hit(tiga, "gempa", "sesudah"), 4);
+  assert.ok(hit(tiga, "umum", "saat") <= 6);
+  for (const f of ["sebelum", "sesudah"]) assert.ok(hit(tiga, "umum", f) <= 8);
+  assert.ok(hit(tiga, "umum", "sesudah") > 5); // panduan pemulihan umum (dokumen, dukungan psikologis) ikut tampil
 });
 t("urutan dalam satu kelompok menurut skor kecocokan", () => {
   const cs = pilihChunk(SEMUA_CHUNK, { ...anon, bahaya: ["gempa"] }).filter((c) => c.hazard === "gempa" && c.phase === "saat");

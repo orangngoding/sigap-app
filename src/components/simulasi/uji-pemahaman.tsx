@@ -29,16 +29,6 @@ export function UjiPemahaman({ soal, judul, keterangan, onSelesai }: { soal: Soa
         <span className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground">Soal {i + 1} dari {soal.length}</span>
         {q.situasi}
       </h2>
-      {q.pesan.length > 0 && (
-        <ul className="mt-3 space-y-2">
-          {q.pesan.map((p) => (
-            <li key={`${p.dari}-${p.jam}`} className="rounded-2xl border border-border bg-muted/50 p-3 text-sm">
-              <span className="flex justify-between gap-2 text-xs font-semibold text-muted-foreground"><span>{p.dari}</span><span className="tabular-nums">{p.jam}</span></span>
-              <span className={`mt-1 block text-foreground ${p.jenis === "medsos" ? "italic" : ""}`}>{p.teks}</span>
-            </li>
-          ))}
-        </ul>
-      )}
       <fieldset className="mt-4">
         <legend className="sr-only">Pilih tindakan terbaik</legend>
         <div className="grid gap-2">

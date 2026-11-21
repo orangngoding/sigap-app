@@ -3,6 +3,7 @@ import type { ProfilRumahTangga } from "@/types";
 import type { ErrorMap, ProfilDraft } from "@/types/rencana";
 import { BATAS_PROFIL as B } from "@/lib/preparedness/constants";
 import { CheckboxGroup, NumberStepper, YaTidak } from "./form-kit";
+import { usePihak } from "./teks-pihak";
 
 const JENIS_DISABILITAS: ReadonlyArray<{ value: ProfilRumahTangga["jenisDisabilitas"][number]; label: string }> = [
   { value: "mobilitas", label: "Mobilitas" },
@@ -20,17 +21,18 @@ interface Props {
 
 export function LangkahKeluarga({ profil, ubah, errors }: Props) {
   const n = profil.jumlahAnggota;
+  const { s: sebut } = usePihak();
   return (
     <div className="space-y-8">
       <div>
-        <h2 className="text-lg font-bold text-foreground">Siapa saja yang tinggal bersama Anda?</h2>
+        <h2 className="text-lg font-bold text-foreground">{sebut("Siapa saja yang tinggal bersama Anda?")}</h2>
         <p className="mt-1 text-sm text-muted-foreground">
           Hanya jumlah orang yang dibutuhkan. Satu orang boleh masuk lebih dari satu kategori. Tidak perlu menulis nama atau nama obat.
         </p>
       </div>
 
       <NumberStepper
-        name="jumlahAnggota" label="Jumlah anggota keluarga (termasuk Anda)" value={n}
+        name="jumlahAnggota" label={sebut("Jumlah anggota keluarga (termasuk Anda)")} value={n}
         min={B.anggotaMin} max={B.anggotaMaks} onChange={(v) => ubah({ jumlahAnggota: v })} error={errors.jumlahAnggota}
       />
 
@@ -63,7 +65,7 @@ export function LangkahKeluarga({ profil, ubah, errors }: Props) {
       </div>
 
       <YaTidak
-        name="hewanPeliharaan" legend="Apakah Anda memelihara hewan?" bantuan="Memengaruhi isi tas siaga dan rencana."
+        name="hewanPeliharaan" legend={sebut("Apakah Anda memelihara hewan?")} bantuan="Memengaruhi isi tas siaga dan rencana."
         value={profil.hewanPeliharaan} onChange={(v) => ubah({ hewanPeliharaan: v })}
       />
     </div>

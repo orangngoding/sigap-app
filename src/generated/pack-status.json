@@ -1,18 +1,18 @@
 {
   "umum": {
-    "jumlah": 39,
+    "jumlah": 46,
     "minimum": 20
   },
   "banjir": {
-    "jumlah": 47,
+    "jumlah": 62,
     "minimum": 12
   },
   "longsor": {
-    "jumlah": 34,
+    "jumlah": 36,
     "minimum": 12
   },
   "gempa": {
-    "jumlah": 17,
+    "jumlah": 35,
     "minimum": 12
   },
   "cuaca_ekstrem": {
@@ -20,7 +20,7 @@
     "minimum": 12
   },
   "tsunami": {
-    "jumlah": 23,
+    "jumlah": 30,
     "minimum": 8
   },
   "kekeringan": {
@@ -32,7 +32,7 @@
     "minimum": 8
   },
   "gunung_api": {
-    "jumlah": 19,
+    "jumlah": 28,
     "minimum": 6
   },
   "gelombang_abrasi": {

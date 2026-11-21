@@ -6,6 +6,7 @@ import { kemarauTerjadi, TAHUN_PENGAMATAN } from "@/lib/iklim/pengamatan";
 import { useDataCard, TTL } from "@/hooks/use-data-card";
 import { snapGrid } from "@/lib/data/iklim-math";
 import { TombolTanya } from "@/components/tanya/tombol-tanya";
+import { TeksPihak } from "@/components/rencana/teks-pihak";
 
 interface Props {
   uji: HasilUji;
@@ -82,7 +83,7 @@ function SudahTerjadi({ lat, lon, proyeksiKini }: { lat: number; lon: number; pr
   }[k.banding];
   return (
     <div className="text-sm leading-relaxed">
-      <p><strong>Yang sudah terjadi:</strong> dalam {TAHUN_PENGAMATAN} tahun terakhir, kemarau terpanjang di wilayah Anda <strong>{k.hari} hari tanpa hujan</strong> ({k.tahun}).</p>
+      <p><strong>Yang sudah terjadi:</strong> <TeksPihak>dalam {TAHUN_PENGAMATAN} tahun terakhir, kemarau terpanjang di wilayah Anda</TeksPihak> <strong>{k.hari} hari tanpa hujan</strong> ({k.tahun}).</p>
       <details className="mt-1">
         <summary className="min-h-8 cursor-pointer font-semibold text-primary">Kenapa berbeda dari angka perkiraan?</summary>
         <p className="mt-1 text-muted-foreground">
@@ -99,14 +100,14 @@ export function RingkasanDampak({ uji, namaWilayah, lat, lon, dijawab, profil, t
   const pertanyaan = `Jelaskan dengan 3 kalimat sederhana, tanpa istilah teknis, untuk keluarga saya di ${namaWilayah} (${keluarga}). Hasil Siaga Iklim rumah kami: ${faktaUntukAsisten(uji)}.${tindakanUtama ? ` Tindakan pertama yang disarankan: ${tindakanUtama}.` : ""} Apa artinya bagi kami, dan apa satu hal terpenting yang bisa kami lakukan minggu ini?`;
   return (
     <section aria-labelledby="judul-dampak" className="rounded-3xl border border-border bg-surface p-6 sm:p-8">
-      <p className="text-sm font-semibold text-muted-foreground">{dijawab ? "Hasil untuk rumah Anda" : "Yang sudah terlihat dari data iklim wilayah Anda"}</p>
-      <h2 id="judul-dampak" className="mt-1 max-w-3xl text-2xl font-bold leading-snug tracking-tight text-balance sm:text-3xl">{judul}</h2>
-      <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted-foreground">{sub}</p>
+      <p className="text-sm font-semibold text-muted-foreground"><TeksPihak>{dijawab ? "Hasil untuk rumah Anda" : "Yang sudah terlihat dari data iklim wilayah Anda"}</TeksPihak></p>
+      <h2 id="judul-dampak" className="mt-1 max-w-3xl text-2xl font-bold leading-snug tracking-tight text-balance sm:text-3xl"><TeksPihak>{judul}</TeksPihak></h2>
+      <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted-foreground"><TeksPihak>{sub}</TeksPihak></p>
       <p className="mt-2 max-w-2xl text-sm text-muted-foreground">Ini perkiraan kasar, bukan ramalan pasti. Gunanya agar Anda bisa bersiap sedikit demi sedikit, bukan untuk khawatir.</p>
       <div className="mt-3 max-w-2xl"><SudahTerjadi lat={lat} lon={lon} proyeksiKini={uji.air.kemarauKini} /></div>
       <div className="mt-4"><TombolTanya label="Jelaskan untuk keluarga saya" pertanyaan={pertanyaan} className="text-sm" /></div>
       <p className="mt-5 max-w-2xl border-t border-border pt-4 text-sm text-muted-foreground">
-        {profil ? `Jumlah orang dan anggota rentan dari profil keluarga Anda di Rencana (${profil.anggota} orang${profil.rentan ? `, ${profil.rentan} anggota rentan` : ""}). ` : ""}
+        <TeksPihak>{profil ? `Jumlah orang dan anggota rentan dari profil keluarga Anda di Rencana (${profil.anggota} orang${profil.rentan ? `, ${profil.rentan} anggota rentan` : ""}). ` : ""}</TeksPihak>
         {dijawab ? "Hitungan dilakukan di perangkat ini." : "Angka air dan atap menyesuaikan setelah pertanyaan di atas dijawab."}{" "}
         <a
           href="#detail-rumah" className="font-semibold text-foreground underline underline-offset-2"

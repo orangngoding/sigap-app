@@ -17,7 +17,7 @@ export default function LatihanPage() {
       <KepalaHalaman
         label="Latihan Siaga · Simulator Bencana AI"
         judul="Rasakan bencananya sebelum terjadi, putuskan dengan tepat saat terjadi"
-        deskripsi="AI menyusun simulasi dari keadaan nyata Anda: anggota keluarga yang rentan, jenis rumah, kendaraan, risiko di lokasi, bahkan prakiraan cuaca minggu ini. Pilih tingkat dasar, menantang, atau bencana beruntun. Setiap keputusan dijelaskan akibatnya dari panduan resmi, dan pemahaman Anda diukur sebelum dan sesudah."
+        deskripsi="AI menyusun simulasi dari keadaan nyata Anda: anggota keluarga yang rentan, jenis rumah, kendaraan, risiko di lokasi, bahkan prakiraan cuaca minggu ini. Pilih tingkat dasar, menantang, atau bencana beruntun. Uji awal singkat menunjukkan hal yang perlu dipelajari, dan setiap keputusan dijelaskan akibatnya dari panduan resmi."
         foto={FOTO.evakuasi}
         lebar="max-w-3xl"
       />

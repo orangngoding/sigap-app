@@ -6,7 +6,7 @@ import type { Chunk } from "./schema";
  */
 
 const STOPWORD = new Set(
-  "yang dan di ke dari untuk pada dengan atau itu ini adalah akan agar saat bila jika juga serta dalam oleh ada tidak bisa dapat para sebagai apa bagaimana kapan mengapa siapa saya anda kita kami mereka lebih sudah belum masih harus perlu sebuah suatu karena sehingga namun tetapi lalu kemudian setelah sebelum sesudah".split(" "),
+  "yang dan di ke dari untuk pada dengan atau itu ini adalah akan agar saat bila jika juga serta dalam oleh ada tidak bisa dapat para sebagai apa bagaimana kapan mengapa siapa saya anda kita kami mereka lebih sudah belum masih harus perlu sebuah suatu karena sehingga namun tetapi lalu kemudian setelah sebelum sesudah terjadi dilakukan lakukan melakukan berada".split(" "),
 );
 
 /** Kata yang maknanya berubah bila dipotong ("bangunan" = gedung, "bangun" = membangun / terjaga). */

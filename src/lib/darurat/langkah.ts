@@ -90,11 +90,11 @@ const peta = (c: Chunk, keadaan?: string): LangkahDarurat => {
 };
 
 /**
- * Langkah Mode Darurat untuk satu bahaya (Blueprint 8.2): paling banyak 7 langkah "Saat kejadian" dan 3 langkah
- * "Sesudah kejadian", murni dari potongan KB (tanpa rencana, tanpa jaringan). Bahaya di KURASI memakai urutan dan
+ * Langkah Mode Darurat untuk satu bahaya (Blueprint 8.2): paling banyak 7 langkah "Saat kejadian" dan 5 langkah
+ * "Sesudah kejadian" (dilipat, dibuka setelah keadaan aman), murni dari potongan KB (tanpa rencana, tanpa jaringan). Bahaya di KURASI memakai urutan dan
  * kelompok keadaan dari tim; bahaya lain: potongan bertanda `darurat: true` didahulukan, lalu menurut prioritas.
  */
-export function langkahDaruratBahaya(kb: Chunk[], hazard: HazardId, maksSaat = 7, maksSesudah = 3): PaketDarurat {
+export function langkahDaruratBahaya(kb: Chunk[], hazard: HazardId, maksSaat = 7, maksSesudah = 5): PaketDarurat {
   const dari = (phase: Chunk["phase"]) => kb.filter((c) => c.hazard === hazard && c.phase === phase);
   const saat = dari("saat");
   const byId = new Map(saat.map((c) => [c.id, c]));

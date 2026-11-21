@@ -4,6 +4,7 @@ import type { Atap, GangguanAir, HasilUji, InputRumah, SumberAir, Tingkat } from
 import { rentangBulan } from "@/lib/iklim/keputusan";
 import { HARI_GANGGUAN_AIR, LITER_PER_ORANG_HARI, MIN_HARI_CADANGAN_AIR, NAMA_BULAN, teksKeDepan, teksPerubahanKemarau } from "@/lib/iklim/ketahanan";
 import { useIklimRumahStore } from "@/stores/iklim-rumah-store";
+import { TeksPihak, usePihak } from "@/components/rencana/teks-pihak";
 
 const fmt = (v: number, d = 1) => v.toLocaleString("id-ID", { maximumFractionDigits: d });
 /** Jumlah hari dibulatkan untuk pembaca awam; di bawah 1 hari ditulis apa adanya. */
@@ -35,13 +36,14 @@ const kolom = "min-h-11 w-full rounded-xl border border-border bg-surface px-3 t
 export function FormRumah({ input, dariProfil }: { input: InputRumah; dariProfil: boolean }) {
   const jawaban = useIklimRumahStore((s) => s.jawaban);
   const ubah = useIklimRumahStore((s) => s.ubah);
+  const { s: sebut } = usePihak();
 
-  const pilih = (aktif: boolean) =>
+  const pilih =(aktif: boolean) =>
     `min-h-11 flex-1 rounded-xl border px-4 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-primary ${aktif ? "border-primary bg-primary text-primary-foreground" : "border-border bg-surface text-foreground hover:bg-muted"}`;
 
   return (
-    <form className="space-y-5" onSubmit={(e) => e.preventDefault()} aria-label="Keadaan rumah Anda">
-      {dariProfil && <p className="rounded-xl bg-muted px-3 py-2 text-xs text-muted-foreground">Jumlah orang dan anggota rentan diambil dari profil keluarga Anda. Ubah di sini bila perlu.</p>}
+    <form className="space-y-5" onSubmit={(e) => e.preventDefault()} aria-label={sebut("Keadaan rumah Anda")}>
+      {dariProfil && <p className="rounded-xl bg-muted px-3 py-2 text-xs text-muted-foreground"><TeksPihak>Jumlah orang dan anggota rentan diambil dari profil keluarga Anda. Ubah di sini bila perlu.</TeksPihak></p>}
 
       <div>
         <label htmlFor="ir-anggota" className="block text-sm font-semibold">Berapa orang tinggal di rumah?</label>
@@ -118,12 +120,12 @@ export function PertanyaanRumah({ namaWilayah }: { namaWilayah: string }) {
   const sisa = [jawaban.gangguanAir, jawaban.litersTersimpan, jawaban.atap].filter((v) => v === null).length;
   return (
     <section aria-labelledby="judul-tanya-rumah" className="rounded-3xl border border-primary/30 bg-primary/5 p-5 sm:p-6">
-      <h2 id="judul-tanya-rumah" className="text-xl font-bold leading-snug">{sisa ? `Cek rumah Anda: ${sisa === 3 ? "3 pertanyaan" : `${sisa} pertanyaan lagi`}` : "Rumah Anda"}</h2>
+      <h2 id="judul-tanya-rumah" className="text-xl font-bold leading-snug"><TeksPihak>{sisa ? `Cek rumah Anda: ${sisa === 3 ? "3 pertanyaan" : `${sisa} pertanyaan lagi`}` : "Rumah Anda"}</TeksPihak></h2>
       <p className="mt-1 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-        {sisa
+        <TeksPihak>{sisa
           ? `Dalam 10-25 tahun, ${namaWilayah} diperkirakan makin panas dan kemarau bisa lebih panjang. Jawab pertanyaan ini agar SIGAP bisa menghitung apa yang paling perlu disiapkan rumah Anda.`
           : "Hasil di bawah sudah dihitung dari jawaban Anda. Ubah kapan saja; jawaban hanya tersimpan di perangkat ini."}
-      </p>
+      </TeksPihak></p>
       <div className="mt-4 grid gap-4 md:grid-cols-3">
         <div>
           <label htmlFor="cek-gangguan" className="text-sm font-semibold">Saat kemarau, berapa lama air di rumah biasanya sulit?</label>
@@ -140,7 +142,7 @@ export function PertanyaanRumah({ namaWilayah }: { namaWilayah: string }) {
           </select>
         </div>
         <div>
-          <label htmlFor="cek-atap" className="text-sm font-semibold">Atap rumah Anda dari apa?</label>
+          <label htmlFor="cek-atap" className="text-sm font-semibold"><TeksPihak>Atap rumah Anda dari apa?</TeksPihak></label>
           <select id="cek-atap" value={jawaban.atap ?? ""} onChange={(e) => ubah({ atap: e.target.value as Atap })} className={`${kolom} mt-1.5`}>
             {jawaban.atap === null && <option value="" disabled>Pilih jawaban</option>}
             {ATAP.map(([v, l]) => <option key={v} value={v}>{l}</option>)}
@@ -154,6 +156,7 @@ export function PertanyaanRumah({ namaWilayah }: { namaWilayah: string }) {
 /** Hasil uji: tiga baris (bukan kartu kembar) dengan status bertulisan, bukan hanya warna. */
 export function HasilUjiRumah({ u, input }: { u: HasilUji; input: InputRumah }) {
   const { air, panas, hujan } = u;
+  const { s: sebut } = usePihak();
   const maks = Math.max(air.hariCukup, air.perluDepan, air.perluKini, 1);
   const nama = [...NAMA_BULAN];
   const bulanIdx = (daftar: string[]) => daftar.map((n) => nama.indexOf(n as (typeof NAMA_BULAN)[number]));
@@ -166,7 +169,7 @@ export function HasilUjiRumah({ u, input }: { u: HasilUji; input: InputRumah }) 
           <Lencana t={air.tingkat} amanLabel="Cukup" />
         </div>
         <div className="space-y-1.5">
-          <Batang label="Air simpanan Anda" hari={air.hariCukup} maks={maks} warna="bg-primary" />
+          <Batang label={sebut("Air simpanan Anda")} hari={air.hariCukup} maks={maks} warna="bg-primary" />
           {air.dariPengguna ? (
             <>
               <Batang label="Air bisa sulit (sekarang)" hari={air.perluKini} maks={maks} warna="bg-amber-300" />
@@ -175,7 +178,7 @@ export function HasilUjiRumah({ u, input }: { u: HasilUji; input: InputRumah }) 
           ) : <Batang label="Cadangan dasar" hari={air.perluKini} maks={maks} warna="bg-amber-300" />}
         </div>
         <p className="text-sm leading-relaxed text-muted-foreground">
-          Keluarga {input.anggota} orang butuh sekitar {air.kebutuhanLiterPerHari} liter air sehari kalau berhemat ({LITER_PER_ORANG_HARI} liter per orang). Air simpanan Anda cukup untuk {fmt(air.hariCukup)} hari.{" "}
+          Keluarga {input.anggota} orang butuh sekitar {air.kebutuhanLiterPerHari} liter air sehari kalau berhemat ({LITER_PER_ORANG_HARI} liter per orang). {sebut(`Air simpanan Anda cukup untuk ${fmt(air.hariCukup)} hari.`)}{" "}
           {!air.dariPengguna
             ? <>Soal air belum dijawab, jadi kami hanya menghitung cadangan dasar {MIN_HARI_CADANGAN_AIR} hari yang sebaiknya dimiliki setiap rumah.</>
             : air.kurangKini > 0
@@ -187,8 +190,8 @@ export function HasilUjiRumah({ u, input }: { u: HasilUji; input: InputRumah }) 
         </p>
         <p className="text-xs leading-relaxed text-muted-foreground">
           {air.dariPengguna
-            ? <>Dari mana angka &ldquo;air bisa sulit&rdquo;? Dari jawaban Anda: &ldquo;beberapa hari&rdquo; kami hitung sekitar {HARI_GANGGUAN_AIR.hari} hari dan &ldquo;beberapa minggu&rdquo; sekitar {HARI_GANGGUAN_AIR.minggu} hari. Untuk 10-25 tahun lagi, angkanya kami sesuaikan dengan perkiraan kemarau: di tahun yang paling kering, wilayah ini bisa {teksPerubahanKemarau(air.kemarauKini, air.kemarauDepan)}.</>
-            : <>Di tahun yang paling kering, wilayah ini bisa {teksPerubahanKemarau(air.kemarauKini, air.kemarauDepan)}. Tetapi tidak hujan bukan berarti air di rumah langsung sulit, karena itu kami menanyakan pengalaman Anda.</>}
+            ? <>Dari mana angka &ldquo;air bisa sulit&rdquo;? {sebut("Dari jawaban Anda")}: &ldquo;beberapa hari&rdquo; kami hitung sekitar {HARI_GANGGUAN_AIR.hari} hari dan &ldquo;beberapa minggu&rdquo; sekitar {HARI_GANGGUAN_AIR.minggu} hari. Untuk 10-25 tahun lagi, angkanya kami sesuaikan dengan perkiraan kemarau: di tahun yang paling kering, wilayah ini bisa {teksPerubahanKemarau(air.kemarauKini, air.kemarauDepan)}.</>
+            : <>Di tahun yang paling kering, wilayah ini bisa {teksPerubahanKemarau(air.kemarauKini, air.kemarauDepan)}. Tetapi tidak hujan bukan berarti air di rumah langsung sulit, karena itu kami menanyakan {sebut("pengalaman Anda")}.</>}
         </p>
         {air.dariPengguna && air.kurangKini > 0 && (
             <div className="rounded-xl bg-muted px-4 py-3 text-sm leading-relaxed">
@@ -229,7 +232,7 @@ export function HasilUjiRumah({ u, input }: { u: HasilUji; input: InputRumah }) 
         </div>
         <p className="text-sm leading-relaxed text-muted-foreground">
           Hujan sangat deras (lebih dari {fmt(hujan.ambangMm, 0)} mm dalam sehari) turun sekitar <strong className="text-foreground">{hariBulat(hujan.hariKini)} hari</strong> dalam setahun; {teksKeDepan(hujan.hariKini, hujan.hariDepan)}.{hujan.bulanPuncak.length ? ` Paling sering terjadi ${rentangBulan(nama, bulanIdx(hujan.bulanPuncak))}.` : ""}
-          {hujan.rawanGenang && " Rumah Anda pernah tergenang, jadi siapkan sebelum bulan-bulan hujan."}
+          {hujan.rawanGenang && sebut(" Rumah Anda pernah tergenang, jadi siapkan sebelum bulan-bulan hujan.")}
         </p>
       </section>
     </div>

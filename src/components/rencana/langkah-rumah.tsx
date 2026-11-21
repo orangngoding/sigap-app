@@ -3,6 +3,7 @@ import { Plus, Trash2, Lock } from "lucide-react";
 import type { Bangunan, ErrorMap, ProfilDraft } from "@/types/rencana";
 import { BATAS_PROFIL as B } from "@/lib/preparedness/constants";
 import { RadioGroup, TextField, YaTidak, fieldId } from "./form-kit";
+import { TeksPihak } from "./teks-pihak";
 
 export const OPSI_BANGUNAN: ReadonlyArray<{ value: Bangunan; label: string }> = [
   { value: "rumah_1_lantai", label: "Rumah 1 lantai" },
@@ -32,7 +33,7 @@ export function LangkahRumah({ profil, ubah, errors }: Props) {
   return (
     <div className="space-y-8">
       <div>
-        <h2 className="text-lg font-bold text-foreground">Rumah dan kondisi Anda</h2>
+        <h2 className="text-lg font-bold text-foreground"><TeksPihak>Rumah dan kondisi Anda</TeksPihak></h2>
         <p className="mt-1 text-sm text-muted-foreground">Dipakai untuk saran evakuasi dan jumlah persediaan.</p>
       </div>
 
@@ -70,7 +71,7 @@ export function LangkahRumah({ profil, ubah, errors }: Props) {
       <section aria-labelledby="judul-lokal" className="space-y-6 rounded-2xl border border-border bg-muted/50 p-5">
         <div>
           <h3 id="judul-lokal" className="flex items-center gap-2 text-base font-bold text-foreground">
-            <Lock className="size-4 text-primary" aria-hidden="true" /> Hanya untuk Kartu Siaga Anda
+            <Lock className="size-4 text-primary" aria-hidden="true" /> <TeksPihak>Hanya untuk Kartu Siaga Anda</TeksPihak>
           </h3>
           <p className="mt-1 text-sm text-muted-foreground">
             Data di bawah ini tersimpan di perangkat ini saja dan tidak pernah dikirim ke server atau AI.

@@ -24,6 +24,8 @@ import { InfoMedis } from "./info-medis";
 import { useLokasiStore } from "@/stores/lokasi-store";
 import { KUNCI_RISIKO, bacaRisikoTersimpan } from "@/hooks/use-risiko-lokasi";
 import type { TingkatRisiko } from "@/lib/risiko/nilai";
+import { KUNCI_KELUARGA, profilMilikSaya } from "@/lib/keluarga/keluarga";
+import { bukaKeluarga } from "@/hooks/use-keluarga";
 
 const FOKUS = "focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-white";
 
@@ -76,6 +78,32 @@ function useRisikoMentah(): string | null {
   );
 }
 
+/** Profil keluarga pemilik ponsel bila yang sedang dibuka keluarga lain (null = pemilik ponsel sedang aktif). */
+function useProfilMilikSaya() {
+  const mentah = useSyncExternalStore(
+    (cb) => {
+      window.addEventListener("storage", cb);
+      return () => window.removeEventListener("storage", cb);
+    },
+    () => {
+      try {
+        return localStorage.getItem(KUNCI_KELUARGA);
+      } catch {
+        return null;
+      }
+    },
+    () => null,
+  );
+  return useMemo(() => {
+    if (!mentah) return null;
+    try {
+      return profilMilikSaya(localStorage);
+    } catch {
+      return null;
+    }
+  }, [mentah]);
+}
+
 /** Apakah Mode Darurat sudah tersimpan di perangkat untuk dibuka tanpa internet (null = belum diperiksa). */
 function useSiapOffline(): boolean | null {
   const [siap, setSiap] = useState<boolean | null>(null);
@@ -98,7 +126,12 @@ export function DaruratView() {
   const siap = useHydrate(useProfilStore, useLokasiStore);
   const draft = useProfilStore((s) => s.profil);
   const lokasi = useLokasiStore((s) => s.lokasi);
-  const risiko = bacaRisikoTersimpan(useRisikoMentah(), siap ? lokasi : null);
+  // Bila yang sedang dibuka keluarga lain (mis. warga yang didata RT), Mode Darurat tetap memakai keluarga pemilik
+  // ponsel: kontak, titik kumpul, DAN urutan bahaya dari profil serta risiko lokasi pemilik ponsel.
+  const milikSaya = useProfilMilikSaya();
+  const risikoMentah = useRisikoMentah();
+  const risiko = milikSaya ? bacaRisikoTersimpan(milikSaya.risikoMentah, milikSaya.titik) : bacaRisikoTersimpan(risikoMentah, siap ? lokasi : null);
+  const bahayaProfil = milikSaya ? (milikSaya.bahaya as HazardId[]) : draft.bahaya;
   const siapOffline = useSiapOffline();
   const profil = useMemo(() => finalisasiProfil(draft), [draft]);
   const online = useOnline();
@@ -109,18 +142,19 @@ export function DaruratView() {
   // Bahaya berisiko tinggi di lokasi (Profil Risiko tersimpan) lalu bahaya pilihan profil tampil lebih dulu.
   const tingkatRisiko = useMemo(() => new Map((risiko?.nilai ?? []).map((n) => [n.id, n.tingkat])), [risiko]);
   const urutan = useMemo(() => {
-    const milik = new Set<HazardId>(draft.bahaya);
+    const milik = new Set<HazardId>(bahayaProfil);
     const bobot = (id: HazardId) => BOBOT_RISIKO[tingkatRisiko.get(id) ?? "belum-diketahui"] + (milik.has(id) ? 1 : 0);
     return HAZARDS.filter((h) => isHazardAktif(h.id)).sort((a, b) => bobot(b.id) - bobot(a.id));
-  }, [draft.bahaya, tingkatRisiko]);
+  }, [bahayaProfil, tingkatRisiko]);
   const aktif = dipilih ?? urutan[0]?.id ?? null;
   const paket = useMemo(() => (aktif ? langkahDaruratBahaya(SEMUA_CHUNK, aktif) : null), [aktif]);
   const labelAktif = HAZARDS.find((h) => h.id === aktif)?.label ?? "";
 
   // Nomor penting dan langkah tidak menunggu penyimpanan lokal: keduanya sudah ada di HTML sehingga tetap terbaca
   // walau JavaScript belum termuat saat offline. Hanya blok "Keluarga saya" yang menunggu data perangkat.
-  const kerabat = profil?.kontakDarurat ?? draft.kontakDarurat;
-  const titik = (profil?.titikKumpul ?? draft.titikKumpul)?.trim();
+  const kerabat = milikSaya ? milikSaya.kontakDarurat : profil?.kontakDarurat ?? draft.kontakDarurat;
+  const titik = milikSaya ? milikSaya.titikKumpul : (profil?.titikKumpul ?? draft.titikKumpul)?.trim();
+  const jumlahOrang = milikSaya ? milikSaya.jumlahAnggota : profil?.jumlahAnggota;
   const [utama, ...lain] = kontak.kontak;
 
   return (
@@ -268,7 +302,7 @@ export function DaruratView() {
 
         <SituasiKritis onKabari={() => document.getElementById("d-kabari")?.scrollIntoView({ behavior: "smooth", block: "start" })} />
 
-        <KabariKeluarga kontak={siap ? kerabat : []} titikKumpul={siap ? titik : undefined} jumlahOrang={siap ? profil?.jumlahAnggota : undefined} />
+        <KabariKeluarga kontak={siap ? kerabat : []} titikKumpul={siap ? titik : undefined} jumlahOrang={siap ? jumlahOrang : undefined} />
 
         <AlatDarurat />
 
@@ -277,6 +311,7 @@ export function DaruratView() {
         {/* Blok 4: keluarga saya */}
         <section aria-labelledby="d-keluarga" className="mt-8 rounded-3xl border-2 border-white/80 p-5 sm:p-6">
           <h2 id="d-keluarga" className="text-2xl font-bold">Keluarga saya</h2>
+          {milikSaya && <p className="mt-1 text-base text-white/80">Menampilkan {milikSaya.nama}, bukan keluarga lain yang sedang Anda dampingi.</p>}
           <div className="mt-3 flex items-start gap-3 rounded-2xl bg-white/10 p-4">
             <MapPin className="mt-0.5 size-6 shrink-0 text-yellow-300" aria-hidden="true" />
             {!siap ? <p>Memuat data keluarga dari perangkat ini…</p> : titik ? <p><span className="block text-base text-white/80">Titik kumpul</span><strong className="text-2xl">{titik}</strong></p> : <p>Titik kumpul belum diisi.</p>}
@@ -294,8 +329,18 @@ export function DaruratView() {
             </ul>
           )}
           <p className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-base">
-            <Link href="/rencana/kartu" className="inline-flex min-h-14 items-center underline underline-offset-4">Buka Kartu Siaga</Link>
-            <Link href="/rencana/profil" className="inline-flex min-h-14 items-center underline underline-offset-4">Isi atau ubah profil</Link>
+            {milikSaya ? (
+              // Tautan biasa akan membuka data keluarga lain yang sedang aktif: kembali dulu ke keluarga pemilik ponsel.
+              <>
+                <button type="button" onClick={() => bukaKeluarga(milikSaya.id, "/rencana/kartu")} className="inline-flex min-h-14 items-center underline underline-offset-4">Buka Kartu Siaga</button>
+                <button type="button" onClick={() => bukaKeluarga(milikSaya.id, "/rencana/profil")} className="inline-flex min-h-14 items-center underline underline-offset-4">Isi atau ubah profil</button>
+              </>
+            ) : (
+              <>
+                <Link href="/rencana/kartu" className="inline-flex min-h-14 items-center underline underline-offset-4">Buka Kartu Siaga</Link>
+                <Link href="/rencana/profil" className="inline-flex min-h-14 items-center underline underline-offset-4">Isi atau ubah profil</Link>
+              </>
+            )}
           </p>
         </section>
 

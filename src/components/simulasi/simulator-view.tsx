@@ -1,6 +1,7 @@
 "use client";
-// Simulator Bencana AI: uji awal (soal tim) -> AI menyusun simulasi untuk keluarga, rumah, lokasi, dan konsep yang
-// keliru di uji awal -> simulasi dimainkan mesin Latihan -> uji akhir (soal sama, urutan berbeda) -> rapor dampak.
+// Simulator Bencana AI: uji awal (5 soal acak dari bank soal tim) -> AI menyusun simulasi untuk keluarga, rumah,
+// lokasi, dan konsep yang keliru di uji awal -> simulasi dimainkan mesin Latihan -> rapor (kunci jawaban uji awal,
+// nilai keputusan simulasi, dan perkembangan antar-sesi).
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { motion } from "motion/react";
@@ -10,11 +11,10 @@ import type { HazardId } from "@/types";
 import type { HasilSimulasi } from "@/lib/ai/simulasi";
 import type { HasilLatihan } from "@/lib/latihan/mesin";
 import { skenarioUntuk } from "@/lib/latihan/mesin";
-import { PESAN } from "@/lib/latihan/pesan";
 import { SKENARIO } from "@/lib/latihan/skenario";
 import { HAZARD_BY_ID } from "@/lib/hazards/hazards";
 import { IKON_BAHAYA } from "@/lib/hazards/ikon";
-import { fokusDari, nilaiUji, peningkatan, soalUjiGabungan, type HasilUji, type SoalUji } from "@/lib/simulasi/uji";
+import { JUMLAH_SOAL, fokusDari, nilaiUji, soalUjiGabungan, type HasilUji, type SoalUji } from "@/lib/simulasi/uji";
 import { LABEL_TINGKAT, TINGKAT_SIMULASI, bencanaKedua, type TingkatSimulasi } from "@/lib/simulasi/tingkat";
 import { finalisasiProfil } from "@/lib/preparedness/profil-schema";
 import { anonimkan } from "@/lib/rencana/hash";
@@ -31,27 +31,26 @@ import { LatihanMain } from "@/components/latihan/latihan-main";
 import { LencanaTingkat } from "@/components/risiko/profil-risiko";
 import { UjiPemahaman } from "./uji-pemahaman";
 
-type Tahap = "siapkan" | "uji-awal" | "menyusun" | "main" | "uji-akhir" | "rapor";
+type Tahap = "siapkan" | "uji-awal" | "menyusun" | "main" | "rapor";
 const TOMBOL = "inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-primary px-6 text-sm font-semibold text-primary-foreground hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:opacity-50";
 const TOMBOL_2 = "inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-border bg-surface px-5 text-sm font-semibold hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
 const BAHAYA_SIM = SKENARIO.map((s) => s.hazard);
 const LANGKAH: Array<{ id: Tahap; label: string }> = [
   { id: "uji-awal", label: "Uji awal" },
   { id: "main", label: "Simulasi AI" },
-  { id: "uji-akhir", label: "Uji akhir" },
   { id: "rapor", label: "Rapor" },
 ];
 
 /** Cadangan di klien bila permintaan gagal (offline, batas): skenario bank tim untuk bahaya ini. */
 function cadanganLokal(h: HazardId): HasilSimulasi {
   const s = skenarioUntuk(h)!;
-  return { mode: "cadangan", dibuatPada: new Date().toISOString(), skenario: s, pesan: Object.fromEntries(s.langkah.flatMap((l) => (PESAN[l.id] ? [[l.id, PESAN[l.id]]] : []))), personalisasi: [], meta: { cache: false, durasiMs: 0, alasanCadangan: "jaringan" } };
+  return { mode: "cadangan", dibuatPada: new Date().toISOString(), skenario: s, personalisasi: [], meta: { cache: false, durasiMs: 0, alasanCadangan: "jaringan" } };
 }
 
 function Langkah({ tahap }: { tahap: Tahap }) {
   const idx = LANGKAH.findIndex((l) => l.id === tahap || (tahap === "menyusun" && l.id === "main"));
   return (
-    <ol className="mb-6 grid grid-cols-4 gap-2 text-center text-xs font-semibold" aria-label="Tahapan simulator">
+    <ol className="mb-6 grid grid-cols-3 gap-2 text-center text-xs font-semibold" aria-label="Tahapan simulator">
       {LANGKAH.map((l, i) => (
         <li key={l.id} aria-current={i === idx ? "step" : undefined} className={`rounded-full px-2 py-1.5 ${i < idx ? "bg-primary/15 text-primary" : i === idx ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"}`}>
           {l.label}
@@ -76,7 +75,7 @@ export function SimulatorView() {
   const profil = useMemo(() => finalisasiProfil(draft), [draft]);
   const risikoQ = useRisikoLokasi(siap ? lokasi : null);
   const risiko = useMemo(() => ringkasRisiko(risikoQ.data?.nilai), [risikoQ.data]);
-  const { catat, naikkanVarian, varian } = useSimulasiStore();
+  const { catat, naikkanVarian, varian, ingatSoal } = useSimulasiStore();
   const riwayat = useSimulasiStore((s) => s.riwayat);
   const dampak = ringkasDampak(riwayat);
   const dariUrl = useSearchParams().get("bahaya");
@@ -95,12 +94,20 @@ export function SimulatorView() {
   const kedua = tingkatSim === "beruntun" ? bencanaKedua(hazard, petaRisiko) : null;
   const [tahap, setTahap] = useState<Tahap>("siapkan");
   const [awal, setAwal] = useState<HasilUji | null>(null);
-  const [akhir, setAkhir] = useState<HasilUji | null>(null);
   const [sim, setSim] = useState<HasilSimulasi | null>(null);
   const [hasilSim, setHasilSim] = useState<HasilLatihan | null>(null);
   const [pesanKe, setPesanKe] = useState(0);
-  const soalAwal = useMemo(() => soalUjiGabungan(hazard, kedua, "awal"), [hazard, kedua]);
-  const soalAkhir = useMemo(() => soalUjiGabungan(hazard, kedua, "akhir"), [hazard, kedua]);
+  const [soalAwal, setSoalAwal] = useState<SoalUji[]>([]);
+
+  /** Ambil 5 soal acak baru, mendahulukan soal yang belum muncul di sesi-sesi terakhir, lalu mulai uji awal. */
+  const mulaiUji = (h: HazardId = hazard, k: HazardId | null = kedua) => {
+    const terakhir = useSimulasiStore.getState().soalTerakhir;
+    const soal = soalUjiGabungan(h, k, { hindari: [...(terakhir[h] ?? []), ...(k ? terakhir[k] ?? [] : [])] });
+    setSoalAwal(soal);
+    ingatSoal(h, soal.map((s) => s.id));
+    if (k) ingatSoal(k, soal.map((s) => s.id));
+    setTahap("uji-awal");
+  };
 
   const susun = async (hasilAwal: HasilUji) => {
     if (!lokasi || !profil) return;
@@ -139,10 +146,12 @@ export function SimulatorView() {
     naikkanVarian(hazard);
     if (o.tingkat) setTingkatSim(o.tingkat);
     setAwal(null);
-    setAkhir(null);
     setSim(null);
     setHasilSim(null);
-    setTahap(o.langsung ? "uji-awal" : "siapkan");
+    if (o.langsung) {
+      const t = o.tingkat ?? tingkatSim;
+      mulaiUji(hazard, t === "beruntun" ? bencanaKedua(hazard, petaRisiko) : null);
+    } else setTahap("siapkan");
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -200,7 +209,7 @@ export function SimulatorView() {
                 );
               })}
             </div>
-            {kedua && <p className="mt-3 rounded-xl bg-muted px-3 py-2 text-sm"><strong>{label}</strong> akan disusul <strong>{HAZARD_BY_ID[kedua].label.toLowerCase()}</strong>, sesuai risiko di lokasi Anda. Uji awal dan akhir mencakup keduanya.</p>}
+            {kedua && <p className="mt-3 rounded-xl bg-muted px-3 py-2 text-sm"><strong>{label}</strong> akan disusul <strong>{HAZARD_BY_ID[kedua].label.toLowerCase()}</strong>, sesuai risiko di lokasi Anda. Uji awal mencakup keduanya.</p>}
             <p className="mt-3 flex items-start gap-2 text-sm text-muted-foreground"><CloudSun className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden="true" /> Bila prakiraan minggu ini di lokasi Anda relevan (hujan lebat, hari kering, El Niño), simulasi dibuka dari kondisi nyata itu.</p>
           </div>
 
@@ -208,10 +217,10 @@ export function SimulatorView() {
             <h3 className="flex items-center gap-2 font-bold"><BrainCircuit className="size-5 text-primary" aria-hidden="true" /> Cara kerja simulator</h3>
             <ol className="mt-3 grid gap-3 text-sm sm:grid-cols-4">
               {[
-                ["Uji awal", `${soalAwal.length} soal singkat tanpa kunci jawaban, untuk mengukur pemahaman Anda sekarang.`],
+                ["Uji awal", `${JUMLAH_SOAL} soal acak yang berganti tiap sesi, untuk melihat pemahaman Anda sekarang.`],
                 ["AI menyusun", "Skenario baru untuk keluarga, rumah, dan lokasi Anda, menyasar hal yang keliru di uji awal."],
-                ["Simulasi", "Keputusan berwaktu lewat notifikasi; setiap pilihan dijelaskan akibat dan dasarnya."],
-                ["Uji akhir dan rapor", "Soal yang sama dengan urutan berbeda: peningkatan pemahaman Anda terukur."],
+                ["Simulasi", "Satu situasi per layar dengan tiga pilihan; setiap pilihan dijelaskan akibat dan dasarnya."],
+                ["Rapor", "Kunci jawaban uji awal, nilai keputusan simulasi, dan perkembangan Anda dari sesi ke sesi."],
               ].map(([j, t], i) => (
                 <li key={j} className="rounded-2xl bg-surface p-3">
                   <span className="flex size-7 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">{i + 1}</span>
@@ -220,16 +229,16 @@ export function SimulatorView() {
                 </li>
               ))}
             </ol>
-            <button type="button" onClick={() => setTahap("uji-awal")} className={`${TOMBOL} mt-5`}>
+            <button type="button" onClick={() => mulaiUji()} className={`${TOMBOL} mt-5`}>
               Mulai simulasi {label.toLowerCase()} <ArrowRight className="size-4" aria-hidden="true" />
             </button>
-            <p className="mt-2 text-xs text-muted-foreground">Sekitar 6 menit. Yang dikirim ke AI: atribut keluarga tanpa nama atau kontak, nama wilayah, fakta risiko, dan prakiraan; koordinat hanya dipakai server untuk mengambil prakiraan dan tidak diteruskan ke AI.</p>
+            <p className="mt-2 text-xs text-muted-foreground">Sekitar 5 menit. Yang dikirim ke AI: atribut keluarga tanpa nama atau kontak, nama wilayah, fakta risiko, dan prakiraan; koordinat hanya dipakai server untuk mengambil prakiraan dan tidak diteruskan ke AI.</p>
           </div>
 
           {dampak && (
             <p className="flex items-center gap-2 rounded-2xl border border-border bg-surface px-4 py-3 text-sm">
               <TrendingUp className="size-5 shrink-0 text-primary" aria-hidden="true" />
-              <span><strong>Dampak terukur Anda:</strong> rata-rata pemahaman {dampak.awal}% sebelum dan {dampak.akhir}% sesudah, dari {dampak.sesi} simulasi.</span>
+              <span><strong>Riwayat Anda:</strong> rata-rata uji awal {dampak.awal}% dan keputusan simulasi {dampak.simulasi}%, dari {dampak.sesi} simulasi.</span>
             </p>
           )}
         </section>
@@ -268,30 +277,22 @@ export function SimulatorView() {
             key={sim.skenario.id}
             id={sim.skenario.id}
             skenario={sim.skenario}
-            pesan={sim.pesan}
-            onSelesai={(h) => setHasilSim(h)}
+            onSelesai={(h) => {
+              setHasilSim(h);
+              if (awal) catat({ waktu: new Date().toISOString(), hazard, awal: awal.persen, simulasi: h.persen, mode: sim.mode });
+            }}
             sesudah={
               <div className="rounded-3xl border border-primary/30 bg-primary/5 p-5 text-center">
-                <p className="font-semibold">Satu langkah lagi: uji akhir untuk mengukur peningkatan pemahaman Anda.</p>
-                <button type="button" onClick={() => setTahap("uji-akhir")} className={`${TOMBOL} mt-3`}>Lanjut ke uji akhir <ArrowRight className="size-4" aria-hidden="true" /></button>
+                <p className="font-semibold">Simulasi selesai. Lihat rapor dan kunci jawaban uji awal Anda.</p>
+                <button type="button" onClick={() => { setTahap("rapor"); window.scrollTo({ top: 0, behavior: "smooth" }); }} className={`${TOMBOL} mt-3`}>Lihat rapor <ArrowRight className="size-4" aria-hidden="true" /></button>
               </div>
             }
           />
         </div>
       )}
 
-      {tahap === "uji-akhir" && (
-        <UjiPemahaman key="akhir" soal={soalAkhir} judul={`Uji akhir · ${label}`} keterangan="Soal yang sama dengan uji awal, urutan pilihan berbeda."
-          onSelesai={(j) => {
-            const h = nilaiUji(soalAkhir, j);
-            setAkhir(h);
-            if (awal) catat({ waktu: new Date().toISOString(), hazard, awal: awal.persen, akhir: h.persen, simulasi: hasilSim?.persen ?? 0, mode: sim?.mode ?? "cadangan" });
-            setTahap("rapor");
-          }} />
-      )}
-
-      {tahap === "rapor" && awal && akhir && (
-        <Rapor hazard={hazard} tingkat={tingkatSim} awal={awal} akhir={akhir} simulasi={hasilSim} soal={soalAkhir} onUlang={ulang} />
+      {tahap === "rapor" && awal && (
+        <Rapor hazard={hazard} tingkat={tingkatSim} awal={awal} simulasi={hasilSim} soal={soalAwal} onUlang={ulang} />
       )}
     </div>
   );
@@ -308,18 +309,16 @@ function Batang({ label, nilai, warna }: { label: string; nilai: number; warna: 
   );
 }
 
-function Rapor({ hazard, tingkat, awal, akhir, simulasi, soal, onUlang }: { hazard: HazardId; tingkat: TingkatSimulasi; awal: HasilUji; akhir: HasilUji; simulasi: HasilLatihan | null; soal: SoalUji[]; onUlang: (o: { langsung: boolean; tingkat?: TingkatSimulasi }) => void }) {
+function Rapor({ hazard, tingkat, awal, simulasi, soal, onUlang }: { hazard: HazardId; tingkat: TingkatSimulasi; awal: HasilUji; simulasi: HasilLatihan | null; soal: SoalUji[]; onUlang: (o: { langsung: boolean; tingkat?: TingkatSimulasi }) => void }) {
   const berikut: TingkatSimulasi | null = tingkat === "dasar" ? "menantang" : tingkat === "menantang" ? "beruntun" : null;
   const riwayat = useSimulasiStore((s) => s.riwayat);
-  const naik = peningkatan(awal.persen, akhir.persen);
-  const belum = soal.filter((q) => akhir.salah.includes(q.id));
-  const kalimat = {
-    tinggi: "Peningkatan tinggi. Simulasi berhasil memperbaiki pemahaman Anda.",
-    sedang: "Peningkatan sedang. Ulangi simulasi untuk memantapkan hal yang masih keliru.",
-    rendah: "Peningkatan kecil. Baca kembali panduan di bawah, lalu coba skenario baru.",
-    turun: "Nilai turun. Ini wajar saat situasinya terasa baru; ulangi untuk memantapkan.",
-    sempurna: "Sempurna sejak awal dan tetap sempurna. Coba bahaya lain atau skenario yang lebih sulit.",
-  }[naik.kategori];
+  const belum = soal.filter((q) => awal.salah.includes(q.id));
+  const nilaiSim = simulasi?.persen ?? null;
+  const kalimat =
+    nilaiSim === null ? "Simulasi belum selesai."
+    : nilaiSim >= 80 ? "Keputusan Anda dalam simulasi sudah sangat baik."
+    : nilaiSim >= 60 ? "Keputusan Anda cukup baik. Ulangi dengan skenario baru untuk memantapkan."
+    : "Masih banyak keputusan yang perlu diperbaiki. Baca kunci jawaban di bawah, lalu coba skenario baru.";
   const sesiIni = riwayat.filter((r) => r.hazard === hazard);
 
   return (
@@ -327,33 +326,32 @@ function Rapor({ hazard, tingkat, awal, akhir, simulasi, soal, onUlang }: { haza
       <div className="rounded-3xl border border-border bg-surface p-5 sm:p-6">
         <h2 id="judul-rapor" className="flex items-center gap-2 text-xl font-bold"><TrendingUp className="size-6 text-primary" aria-hidden="true" /> Rapor simulasi {HAZARD_BY_ID[hazard].label.toLowerCase()}</h2>
         <div className="mt-5 space-y-3">
-          <Batang label="Pemahaman sebelum simulasi" nilai={awal.persen} warna="bg-muted-foreground/50" />
-          <Batang label="Pemahaman sesudah simulasi" nilai={akhir.persen} warna="bg-primary" />
-          {simulasi && <Batang label="Keputusan selama simulasi" nilai={simulasi.persen} warna="bg-amber-500" />}
+          <Batang label={`Uji awal (${awal.benar} dari ${awal.total} tepat)`} nilai={awal.persen} warna="bg-muted-foreground/50" />
+          {simulasi && <Batang label="Keputusan selama simulasi" nilai={simulasi.persen} warna="bg-primary" />}
         </div>
-        <p className="mt-5 text-3xl font-extrabold tabular-nums">{naik.selisih > 0 ? "+" : ""}{naik.selisih} poin</p>
-        <p className="text-sm text-muted-foreground">{kalimat}{naik.g !== null ? ` (normalized gain ${String(naik.g).replace(".", ",")})` : ""}</p>
+        <p className="mt-4 text-sm text-muted-foreground">{kalimat}</p>
       </div>
 
       {belum.length > 0 ? (
         <div className="rounded-3xl border border-warning-foreground/30 bg-warning p-5">
-          <h3 className="flex items-center gap-2 font-bold"><ClipboardList className="size-5" aria-hidden="true" /> Masih perlu dipahami</h3>
-          <ul className="mt-2 space-y-2 text-sm">
+          <h3 className="flex items-center gap-2 font-bold"><ClipboardList className="size-5" aria-hidden="true" /> Kunci jawaban uji awal yang belum tepat</h3>
+          <ul className="mt-2 space-y-3 text-sm">
             {belum.map((q) => <li key={q.id}><span className="text-muted-foreground">{q.situasi}</span><br /><strong>Tindakan tepat: {q.teksTerbaik}</strong></li>)}
           </ul>
         </div>
       ) : (
-        <p className="flex items-center gap-2 rounded-3xl border border-success-foreground/30 bg-success p-5 font-semibold text-success-foreground"><CheckCircle2 className="size-5" aria-hidden="true" /> Semua soal uji akhir dijawab dengan tindakan yang tepat.</p>
+        <p className="flex items-center gap-2 rounded-3xl border border-success-foreground/30 bg-success p-5 font-semibold text-success-foreground"><CheckCircle2 className="size-5" aria-hidden="true" /> Semua soal uji awal dijawab dengan tindakan yang tepat.</p>
       )}
 
       {sesiIni.length > 1 && (
         <div className="rounded-3xl border border-border bg-surface p-5">
           <h3 className="font-bold">Perkembangan Anda ({sesiIni.length} simulasi {HAZARD_BY_ID[hazard].label.toLowerCase()})</h3>
-          <ol className="mt-3 flex items-end gap-2" aria-label="Nilai uji akhir per simulasi">
+          <p className="mt-0.5 text-xs text-muted-foreground">Nilai uji awal tiap sesi. Soalnya berganti, jadi nilai yang naik menandakan pemahaman yang makin luas.</p>
+          <ol className="mt-3 flex items-end gap-2" aria-label="Nilai uji awal per simulasi">
             {sesiIni.slice(-8).map((r) => (
               <li key={r.waktu} className="flex flex-1 flex-col items-center gap-1 text-xs">
-                <span className="w-full rounded-t-md bg-primary" style={{ height: `${Math.max(6, r.akhir) * 0.8}px` }} aria-hidden="true" />
-                <span className="tabular-nums">{r.akhir}%</span>
+                <span className="w-full rounded-t-md bg-primary" style={{ height: `${Math.max(6, r.awal) * 0.8}px` }} aria-hidden="true" />
+                <span className="tabular-nums">{r.awal}%</span>
               </li>
             ))}
           </ol>
@@ -363,7 +361,7 @@ function Rapor({ hazard, tingkat, awal, akhir, simulasi, soal, onUlang }: { haza
       <div className="rounded-3xl border border-border bg-surface p-5">
         <h3 className="font-bold">Lanjutkan berlatih</h3>
         <p className="mt-1 text-sm text-muted-foreground">
-          {belum.length > 0 ? "Ulangi dengan skenario baru; AI akan kembali menyasar hal yang masih keliru." : berikut ? `Pemahaman Anda baik. Coba tingkat ${LABEL_TINGKAT[berikut].judul.toLowerCase()} agar lebih siap menghadapi keadaan yang lebih sulit.` : "Coba bencana lain yang berisiko di lokasi Anda."}
+          {belum.length > 0 ? "Ulangi dengan skenario baru dan soal uji yang berbeda; AI akan menyasar hal yang masih keliru." : berikut ? `Pemahaman Anda baik. Coba tingkat ${LABEL_TINGKAT[berikut].judul.toLowerCase()} agar lebih siap menghadapi keadaan yang lebih sulit.` : "Coba bencana lain yang berisiko di lokasi Anda."}
         </p>
         <div className="mt-3 flex flex-wrap gap-3">
           <button type="button" onClick={() => onUlang({ langsung: true })} className={TOMBOL}><RotateCcw className="size-4" aria-hidden="true" /> Skenario baru, bencana sama</button>

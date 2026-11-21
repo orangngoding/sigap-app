@@ -1,17 +1,17 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { useAngkaHalus } from "@/hooks/use-angka-halus";
 import {
-  ArrowRight, BadgeAlert, CheckCircle2, ChevronDown, CircleAlert, ClipboardCheck, ExternalLink, Forward, HeartPulse, Megaphone, Radio,
-  RotateCcw, Share2, ShieldCheck, Timer, Trophy, Users, Volume2, VolumeX, XCircle, type LucideIcon,
+  ArrowRight, CheckCircle2, ChevronDown, CircleAlert, ClipboardCheck, ExternalLink, HeartPulse,
+  RotateCcw, Share2, Timer, Trophy, Volume2, VolumeX, XCircle,
 } from "lucide-react";
 import { CHUNK_BY_ID } from "@/lib/kb/data";
 import { HAZARD_BY_ID } from "@/lib/hazards/hazards";
-import { AMBANG_LULUS, cariLangkah, hitungHasil, hoaksDikenali, kunciLatihan, langkahSesudah, pelajaranDari, teksBagikanLatihan, type HasilLatihan, type Jawaban } from "@/lib/latihan/mesin";
+import { AMBANG_LULUS, cariLangkah, hitungHasil, kunciLatihan, langkahSesudah, pelajaranDari, teksBagikanLatihan, type HasilLatihan, type Jawaban } from "@/lib/latihan/mesin";
 import { SKENARIO_BY_ID, type Pilihan, type Skenario } from "@/lib/latihan/skenario";
-import { AWAL_KESELAMATAN, DETIK_KEPUTUSAN, PESAN, meterKeselamatan, type JenisPesan, type Pesan } from "@/lib/latihan/pesan";
+import { AWAL_KESELAMATAN, DETIK_KEPUTUSAN, meterKeselamatan } from "@/lib/latihan/keselamatan";
 import { useBacakan } from "@/hooks/use-suara";
 import { useHydrate } from "@/hooks/use-hydrate";
 import { useLatihanStore } from "@/stores/latihan-store";
@@ -28,14 +28,6 @@ const NADA: Record<Pilihan["nilai"], { cls: string; Ikon: typeof CheckCircle2; l
   0: { cls: "border-danger-foreground/40 bg-danger text-danger-foreground", Ikon: XCircle, label: "Berbahaya" },
 };
 
-const SUMBER_PESAN: Record<JenisPesan, { Ikon: LucideIcon; cls: string; label: string }> = {
-  resmi: { Ikon: ShieldCheck, cls: "border-emerald-500/40 bg-emerald-50 dark:bg-emerald-400/10", label: "Sumber resmi" },
-  warga: { Ikon: Megaphone, cls: "border-sky-500/30 bg-sky-50 dark:bg-sky-400/10", label: "Pengumuman warga" },
-  keluarga: { Ikon: Users, cls: "border-border bg-surface", label: "Keluarga" },
-  radio: { Ikon: Radio, cls: "border-violet-500/30 bg-violet-50 dark:bg-violet-400/10", label: "Radio" },
-  medsos: { Ikon: Forward, cls: "border-border bg-muted/60", label: "Pesan diteruskan" },
-};
-
 /** Status keselamatan keluarga untuk meter dan hasil akhir. */
 function statusMeter(m: number) {
   return m >= 80 ? { label: "Keluarga selamat dan siap", warna: "bg-emerald-500" } : m >= 50 ? { label: "Selamat, tetapi ada risiko", warna: "bg-amber-500" } : { label: "Keluarga dalam bahaya", warna: "bg-red-600" };
@@ -48,31 +40,6 @@ function Sumber({ id }: { id: string }) {
     <a href={c.sourceUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs text-muted-foreground underline underline-offset-2">
       Sumber: {c.sourceTitle} <ExternalLink className="size-3" aria-hidden="true" /><span className="sr-only">(buka di tab baru)</span>
     </a>
-  );
-}
-
-/** Satu notifikasi di lini masa ponsel; label hoaks baru tampil setelah pengguna menjawab. */
-function Notifikasi({ p, i, terungkap }: { p: Pesan; i: number; terungkap: boolean }) {
-  const diam = useReducedMotion();
-  const g = SUMBER_PESAN[p.jenis];
-  const hoaks = terungkap && p.hoaks;
-  return (
-    <motion.li
-      initial={diam ? false : { opacity: 0, y: 10, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ delay: diam ? 0 : 0.35 + i * 0.7, duration: 0.3 }}
-      className={`rounded-2xl border p-3 ${hoaks ? "border-red-500 bg-red-50 dark:bg-red-500/10" : g.cls}`}
-    >
-      <div className="flex items-center justify-between gap-2 text-xs">
-        <span className="flex items-center gap-1.5 font-semibold text-foreground"><g.Ikon className="size-3.5" aria-hidden="true" /> {p.dari}</span>
-        <span className="tabular-nums text-muted-foreground">{p.jam}</span>
-      </div>
-      <p className={`mt-1 text-sm leading-relaxed ${p.jenis === "medsos" ? "italic" : ""} text-foreground`}>{p.teks}</p>
-      {hoaks && (
-        <p className="mt-2 flex items-start gap-1.5 rounded-xl bg-red-600 px-2.5 py-1.5 text-xs font-medium text-white">
-          <BadgeAlert className="mt-0.5 size-3.5 shrink-0" aria-hidden="true" /> <span><strong>Hoaks.</strong> {p.hoaks}</span>
-        </p>
-      )}
-      <span className="sr-only">({g.label})</span>
-    </motion.li>
   );
 }
 
@@ -107,18 +74,15 @@ interface PropsLatihan {
   id: string;
   /** Skenario dari luar bank (mis. Simulator Bencana AI); bawaan: skenario bank `id`. */
   skenario?: Skenario;
-  /** Pesan notifikasi per langkah untuk skenario dari luar; bawaan: PESAN bank. */
-  pesan?: Record<string, Pesan[]>;
-  /** Dipanggil sekali saat simulasi selesai (mis. untuk lanjut ke uji akhir). */
+  /** Dipanggil sekali saat simulasi selesai (mis. untuk mencatat nilai dan lanjut ke rapor). */
   onSelesai?: (hasil: HasilLatihan, jawaban: Jawaban[]) => void;
-  /** Isi tambahan di atas layar hasil (mis. ajakan uji akhir), dan sembunyikan tombol ulang. */
+  /** Isi tambahan di akhir layar hasil (mis. ajakan melihat rapor), menggantikan tombol ulang. */
   sesudah?: React.ReactNode;
 }
 
-/** Sesi Latihan Siaga: situasi datang lewat notifikasi, keputusan berwaktu, akibat terlihat, lalu diterapkan ke rencana. */
-export function LatihanMain({ id, skenario, pesan: petaLuar, onSelesai, sesudah }: PropsLatihan) {
+/** Sesi Latihan Siaga: satu situasi per layar, keputusan berwaktu, akibat terlihat, lalu diterapkan ke rencana. */
+export function LatihanMain({ id, skenario, onSelesai, sesudah }: PropsLatihan) {
   const s = skenario ?? SKENARIO_BY_ID[id];
-  const petaPesan = petaLuar ?? PESAN;
   const siap = useHydrate(useLatihanStore, useProgresStore, useRencanaStore);
   const catat = useLatihanStore((x) => x.catat);
   const setel = useProgresStore((x) => x.setel);
@@ -135,7 +99,6 @@ export function LatihanMain({ id, skenario, pesan: petaLuar, onSelesai, sesudah 
   const judulRef = useRef<HTMLHeadingElement>(null);
 
   const langkah = cariLangkah(s, langkahId)!;
-  const pesan = petaPesan[langkahId] ?? [];
   const nomor = jawaban.length + (dipilih === null ? 1 : 0);
   const hasil = hitungHasil(s, jawaban);
   const label = HAZARD_BY_ID[s.hazard].label;
@@ -149,7 +112,6 @@ export function LatihanMain({ id, skenario, pesan: petaLuar, onSelesai, sesudah 
 
   const tindakanRencana = useMemo(() => (rencana && rencana.mode !== "contoh" ? rencana.tindakan : []), [rencana]);
   const pelajaran = useMemo(() => (selesai ? pelajaranDari(s, jawaban, tindakanRencana) : []), [selesai, s, jawaban, tindakanRencana]);
-  const hoaks = hoaksDikenali(jawaban, s, petaPesan);
   const lambat = jawaban.filter((j) => (j.detik ?? 0) > DETIK_KEPUTUSAN).length;
 
   // Fokus ke situasi baru agar pembaca layar dan papan ketik mengikuti alur.
@@ -201,7 +163,6 @@ export function LatihanMain({ id, skenario, pesan: petaLuar, onSelesai, sesudah 
     const st = statusMeter(meterKini);
     return (
       <section aria-labelledby="judul-hasil" className="space-y-6">
-        {sesudah}
         <div className={`rounded-3xl border p-6 text-center ${hasil.lulus ? "border-success-foreground/30 bg-success" : "border-warning-foreground/30 bg-warning"}`}>
           <motion.div initial={{ scale: 0.4, rotate: -12, opacity: 0 }} animate={{ scale: 1, rotate: 0, opacity: 1 }} transition={{ type: "spring", stiffness: 260, damping: 14 }}>
             <Trophy className={`mx-auto size-10 ${hasil.lulus ? "text-success-foreground" : "text-warning-foreground"}`} aria-hidden="true" />
@@ -215,16 +176,11 @@ export function LatihanMain({ id, skenario, pesan: petaLuar, onSelesai, sesudah 
           {terbaik !== undefined && <p className="mt-1 text-xs text-muted-foreground">Nilai terbaik Anda: {terbaik}</p>}
         </div>
 
-        <ul className="grid gap-3 sm:grid-cols-3">
+        <ul className="grid gap-3 sm:grid-cols-2">
           <li className="rounded-2xl border border-border bg-surface p-4">
             <p className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground"><HeartPulse className="size-4 text-primary" aria-hidden="true" /> Keselamatan keluarga</p>
             <p className="mt-1 text-2xl font-bold tabular-nums">{meterKini}<span className="text-sm text-muted-foreground">/100</span></p>
             <p className="text-sm">{st.label}</p>
-          </li>
-          <li className="rounded-2xl border border-border bg-surface p-4">
-            <p className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground"><BadgeAlert className="size-4 text-primary" aria-hidden="true" /> Hoaks</p>
-            <p className="mt-1 text-2xl font-bold tabular-nums">{hoaks.dikenali}<span className="text-sm text-muted-foreground">/{hoaks.total}</span></p>
-            <p className="text-sm">{hoaks.total === 0 ? "Tidak ada hoaks di jalur ini" : hoaks.dikenali === hoaks.total ? "Semua dikenali dan tidak disebarkan" : "Ada yang lolos; selalu cek sumber resmi"}</p>
           </li>
           <li className="rounded-2xl border border-border bg-surface p-4">
             <p className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground"><Timer className="size-4 text-primary" aria-hidden="true" /> Kecepatan</p>
@@ -340,23 +296,14 @@ export function LatihanMain({ id, skenario, pesan: petaLuar, onSelesai, sesudah 
 
       <AnimatePresence mode="wait" initial={false}>
         <motion.div key={langkah.id} initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -24 }} transition={{ duration: 0.25, ease: [0.2, 0, 0, 1] }} className="space-y-4">
-          {pesan.length > 0 && (
-            <div className="rounded-3xl bg-ink p-3 sm:p-4">
-              <p className="mb-2 px-1 text-xs font-semibold uppercase tracking-wider text-emerald-300">Notifikasi di ponsel Anda</p>
-              <ul className="space-y-2" aria-label="Pesan yang masuk">
-                {pesan.map((x, i) => <Notifikasi key={`${langkah.id}-${i}`} p={x} i={i} terungkap={dipilih !== null} />)}
-              </ul>
-            </div>
-          )}
-
           <div className="rounded-2xl border border-border bg-surface p-5 sm:p-6">
             <div className="flex items-start justify-between gap-3">
               <h2 id="judul-situasi" ref={judulRef} tabIndex={-1} className="text-lg font-semibold leading-relaxed text-foreground focus:outline-none">{langkah.situasi}</h2>
               {suara.didukung && (
                 <button
-                  type="button" onClick={() => suara.alih(langkah.id, `${pesan.map((x) => `Pesan dari ${x.dari}: ${x.teks}`).join(". ")} ${langkah.situasi} Pilihan: ${langkah.pilihan.map((x, i) => `${i + 1}. ${x.teks}`).join(". ")}`)}
+                  type="button" onClick={() => suara.alih(langkah.id, `${langkah.situasi} Pilihan: ${langkah.pilihan.map((x, i) => `${i + 1}. ${x.teks}`).join(". ")}`)}
                   className="inline-flex size-10 shrink-0 items-center justify-center rounded-lg border border-border hover:bg-muted focus-visible:outline-2 focus-visible:outline-primary"
-                  aria-label={suara.sedang === langkah.id ? "Hentikan bacaan" : "Bacakan pesan, situasi, dan pilihan"}
+                  aria-label={suara.sedang === langkah.id ? "Hentikan bacaan" : "Bacakan situasi dan pilihan"}
                 >
                   {suara.sedang === langkah.id ? <VolumeX className="size-4" aria-hidden="true" /> : <Volume2 className="size-4" aria-hidden="true" />}
                 </button>

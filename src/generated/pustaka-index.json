@@ -192,9 +192,9 @@
             "darurat": false
           },
           {
-            "id": "banjir-sesudah-001",
-            "judul": "Bersihkan rumah dengan antiseptik",
-            "isi": "Bersihkan rumah dan perabot yang terkena banjir, lalu gunakan antiseptik.",
+            "id": "banjir-sesudah-013",
+            "judul": "Jangan langsung menyalakan listrik setelah banjir surut",
+            "isi": "Pastikan semua alat elektronik dan instalasi listrik sudah benar-benar kering. PLN menyalakan listrik kembali bila instalasi PLN dan rumah warga sudah kering dan siap dialiri.",
             "darurat": false
           }
         ]
@@ -212,6 +212,10 @@
       {
         "judul": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
         "url": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf"
+      },
+      {
+        "judul": "Begini kiat dari PLN untuk hindari bahaya listrik saat banjir (ANTARA, mengutip PT PLN)",
+        "url": "https://ambon.antaranews.com/berita/114725/begini-kiat-dari-pln-untuk-hindari-bahaya-listrik-saat-banjir"
       }
     ]
   },
@@ -318,15 +322,15 @@
             "darurat": false
           },
           {
-            "id": "longsor-sesudah-004",
-            "judul": "Tetap di tempat aman dan ikuti informasi",
-            "isi": "Jauhi kawasan yang terkena longsor, tetap berada di tempat aman, dan ikuti terus informasi untuk memastikan Anda berada di tempat yang tepat.",
+            "id": "longsor-sesudah-008",
+            "judul": "Periksa ke dokter bila demam setelah kena lumpur",
+            "isi": "Leptospirosis kerap muncul setelah banjir dan longsor. Demam, nyeri otot, sakit kepala, atau mata merah setelah terpapar lumpur perlu segera diperiksa ke fasilitas kesehatan.",
             "darurat": false
           },
           {
-            "id": "longsor-sesudah-005",
-            "judul": "Beri pertolongan tanpa membahayakan diri",
-            "isi": "Berikan pertolongan bagi yang membutuhkan tanpa membahayakan keselamatan diri sendiri.",
+            "id": "longsor-sesudah-004",
+            "judul": "Tetap di tempat aman dan ikuti informasi",
+            "isi": "Jauhi kawasan yang terkena longsor, tetap berada di tempat aman, dan ikuti terus informasi untuk memastikan Anda berada di tempat yang tepat.",
             "darurat": false
           }
         ]
@@ -348,6 +352,10 @@
       {
         "judul": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak)",
         "url": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf"
+      },
+      {
+        "judul": "Kemenkes Siaga Penanggulangan Leptospirosis Pasca Bencana (Rilis Kemenkes, 2025)",
+        "url": "https://www.kemkes.go.id/id/kemenkes-siaga-penanggulangan-leptospirosis-pasca-bencana"
       }
     ]
   },
@@ -366,6 +374,18 @@
         "judul": "Sebelum gempa",
         "butir": [
           {
+            "id": "gempa-sebelum-006",
+            "judul": "Kenali tempat berlindung di dalam rumah",
+            "isi": "Tentukan tempat aman saat gempa, seperti kolong meja yang kuat, dekat pilar bangunan, atau perabot kokoh lainnya, dan beri tahu semua anggota keluarga.",
+            "darurat": false
+          },
+          {
+            "id": "gempa-sebelum-007",
+            "judul": "Latih keluarga: merunduk, lindungi kepala, berpegangan",
+            "isi": "Pastikan setiap anggota keluarga tahu cara berlindung: merunduk, lindungi kepala, masuk ke kolong meja atau tempat tidur yang kuat, lalu berpegangan pada kakinya.",
+            "darurat": false
+          },
+          {
             "id": "gempa-sebelum-002",
             "judul": "Ikat perabot ke dinding",
             "isi": "Pasang perabot ke dinding dan ikat benda yang menggantung agar tidak jatuh saat guncangan.",
@@ -381,18 +401,6 @@
             "id": "gempa-sebelum-004",
             "judul": "Periksa lokasi dan struktur rumah",
             "isi": "Pastikan rumah tidak berada di area rawan longsor atau likuefaksi, dan perbaiki struktur bangunan yang lemah.",
-            "darurat": false
-          },
-          {
-            "id": "gempa-sebelum-001",
-            "judul": "Ikuti sosialisasi dan simulasi",
-            "isi": "Ikuti sosialisasi dan simulasi kesiapsiagaan gempa di lingkungan Anda.",
-            "darurat": false
-          },
-          {
-            "id": "gempa-sebelum-005",
-            "judul": "Matikan air, gas, listrik saat tak dipakai",
-            "isi": "Matikan air, gas, dan listrik saat tidak dipakai untuk mengurangi risiko kebakaran setelah gempa.",
             "darurat": false
           }
         ]
@@ -454,9 +462,15 @@
             "darurat": false
           },
           {
-            "id": "gempa-sesudah-004",
-            "judul": "Waspadai gempa susulan",
-            "isi": "Hindari berjalan di sekitar area terdampak karena gempa susulan masih mungkin terjadi.",
+            "id": "gempa-sesudah-005",
+            "judul": "Keluar dengan tertib menuju titik kumpul",
+            "isi": "Setelah guncangan reda, tetap lindungi kepala dan keluar dengan tertib melalui jalur evakuasi menuju titik kumpul yang telah disepakati.",
+            "darurat": false
+          },
+          {
+            "id": "gempa-sesudah-006",
+            "judul": "Jauhi tempat yang berbau gas, bensin, atau bahan kimia",
+            "isi": "Jauhi lokasi yang berbau cairan berbahaya seperti gas, bensin, atau bahan kimia, serta bangunan yang sudah rusak karena bisa runtuh saat gempa susulan.",
             "darurat": false
           }
         ]
@@ -464,12 +478,12 @@
     ],
     "sumber": [
       {
-        "judul": "Antisipasi Gempa Bumi (BMKG)",
-        "url": "https://www.bmkg.go.id/gempabumi/mitigasi/antisipasi-gempabumi"
+        "judul": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak)",
+        "url": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf"
       },
       {
-        "judul": "Buku Saku Tanggap, Tangkas, Tangguh Menghadapi Bencana (BNPB, 2012)",
-        "url": "https://www.bnpb.go.id/storage/app/media/uploads/migration/pubs/478.pdf"
+        "judul": "Antisipasi Gempa Bumi (BMKG)",
+        "url": "https://www.bmkg.go.id/gempabumi/mitigasi/antisipasi-gempabumi"
       },
       {
         "judul": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019)",
@@ -508,21 +522,21 @@
             "darurat": false
           },
           {
+            "id": "tsunami-sebelum-006",
+            "judul": "Kenali gempa yang bisa memicu tsunami",
+            "isi": "Gempa yang kuat sampai sulit berdiri, atau gempa lemah yang terasa lama (lebih dari 1 menit), dapat memicu tsunami dalam waktu singkat. Segera jauhi pantai dan tepi sungai.",
+            "darurat": false
+          },
+          {
+            "id": "tsunami-sebelum-007",
+            "judul": "Ingat: tsunami tidak selalu didahului air laut surut",
+            "isi": "Jangan pergi ke pantai untuk melihat datangnya tsunami. Saat evakuasi, jangan memakai kendaraan karena bisa memacetkan jalan, dan hindari melewati jembatan.",
+            "darurat": false
+          },
+          {
             "id": "tsunami-sebelum-003",
             "judul": "Pantau informasi resmi soal potensi tsunami",
             "isi": "Setelah gempa, pantau media resmi untuk informasi potensi tsunami. Lembaga yang berwenang memberi peringatan tsunami adalah BMKG.",
-            "darurat": false
-          },
-          {
-            "id": "tsunami-sebelum-004",
-            "judul": "Kenali rambu bahaya tsunami",
-            "isi": "Wilayah yang berpotensi terdampak tsunami ditandai rambu peringatan bahaya tsunami. Kenali rambu itu beserta petunjuk jalur evakuasi di sekitar Anda.",
-            "darurat": false
-          },
-          {
-            "id": "tsunami-sebelum-005",
-            "judul": "Dukung penanaman pohon pelindung pesisir",
-            "isi": "Penanaman kelapa, cemara laut, beringin, dan bakau di pesisir dapat membantu meredam gelombang dan mencegah abrasi pantai. Ikut serta dalam penanaman di lingkungan Anda.",
             "darurat": false
           }
         ]
@@ -584,15 +598,15 @@
             "darurat": false
           },
           {
-            "id": "tsunami-sesudah-004",
-            "judul": "Hindari air genangan: tercemar dan ada risiko listrik",
-            "isi": "Hindari air yang menggenang karena kemungkinan tercemar zat berbahaya dan ada ancaman tersengat aliran listrik.",
+            "id": "tsunami-sesudah-010",
+            "judul": "Tunggu BMKG menyatakan ancaman tsunami berakhir",
+            "isi": "Tetap di tempat tinggi sampai ada informasi dari BMKG bahwa ancaman tsunami sudah berakhir, melalui TV nasional, radio daerah, atau pengumuman setempat.",
             "darurat": false
           },
           {
-            "id": "tsunami-sesudah-005",
-            "judul": "Hati-hati memasuki gedung, fondasi mungkin rusak",
-            "isi": "Berhati-hatilah saat memasuki gedung karena ada ancaman kerusakan yang tidak terlihat, misalnya pada fondasi. Tetap di luar gedung yang masih dikelilingi air.",
+            "id": "tsunami-sesudah-004",
+            "judul": "Hindari air genangan: tercemar dan ada risiko listrik",
+            "isi": "Hindari air yang menggenang karena kemungkinan tercemar zat berbahaya dan ada ancaman tersengat aliran listrik.",
             "darurat": false
           }
         ]
@@ -602,6 +616,10 @@
       {
         "judul": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019)",
         "url": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf"
+      },
+      {
+        "judul": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak)",
+        "url": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf"
       }
     ]
   },
@@ -696,21 +714,27 @@
             "darurat": false
           },
           {
+            "id": "gunung_api-sesudah-005",
+            "judul": "Periksa apakah keluarga lengkap dan ada yang terluka",
+            "isi": "Periksa keadaan semua anggota keluarga: lengkap atau tidak, ada yang terluka atau tidak. Bila ada yang terluka, pastikan ada yang bisa memberi pertolongan pertama.",
+            "darurat": false
+          },
+          {
+            "id": "gunung_api-sesudah-006",
+            "judul": "Dahulukan pertolongan bagi kelompok rentan",
+            "isi": "Prioritaskan pertolongan bagi orang sakit, lansia, anak-anak, ibu hamil atau menyusui, penyandang disabilitas, dan penderita penyakit serius.",
+            "darurat": false
+          },
+          {
+            "id": "gunung_api-sesudah-007",
+            "judul": "Kembali ke rumah hanya bila dinyatakan aman",
+            "isi": "Terus pantau perkembangan aktivitas gunung api melalui radio, televisi, atau media informasi lain. Kembali ke rumah hanya bila instansi berwenang menyatakan aman.",
+            "darurat": false
+          },
+          {
             "id": "gunung_api-sesudah-002",
             "judul": "Hindari berkendara di area hujan abu",
             "isi": "Hindari mengendarai mobil di daerah yang terkena hujan abu vulkanik karena dapat merusak mesin kendaraan.",
-            "darurat": false
-          },
-          {
-            "id": "gunung_api-sesudah-003",
-            "judul": "Bersihkan abu dari atap",
-            "isi": "Bersihkan timbunan debu vulkanik dari atap karena beratnya dapat merobohkan atau merusak atap rumah dan bangunan.",
-            "darurat": false
-          },
-          {
-            "id": "gunung_api-sesudah-004",
-            "judul": "Waspadai lahar di aliran sungai saat hujan",
-            "isi": "Waspadai wilayah aliran sungai yang berpotensi dilanda lahar pada musim hujan.",
             "darurat": false
           }
         ]
@@ -720,6 +744,10 @@
       {
         "judul": "Buku Saku Menghadapi Bencana: Tanggap Tangkas Tangguh (BNPB, cetakan keempat, 2019)",
         "url": "https://www.bnpb.go.id/storage/app/media/Buku%20BNPB/Buku%20Saku%20Bencana%20BNPB.pdf"
+      },
+      {
+        "judul": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak)",
+        "url": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf"
       }
     ]
   },
@@ -1297,15 +1325,15 @@
             "darurat": false
           },
           {
-            "id": "karhutla-saat-011",
-            "judul": "Beri perlindungan ekstra bagi kelompok rentan",
-            "isi": "Anak-anak, lansia, ibu hamil, dan penderita penyakit bawaan paling berisiko terdampak asap. Beri mereka perlindungan ekstra.",
+            "id": "banjir-sesudah-021",
+            "judul": "Perhatikan anggota keluarga dengan penyakit kronis",
+            "isi": "Banjir yang berlangsung berhari-hari dapat memperburuk penyakit kronis karena daya tahan tubuh menurun. Periksakan ke petugas kesehatan bila keluhannya bertambah.",
             "darurat": false
           },
           {
-            "id": "umum-sebelum-015",
-            "judul": "Sesuaikan peringatan dini dengan jenis disabilitas",
-            "isi": "Pastikan peringatan dini dapat diterima anggota dengan disabilitas sesuai jenisnya, dan latih penyelamatan diri bersama kerabat terdekat.",
+            "id": "karhutla-saat-011",
+            "judul": "Beri perlindungan ekstra bagi kelompok rentan",
+            "isi": "Anak-anak, lansia, ibu hamil, dan penderita penyakit bawaan paling berisiko terdampak asap. Beri mereka perlindungan ekstra.",
             "darurat": false
           }
         ]
@@ -1323,6 +1351,10 @@
       {
         "judul": "Panduan Kesiapsiagaan Bencana untuk Keluarga (BNPB, 2018; salinan situs PPID Kab. Demak)",
         "url": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf"
+      },
+      {
+        "judul": "Antisipasi Penyakit Menular Saat Banjir (Rilis Kemenkes)",
+        "url": "https://kemkes.go.id/id/antisipasi-penyakit-menular-saat-banjir"
       },
       {
         "judul": "Kemenkes Perkuat Perlindungan Kelompok Rentan Hadapi Karhutla (Rilis Kemenkes, 26 Agustus 2026)",

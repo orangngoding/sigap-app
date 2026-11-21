@@ -67,7 +67,7 @@ export function BilahArtikel({ bagian }: { bagian: BagianIsi[] }) {
     "inline-flex min-h-11 min-w-11 items-center justify-center gap-1.5 rounded-full px-3 text-sm font-semibold text-foreground hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
 
   return (
-    <div className="bilah-artikel tanpa-cetak kaca sticky top-16 z-30 border-b border-border/70">
+    <div className="bilah-artikel tanpa-cetak kaca sticky top-[calc(4rem+var(--spanduk,0px))] z-30 border-b border-border/70">
       <div className="relative mx-auto flex max-w-7xl items-center gap-1 px-2 py-0.5 sm:px-4 lg:px-6">
         <Link href="/pustaka" className={tombol}>
           <ArrowLeft className="size-4" aria-hidden="true" /> Pustaka

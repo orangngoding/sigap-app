@@ -4,6 +4,7 @@ import { Backpack, CalendarPlus, CalendarClock, ChevronDown } from "lucide-react
 import type { ItemTas, Progres } from "@/types/rencana";
 import { kelompokkanTas } from "@/lib/preparedness/tas";
 import { BISA_KEDALUWARSA, buatIcs, ringkasPengingat, sisaHari, statusKedaluwarsa, tanggalValid, type PetaKedaluwarsa } from "@/lib/rencana/pengingat";
+import { TeksPihak } from "@/components/rencana/teks-pihak";
 
 const LENCANA = {
   lewat: "bg-danger text-danger-foreground",
@@ -53,7 +54,7 @@ export function TasSiaga({ tas, progres, onToggle, kedaluwarsa, onKedaluwarsa }:
         <Backpack className="size-5 text-primary" aria-hidden="true" /> Tas Siaga
       </h2>
       <p className="mt-1 text-sm text-muted-foreground">
-        Jumlah adalah perkiraan dari rumus sederhana berdasarkan jumlah anggota dan lama persediaan. Sesuaikan dengan kebutuhan keluarga Anda.
+        Jumlah adalah perkiraan dari rumus sederhana berdasarkan jumlah anggota dan lama persediaan. <TeksPihak>Sesuaikan dengan kebutuhan keluarga Anda.</TeksPihak>
       </p>
 
       {kedaluwarsa && (

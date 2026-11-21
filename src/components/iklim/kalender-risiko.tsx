@@ -4,6 +4,7 @@ import { ExternalLink } from "lucide-react";
 import type { KlimatologiResponse } from "@/lib/data/klimatologi";
 import { NAMA_BULAN, bulanWib, kalenderDariBulanan } from "@/lib/iklim/ketahanan";
 import { rentangBulan } from "@/lib/iklim/keputusan";
+import { TeksPihak } from "@/components/rencana/teks-pihak";
 import type { KondisiGlobal } from "@/lib/data/iklim-global";
 
 const fmt = (v: number, d = 1) => v.toLocaleString("id-ID", { maximumFractionDigits: d });
@@ -45,7 +46,7 @@ export function RingkasanKalender({ k, namaWilayah, global }: { k: KlimatologiRe
         </p>
       )}
       <p className="mt-4 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-        Ini pola rata-rata, bukan ramalan tahun ini. Untuk perkiraan kapan kemarau atau musim hujan tahun ini dimulai di zona Anda, lihat{" "}
+        <TeksPihak>Ini pola rata-rata, bukan ramalan tahun ini. Untuk perkiraan kapan kemarau atau musim hujan tahun ini dimulai di zona Anda, lihat</TeksPihak>{" "}
         <a href={URL_PREDIKSI_MUSIM_BMKG} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-semibold text-primary underline underline-offset-2">
           Prediksi Musim BMKG<ExternalLink className="size-3.5" aria-hidden="true" /><span className="sr-only"> (membuka situs BMKG di tab baru)</span>
         </a>.

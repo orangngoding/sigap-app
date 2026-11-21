@@ -14,6 +14,8 @@ import { useLokasiStore } from "@/stores/lokasi-store";
 import { useProfilStore } from "@/stores/profil-store";
 import { useRencanaStore } from "@/stores/rencana-store";
 import { finalisasiProfil } from "@/lib/preparedness/profil-schema";
+import { useKeluarga } from "@/hooks/use-keluarga";
+import { TeksPihak } from "@/components/rencana/teks-pihak";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "";
 const GARIS = "________________";
@@ -33,6 +35,9 @@ export function KartuView() {
   const rencana = useRencanaStore((s) => s.rencana);
   const [mengunduh, setMengunduh] = useState(false);
   const { namaKeluarga, ukuran, tampilkanCatatan, ubah } = useKartuStore();
+  // Nama di daftar keluarga (bila ada lebih dari satu keluarga): tawarkan bila nama kartu berbeda.
+  const { aktif: keluargaAktif, jumlah: jumlahKeluarga } = useKeluarga();
+  const namaDaftar = jumlahKeluarga > 1 && keluargaAktif ? keluargaAktif.nama.slice(0, NAMA_KELUARGA_MAKS) : null;
   const [qr, setQr] = useState<string | null>(null);
   const profil = useMemo(() => finalisasiProfil(draft), [draft]);
   const risikoQ = useRisikoLokasi(siap ? lokasi : null);
@@ -51,7 +56,7 @@ export function KartuView() {
   if (!lokasi || !profil || !rencana) {
     return (
       <div className="rounded-2xl border border-border bg-surface p-8 text-center">
-        <h1 className="font-semibold">Kartu Siaga dibuat dari rencana Anda.</h1>
+        <h1 className="font-semibold"><TeksPihak>Kartu Siaga dibuat dari rencana Anda.</TeksPihak></h1>
         <p className="mt-1 text-sm text-muted-foreground">Pilih lokasi dan isi profil keluarga dulu, lalu buka Rencana Siaga.</p>
         <Link href="/rencana" className="mt-4 inline-flex min-h-12 items-center rounded-lg bg-primary px-6 text-sm font-semibold text-primary-foreground">Ke Rencana Siaga</Link>
       </div>
@@ -91,6 +96,11 @@ export function KartuView() {
               aria-describedby="nama-bantuan"
             />
             <p id="nama-bantuan" className="mt-1 text-xs text-muted-foreground">{namaKeluarga.length}/{NAMA_KELUARGA_MAKS} karakter</p>
+            {siap && namaDaftar && namaKeluarga.trim() !== namaDaftar.trim() && (
+              <button type="button" onClick={() => ubah({ namaKeluarga: namaDaftar })} className="mt-1 inline-flex min-h-9 items-center text-left text-xs font-semibold text-primary underline underline-offset-2">
+                Pakai nama keluarga: {namaDaftar}
+              </button>
+            )}
           </div>
           <div role="group" aria-label="Ukuran kertas" className="flex gap-2">
             {(["A4", "A5"] as const).map((u) => (

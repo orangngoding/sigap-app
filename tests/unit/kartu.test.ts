@@ -10,11 +10,11 @@ import type { Tindakan } from "@/types/rencana";
 let lulus = 0; const gagal: string[] = [];
 const uji = (nama: string, fn: () => void) => { try { fn(); lulus++; console.log("OK   ", nama); } catch (e) { gagal.push(nama); console.log("GAGAL", nama, "->", (e as Error).message.split("\n")[0]); } };
 
-uji("darurat: tiap bahaya aktif punya langkah Saat (<=7) dan Sesudah (<=3), tiap langkah <=12 kata", () => {
+uji("darurat: tiap bahaya aktif punya langkah Saat (<=7) dan Sesudah (<=5), tiap langkah <=12 kata", () => {
   for (const h of HAZARDS.filter((x) => isHazardAktif(x.id))) {
     const p = langkahDaruratBahaya(SEMUA_CHUNK, h.id);
     assert.ok(p.saat.length >= 1 && p.saat.length <= 7, `${h.id} saat=${p.saat.length}`);
-    assert.ok(p.sesudah.length <= 3, `${h.id} sesudah`);
+    assert.ok(p.sesudah.length <= 5, `${h.id} sesudah`);
     for (const l of [...p.saat, ...p.sesudah]) assert.ok(l.teks.split(/\s+/).length <= MAKS_KATA_LANGKAH, `${l.id}: ${l.teks}`);
   }
 });
@@ -53,7 +53,7 @@ uji("gelombang/abrasi: kini aktif, punya langkah Saat 5-7 dan Sesudah, tiga fase
   assert.equal(isHazardAktif("gelombang_abrasi"), true);
   const p = langkahDaruratBahaya(SEMUA_CHUNK, "gelombang_abrasi");
   assert.ok(p.saat.length >= 5 && p.saat.length <= 7, `saat=${p.saat.length}`);
-  assert.equal(p.sesudah.length, 3);
+  assert.equal(p.sesudah.length, 5);
 });
 uji("turunan: langkah Saat/Sesudah gelombang_abrasi selain 'jauhi pantai' wajib berlabel turunan (tidak ada panduan resmi khusus)", () => {
   const tanpaLabel = SEMUA_CHUNK.filter((c) => c.hazard === "gelombang_abrasi" && c.phase !== "sebelum" && !c.turunan);

@@ -104,7 +104,8 @@ export function MobileBottomNav() {
       ref={navRef}
       data-bingkai-situs
       aria-label="Navigasi bawah"
-      className="tanpa-cetak kaca fixed inset-x-0 bottom-0 z-50 border-t border-border/70 pb-[env(safe-area-inset-bottom)] md:hidden"
+      // bg-white/95: kaca 78% membuat angka besar hero (mis. "265") tembus di balik label navigasi.
+      className="tanpa-cetak kaca bg-white/95 fixed inset-x-0 bottom-0 z-50 border-t border-border/70 pb-[env(safe-area-inset-bottom)] md:hidden"
     >
       <div className="mx-auto grid h-16 max-w-lg grid-cols-5">
         {navigation.map((item) => {

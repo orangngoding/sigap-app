@@ -10,6 +10,7 @@ import { StatusBanner } from "@/components/global/status-banner";
 import { StepIndicator } from "@/components/global/step-indicator";
 import { StorageBanner } from "@/components/global/storage-banner";
 import { useHydrate } from "@/hooks/use-hydrate";
+import { SkorPanel } from "./skor-panel";
 import { useSusunRencana } from "@/hooks/use-susun-rencana";
 import { ARTIKEL_BY_SLUG } from "@/lib/pustaka/data";
 import { bacaRingkasanLokal, ringkasRisiko } from "@/lib/rencana/klien";
@@ -24,7 +25,6 @@ import { useRencanaStore } from "@/stores/rencana-store";
 import { useLokasiStore } from "@/stores/lokasi-store";
 import { useProfilStore } from "@/stores/profil-store";
 import { useProgresStore } from "@/stores/progres-store";
-import { SkorPanel } from "./skor-panel";
 import { TasSiaga } from "./tas-siaga";
 import { TindakanDaftar } from "./tindakan-daftar";
 import { AksiIklimDaftar } from "./aksi-iklim-daftar";
@@ -43,6 +43,7 @@ import { ProfilRisiko } from "@/components/risiko/profil-risiko";
 import { useRisikoLokasi } from "@/hooks/use-risiko-lokasi";
 
 import { tambahkanBahaya } from "@/lib/preparedness/saran-bahaya";
+import { TeksPihak } from "@/components/rencana/teks-pihak";
 
 type TabId = "ringkasan" | "tindakan" | "tas" | "bagikan";
 const TAB: Array<{ id: TabId; label: string; Ikon: typeof LayoutDashboard }> = [
@@ -61,7 +62,7 @@ function LangkahKurang({ ikon, pesan, href, tombol }: { ikon: React.ReactNode; p
     <div className="rounded-2xl border border-border bg-surface p-8 text-center">
       <h1 className="sr-only">Rencana Siaga</h1>
       <div className="mx-auto flex size-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">{ikon}</div>
-      <p className="mx-auto mt-4 max-w-md text-base font-semibold text-foreground">{pesan}</p>
+      <p className="mx-auto mt-4 max-w-md text-base font-semibold text-foreground"><TeksPihak>{pesan}</TeksPihak></p>
       <Link href={href} className="mt-6 inline-flex min-h-12 items-center justify-center rounded-lg bg-primary px-6 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
         {tombol}
       </Link>
@@ -268,12 +269,12 @@ export function RencanaView() {
       {!contoh && <StatusSusun status={status} alasan={alasan} pulihMenit={pulihMenit} usang={usang} onSusun={() => void susun({ paksa: true })} onBatal={batal} />}
       {sorotan.length > 0 && (
         <StatusBanner tone="warning" action={<Link href="/lokasi" className="inline-flex min-h-11 items-center font-semibold underline">Lihat data</Link>}>
-          <strong>Perhatikan hari ini:</strong> {sorotan.join(" ")}
+          <strong>Perhatikan hari ini:</strong> <TeksPihak>{sorotan.join(" ")}</TeksPihak>
         </StatusBanner>
       )}
 
       {/* Navigasi tab: menempel di bawah header agar berpindah bagian tanpa menggulir panjang. */}
-      <div ref={tabRef} className="tanpa-cetak bilah-lengket sticky top-16 z-30 -mx-4 px-4 py-2 sm:mx-0 sm:px-0">
+      <div ref={tabRef} className="tanpa-cetak bilah-lengket sticky top-[calc(4rem+var(--spanduk,0px))] z-30 -mx-4 px-4 py-2 sm:mx-0 sm:px-0">
         <div role="tablist" aria-label="Bagian rencana" className="kaca isolate flex gap-1 overflow-x-auto rounded-2xl border border-border/70 p-1 shadow-sm">
           {TAB.map(({ id, label, Ikon }) => {
             const aktif = tab === id;
@@ -350,10 +351,10 @@ export function RencanaView() {
         {rencana && (
           <section aria-labelledby="judul-ringkasan" className="rounded-2xl border border-border bg-surface p-5 sm:p-6">
             <div className="flex flex-wrap items-center justify-between gap-2">
-              <h2 id="judul-ringkasan" className="text-lg font-bold text-foreground">Ringkasan untuk keluarga Anda</h2>
+              <h2 id="judul-ringkasan" className="text-lg font-bold text-foreground"><TeksPihak>Ringkasan untuk keluarga Anda</TeksPihak></h2>
               <LabelAi mode={rencana.mode} />
             </div>
-            <p className="mt-3 leading-relaxed text-foreground">{rencana.ringkasanRisiko}</p>
+            <p className="mt-3 leading-relaxed text-foreground"><TeksPihak>{rencana.ringkasanRisiko}</TeksPihak></p>
             {faktor.length > 0 && (
               <>
                 <h3 className="mt-5 text-sm font-semibold text-foreground">Hal yang perlu diperhatikan</h3>
@@ -388,10 +389,12 @@ export function RencanaView() {
               <span><span className="block font-bold">Buat Kartu Siaga</span><span className="block text-sm text-primary-foreground/80">Satu halaman untuk ditempel di rumah, dengan kode QR ke Mode Darurat.</span></span>
             </Link>
           )}
-          <button type="button" onClick={() => window.print()} className="angkat flex items-start gap-4 rounded-2xl border border-border bg-surface p-5 text-left focus-visible:outline-2 focus-visible:outline-primary">
-            <FileText className="size-6 shrink-0 text-primary" aria-hidden="true" />
-            <span><span className="block font-bold text-foreground">Cetak rencana lengkap</span><span className="block text-sm text-muted-foreground">Semua tindakan dan isi tas siaga, rapi hitam putih.</span></span>
-          </button>
+          {!contoh && (
+            <Link href="/rencana/cetak" className="angkat flex items-start gap-4 rounded-2xl border border-border bg-surface p-5 text-left focus-visible:outline-2 focus-visible:outline-primary">
+              <FileText className="size-6 shrink-0 text-primary" aria-hidden="true" />
+              <span><span className="block font-bold text-foreground">Cetak rencana lengkap</span><span className="block text-sm text-muted-foreground">Dokumen A4 rapi: identitas, risiko, nomor penting, tindakan per bencana, dan Tas Siaga. Bisa disimpan sebagai PDF.</span></span>
+            </Link>
+          )}
           <Link href="/tanya" className="angkat flex items-start gap-4 rounded-2xl border border-border bg-surface p-5 focus-visible:outline-2 focus-visible:outline-primary">
             <MessageCircleQuestion className="size-6 shrink-0 text-primary" aria-hidden="true" />
             <span><span className="block font-bold text-foreground">Tanya Asisten</span><span className="block text-sm text-muted-foreground">Tanyakan apa pun tentang rencana ini.</span></span>
@@ -412,7 +415,7 @@ export function RencanaView() {
         {rencana && rencana.rekomendasiEdukasi.length > 0 && (
           <section aria-labelledby="judul-bacaan">
             <h2 id="judul-bacaan" className="flex items-center gap-2 text-lg font-bold text-foreground">
-              <BookOpen className="size-5 text-primary" aria-hidden="true" /> Bacaan untuk Anda
+              <BookOpen className="size-5 text-primary" aria-hidden="true" /> <TeksPihak>Bacaan untuk Anda</TeksPihak>
             </h2>
             <ul className="mt-3 grid gap-3 sm:grid-cols-2">
               {rencana.rekomendasiEdukasi.filter((slug) => ARTIKEL_BY_SLUG[slug]).map((slug) => (
@@ -431,7 +434,7 @@ export function RencanaView() {
         )}
       </div>
 
-      {rencana && <p className="text-sm text-muted-foreground">{rencana.catatanKeterbatasan}</p>}
+      {rencana && <p className="text-sm text-muted-foreground"><TeksPihak>{rencana.catatanKeterbatasan}</TeksPihak></p>}
       <DisclaimerBox />
     </div>
   );

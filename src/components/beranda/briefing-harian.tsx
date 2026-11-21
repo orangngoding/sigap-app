@@ -12,6 +12,7 @@ import { useLokasiStore } from "@/stores/lokasi-store";
 import { useProfilStore } from "@/stores/profil-store";
 import { TombolTanya } from "@/components/tanya/tombol-tanya";
 import { profilSudahDiisi } from "@/lib/preparedness/profil-awal";
+import { TeksPihak, usePihak } from "@/components/rencana/teks-pihak";
 
 const TINGKAT: Record<Tingkat, { label: string; cls: string; Ikon: LucideIcon }> = {
   tenang: { label: "Tenang", cls: "bg-success text-success-foreground", Ikon: CheckCircle2 },
@@ -86,6 +87,7 @@ export function BriefingHarian({ varian = "beranda" }: { varian?: "beranda" | "l
       }
     },
   });
+  const { s: sebut } = usePihak();
 
   const bungkus = varian === "beranda" ? "mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8" : "";
 
@@ -100,7 +102,7 @@ export function BriefingHarian({ varian = "beranda" }: { varian?: "beranda" | "l
             <Sparkles className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden="true" />
             <div>
               <p className="font-semibold text-foreground">Briefing Siaga Hari Ini</p>
-              <p className="text-sm text-muted-foreground">Pilih lokasi untuk mendapat ringkasan cuaca, gempa, dan peringatan BMKG di wilayah Anda, beserta 3 tindakan untuk keluarga.</p>
+              <p className="text-sm text-muted-foreground"><TeksPihak>Pilih lokasi untuk mendapat ringkasan cuaca, gempa, dan peringatan BMKG di wilayah Anda, beserta 3 tindakan untuk keluarga.</TeksPihak></p>
             </div>
           </div>
           <Link href="/lokasi" className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-primary px-5 text-sm font-semibold text-primary-foreground hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
@@ -146,7 +148,7 @@ export function BriefingHarian({ varian = "beranda" }: { varian?: "beranda" | "l
             <div className="grid gap-3 sm:grid-cols-3">
               {[0, 1, 2].map((i) => <div key={i} className="h-24 animate-pulse rounded-xl bg-muted motion-reduce:animate-none" />)}
             </div>
-            <p className="text-xs text-muted-foreground">Membaca data BMKG untuk wilayah Anda...</p>
+            <p className="text-xs text-muted-foreground"><TeksPihak>Membaca data BMKG untuk wilayah Anda...</TeksPihak></p>
           </div>
         )}
 
@@ -165,7 +167,7 @@ export function BriefingHarian({ varian = "beranda" }: { varian?: "beranda" | "l
                 Briefing lama dari {waktuMutlak(d.dibuatPada)}. Sambungkan internet lalu muat ulang.
               </p>
             )}
-            <p className="text-base leading-relaxed text-foreground">{d.ringkasan}</p>
+            <p className="text-base leading-relaxed text-foreground">{sebut(d.ringkasan)}</p>
 
             {d.sinyal.length > 0 && (
               <ul className="grid gap-2 sm:grid-cols-2" aria-label="Sinyal dari data resmi BMKG dan profil risiko lokasi">
@@ -176,12 +178,12 @@ export function BriefingHarian({ varian = "beranda" }: { varian?: "beranda" | "l
                     <li key={`${s.jenis}-${s.fakta}`} className={`flex items-start gap-2.5 rounded-xl border p-3 ${warna}`}>
                       <Ikon className="mt-0.5 size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
                       <div className="min-w-0 text-sm">
-                        <p className="font-semibold text-foreground">{s.judul}</p>
+                        <p className="font-semibold text-foreground">{sebut(s.judul)}</p>
                         <p className="text-muted-foreground">
-                          {s.fakta}{" "}
+                          {sebut(s.fakta)}{" "}
                           {s.sumber === "risiko" ? (
                             <Link href={s.url} className="whitespace-nowrap text-xs font-medium text-primary underline underline-offset-2">
-                              Profil risiko<span className="sr-only"> (data lokasi Anda)</span>
+                              Profil risiko<span className="sr-only"> ({sebut("data lokasi Anda")})</span>
                             </Link>
                           ) : (
                             <a href={s.url} target="_blank" rel="noopener noreferrer" className="whitespace-nowrap text-xs font-medium text-primary underline underline-offset-2">
@@ -205,8 +207,8 @@ export function BriefingHarian({ varian = "beranda" }: { varian?: "beranda" | "l
                   className="flex flex-col rounded-xl border border-border bg-background p-4"
                 >
                   <span className="mb-2 flex size-7 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground" aria-hidden="true">{i + 1}</span>
-                  <p className="text-sm font-semibold text-foreground">{x.judul}</p>
-                  <p className="mt-1 flex-1 text-sm text-muted-foreground">{x.alasan}</p>
+                  <p className="text-sm font-semibold text-foreground">{sebut(x.judul)}</p>
+                  <p className="mt-1 flex-1 text-sm text-muted-foreground">{sebut(x.alasan)}</p>
                   <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2">
                     {x.tautan && <TautanTindakan href={x.tautan.href} label={x.tautan.label} />}
                     <TombolTanya label="Tanya" pertanyaan={`Dari briefing siaga hari ini: "${x.judul}". ${x.alasan} Bagaimana cara melakukannya untuk keluarga saya?`} />
@@ -217,7 +219,7 @@ export function BriefingHarian({ varian = "beranda" }: { varian?: "beranda" | "l
 
             {d.catatan.length > 0 && (
               <ul className="space-y-1 text-xs text-muted-foreground">
-                {d.catatan.map((c) => <li key={c} className="flex items-start gap-1.5"><AlertTriangle className="mt-0.5 size-3.5 shrink-0" aria-hidden="true" /> {c}</li>)}
+                {d.catatan.map((c) => <li key={c} className="flex items-start gap-1.5"><AlertTriangle className="mt-0.5 size-3.5 shrink-0" aria-hidden="true" /> {sebut(c)}</li>)}
               </ul>
             )}
 

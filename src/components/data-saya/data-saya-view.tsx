@@ -24,6 +24,10 @@ import { useProgresStore } from "@/stores/progres-store";
 import { useRencanaStore } from "@/stores/rencana-store";
 import { useTanyaStore } from "@/stores/tanya-store";
 import { useTasStore } from "@/stores/tas-store";
+import { useMedisStore } from "@/stores/medis-store";
+import { useSimulasiStore } from "@/stores/simulasi-store";
+import { useAksiIklimStore } from "@/stores/aksi-iklim-store";
+import { useIklimRumahStore } from "@/stores/iklim-rumah-store";
 
 const BTN = "inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-border bg-surface px-5 text-sm font-semibold hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
 const BTN_UTAMA = "inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-primary px-5 text-sm font-semibold text-primary-foreground shadow-sm shadow-primary/30 hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
@@ -134,6 +138,11 @@ export function DataSayaView() {
     useTanyaStore.getState().hapusSemuaSesi();
     useLatihanStore.getState().reset();
     useTasStore.getState().reset();
+    // Info medis, Simulasi, dan Siaga Iklim juga: tanpa ini info medis masih tampil di Mode Darurat sampai dimuat ulang.
+    useMedisStore.getState().reset();
+    useSimulasiStore.getState().reset();
+    useIklimRumahStore.getState().reset();
+    useAksiIklimStore.setState({ aksi: [] });
     hapusSisaKunci();
     setKonfirmasi(false);
     setSelesai(true);

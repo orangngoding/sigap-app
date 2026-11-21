@@ -5,6 +5,7 @@ import { ExternalLink, LocateFixed, Loader2 } from "lucide-react";
 import type { PosisiPerangkat } from "./peta-lokasi";
 import { jarakKm } from "@/lib/data/titik-panas";
 import { PESAN_TIDAK_AMAN, pesanGalatLokasi } from "@/lib/geo/galat-lokasi";
+import { TeksPihak } from "@/components/rencana/teks-pihak";
 
 const Peta = dynamic(() => import("./peta-lokasi"), {
   ssr: false,
@@ -40,9 +41,9 @@ export function PetaLokasi({ lat, lon, label, presisi, nama }: { lat: number; lo
       <Peta lat={lat} lon={lon} label={label} presisi={presisi} posisi={posisi} />
       <figcaption className="mt-2 space-y-2 text-xs text-muted-foreground">
         <p>
-          {presisi === "desa"
+          <TeksPihak>{presisi === "desa"
             ? `Titik hijau adalah titik kelurahan/desa ${nama ?? ""} dari data wilayah yang dipakai BMKG (Kemendagri). Rumah Anda bisa berjarak beberapa ratus meter sampai beberapa kilometer dari titik ini.`.replace("  ", " ")
-            : "Titik peta adalah pusat kabupaten/kota (perkiraan) karena titik kelurahan belum terbaca; akan diperbarui otomatis saat tersambung."}
+            : "Titik peta adalah pusat kabupaten/kota (perkiraan) karena titik kelurahan belum terbaca; akan diperbarui otomatis saat tersambung."}</TeksPihak>
           {jarak !== null && ` Posisi Anda (biru) sekitar ${jarak < 1 ? `${Math.round(jarak * 1000)} m` : `${jarak.toFixed(1).replace(".", ",")} km`} dari titik itu; posisi ini tidak disimpan.`}
         </p>
         <span className="flex flex-wrap gap-2">

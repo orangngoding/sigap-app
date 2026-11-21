@@ -8,6 +8,7 @@ import { HAZARD_BY_ID } from "@/lib/hazards/hazards";
 import { IKON_BAHAYA } from "@/lib/hazards/ikon";
 import { disarankanData } from "@/lib/risiko/nilai";
 import { LencanaTingkat } from "@/components/risiko/profil-risiko";
+import { TeksPihak } from "@/components/rencana/teks-pihak";
 
 const BUNGKUS = "mx-auto max-w-7xl px-4 pb-4 sm:px-6 lg:px-8";
 const SUMBER = ["Smithsonian GVP", "USGS", "NOAA NCEI", "SRTM", "NASA"];
@@ -48,7 +49,7 @@ export function RisikoTeratas() {
         <header className="flex flex-wrap items-start justify-between gap-3">
           <div>
             <h2 id="judul-risiko-teratas" className="flex items-center gap-2 text-lg font-bold text-foreground">
-              <Database className="size-5 text-primary" aria-hidden="true" /> Risiko teratas di lokasi Anda
+              <Database className="size-5 text-primary" aria-hidden="true" /> <TeksPihak>Risiko teratas di lokasi Anda</TeksPihak>
             </h2>
             <p className="text-sm text-muted-foreground">{lokasi.kelurahan}, {lokasi.kabKota} · dihitung dari data terbuka, bukan peta risiko resmi</p>
           </div>
@@ -73,7 +74,7 @@ export function RisikoTeratas() {
                     <p className="font-semibold text-foreground">{h.label}</p>
                     <span className="ml-auto"><LencanaTingkat t={n.tingkat} /></span>
                   </div>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{n.alasan[0]}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground"><TeksPihak>{n.alasan[0]}</TeksPihak></p>
                 </li>
               );
             })}

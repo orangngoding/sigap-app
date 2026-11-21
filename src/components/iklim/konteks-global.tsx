@@ -3,6 +3,7 @@ import { ExternalLink, Flame, Globe2, Thermometer } from "lucide-react";
 import { URL_BMKG_IKLIM, teksEnso, type KondisiGlobal } from "@/lib/data/iklim-global";
 import type { RingkasTitikPanas } from "@/lib/data/titik-panas";
 import { URL_FIRMS_BERANDA } from "@/lib/data/titik-panas";
+import { TeksPihak } from "@/components/rencana/teks-pihak";
 
 const TAUTAN = "inline-flex items-center gap-1 font-semibold text-primary underline underline-offset-2";
 const fmt = (v: number) => v.toLocaleString("id-ID", { maximumFractionDigits: 0 });
@@ -59,7 +60,7 @@ export function KartuGlobal({ g }: { g: KondisiGlobal }) {
         {g.dampak.map((d) => <li key={d} className="flex gap-2"><span className="mt-2 size-1.5 shrink-0 rounded-full bg-foreground/60" aria-hidden="true" /> {d}</li>)}
       </ul>
       <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-        Dampaknya berbeda di tiap wilayah. Untuk perkiraan awal dan lama musim hujan di zona Anda, ikuti{" "}
+        <TeksPihak>Dampaknya berbeda di tiap wilayah. Untuk perkiraan awal dan lama musim hujan di zona Anda, ikuti</TeksPihak>{" "}
         <a href={URL_BMKG_IKLIM} target="_blank" rel="noopener noreferrer" className={TAUTAN}>Prakiraan Musim BMKG<ExternalLink className="size-3.5" aria-hidden="true" /><span className="sr-only"> (membuka situs BMKG di tab baru)</span></a>.
         Sumber data: {g.sumber.nama}.
       </p>
@@ -76,7 +77,7 @@ export function PanelTitikPanas({ tp, rawan }: { tp: RingkasTitikPanas; rawan: b
       <p className="mt-1 text-sm text-muted-foreground">Deteksi anomali panas oleh satelit NASA dalam 7 hari terakhir. Ini indikasi api, bukan kepastian kebakaran.</p>
       <div className={`mt-4 grid gap-4 ${rawan ? "md:grid-cols-2" : ""}`}>
         <div>
-          <p className="text-sm font-semibold">Di sekitar Anda (radius {tp.radiusKm} km)</p>
+          <p className="text-sm font-semibold"><TeksPihak>{`Di sekitar Anda (radius ${tp.radiusKm} km)`}</TeksPihak></p>
           <p className="mt-1 text-3xl font-extrabold tabular-nums">{fmt(tp.dalam7h)} <span className="text-base font-semibold text-muted-foreground">titik</span></p>
           <p className="text-sm text-muted-foreground">
             {tp.dalam24j} dalam 24 jam terakhir.{tp.terdekat ? ` Terdekat ${tp.terdekat.km} km ke arah ${tp.terdekat.arah}.` : " Tidak ada dalam 150 km."}

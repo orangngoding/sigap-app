@@ -14,6 +14,7 @@ import { useProfilStore } from "@/stores/profil-store";
 import { MAKS_PERINGATAN, MAKS_PERTANYAAN, pilihPesanAktif, tampakPeringatan, useTanyaStore, type PesanChat } from "@/stores/tanya-store";
 import { JEDA_KIRIM_MS, TAMPIL_HITUNG_MS, useBacakan, useDikte } from "@/hooks/use-suara";
 import { profilSudahDiisi } from "@/lib/preparedness/profil-awal";
+import { TeksPihak } from "@/components/rencana/teks-pihak";
 
 const CONTOH = [
   { Ikon: CloudSun, teks: "Apa itu BMKG dan apa tugasnya?" },
@@ -159,12 +160,12 @@ function Gelembung({
             <LabelDasar h={p.hasil} />
             {p.hasil.kondisi && (
               <span className="inline-flex items-center gap-1.5 rounded-full bg-sky-50 px-2.5 py-1 text-xs font-semibold text-sky-800">
-                <CloudSun className="size-3.5" aria-hidden="true" /> Data BMKG terkini di lokasi Anda
+                <CloudSun className="size-3.5" aria-hidden="true" /> <TeksPihak>Data BMKG terkini di lokasi Anda</TeksPihak>
               </span>
             )}
             {p.hasil.risiko && (
               <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-2.5 py-1 text-xs font-semibold text-primary">
-                <Database className="size-3.5" aria-hidden="true" /> Profil risiko lokasi Anda
+                <Database className="size-3.5" aria-hidden="true" /> <TeksPihak>Profil risiko lokasi Anda</TeksPihak>
               </span>
             )}
           </div>
@@ -294,7 +295,7 @@ export function AsistenChat({ varian = "halaman" }: Props) {
             <AvatarAsisten />
             <p className={`mt-4 font-extrabold tracking-tight text-foreground ${panel ? "text-xl" : "text-2xl sm:text-3xl"}`}>Halo, ada yang bisa saya bantu?</p>
             <p className="mt-2 max-w-md text-sm text-muted-foreground">
-              Tanyakan apa saja seputar bencana, cuaca, dan perubahan iklim, dengan teks atau suara. Jawaban memakai panduan resmi BNPB dan BMKG{profilSudahDiisi(profil) ? ", disesuaikan dengan keluarga Anda" : ""}.
+              Tanyakan apa saja seputar bencana, cuaca, dan perubahan iklim, dengan teks atau suara. Jawaban memakai panduan resmi BNPB dan BMKG<TeksPihak>{profilSudahDiisi(profil) ? ", disesuaikan dengan keluarga Anda" : ""}</TeksPihak>.
             </p>
             <ul className={`mt-6 grid w-full gap-2 text-left ${panel ? "" : "sm:grid-cols-2"}`}>
               {CONTOH.map(({ Ikon, teks }, i) => (

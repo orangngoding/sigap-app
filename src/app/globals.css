@@ -174,11 +174,12 @@
   html {
     @apply font-sans;
     /* Header menempel (4rem): fokus keyboard dan tautan #bagian tidak boleh tertutup (WCAG 2.2 SC 2.4.11). */
-    scroll-padding-top: 4.5rem;
+    /* --spanduk: tinggi spanduk "Sedang membuka data keluarga lain" yang ikut menempel (0 bila tidak tampil). */
+    scroll-padding-top: calc(4.5rem + var(--spanduk, 0px));
   }
   /* Halaman dengan bilah kedua yang ikut menempel (artikel Pustaka, tab Rencana): ruang ekstra. */
   html:has(.bilah-artikel, .bilah-lengket) {
-    scroll-padding-top: 7.5rem;
+    scroll-padding-top: calc(7.5rem + var(--spanduk, 0px));
   }
 
   body {

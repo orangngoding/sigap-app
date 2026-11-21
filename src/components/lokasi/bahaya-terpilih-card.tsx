@@ -6,6 +6,7 @@ import { HAZARD_BY_ID } from "@/lib/hazards/hazards";
 import { HAZARD_DESKRIPSI } from "@/lib/hazards/pack-status";
 import { KANAL_DIVERIFIKASI, KANAL_RESMI, URL_INARISK_RESMI } from "@/lib/hazards/kanal";
 import { useProfilStore } from "@/stores/profil-store";
+import { TeksPihak } from "@/components/rencana/teks-pihak";
 
 /**
  * Kartu Bahaya Terpilih (Blueprint 6.2): satu baris per bahaya terpilih dengan ringkasan dan kanal resmi.
@@ -50,7 +51,7 @@ export function BahayaTerpilihCard() {
         </ul>
       )}
       <p className="mt-3 text-xs text-muted-foreground">
-        Saran bahaya berasal dari data lokasi dan jawaban Anda, bukan peta risiko resmi.{" "}
+        <TeksPihak>Saran bahaya berasal dari data lokasi dan jawaban Anda, bukan peta risiko resmi.</TeksPihak>{" "}
         <a href={URL_INARISK_RESMI} target="_blank" rel="noopener noreferrer" className="underline">Cek peta risiko resmi di InaRISK (BNPB)</a>. Tautan diperiksa {KANAL_DIVERIFIKASI}.
       </p>
     </section>

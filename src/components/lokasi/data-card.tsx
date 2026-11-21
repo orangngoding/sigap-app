@@ -5,6 +5,7 @@ import type { ApiBase } from "@/types";
 import { SumberBadge } from "@/components/global/sumber-badge";
 import { waktuMutlak } from "@/lib/utils/format";
 import { TombolTanya } from "@/components/tanya/tombol-tanya";
+import { TeksPihak } from "@/components/rencana/teks-pihak";
 
 interface Props<T extends ApiBase> {
   title: string;
@@ -72,7 +73,7 @@ export function DataCard<T extends ApiBase>({
               </button>
             </div>
           )}
-          <p className="text-sm font-medium text-foreground">{takeaway(data)}</p>
+          <p className="text-sm font-medium text-foreground"><TeksPihak>{takeaway(data)}</TeksPihak></p>
           {tanya && <TombolTanya label="Apa artinya bagi keluarga saya?" pertanyaan={tanya(data)} />}
           {children(data)}
           <SumberBadge sumber={data.sumber} />

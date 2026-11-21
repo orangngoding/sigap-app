@@ -4,6 +4,7 @@ import type { Lokasi } from "@/types";
 import type { LangkahWizard, ProfilDraft } from "@/types/rencana";
 import { HAZARD_BY_ID } from "@/lib/hazards/hazards";
 import { OPSI_BANGUNAN } from "./langkah-rumah";
+import { TeksPihak } from "./teks-pihak";
 
 function Ubah({ onClick, label }: { onClick: () => void; label: string }) {
   return (
@@ -43,7 +44,7 @@ export function RingkasanProfil({
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-lg font-bold text-foreground">Periksa ringkasan Anda</h2>
+        <h2 className="text-lg font-bold text-foreground"><TeksPihak>Periksa ringkasan Anda</TeksPihak></h2>
         <p className="mt-1 text-sm text-muted-foreground">Pastikan sudah sesuai, lalu susun Rencana Siaga.</p>
       </div>
 
@@ -52,7 +53,7 @@ export function RingkasanProfil({
           <p className="flex items-start gap-2"><MapPin className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden="true" />
             {lokasi.kelurahan}, Kec. {lokasi.kecamatan}, {lokasi.kabKota}, {lokasi.provinsi}</p>
         ) : (
-          <p className="text-muted-foreground">Belum dipilih. Pilih lokasi supaya rencana sesuai tempat Anda.</p>
+          <p className="text-muted-foreground"><TeksPihak>Belum dipilih. Pilih lokasi supaya rencana sesuai tempat Anda.</TeksPihak></p>
         )}
       </Blok>
 

@@ -4,6 +4,7 @@ import { Info } from "lucide-react";
 import type { KunciMetrik, ProyeksiResponse } from "@/lib/data/proyeksi";
 import { LABEL_PERIODE } from "@/lib/iklim/ketahanan";
 import { GrafikProyeksi } from "./grafik-proyeksi";
+import { TeksPihak } from "@/components/rencana/teks-pihak";
 
 const fmt = (v: number, d = 1) => v.toLocaleString("id-ID", { maximumFractionDigits: d });
 
@@ -47,7 +48,7 @@ export function DataLengkap({ p }: { p: ProyeksiResponse }) {
         {p.metode ? (
           <>
             <h3 className="text-lg font-bold">Yang sudah tercatat, tahun demi tahun</h3>
-            <p className="mt-1 text-sm text-muted-foreground">Grafik ini pengamatan nyata NASA POWER 1991-{p.metode.akhirAmati} di lokasi Anda (kemarau El Niño 2015, 2019, dan 2023 ikut terbaca). Angka 2031-2050 ada di tabel di atas, bukan di grafik, karena dihitung per periode, bukan per tahun.</p>
+            <p className="mt-1 text-sm text-muted-foreground">Grafik ini pengamatan nyata NASA POWER 1991-{p.metode.akhirAmati} <TeksPihak>di lokasi Anda</TeksPihak> (kemarau El Niño 2015, 2019, dan 2023 ikut terbaca). Angka 2031-2050 ada di tabel di atas, bukan di grafik, karena dihitung per periode, bukan per tahun.</p>
           </>
         ) : (
           <>

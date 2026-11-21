@@ -1,8 +1,8 @@
-// Jalankan: npx tsx tests/unit/simulasi.test.ts  (Simulasi lewat notifikasi, hoaks, meter keselamatan, terapkan di rumah)
+// Jalankan: npx tsx tests/unit/simulasi.test.ts  (Simulasi: situasi berdiri sendiri, meter keselamatan, terapkan di rumah)
 import assert from "node:assert/strict";
 import { SKENARIO, SKENARIO_BY_ID } from "@/lib/latihan/skenario";
-import { cariLangkah, hoaksDikenali, pelajaranDari, teksBagikanLatihan, type Jawaban } from "@/lib/latihan/mesin";
-import { AWAL_KESELAMATAN, PESAN, meterKeselamatan } from "@/lib/latihan/pesan";
+import { cariLangkah, pelajaranDari, teksBagikanLatihan, type Jawaban } from "@/lib/latihan/mesin";
+import { AWAL_KESELAMATAN, meterKeselamatan } from "@/lib/latihan/keselamatan";
 import { lolosPenyaring } from "@/lib/ai/guardrails";
 import type { Tindakan } from "@/types/rencana";
 
@@ -10,39 +10,19 @@ let ok = 0;
 const tests: Array<[string, () => void]> = [];
 const t = (n: string, f: () => void) => tests.push([n, f]);
 
-const semuaId = new Set(SKENARIO.flatMap((s) => [...s.langkah, ...(s.cabang ?? [])].map((l) => l.id)));
-
-t("setiap pesan menempel ke langkah yang ada; jam berformat HH.MM", () => {
-  for (const [id, daftar] of Object.entries(PESAN)) {
-    assert.ok(semuaId.has(id), `pesan untuk langkah tak dikenal: ${id}`);
-    for (const p of daftar) assert.match(p.jam, /^\d{2}\.\d{2}$/, `${id}: ${p.jam}`);
-  }
-});
-
-t("setiap skenario punya minimal satu hoaks; hoaks hanya di pesan diteruskan atau keluarga, dengan penjelasan", () => {
-  for (const s of SKENARIO) {
-    const ids = [...s.langkah, ...(s.cabang ?? [])].map((l) => l.id);
-    const hoaks = ids.flatMap((id) => PESAN[id] ?? []).filter((p) => p.hoaks);
-    assert.ok(hoaks.length >= 1, `${s.id} tanpa hoaks`);
-    for (const p of hoaks) {
-      assert.ok(["medsos", "keluarga"].includes(p.jenis), `${s.id}: hoaks dari sumber ${p.jenis}`);
-      assert.ok((p.hoaks ?? "").length > 30, `${s.id}: penjelasan hoaks terlalu pendek`);
-    }
-  }
-});
-
-t("pesan resmi tidak memuat nomor telepon atau tautan asli; teks lolos penyaring ramalan", () => {
-  for (const daftar of Object.values(PESAN)) for (const p of daftar) {
-    if (p.jenis === "resmi") assert.doesNotMatch(p.teks, /https?:|\b0\d{8,}/, p.teks);
-    if (!p.hoaks) assert.ok(lolosPenyaring(p.teks), p.teks);
-  }
-});
-
-t("langkah berhoaks: jawaban terbaik tidak menyebarkan atau mengikuti hoaks", () => {
+t("situasi berdiri sendiri (tanpa notifikasi terpisah): tidak merujuk 'pesan itu', tanpa tautan, lolos penyaring", () => {
   for (const s of SKENARIO) for (const l of [...s.langkah, ...(s.cabang ?? [])]) {
-    if (!(PESAN[l.id] ?? []).some((p) => p.hoaks)) continue;
+    assert.doesNotMatch(l.situasi, /\b(pesan|kabar|notifikasi) (itu|tadi|tersebut)\b/i, `${l.id}: ${l.situasi}`);
+    assert.doesNotMatch(l.situasi, /https?:|www\./, l.id);
+    assert.ok(lolosPenyaring(l.situasi), `${l.id}: ${l.situasi}`);
+  }
+});
+
+t("langkah tentang pesan berantai: jawaban terbaik tidak menyebarkannya", () => {
+  for (const s of SKENARIO) for (const l of [...s.langkah, ...(s.cabang ?? [])]) {
+    if (!/pesan berantai/i.test(l.situasi)) continue;
     const terbaik = l.pilihan.find((p) => p.nilai === 2)!;
-    assert.doesNotMatch(terbaik.teks, /teruskan|sebarkan|turun/i, `${s.id}/${l.id}: ${terbaik.teks}`);
+    assert.doesNotMatch(terbaik.teks, /teruskan|sebarkan|bagikan/i, `${s.id}/${l.id}: ${terbaik.teks}`);
   }
 });
 
@@ -54,13 +34,6 @@ t("meter keselamatan: tepat +15, kurang tepat -5, berbahaya -20, dibatasi 0-100"
 
 const gempa = SKENARIO_BY_ID["gempa-malam"];
 const idxNilai = (langkahId: string, nilai: 0 | 1 | 2) => cariLangkah(gempa, langkahId)!.pilihan.findIndex((p) => p.nilai === nilai);
-
-t("hoaks dikenali dihitung dari langkah berhoaks saja", () => {
-  const benar: Jawaban[] = gempa.langkah.map((l) => ({ langkahId: l.id, pilihan: idxNilai(l.id, 2) }));
-  assert.deepEqual(hoaksDikenali(benar, gempa), { total: 1, dikenali: 1 });
-  const sebar = benar.map((j) => (j.langkahId === "g5" ? { ...j, pilihan: 0 } : j));
-  assert.deepEqual(hoaksDikenali(sebar, gempa), { total: 1, dikenali: 0 });
-});
 
 t("terapkan di rumah: keputusan keliru dicocokkan ke tindakan rencana yang bersumber sama", () => {
   const g2Terbaik = cariLangkah(gempa, "g2")!.pilihan.find((p) => p.nilai === 2)!;

@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
+import type { CSSProperties } from "react";
 import { AlertTriangle, CheckCircle2, CloudRain, ExternalLink, Eye, Flame, RefreshCw, Sparkles, Sun, Thermometer, Wind, type LucideIcon } from "lucide-react";
 import type { Lokasi } from "@/types";
 import type { HasilRencanaPekan } from "@/lib/ai/rencana-pekan";
@@ -14,6 +15,7 @@ import { PanelTitikPanas, SorotanGlobal } from "./konteks-global";
 import type { CuacaResponse } from "@/types";
 import { TTL, useDataCard } from "@/hooks/use-data-card";
 import { statusHujanLebat, teksStatusHujan } from "@/components/lokasi/cuaca-card";
+import { TeksPihak } from "@/components/rencana/teks-pihak";
 
 type Tampil<T> = T & { stale?: boolean };
 
@@ -50,7 +52,7 @@ function SelHari({ h }: { h: HariPekan }) {
   const Ikon = h.jenis[0] ? JENIS[h.jenis[0]].Ikon : null;
   const [hari, tgl, bln] = namaTanggal(h.tanggal).split(" ");
   return (
-    <li className={`flex w-[4.6rem] shrink-0 flex-col items-center gap-1 rounded-2xl border p-2 text-center ${t.sel}`}>
+    <li data-tingkat={h.tingkat} className={`flex w-[4.6rem] shrink-0 flex-col lg:w-auto items-center gap-1 rounded-2xl border p-2 text-center ${t.sel}`}>
       <span className="text-[11px] font-semibold text-muted-foreground">{hari.slice(0, 3)}</span>
       <span className="text-sm font-bold">{tgl} {bln}</span>
       <span className="flex h-5 items-center" aria-hidden="true">{Ikon ? <Ikon className="size-4" /> : <CheckCircle2 className="size-4 text-success-foreground" />}</span>
@@ -60,7 +62,14 @@ function SelHari({ h }: { h: HariPekan }) {
   );
 }
 
-type LokasiPekan = Pick<Lokasi, "lat" | "lon" | "kabKota" | "provinsi">;
+/** Wadah gulir hari per hari: tampilkan hari berisiko pertama (di HP hanya 4-5 hari yang terlihat). */
+function gulirKeHariRisiko(ol: HTMLOListElement | null) {
+  if (!ol || ol.scrollWidth <= ol.clientWidth) return;
+  const sel = ol.querySelector<HTMLElement>('li:not([data-tingkat="aman"])');
+  if (sel) ol.scrollLeft = Math.max(0, sel.offsetLeft - 8);
+}
+
+type LokasiPekan =Pick<Lokasi, "lat" | "lon" | "kabKota" | "provinsi">;
 
 interface ItemStatus { j: JenisSinyal; tingkat: Tingkat; label: string; teks: string }
 
@@ -141,7 +150,7 @@ export function SiagaPekan({ lokasi, onBukaMusim }: { lokasi: LokasiPekan & { ad
   if (sinyal.isPending)
     return (
       <div className="space-y-3" aria-busy="true" role="status">
-        <p className="text-sm text-muted-foreground">Membaca prakiraan 16 hari dan kualitas udara di wilayah Anda…</p>
+        <p className="text-sm text-muted-foreground"><TeksPihak>Membaca prakiraan 16 hari dan kualitas udara di wilayah Anda…</TeksPihak></p>
         <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-5">{URUTAN.map((j) => <div key={j} className="h-24 animate-pulse rounded-2xl bg-muted motion-reduce:animate-none" />)}</div>
         <div className="h-28 animate-pulse rounded-2xl bg-muted motion-reduce:animate-none" />
       </div>
@@ -212,7 +221,14 @@ export function SiagaPekan({ lokasi, onBukaMusim }: { lokasi: LokasiPekan & { ad
             <span className="font-semibold text-primary">Suhu dan hujan per hari</span>
           </summary>
           {/* relative: teks sr-only (position absolute) di tiap sel ikut terpotong wadah gulir, tidak melebarkan halaman. */}
-          <ol className="relative mt-3 flex gap-2 overflow-x-auto pb-2" aria-label="Prakiraan 16 hari">
+          {/* Layar lebar: semua hari dalam satu baris (dulu hari ke-16 terpotong di luar wadah gulir, padahal bisa jadi
+              satu-satunya hari berisiko). Layar sempit: tetap digulir, dan wadah langsung digulir ke hari berisiko pertama. */}
+          <ol
+            ref={gulirKeHariRisiko}
+            style={{ "--n": d.hari.length } as CSSProperties}
+            className="relative mt-3 flex gap-2 overflow-x-auto pb-2 lg:grid lg:grid-cols-[repeat(var(--n),minmax(0,1fr))] lg:overflow-visible"
+            aria-label={`Prakiraan ${d.hari.length} hari`}
+          >
             {d.hari.map((h) => <SelHari key={h.tanggal} h={h} />)}
           </ol>
         </details>
@@ -223,7 +239,7 @@ export function SiagaPekan({ lokasi, onBukaMusim }: { lokasi: LokasiPekan & { ad
 
       <section aria-labelledby="judul-rencana-pekan" className="rounded-3xl bg-ink p-6 text-ink-foreground sm:p-8 cetak-panel">
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <h3 id="judul-rencana-pekan" className="text-xl font-bold text-white">Rencana 7 hari untuk keluarga Anda</h3>
+          <h3 id="judul-rencana-pekan" className="text-xl font-bold text-white"><TeksPihak>Rencana 7 hari untuk keluarga Anda</TeksPihak></h3>
           {rencana.data && (
             <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-emerald-200">
               <Sparkles className="size-3.5" aria-hidden="true" /> {rencana.data.mode === "ai" ? "Disusun AI dari sinyal di atas, diperiksa kode" : rencana.data.mode === "tenang" ? "Minggu tenang: cukup persiapan ringan" : "Disusun dari aturan (AI sedang tidak tersedia)"}
@@ -240,14 +256,14 @@ export function SiagaPekan({ lokasi, onBukaMusim }: { lokasi: LokasiPekan & { ad
           <p className="mt-4 text-sm text-ink-muted">Rencana belum dapat disusun. Tindakan per bahaya di bawah tetap berlaku.</p>
         ) : rencana.data ? (
           <>
-            <p className="mt-4 max-w-3xl leading-relaxed text-white">{rencana.data.ringkasan}</p>
+            <p className="mt-4 max-w-3xl leading-relaxed text-white"><TeksPihak>{rencana.data.ringkasan}</TeksPihak></p>
             <ol className="mt-5 space-y-3">
               {rencana.data.langkah.map((l, i) => (
                 <li key={i} className="flex gap-4 rounded-2xl bg-white/5 p-4">
                   <span className="h-fit shrink-0 rounded-full bg-emerald-400/15 px-3 py-1 text-xs font-bold text-emerald-200">{l.kapan}</span>
                   <div>
-                    <p className="font-semibold text-white">{l.tindakan}</p>
-                    <p className="mt-1 text-sm leading-relaxed text-ink-muted">{l.alasan}</p>
+                    <p className="font-semibold text-white"><TeksPihak>{l.tindakan}</TeksPihak></p>
+                    <p className="mt-1 text-sm leading-relaxed text-ink-muted"><TeksPihak>{l.alasan}</TeksPihak></p>
                   </div>
                 </li>
               ))}
@@ -272,10 +288,10 @@ export function SiagaPekan({ lokasi, onBukaMusim }: { lokasi: LokasiPekan & { ad
               return (
                 <li key={s.jenis} className="cetak-utuh rounded-2xl border border-border bg-surface p-5">
                   <div className="flex items-start justify-between gap-3">
-                    <p className="flex items-center gap-2 font-semibold"><Ikon className="size-5 text-primary" aria-hidden="true" /> {s.judul}</p>
+                    <p className="flex items-center gap-2 font-semibold"><Ikon className="size-5 text-primary" aria-hidden="true" /> <TeksPihak>{s.judul}</TeksPihak></p>
                     <span className={`inline-flex shrink-0 items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold ${t.chip}`}><t.Ikon className="size-3" aria-hidden="true" /> {t.label}{waspadaHari > 0 && s.tingkat === "waspada" ? ` (${waspadaHari} hari)` : ""}</span>
                   </div>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.fakta}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground"><TeksPihak>{s.fakta}</TeksPihak></p>
                   <ul className="mt-3 space-y-1.5 text-sm">
                     {s.tindakan.map((x) => (
                       <li key={x} className="flex gap-2"><CheckCircle2 className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden="true" /> {x}</li>

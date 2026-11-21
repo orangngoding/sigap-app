@@ -9,7 +9,7 @@ import { hitungFaktorKerentanan } from "@/lib/preparedness/faktor";
 import { hitungTas } from "@/lib/preparedness/tas";
 import { HAZARD_BY_ID } from "@/lib/hazards/hazards";
 import { hashMasukan } from "@/lib/rencana/hash";
-import { bangunRencanaTemplat, chunkKeTindakan, kelompokProfil, relevan, ringkasanTemplat, skorChunk } from "@/lib/rencana/templat";
+import { bangunRencanaTemplat, chunkKeTindakan, kelompokProfil, pilihChunk, relevan, ringkasanTemplat, skorChunk } from "@/lib/rencana/templat";
 import { GalatProvider, type LlmProvider } from "./provider";
 import { RencanaSiaga, type RencanaRequestT } from "./schema";
 import { bersihkanTeks, lolosPenyaring } from "./guardrails";
@@ -221,7 +221,18 @@ export function pascaProses(
       }
     }
   }
-  return hasil.slice(0, 60);
+  const inti = hasil.slice(0, 60);
+  // Panduan "Sesudah" tidak dihitung dalam skor, tetapi model hanya melihat 24 passage sehingga sering memilih sedikit.
+  // Lengkapi dari KB (pilihan templat yang sama) agar panduan pemulihan tetap utuh: kesehatan, air, listrik, dokumen.
+  for (const c of pilihChunk(kb, p)) {
+    if (c.phase !== "sesudah") continue;
+    const t = chunkKeTindakan(c);
+    if (!sudah.has(t.actionId)) {
+      sudah.add(t.actionId);
+      inti.push(t);
+    }
+  }
+  return inti;
 }
 
 export function rekomendasiArtikel(bahaya: HazardId[], artikel: ArtikelRingkas[] = []): string[] {

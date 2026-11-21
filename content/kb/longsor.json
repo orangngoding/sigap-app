@@ -542,5 +542,33 @@
     "sourceUrl": "https://ppid.demakkab.go.id/asset/files/dokumendokumen/d1e6343258a5d7b07a20a3760c0d2027.pdf",
     "accessedAt": "2026-11-17",
     "reviewedBy": []
+  },
+  {
+    "id": "longsor-sesudah-008",
+    "hazard": "longsor",
+    "phase": "sesudah",
+    "audience": ["umum"],
+    "priority": "tinggi",
+    "darurat": false,
+    "title": "Periksa ke dokter bila demam setelah kena lumpur",
+    "body": "Leptospirosis kerap muncul setelah banjir dan longsor. Demam, nyeri otot, sakit kepala, atau mata merah setelah terpapar lumpur perlu segera diperiksa ke fasilitas kesehatan.",
+    "sourceTitle": "Kemenkes Siaga Penanggulangan Leptospirosis Pasca Bencana (Rilis Kemenkes, 2025)",
+    "sourceUrl": "https://www.kemkes.go.id/id/kemenkes-siaga-penanggulangan-leptospirosis-pasca-bencana",
+    "accessedAt": "2026-11-21",
+    "reviewedBy": []
+  },
+  {
+    "id": "longsor-sesudah-009",
+    "hazard": "longsor",
+    "phase": "sesudah",
+    "audience": ["umum"],
+    "priority": "sedang",
+    "darurat": false,
+    "title": "Pakai pelindung saat membersihkan lumpur",
+    "body": "Bakteri leptospira menular lewat air, lumpur, tanah, atau makanan yang tercemar. Membersihkan rumah atau beraktivitas di area berlumpur tanpa alat pelindung diri memperbesar risiko tertular.",
+    "sourceTitle": "Kemenkes Siaga Penanggulangan Leptospirosis Pasca Bencana (Rilis Kemenkes, 2025)",
+    "sourceUrl": "https://www.kemkes.go.id/id/kemenkes-siaga-penanggulangan-leptospirosis-pasca-bencana",
+    "accessedAt": "2026-11-21",
+    "reviewedBy": []
   }
 ]

@@ -27,6 +27,7 @@ import { DataLengkap } from "./data-lengkap";
 import { SiagaPekan, useSinyalPekan } from "./siaga-pekan";
 import { KartuGlobal } from "./konteks-global";
 import { TigaBulan } from "./tiga-bulan";
+import { TeksPihak, usePihak } from "@/components/rencana/teks-pihak";
 
 type TabId = "pekan" | "musim" | "jangka";
 const TAB: Array<{ id: TabId; label: string; sub: string; Ikon: typeof Home }> = [
@@ -53,9 +54,9 @@ const lengkap = (p: ProyeksiResponse | undefined): p is ProyeksiResponse => Bool
 function Menghitung() {
   return (
     <div role="status" aria-live="polite" className="rounded-3xl border border-border bg-surface p-6 sm:p-8">
-      <p className="text-lg font-bold">Menghitung iklim wilayah Anda…</p>
+      <p className="text-lg font-bold"><TeksPihak>Menghitung iklim wilayah Anda…</TeksPihak></p>
       <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
-        Kami meringkas sekitar 60 tahun data dari dua model iklim global untuk wilayah Anda. Pertama kali bisa memakan 15-30 detik; setelah itu tersimpan di perangkat dan langsung tampil.
+        <TeksPihak>Kami meringkas sekitar 60 tahun data dari dua model iklim global untuk wilayah Anda. Pertama kali bisa memakan 15-30 detik; setelah itu tersimpan di perangkat dan langsung tampil.</TeksPihak>
       </p>
       <div className="mt-5 space-y-3" aria-hidden="true">
         <div className="h-4 w-3/4 animate-pulse rounded bg-muted motion-reduce:animate-none" />
@@ -72,7 +73,7 @@ function TanpaLokasi() {
         <Image src={FOTO.kekeringan.src} alt="" fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />
       </div>
       <div className="p-6 sm:p-8">
-        <h2 className="text-2xl font-bold">Pilih lokasi untuk melihat bulan rawan di wilayah Anda</h2>
+        <h2 className="text-2xl font-bold"><TeksPihak>Pilih lokasi untuk melihat bulan rawan di wilayah Anda</TeksPihak></h2>
         <p className="mt-3 text-muted-foreground">Proyeksi dihitung per grid sekitar 25 km. Lokasi hanya disimpan di perangkat ini; koordinat dibulatkan sebelum dikirim ke penyedia data.</p>
         <Link href="/lokasi" className="press mt-6 inline-flex min-h-11 items-center gap-2 rounded-xl bg-primary px-5 text-sm font-semibold text-primary-foreground hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
           <MapPin className="size-4" aria-hidden="true" /> Pilih lokasi
@@ -83,10 +84,11 @@ function TanpaLokasi() {
 }
 
 function Bagian({ id, judul, pengantar, children }: { id: string; judul: string; pengantar?: string; children: React.ReactNode }) {
+  const { s: sebut } = usePihak();
   return (
     <section aria-labelledby={id} className="scroll-mt-24">
-      <h2 id={id} className="text-2xl font-bold tracking-tight">{judul}</h2>
-      {pengantar && <p className="mt-1.5 max-w-3xl text-sm leading-relaxed text-muted-foreground">{pengantar}</p>}
+      <h2 id={id} className="text-2xl font-bold tracking-tight">{sebut(judul)}</h2>
+      {pengantar && <p className="mt-1.5 max-w-3xl text-sm leading-relaxed text-muted-foreground">{sebut(pengantar)}</p>}
       <div className="mt-5">{children}</div>
     </section>
   );
@@ -210,7 +212,7 @@ export function SiagaIklim() {
         <Link href="/lokasi" className="inline-flex min-h-11 items-center font-semibold text-primary underline underline-offset-2">Ganti lokasi</Link>
       </div>
 
-      <div className="tanpa-cetak bilah-lengket sticky top-16 z-30 -mx-4 px-4 py-2 sm:mx-0 sm:px-0">
+      <div className="tanpa-cetak bilah-lengket sticky top-[calc(4rem+var(--spanduk,0px))] z-30 -mx-4 px-4 py-2 sm:mx-0 sm:px-0">
         <div role="tablist" aria-label="Rentang waktu" className="kaca isolate grid grid-cols-3 gap-1 rounded-2xl border border-border/70 p-1 shadow-sm">
           {TAB.map(({ id, label, sub, Ikon }) => {
             const aktif = tab === id;
@@ -243,12 +245,12 @@ export function SiagaIklim() {
         )}
         {klimatologi.isPending ? (
           <div role="status" aria-busy="true" className="space-y-3">
-            <p className="text-sm text-muted-foreground">Membaca 30 tahun data pengamatan iklim di wilayah Anda…</p>
+            <p className="text-sm text-muted-foreground"><TeksPihak>Membaca 30 tahun data pengamatan iklim di wilayah Anda…</TeksPihak></p>
             <div className="grid gap-3 md:grid-cols-3">{[0, 1, 2].map((i) => <div key={i} className="h-40 animate-pulse rounded-2xl bg-muted motion-reduce:animate-none" />)}</div>
           </div>
         ) : klimatologi.isError ? (
           <div role="alert" className="rounded-3xl border border-border bg-surface p-6">
-            <p className="font-semibold">Pola iklim wilayah Anda belum dapat dimuat.</p>
+            <p className="font-semibold"><TeksPihak>Pola iklim wilayah Anda belum dapat dimuat.</TeksPihak></p>
             <p className="mt-1 text-sm text-muted-foreground">{klimatologi.error instanceof GalatKuota ? "Penyedia data utama sedang melebihi batas pemakaian hariannya dan sumber cadangan (NASA POWER) juga sedang tidak terjangkau. Informasi kondisi iklim tahun ini di atas tetap berlaku; coba lagi beberapa saat lagi." : "Penyedia data mungkin sedang sibuk. Informasi kondisi iklim tahun ini di atas tetap berlaku; coba lagi nanti."}</p>
             <button type="button" onClick={() => klimatologi.refetch()} className="press mt-4 inline-flex min-h-11 items-center gap-2 rounded-xl border border-border px-4 text-sm font-semibold hover:bg-muted">
               <RefreshCw className="size-4" aria-hidden="true" /> Coba lagi
@@ -281,14 +283,14 @@ export function SiagaIklim() {
               {p!.stale && <p className="rounded-xl bg-warning px-4 py-2 text-sm text-warning-foreground">Menampilkan data tersimpan terakhir karena perangkat sedang offline atau server tidak terjangkau.</p>}
               {p!.perkiraan && (
                 <p className="rounded-xl bg-muted px-4 py-2 text-sm leading-relaxed" role="note">
-                  {p!.perkiraan.alasan === "cadangan-kuota"
+                  <TeksPihak>{p!.perkiraan.alasan === "cadangan-kuota"
                     ? `Lokasi Anda belum bisa dihitung langsung karena penyedia data sedang melebihi batas pemakaian, jadi ini data iklim kota terdekat: ${p!.perkiraan.kota} (sekitar ${p!.perkiraan.km} km). Pola umumnya serupa, tetapi angkanya perkiraan.`
-                    : `Data iklim kota terdekat: ${p!.perkiraan.kota} (sekitar ${p!.perkiraan.km} km). Model iklim beresolusi 25-50 km, jadi hasilnya serupa untuk sekitar kota ini.`}
+                    : `Data iklim kota terdekat: ${p!.perkiraan.kota} (sekitar ${p!.perkiraan.km} km). Model iklim beresolusi 25-50 km, jadi hasilnya serupa untuk sekitar kota ini.`}</TeksPihak>
                 </p>
               )}
               {p!.metode?.id === "pengamatan-delta" && (
                 <p className="rounded-xl bg-muted px-4 py-2 text-sm leading-relaxed" role="note">
-                  Dihitung dari data pengamatan lokasi Anda (NASA POWER, 1991-{p!.metode.akhirAmati}) karena model iklim resolusi tinggi sedang penuh. Angka 2031-2050 = pola cuaca {p!.metode.akhirAmati - 19}-{p!.metode.akhirAmati} di lokasi ini dengan suhu siang sekitar {String(p!.metode.perubahanSuhuC).replace(".", ",")}°C di atas rata-rata 1991-2010, sesuai proyeksi ansambel model CMIP6 untuk Indonesia (World Bank). Arah dan besarnya dapat dipercaya; detail per lokasi sedikit lebih kasar.
+                  <TeksPihak>Dihitung dari data pengamatan lokasi Anda</TeksPihak> (NASA POWER, 1991-{p!.metode.akhirAmati}) karena model iklim resolusi tinggi sedang penuh. Angka 2031-2050 = pola cuaca {p!.metode.akhirAmati - 19}-{p!.metode.akhirAmati} di lokasi ini dengan suhu siang sekitar {String(p!.metode.perubahanSuhuC).replace(".", ",")}°C di atas rata-rata 1991-2010, sesuai proyeksi ansambel model CMIP6 untuk Indonesia (World Bank). Arah dan besarnya dapat dipercaya; detail per lokasi sedikit lebih kasar.
                 </p>
               )}
               {/* Urutan untuk pembaca awam: tanya dulu, lalu hasil, lalu tindakan, lalu rinciannya. */}

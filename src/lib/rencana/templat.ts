@@ -9,7 +9,15 @@ import type { RisikoRingkas } from "@/lib/ai/schema";
 
 const BOBOT = { tinggi: 3, sedang: 2, rendah: 1 } as const;
 const URUT_FASE: Phase[] = ["sebelum", "saat", "sesudah"];
-const MAKS_UMUM = 6;
+/**
+ * Batas potongan per bahaya per fase. "Saat" tetap ringkas (dibaca saat panik); "sebelum" dan "sesudah" boleh lebih
+ * banyak karena dibaca selagi tenang dan memuat panduan pemulihan (kesehatan, air bersih, listrik, dokumen).
+ */
+const MAKS_FASE: Record<Phase, { sedikit: number; banyak: number; umum: number }> = {
+  sebelum: { sedikit: 6, banyak: 4, umum: 8 },
+  saat: { sedikit: 5, banyak: 3, umum: 6 },
+  sesudah: { sedikit: 7, banyak: 4, umum: 8 },
+};
 
 export function kelompokProfil(p: ProfilAnonim): Group[] {
   const g: Group[] = [];
@@ -42,12 +50,12 @@ export function relevan(c: Chunk, p: ProfilAnonim): boolean {
 }
 
 export function pilihChunk(kb: Chunk[], p: ProfilAnonim): Chunk[] {
-  const maks = p.bahaya.length > 2 ? 3 : 5;
   const hasil: Chunk[] = [];
   const urutan = ["umum", ...p.bahaya];
   for (const fase of URUT_FASE) {
+    const m = MAKS_FASE[fase];
     for (const h of urutan) {
-      const batas = h === "umum" ? MAKS_UMUM : maks;
+      const batas = h === "umum" ? m.umum : p.bahaya.length > 2 ? m.banyak : m.sedikit;
       const kandidat = kb
         .filter((c) => c.phase === fase && c.hazard === h && relevan(c, p))
         .map((c, i) => ({ c, s: skorChunk(c, p), i }))

@@ -1,13 +1,14 @@
 // Cadangan data SIGAP di perangkat: ekspor ke JSON dan pulihkan di perangkat lain (ganti HP, peramban baru).
 // Murni (tanpa DOM) agar bisa diuji. File cadangan dianggap tidak tepercaya: hanya kunci `sigap:v1:*`
 // yang dikenal yang dipulihkan, ukurannya dibatasi, dan isinya harus JSON.
+import { KUNCI_KELUARGA, bersihkanDaftar } from "@/lib/keluarga/keluarga";
 
 export const AWALAN = "sigap:v1:";
 /** Batas ukuran file cadangan (byte). Data SIGAP biasanya puluhan KB. */
 export const MAKS_BYTE_CADANGAN = 2 * 1024 * 1024;
 
 /** Kunci yang boleh dipulihkan. Cache respons data dan antrean toast tidak ikut (bisa dibuat ulang). */
-const POLA_KUNCI = /^sigap:v1:(lokasi|profil|progres|rencana|kartu|tanya|latihan|tas|iklimrumah|medis|simulasi|aksiiklim)$/;
+const POLA_KUNCI = /^sigap:v1:(lokasi|profil|progres|rencana|kartu|tanya|latihan|tas|iklimrumah|medis|simulasi|aksiiklim|keluarga)$/;
 
 export interface IsiCadangan {
   diekspor: string | null;
@@ -37,6 +38,14 @@ export function bacaCadangan(teks: string): HasilBaca {
       dilewati.push(k);
       continue;
     }
+    // Daftar keluarga bukan store zustand ({ versi, aktif, daftar }): diperiksa dengan pembersihnya sendiri.
+    // Sebelumnya ikut ditolak oleh pemeriksaan { state } di bawah, sehingga semua keluarga lain hilang saat dipulihkan.
+    if (k === KUNCI_KELUARGA) {
+      const d = bersihkanDaftar(v);
+      if (d) kunci[k] = JSON.stringify(d);
+      else dilewati.push(k);
+      continue;
+    }
     // Store zustand menyimpan { state, version }; nilai lain tidak dipulihkan.
     if (!v || typeof v !== "object" || !("state" in v)) {
       dilewati.push(k);
@@ -60,6 +69,9 @@ const LABEL: Record<string, string> = {
   tas: "kedaluwarsa tas siaga",
   iklimrumah: "jawaban Siaga Iklim",
   aksiiklim: "tindakan dari Siaga Iklim",
+  keluarga: "daftar keluarga yang didampingi",
+  medis: "info medis darurat",
+  simulasi: "riwayat Simulasi",
 };
 
 /** Daftar isi cadangan yang mudah dibaca, untuk konfirmasi sebelum memulihkan. */

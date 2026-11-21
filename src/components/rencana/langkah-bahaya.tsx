@@ -9,6 +9,7 @@ import { PERTANYAAN_PEMICU, URL_INARISK } from "@/lib/hazards/pertanyaan";
 import { sarankanBahaya, tambahkanBahaya, terapkanPerubahanJawaban, varianDisarankan } from "@/lib/preparedness/saran-bahaya";
 import { ProfilRisiko } from "@/components/risiko/profil-risiko";
 import { CheckboxGroup, FieldError, RadioGroup, fieldId } from "./form-kit";
+import { usePihak } from "@/components/rencana/teks-pihak";
 
 const JAWABAN = [
   { value: "ya", label: "Ya" },
@@ -32,6 +33,7 @@ interface Props {
 }
 
 export function LangkahBahaya({ profil, ubah, errors, lokasi }: Props) {
+  const { s: sebut } = usePihak();
   const saran = sarankanBahaya(profil.jawabanPemicu);
 
   const jawab = (id: string, nilai: JawabanPemicu) => {
@@ -59,19 +61,19 @@ export function LangkahBahaya({ profil, ubah, errors, lokasi }: Props) {
           lokasi={lokasi}
           terpilih={profil.bahaya}
           ringkas
-          judul="Langkah 1: risiko di lokasi Anda menurut data"
+          judul={sebut("Langkah 1: risiko di lokasi Anda menurut data")}
           onTambah={(ids, varian) => ubah(tambahkanBahaya(profil, ids, varian))}
         />
       )}
       <section aria-labelledby="judul-pertanyaan">
-        <h2 id="judul-pertanyaan" className="text-lg font-bold text-foreground">Kenali lingkungan tempat tinggal Anda</h2>
+        <h2 id="judul-pertanyaan" className="text-lg font-bold text-foreground">{sebut("Kenali lingkungan tempat tinggal Anda")}</h2>
         <p className="mt-1 text-sm text-muted-foreground">
           Data tidak bisa melihat sungai kecil, tebing, atau saluran di dekat rumah. Jawab tujuh pertanyaan singkat ini untuk melengkapinya.
         </p>
         <div className="mt-5 space-y-6">
           {PERTANYAAN_PEMICU.map((q) => (
             <RadioGroup<JawabanPemicu>
-              key={q.id} name={`jawaban-${q.id}`} legend={q.teks} bantuan={q.bantuan} options={JAWABAN}
+              key={q.id} name={`jawaban-${q.id}`} legend={sebut(q.teks)} bantuan={sebut(q.bantuan)} options={JAWABAN}
               value={profil.jawabanPemicu[q.id] ?? "tidak_tahu"} onChange={(v) => jawab(q.id, v)}
             />
           ))}
@@ -94,13 +96,13 @@ export function LangkahBahaya({ profil, ubah, errors, lokasi }: Props) {
                     <span className="rounded bg-muted px-1.5 py-0.5 text-xs font-normal text-muted-foreground">Segera hadir</span>
                   )}
                 </span>
-                <span className="block text-muted-foreground">Disarankan karena {s.alasan.join("; ")}.</span>
+                <span className="block text-muted-foreground">Disarankan karena {sebut(s.alasan.join("; "))}.</span>
               </li>
             );
           })}
         </ul>
         <p className="mt-4 text-sm text-muted-foreground">
-          Saran ini berasal dari jawaban Anda, bukan peta risiko resmi.{" "}
+          {sebut("Saran ini berasal dari jawaban Anda, bukan peta risiko resmi.")}{" "}
           <a href={URL_INARISK} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 font-semibold text-primary underline-offset-2 hover:underline">
             Cek peta risiko resmi di InaRISK <ExternalLink className="size-3.5" aria-hidden="true" />
             <span className="sr-only">(tab baru)</span>
@@ -110,7 +112,7 @@ export function LangkahBahaya({ profil, ubah, errors, lokasi }: Props) {
 
       <section aria-labelledby="judul-picker">
         <fieldset id={fieldId("bahaya")} tabIndex={-1} className="min-w-0 focus:outline-none">
-          <legend id="judul-picker" className="text-lg font-bold text-foreground">Pilih bahaya untuk rencana Anda</legend>
+          <legend id="judul-picker" className="text-lg font-bold text-foreground">{sebut("Pilih bahaya untuk rencana Anda")}</legend>
           <p className="mt-1 text-sm text-muted-foreground">
             Pilih minimal satu. Semua 9 bahaya tersedia dan masing-masing punya langkah sebelum, saat, dan sesudah. Anda bebas menambah atau mengurangi.
           </p>

@@ -12,6 +12,7 @@ import { useLokasiStore } from "@/stores/lokasi-store";
 import { useProgresStore } from "@/stores/progres-store";
 import { useRencanaStore } from "@/stores/rencana-store";
 import { useTasStore } from "@/stores/tas-store";
+import { usePihak } from "@/components/rencana/teks-pihak";
 
 const R = 20;
 const K = 2 * Math.PI * R;
@@ -31,6 +32,7 @@ export function KartuLanjutkan() {
     [rencana, progres],
   );
   const skor = useAngkaHalus(hasil?.skor ?? 0, { tunda: 0.3 });
+  const judul = usePihak().s("Rencana keluarga Anda");
 
   if (!siap || !rencana || !hasil || rencana.mode === "contoh") return null;
   const p = ringkasPengingat(rencana.tas, kedaluwarsa);
@@ -38,7 +40,7 @@ export function KartuLanjutkan() {
 
   return (
     <motion.section
-      aria-label="Rencana keluarga Anda"
+      aria-label={judul}
       initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, delay: 0.3 }}
       className="kaca-gelap mt-6 flex max-w-xl flex-wrap items-center gap-4 rounded-2xl border border-white/15 p-4"
     >
@@ -50,7 +52,7 @@ export function KartuLanjutkan() {
         <span className="absolute inset-0 flex items-center justify-center text-sm font-bold tabular-nums text-white">{skor}</span>
       </div>
       <div className="min-w-0 flex-1">
-        <p className="text-sm font-semibold text-white">Rencana keluarga Anda{lokasi ? ` · ${lokasi.kelurahan}` : ""}</p>
+        <p className="text-sm font-semibold text-white">{judul}{lokasi ? ` · ${lokasi.kelurahan}` : ""}</p>
         <p className="text-sm text-white/70">
           Skor {hasil.label.toLowerCase()} · {hasil.dicentang} dari {hasil.total} butir siap
         </p>

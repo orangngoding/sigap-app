@@ -7,6 +7,7 @@ import { disarankanData, type NilaiBahaya, type TingkatRisiko } from "@/lib/risi
 import { HAZARD_BY_ID } from "@/lib/hazards/hazards";
 import { IKON_BAHAYA } from "@/lib/hazards/ikon";
 import { URL_INARISK } from "@/lib/hazards/pertanyaan";
+import { TeksPihak, usePihak } from "@/components/rencana/teks-pihak";
 
 const GAYA: Record<TingkatRisiko, { label: string; kelas: string }> = {
   tinggi: { label: "Tinggi", kelas: "bg-danger text-danger-foreground" },
@@ -47,7 +48,7 @@ function Baris({ n, belumAda, onTambah }: { n: NilaiBahaya; belumAda: boolean; o
         </div>
         {n.alasan.length > 0 ? (
           <ul className="mt-1 space-y-0.5 text-sm leading-relaxed text-muted-foreground">
-            {n.alasan.map((a) => <li key={a}>{a}</li>)}
+            {n.alasan.map((a) => <li key={a}><TeksPihak>{a}</TeksPihak></li>)}
           </ul>
         ) : (
           <p className="mt-1 text-sm text-muted-foreground">Sumber data ({n.sumber}) belum terbaca saat ini; jawab pertanyaan swa-penilaian atau cek InaRISK.</p>
@@ -69,7 +70,8 @@ function Baris({ n, belumAda, onTambah }: { n: NilaiBahaya; belumAda: boolean; o
 }
 
 /** Panel "Risiko di lokasi Anda": 9 bahaya dinilai dari data terbuka, dengan alasan berupa angka dan sumber. */
-export function ProfilRisiko({ lokasi, terpilih, onTambah, ringkas = false, judul = "Risiko di lokasi Anda menurut data", idJudul = "judul-profil-risiko" }: Props) {
+export function ProfilRisiko({ lokasi, terpilih, onTambah, ringkas = false, judul: judulAsli = "Risiko di lokasi Anda menurut data", idJudul = "judul-profil-risiko" }: Props) {
+  const judul = usePihak().s(judulAsli);
   const q = useRisikoLokasi(lokasi);
   const [buka, setBuka] = useState(!ringkas);
   const ada = new Set(terpilih ?? []);
@@ -132,7 +134,7 @@ export function ProfilRisiko({ lokasi, terpilih, onTambah, ringkas = false, judu
       )}
 
       <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
-        {q.data.catatan}{" "}
+        <TeksPihak>{q.data.catatan}</TeksPihak>{" "}
         <a href={URL_INARISK} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 font-semibold text-primary underline-offset-2 hover:underline">
           Buka InaRISK <ExternalLink className="size-3" aria-hidden="true" /><span className="sr-only">(tab baru)</span>
         </a>
