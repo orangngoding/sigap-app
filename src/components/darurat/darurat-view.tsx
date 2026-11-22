@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import {
-  Ambulance, CheckCircle2, ChevronDown, Flame, LifeBuoy, MapPin,
+  Ambulance, ChevronDown, Flame, LifeBuoy, MapPin,
   Phone, PlayCircle, ShieldHalf, Siren, Volume2, VolumeX, Wifi, WifiOff, X, type LucideIcon,
 } from "lucide-react";
 import { IKON_BAHAYA } from "@/lib/hazards/ikon";
@@ -21,6 +21,7 @@ import { PanduanLangkah } from "./panduan-langkah";
 import { SituasiKritis } from "./situasi-kritis";
 import { KabariKeluarga } from "./kabari-keluarga";
 import { InfoMedis } from "./info-medis";
+import { StatusKoneksi, useOnline } from "./status-koneksi";
 import { useLokasiStore } from "@/stores/lokasi-store";
 import { KUNCI_RISIKO, bacaRisikoTersimpan } from "@/hooks/use-risiko-lokasi";
 import type { TingkatRisiko } from "@/lib/risiko/nilai";
@@ -42,21 +43,6 @@ function TombolBacakan({ id, teks }: { id: string; teks: string }) {
     <button type="button" onClick={() => s.alih(id, teks)} className={`inline-flex min-h-14 items-center justify-center gap-2 rounded-2xl border-2 border-white px-4 text-lg font-bold ${FOKUS}`} aria-pressed={aktif}>
       {aktif ? <VolumeX className="size-5" aria-hidden="true" /> : <Volume2 className="size-5" aria-hidden="true" />} {aktif ? "Berhenti" : "Bacakan"}
     </button>
-  );
-}
-
-function useOnline(): boolean {
-  return useSyncExternalStore(
-    (cb) => {
-      window.addEventListener("online", cb);
-      window.addEventListener("offline", cb);
-      return () => {
-        window.removeEventListener("online", cb);
-        window.removeEventListener("offline", cb);
-      };
-    },
-    () => navigator.onLine,
-    () => true,
   );
 }
 
@@ -167,7 +153,7 @@ export function DaruratView() {
           <div className="flex items-center gap-2">
             <p role="status" className={`inline-flex items-center gap-2 rounded-full border-2 px-3 py-1 text-base font-bold ${online ? "border-emerald-400 text-emerald-300" : "border-yellow-300 text-yellow-300"}`}>
               {online ? <Wifi className="size-5" aria-hidden="true" /> : <WifiOff className="size-5" aria-hidden="true" />}
-              {online ? "Online" : "Offline: tetap bisa dipakai"}
+              {online ? "Online" : "Offline"}
             </p>
             <Link href="/" aria-label="Keluar dari Mode Darurat" className={`inline-flex min-h-11 items-center gap-1.5 rounded-full border-2 border-white/60 px-3 text-base font-bold hover:border-white ${FOKUS}`}>
               <X className="size-5" aria-hidden="true" /> Keluar
@@ -175,12 +161,7 @@ export function DaruratView() {
           </div>
         </div>
         <p className="mt-1 text-white/85">Tetap tenang. Lindungi diri dulu, lalu hubungi bantuan.</p>
-        {siapOffline !== null && (
-          <p className={`mt-2 inline-flex items-center gap-2 text-base ${siapOffline ? "text-emerald-300" : "text-yellow-200"}`}>
-            {siapOffline ? <CheckCircle2 className="size-5" aria-hidden="true" /> : <WifiOff className="size-5" aria-hidden="true" />}
-            {siapOffline ? "Halaman ini tersimpan di ponsel: tetap terbuka tanpa internet." : "Belum tersimpan untuk offline. Biarkan halaman ini terbuka sebentar selagi ada internet."}
-          </p>
-        )}
+        <StatusKoneksi online={online} siapOffline={siapOffline} />
 
         {/* Blok 1: nomor penting, 112 paling besar */}
         <section aria-labelledby="d-nomor" className="mt-6 grid gap-3 md:grid-cols-[1.2fr_1fr]">
@@ -257,8 +238,9 @@ export function DaruratView() {
               <TombolBacakan id={`darurat-${aktif}`} teks={`Saat kejadian. ${paket.saat.map((l, i) => `${i + 1}. ${teksLengkap(l)}`).join(" ")}`} />
             </div>
             {/* Langkah dikelompokkan menurut keadaan (di dalam bangunan, di mobil, ...) dan bisa dilipat: orang panik langsung
-                membuka yang berlaku untuknya tanpa menggulir semua langkah. Kelompok pertama terbuka; "Pandu saya" dan
-                "Bacakan" tetap memuat semua langkah. Native <details>: tetap jalan tanpa JavaScript dan tanpa internet. */}
+                membuka yang berlaku untuknya tanpa menggulir semua langkah. Semua kelompok tertutup saat halaman dibuka
+                atau bahaya diganti, agar pilihan keadaan terlihat sekaligus; "Pandu saya" dan "Bacakan" tetap memuat
+                semua langkah. Native <details>: tetap jalan tanpa JavaScript dan tanpa internet. */}
             {paket.kelompok.map((k, ki) => {
               const awal = paket.kelompok.slice(0, ki).reduce((n, x) => n + x.langkah.length, 0);
               const daftar = (
@@ -276,7 +258,7 @@ export function DaruratView() {
               );
               if (!k.keadaan) return <div key="umum" className="mt-4">{daftar}</div>;
               return (
-                <details key={`${aktif}-${k.keadaan}`} open={ki === 0} className="group mt-3 rounded-2xl border-2 border-white/25 open:border-yellow-300/70">
+                <details key={`${aktif}-${k.keadaan}`} className="group mt-3 rounded-2xl border-2 border-white/25 open:border-yellow-300/70">
                   <summary className={`flex min-h-16 cursor-pointer list-none items-center gap-3 rounded-2xl px-4 py-3 [&::-webkit-details-marker]:hidden ${FOKUS}`}>
                     <span className="flex-1">
                       <span className="block text-lg font-extrabold leading-tight text-yellow-300 sm:text-xl">{k.keadaan}</span>

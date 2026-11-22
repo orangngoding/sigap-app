@@ -53,10 +53,10 @@ function SelHari({ h }: { h: HariPekan }) {
   const [hari, tgl, bln] = namaTanggal(h.tanggal).split(" ");
   return (
     <li data-tingkat={h.tingkat} className={`flex w-[4.6rem] shrink-0 flex-col lg:w-auto items-center gap-1 rounded-2xl border p-2 text-center ${t.sel}`}>
-      <span className="text-[11px] font-semibold text-muted-foreground">{hari.slice(0, 3)}</span>
+      <span className="text-xs font-semibold text-muted-foreground">{hari.slice(0, 3)}</span>
       <span className="text-sm font-bold">{tgl} {bln}</span>
       <span className="flex h-5 items-center" aria-hidden="true">{Ikon ? <Ikon className="size-4" /> : <CheckCircle2 className="size-4 text-success-foreground" />}</span>
-      <span className="text-[11px] tabular-nums text-muted-foreground">{h.tmax !== null ? `${Math.round(h.tmax)}°` : "-"} · {h.hujan !== null ? `${Math.round(h.hujan)} mm` : "-"}</span>
+      <span className="text-xs tabular-nums text-muted-foreground">{h.tmax !== null ? `${Math.round(h.tmax)}°` : "-"} · {h.hujan !== null ? `${Math.round(h.hujan)} mm` : "-"}</span>
       <span className="sr-only">{t.label}{h.jenis.length ? `: ${h.jenis.map((j) => JENIS[j].label).join(", ")}` : ""}</span>
     </li>
   );
@@ -204,7 +204,7 @@ export function SiagaPekan({ lokasi, onBukaMusim }: { lokasi: LokasiPekan & { ad
               <span><strong>{berisiko.length ? "Lainnya aman" : "Aman"}, sudah dicek:</strong> {aman.map((x) => x.label.toLowerCase()).join(", ")}.</span>
             </p>
             <details className="mt-2 pl-6 text-sm">
-              <summary className="min-h-8 cursor-pointer font-semibold text-primary">Lihat rinciannya</summary>
+              <summary className="min-h-8 any-pointer-coarse:min-h-11 cursor-pointer font-semibold text-primary">Lihat rinciannya</summary>
               <ul className="mt-2 space-y-1.5 text-muted-foreground">
                 {aman.map((x) => <li key={x.j}><strong className="text-foreground">{x.label}:</strong> {x.teks}</li>)}
               </ul>
@@ -216,7 +216,7 @@ export function SiagaPekan({ lokasi, onBukaMusim }: { lokasi: LokasiPekan & { ad
       <section aria-labelledby="judul-hari-pekan">
         <h3 id="judul-hari-pekan" className="text-lg font-bold">Hari per hari</h3>
         <details open={hariRisiko > 0} className="mt-1">
-          <summary className="min-h-8 cursor-pointer text-sm text-muted-foreground">
+          <summary className="min-h-8 any-pointer-coarse:min-h-11 cursor-pointer text-sm text-muted-foreground">
             {hariRisiko > 0 ? `${hariRisiko} dari ${d.hari.length} hari perlu diperhatikan (berwarna). ` : `Tidak ada hari berisiko dalam ${d.hari.length} hari. `}
             <span className="font-semibold text-primary">Suhu dan hujan per hari</span>
           </summary>

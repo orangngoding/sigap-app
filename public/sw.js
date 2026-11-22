@@ -5,7 +5,7 @@
 // - Halaman lain: jaringan dulu, simpan salinan, pakai salinan saat offline.
 // - API dan data pribadi tidak pernah disimpan di cache ini (data pengguna ada di localStorage).
 // Ganti VERSI tiap rilis agar cache lama dibersihkan.
-const VERSI = "sigap-v5";
+const VERSI = "sigap-v6";
 const HALAMAN_INTI = ["/darurat", "/rencana/kartu", "/"];
 const POLA_ASET = /\/_next\/static\/[^"'\s)\\]+/g;
 
@@ -77,7 +77,12 @@ self.addEventListener("fetch", (e) => {
             if (m || r.mode !== "navigate") return m;
             // Halaman belum tersimpan: ARAHKAN ke Mode Darurat (bukan menyajikan isinya di alamat lain, yang membuat
             // JavaScript halaman asal bentrok dengan HTML Mode Darurat). Bila Mode Darurat juga belum tersimpan, galat biasa.
-            return (await caches.match("/darurat")) ? Response.redirect(new URL("/darurat", self.location.origin).href, 302) : undefined;
+            // ?offline=1&dari=<path>: Mode Darurat menjelaskan kenapa pengguna sampai di sini dan menawarkan jalan kembali.
+            if (!(await caches.match("/darurat"))) return undefined;
+            const tujuan = new URL("/darurat", self.location.origin);
+            tujuan.searchParams.set("offline", "1");
+            if (url.pathname !== "/darurat") tujuan.searchParams.set("dari", url.pathname);
+            return Response.redirect(tujuan.href, 302);
           }),
       ),
   );

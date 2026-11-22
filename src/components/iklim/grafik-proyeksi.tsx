@@ -46,7 +46,7 @@ export function GrafikProyeksi({ data }: { data: ProyeksiResponse }) {
           {PILIHAN.map((x) => (
             <button
               key={x.id} type="button" role="tab" aria-selected={kunci === x.id} onClick={() => setKunci(x.id)}
-              className={`relative min-h-9 rounded-lg px-3 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-primary sm:text-sm ${kunci === x.id ? "text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
+              className={`relative min-h-9 any-pointer-coarse:min-h-11 rounded-lg px-3 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-primary sm:text-sm ${kunci === x.id ? "text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
             >
               {kunci === x.id && <motion.span layoutId="grafik-proyeksi" className="absolute inset-0 -z-10 rounded-lg bg-primary" transition={{ type: "spring", stiffness: 420, damping: 34 }} />}
               {x.label}

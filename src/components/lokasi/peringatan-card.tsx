@@ -11,7 +11,7 @@ import { TeksPihak } from "@/components/rencana/teks-pihak";
 function TombolJelaskan({ teks }: { teks: string }) {
   const jelaskan = useAsistenUi((s) => s.jelaskan);
   return (
-    <button type="button" onClick={() => jelaskan(teks)} className="font-semibold text-primary underline underline-offset-2">
+    <button type="button" onClick={() => jelaskan(teks)} className="inline-flex items-center font-semibold text-primary underline underline-offset-2 any-pointer-coarse:min-h-11">
       Jelaskan untuk saya
     </button>
   );
@@ -56,13 +56,13 @@ export function PeringatanCard({ lokasi }: { lokasi: Pick<Lokasi, "adm4" | "prov
               <p className="mt-2">{p.ringkasan}</p>
               <div className="mt-2 flex flex-wrap items-center gap-3">
                 <TombolJelaskan teks={p.teks} />
-                <a href={p.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-primary underline underline-offset-2">
+                <a href={p.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-primary underline underline-offset-2 any-pointer-coarse:min-h-11">
                   Teks resmi <ExternalLink className="size-3.5" aria-hidden="true" />
                 </a>
               </div>
             </article>
           ))}
-          <a href={d.tautanResmi || RESMI} target="_blank" rel="noreferrer" className="inline-flex min-h-10 items-center gap-2 rounded-lg border border-border px-3 font-medium hover:bg-muted">
+          <a href={d.tautanResmi || RESMI} target="_blank" rel="noreferrer" className="inline-flex min-h-10 any-pointer-coarse:min-h-11 items-center gap-2 rounded-lg border border-border px-3 font-medium hover:bg-muted">
             Buka peringatan dini BMKG <ExternalLink className="size-4" aria-hidden="true" />
           </a>
         </div>

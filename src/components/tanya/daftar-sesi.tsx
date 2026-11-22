@@ -7,7 +7,7 @@ import { cariSesi, kelompokkanSesi, type SesiChat } from "@/lib/tanya/sesi";
 import { waktuRelatif } from "@/lib/utils/format";
 import { useTanyaStore } from "@/stores/tanya-store";
 
-const TOMBOL_IKON = "inline-flex size-8 items-center justify-center rounded-lg text-muted-foreground hover:bg-background hover:text-foreground focus-visible:outline-2 focus-visible:outline-primary";
+const TOMBOL_IKON = "inline-flex size-8 any-pointer-coarse:size-11 items-center justify-center rounded-lg text-muted-foreground hover:bg-background hover:text-foreground focus-visible:outline-2 focus-visible:outline-primary";
 
 function ButirSesi({ s, aktif, onPilih }: { s: SesiChat; aktif: boolean; onPilih: () => void }) {
   const { hapusSesi, gantiJudul } = useTanyaStore.getState();
@@ -37,8 +37,8 @@ function ButirSesi({ s, aktif, onPilih }: { s: SesiChat; aktif: boolean; onPilih
       <div className="flex items-center justify-between gap-2 rounded-xl bg-red-50 px-3 py-2 text-sm text-red-900" role="alertdialog" aria-label={`Hapus percakapan ${s.judul}?`}>
         <span className="font-medium">Hapus percakapan ini?</span>
         <span className="flex gap-1">
-          <button type="button" onClick={() => hapusSesi(s.id)} className="min-h-8 rounded-lg bg-red-600 px-3 text-xs font-semibold text-white hover:bg-red-700">Hapus</button>
-          <button type="button" onClick={() => setMode("biasa")} className="min-h-8 rounded-lg px-3 text-xs font-semibold hover:bg-red-100">Batal</button>
+          <button type="button" onClick={() => hapusSesi(s.id)} className="min-h-8 any-pointer-coarse:min-h-11 rounded-lg bg-red-600 px-3 text-xs font-semibold text-white hover:bg-red-700">Hapus</button>
+          <button type="button" onClick={() => setMode("biasa")} className="min-h-8 any-pointer-coarse:min-h-11 rounded-lg px-3 text-xs font-semibold hover:bg-red-100">Batal</button>
         </span>
       </div>
     );
@@ -87,7 +87,7 @@ export function DaftarSesi({ onPilih }: { onPilih?: () => void }) {
           <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
           <input
             id="cari-sesi" type="search" value={kata} onChange={(e) => setKata(e.target.value)} placeholder="Cari percakapan"
-            className="min-h-10 w-full rounded-xl border border-border bg-surface pl-9 pr-3 text-sm focus-visible:outline-2 focus-visible:outline-primary"
+            className="min-h-10 any-pointer-coarse:min-h-11 w-full rounded-xl border border-border bg-surface pl-9 pr-3 text-sm focus-visible:outline-2 focus-visible:outline-primary"
           />
         </div>
       )}
@@ -127,12 +127,12 @@ export function DaftarSesi({ onPilih }: { onPilih?: () => void }) {
             <div className="flex items-center justify-between gap-2 text-sm">
               <span className="font-medium text-red-800">Hapus {sesi.length} percakapan?</span>
               <span className="flex gap-1">
-                <button type="button" onClick={() => { hapusSemuaSesi(); setYakinHapus(false); }} className="min-h-8 rounded-lg bg-red-600 px-3 text-xs font-semibold text-white">Hapus semua</button>
-                <button type="button" onClick={() => setYakinHapus(false)} className="min-h-8 rounded-lg px-3 text-xs font-semibold hover:bg-muted">Batal</button>
+                <button type="button" onClick={() => { hapusSemuaSesi(); setYakinHapus(false); }} className="min-h-8 any-pointer-coarse:min-h-11 rounded-lg bg-red-600 px-3 text-xs font-semibold text-white">Hapus semua</button>
+                <button type="button" onClick={() => setYakinHapus(false)} className="min-h-8 any-pointer-coarse:min-h-11 rounded-lg px-3 text-xs font-semibold hover:bg-muted">Batal</button>
               </span>
             </div>
           ) : (
-            <button type="button" onClick={() => setYakinHapus(true)} className="inline-flex min-h-9 items-center gap-1.5 rounded-lg px-2 text-xs font-medium text-muted-foreground hover:bg-muted hover:text-foreground">
+            <button type="button" onClick={() => setYakinHapus(true)} className="inline-flex min-h-9 any-pointer-coarse:min-h-11 items-center gap-1.5 rounded-lg px-2 text-xs font-medium text-muted-foreground hover:bg-muted hover:text-foreground">
               <Trash2 className="size-3.5" aria-hidden="true" /> Hapus semua riwayat
             </button>
           )}

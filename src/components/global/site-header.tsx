@@ -13,21 +13,23 @@ export function SiteHeader() {
         </Link>
 
         {/* usePathname pada rute dinamis memerlukan Suspense saat Cache Components aktif. */}
-        <Suspense fallback={<div className="hidden flex-1 md:block" />}>
+        <Suspense fallback={<div className="hidden flex-1 lg:block" />}>
           <NavUtama />
         </Suspense>
 
         <div className="flex items-center gap-2">
         <Link
           href="/data-saya"
-          className="hidden min-h-11 items-center gap-1.5 rounded-xl px-3 text-sm font-semibold text-muted-foreground hover:bg-muted hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary lg:inline-flex"
+          // 1024-1279 px: ikon saja agar navigasi muat satu baris; label tampil mulai 1280 px.
+          className="hidden min-h-11 min-w-11 items-center justify-center gap-1.5 whitespace-nowrap rounded-xl px-3 text-sm font-semibold text-muted-foreground hover:bg-muted hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary lg:inline-flex"
           title="Data & privasi: lihat, pindahkan, atau hapus data Anda"
+          aria-label="Data & privasi"
         >
-          <Lock className="size-4" aria-hidden="true" /> Data &amp; privasi
+          <Lock className="size-4" aria-hidden="true" /> <span className="hidden xl:inline">Data &amp; privasi</span>
         </Link>
         <Link
           href="/darurat"
-          className="inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-xl bg-destructive px-3 text-sm font-bold text-white shadow-sm hover:bg-red-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-destructive sm:px-4"
+          className="inline-flex min-h-11 min-w-11 items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-destructive px-3 text-sm font-bold text-white shadow-sm hover:bg-red-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-destructive sm:px-4"
           aria-label="Buka Mode Darurat"
         >
           <span className="size-2.5 rounded-full bg-white" aria-hidden="true" />

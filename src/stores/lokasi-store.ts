@@ -3,6 +3,7 @@ import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import type { Lokasi } from "@/types";
 import { safeStorage } from "@/lib/storage/safe-storage";
+import { sanitasiLokasi } from "@/lib/storage/sanitasi";
 
 interface LokasiState {
   lokasi: Lokasi | null;
@@ -24,6 +25,9 @@ export const useLokasiStore = create<LokasiState>()(
       storage: createJSONStorage(() => safeStorage),
       partialize: (s) => ({ lokasi: s.lokasi }),
       migrate: (persisted) => persisted as { lokasi: Lokasi | null }, // titik migrasi skema berikutnya
+      // Lokasi yang bentuknya salah (mis. dari berkas cadangan yang rusak) dibuang: pengguna memilih lokasi lagi,
+      // halaman tidak gagal dimuat.
+      merge: (persisted, current) => ({ ...current, lokasi: sanitasiLokasi((persisted as { lokasi?: unknown } | null)?.lokasi) }),
     },
   ),
 );

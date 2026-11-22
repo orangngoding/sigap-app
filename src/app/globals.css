@@ -630,3 +630,30 @@ body:has([data-mode-darurat]):not(:has([style*="display: none"] [data-mode-darur
   padding-bottom: 0 !important;
   background: #000;
 }
+
+/* Beranda di HP dan tablet untuk pengguna yang sudah memilih lokasi (penanda dari PenandaPengguna di layout):
+   hero ringkas agar Briefing hari ini langsung terlihat, blok pengenalan disembunyikan, dan tombol "Mulai susun
+   rencana" diganti kartu "Buka rencana" bila rencana sudah ada. Desktop (1024 px ke atas) tidak berubah. */
+@media (max-width: 1023.98px) {
+  html[data-pengguna="lama"] .hanya-pengguna-baru {
+    display: none;
+  }
+  html[data-pengguna="lama"] .beranda-hero {
+    min-height: 0;
+    padding-block: 2.5rem;
+  }
+  html[data-rencana="ada"] .hanya-tanpa-rencana {
+    display: none;
+  }
+}
+
+/* Peta Leaflet di perangkat sentuh: tombol perbesar/perkecil 44 px (bawaan Leaflet 30 px). Selektor lebih spesifik
+   karena leaflet.css dimuat belakangan bersama peta (dimuat malas) dan akan menimpa aturan setara. */
+@media (any-pointer: coarse) {
+  .leaflet-container.leaflet-touch .leaflet-bar a {
+    width: 44px;
+    height: 44px;
+    line-height: 44px;
+    font-size: 24px;
+  }
+}

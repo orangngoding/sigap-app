@@ -25,9 +25,9 @@ export function AsistenMelayang() {
           type="button"
           data-masuk
           style={{ "--tunda": "700ms" } as React.CSSProperties}
-          // HP: disembunyikan karena navigasi bawah sudah punya "Asisten" dan tombol bulat menutupi isi halaman.
-          // Panel tetap bisa dibuka dari tombol "Tanya" di dalam halaman (lewat store).
-          className="tanpa-cetak fixed bottom-20 right-4 z-40 hidden size-14 md:inline-flex items-center justify-center gap-2 rounded-full bg-primary text-sm sm:size-auto sm:min-h-12 sm:px-5 font-semibold text-primary-foreground shadow-lg transition hover:bg-primary/90 hover:shadow-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary md:bottom-6 md:right-6"
+          // Di bawah 1024 px disembunyikan: navigasi bawah memuat "Asisten" (menu Lainnya) dan tombol bulat menutupi isi
+          // halaman. Panel tetap bisa dibuka dari tombol "Tanya" di dalam halaman (lewat store).
+          className="tanpa-cetak fixed bottom-6 right-6 z-40 hidden lg:inline-flex items-center justify-center gap-2 rounded-full bg-primary text-sm sm:size-auto sm:min-h-12 sm:px-5 font-semibold text-primary-foreground shadow-lg transition hover:bg-primary/90 hover:shadow-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         >
           <Sparkles className={`size-5 sm:size-4 ${memuat ? "animate-pulse motion-reduce:animate-none" : ""}`} aria-hidden="true" />
           <span className="sr-only sm:not-sr-only">Tanya Asisten</span>
@@ -37,7 +37,7 @@ export function AsistenMelayang() {
         <Dialog.Content
           // Panel tetap terbuka saat pengguna menyentuh/menggulir halaman; tutup lewat tombol X, Esc, atau tombol Tanya Asisten.
           onInteractOutside={(e) => e.preventDefault()}
-          className="fixed inset-x-0 bottom-0 z-50 flex h-[75dvh] flex-col rounded-t-2xl border border-border bg-background p-4 shadow-2xl data-[state=open]:animate-in data-[state=open]:slide-in-from-bottom-8 data-[state=open]:fade-in-0 md:inset-x-auto md:bottom-6 md:right-6 md:h-[min(680px,calc(100dvh-7rem))] md:w-[440px] md:rounded-2xl"
+          className="fixed inset-x-0 bottom-0 z-50 flex h-[75dvh] flex-col rounded-t-2xl border border-border bg-background p-4 shadow-2xl data-[state=open]:animate-in data-[state=open]:slide-in-from-bottom-8 data-[state=open]:fade-in-0 pb-[max(1rem,env(safe-area-inset-bottom))] lg:inset-x-auto lg:bottom-6 lg:right-6 lg:h-[min(680px,calc(100dvh-7rem))] lg:w-[440px] lg:rounded-2xl lg:pb-4"
           aria-describedby="asisten-panel-ket"
         >
           <div className="mb-3 flex shrink-0 items-start justify-between gap-3 border-b border-border pb-3">

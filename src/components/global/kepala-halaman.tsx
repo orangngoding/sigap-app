@@ -26,15 +26,15 @@ export function KepalaHalaman({
           <div className="absolute inset-x-0 bottom-0 -z-10 h-24 bg-gradient-to-t from-ink/60 to-transparent" aria-hidden="true" />
         </>
       )}
-      <div className={`mx-auto ${lebar} px-4 py-12 sm:px-6 sm:py-16 lg:px-8`}>
+      <div className={`mx-auto ${lebar} px-4 py-8 sm:px-6 sm:py-16 lg:px-8`}>
         {label && (
           <p data-masuk className={`text-sm font-semibold uppercase tracking-wider ${gelap ? "text-emerald-300" : "text-primary"}`}>{label}</p>
         )}
-        <h1 data-masuk style={{ "--tunda": "60ms" } as React.CSSProperties} className={`mt-2 max-w-3xl text-4xl font-extrabold tracking-tight sm:text-5xl ${gelap ? "text-white" : "text-foreground"}`}>
+        <h1 data-masuk style={{ "--tunda": "60ms" } as React.CSSProperties} className={`mt-2 max-w-3xl text-3xl font-extrabold tracking-tight sm:text-5xl ${gelap ? "text-white" : "text-foreground"}`}>
           {judul}
         </h1>
         {deskripsi && (
-          <p data-masuk style={{ "--tunda": "120ms" } as React.CSSProperties} className={`mt-4 max-w-2xl text-base leading-relaxed sm:text-lg ${gelap ? "text-ink-muted" : "text-muted-foreground"}`}>
+          <p data-masuk style={{ "--tunda": "120ms" } as React.CSSProperties} className={`mt-3 max-w-2xl text-base leading-relaxed sm:mt-4 sm:text-lg ${gelap ? "text-ink-muted" : "text-muted-foreground"}`}>
             {deskripsi}
           </p>
         )}

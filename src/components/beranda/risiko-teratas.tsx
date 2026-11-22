@@ -65,7 +65,7 @@ export function RisikoTeratas() {
             </h2>
             <p className="text-sm text-muted-foreground">{lokasi.kelurahan}, {lokasi.kabKota} · dihitung dari data terbuka, bukan peta risiko resmi</p>
           </div>
-          <Link href="/lokasi" className="inline-flex min-h-10 items-center gap-1 text-sm font-semibold text-primary">
+          <Link href="/lokasi" className="inline-flex min-h-10 any-pointer-coarse:min-h-11 items-center gap-1 text-sm font-semibold text-primary">
             Lihat 9 bahaya <ArrowRight className="size-4" aria-hidden="true" />
           </Link>
         </header>

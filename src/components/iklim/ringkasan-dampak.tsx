@@ -85,7 +85,7 @@ function SudahTerjadi({ lat, lon, proyeksiKini }: { lat: number; lon: number; pr
     <div className="text-sm leading-relaxed">
       <p><strong>Yang sudah terjadi:</strong> <TeksPihak>dalam {TAHUN_PENGAMATAN} tahun terakhir, kemarau terpanjang di wilayah Anda</TeksPihak> <strong>{k.hari} hari tanpa hujan</strong> ({k.tahun}).</p>
       <details className="mt-1">
-        <summary className="min-h-8 cursor-pointer font-semibold text-primary">Kenapa berbeda dari angka perkiraan?</summary>
+        <summary className="min-h-8 any-pointer-coarse:min-h-11 cursor-pointer font-semibold text-primary">Kenapa berbeda dari angka perkiraan?</summary>
         <p className="mt-1 text-muted-foreground">
           Angka perkiraan menggambarkan tahun yang paling kering dalam 20 tahun, sedangkan catatan ini hanya {TAHUN_PENGAMATAN} tahun ({k.tahunAwal}-{k.tahunAkhir}).{banding} Sumber: catatan cuaca {q.data?.sumber.nama.startsWith("NASA") ? "NASA POWER" : "ERA5 (Open-Meteo)"}{q.data?.stale ? ", tersimpan terakhir" : ""}.
         </p>

@@ -25,6 +25,8 @@ const headerKeamanan = [
 ];
 
 const nextConfig: NextConfig = {
+  // Tidak mengumumkan teknologi server lewat header X-Powered-By.
+  poweredByHeader: false,
   async headers() {
     return [{ source: "/:path*", headers: headerKeamanan }];
   },

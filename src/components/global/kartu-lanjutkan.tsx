@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useMemo } from "react";
 import { motion } from "motion/react";
-import { ArrowRight, CalendarClock } from "lucide-react";
+import { ArrowRight, CalendarClock, MapPin } from "lucide-react";
 import { useHydrate } from "@/hooks/use-hydrate";
 import { useAngkaHalus } from "@/hooks/use-angka-halus";
 import { bangunButir, hitungSkor } from "@/lib/preparedness/skor";
@@ -42,29 +42,56 @@ export function KartuLanjutkan() {
     <motion.section
       aria-label={judul}
       initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, delay: 0.3 }}
-      className="kaca-gelap mt-6 flex max-w-xl flex-wrap items-center gap-4 rounded-2xl border border-white/15 p-4"
+      // HP: tiga baris (ring + judul, kemajuan dengan batang, tombol selebar kartu) agar teks tidak terjepit di samping
+      // tombol. Mulai 640 px: satu baris seperti sebelumnya (sm:contents meleburkan pembungkus baris pertama).
+      className="kaca-gelap mt-6 flex max-w-xl flex-col gap-4 rounded-2xl border border-white/15 p-4 sm:flex-row sm:flex-wrap sm:items-center"
     >
-      <div className="relative size-14 shrink-0 text-emerald-300" role="meter" aria-label="Skor kesiapsiagaan" aria-valuemin={0} aria-valuemax={100} aria-valuenow={hasil.skor}>
-        <svg viewBox="0 0 48 48" className="size-full -rotate-90" aria-hidden="true">
-          <circle cx="24" cy="24" r={R} fill="none" strokeWidth="5" className="stroke-white/15" />
-          <circle cx="24" cy="24" r={R} fill="none" strokeWidth="5" strokeLinecap="round" stroke="currentColor" strokeDasharray={`${(skor / 100) * K} ${K}`} />
-        </svg>
-        <span className="absolute inset-0 flex items-center justify-center text-sm font-bold tabular-nums text-white">{skor}</span>
+      <div className="flex items-center gap-4 sm:contents">
+        <div className="relative size-16 shrink-0 text-emerald-300 sm:size-14" role="meter" aria-label="Skor kesiapsiagaan" aria-valuemin={0} aria-valuemax={100} aria-valuenow={hasil.skor}>
+          <svg viewBox="0 0 48 48" className="size-full -rotate-90" aria-hidden="true">
+            <circle cx="24" cy="24" r={R} fill="none" strokeWidth="5" className="stroke-white/15" />
+            <circle cx="24" cy="24" r={R} fill="none" strokeWidth="5" strokeLinecap="round" stroke="currentColor" strokeDasharray={`${(skor / 100) * K} ${K}`} />
+          </svg>
+          <span className="absolute inset-0 flex items-center justify-center text-base font-bold tabular-nums text-white sm:text-sm">{skor}</span>
+        </div>
+        <div className="min-w-0 flex-1">
+          <p className="text-base font-semibold leading-snug text-white sm:text-sm">
+            {judul}
+            <span className="hidden sm:inline">{lokasi ? ` · ${lokasi.kelurahan}` : ""}</span>
+          </p>
+          {lokasi && (
+            <p className="mt-0.5 flex items-center gap-1 text-sm text-white/70 sm:hidden">
+              <MapPin className="size-3.5 shrink-0" aria-hidden="true" /> <span className="truncate">{lokasi.kelurahan}</span>
+            </p>
+          )}
+          <p className="hidden text-sm text-white/70 sm:block">
+            Skor {hasil.label.toLowerCase()} · {hasil.dicentang} dari {hasil.total} butir siap
+          </p>
+          {perlu > 0 && (
+            <p className="mt-1 hidden items-center gap-1 text-xs font-semibold text-amber-300 sm:inline-flex">
+              <CalendarClock className="size-3.5" aria-hidden="true" /> {perlu} isi tas siaga perlu diganti
+            </p>
+          )}
+        </div>
       </div>
-      <div className="min-w-0 flex-1">
-        <p className="text-sm font-semibold text-white">{judul}{lokasi ? ` · ${lokasi.kelurahan}` : ""}</p>
-        <p className="text-sm text-white/70">
-          Skor {hasil.label.toLowerCase()} · {hasil.dicentang} dari {hasil.total} butir siap
-        </p>
+      {/* HP: kemajuan butir sebagai batang selebar kartu. */}
+      <div className="sm:hidden">
+        <div className="flex items-baseline justify-between gap-3 text-sm">
+          <span className="font-semibold text-white">{hasil.dicentang} dari {hasil.total} butir siap</span>
+          <span className="shrink-0 text-white/70">Skor {hasil.label.toLowerCase()}</span>
+        </div>
+        <div className="mt-2 h-2 overflow-hidden rounded-full bg-white/15" aria-hidden="true">
+          <div className="h-full rounded-full bg-emerald-300" style={{ width: `${hasil.total ? Math.round((hasil.dicentang / hasil.total) * 100) : 0}%` }} />
+        </div>
         {perlu > 0 && (
-          <p className="mt-1 inline-flex items-center gap-1 text-xs font-semibold text-amber-300">
-            <CalendarClock className="size-3.5" aria-hidden="true" /> {perlu} isi tas siaga perlu diganti
+          <p className="mt-3 flex items-center gap-1.5 text-sm font-semibold text-amber-300">
+            <CalendarClock className="size-4 shrink-0" aria-hidden="true" /> {perlu} isi tas siaga perlu diganti
           </p>
         )}
       </div>
       <Link
         href="/rencana"
-        className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-white px-4 text-sm font-bold text-ink hover:bg-emerald-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+        className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-white px-4 text-base font-bold text-ink hover:bg-emerald-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:min-h-11 sm:w-auto sm:text-sm"
       >
         Buka rencana <ArrowRight className="size-4" aria-hidden="true" />
       </Link>

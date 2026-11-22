@@ -97,7 +97,7 @@ export function KartuView() {
             />
             <p id="nama-bantuan" className="mt-1 text-xs text-muted-foreground">{namaKeluarga.length}/{NAMA_KELUARGA_MAKS} karakter</p>
             {siap && namaDaftar && namaKeluarga.trim() !== namaDaftar.trim() && (
-              <button type="button" onClick={() => ubah({ namaKeluarga: namaDaftar })} className="mt-1 inline-flex min-h-9 items-center text-left text-xs font-semibold text-primary underline underline-offset-2">
+              <button type="button" onClick={() => ubah({ namaKeluarga: namaDaftar })} className="mt-1 inline-flex min-h-9 any-pointer-coarse:min-h-11 items-center text-left text-xs font-semibold text-primary underline underline-offset-2">
                 Pakai nama keluarga: {namaDaftar}
               </button>
             )}

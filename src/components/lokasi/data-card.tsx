@@ -52,7 +52,7 @@ export function DataCard<T extends ApiBase>({
             <button
               type="button"
               onClick={() => refetch()}
-              className="inline-flex min-h-10 items-center gap-2 rounded-lg border border-border px-3 font-medium hover:bg-muted"
+              className="inline-flex min-h-10 any-pointer-coarse:min-h-11 items-center gap-2 rounded-lg border border-border px-3 font-medium hover:bg-muted"
             >
               <RefreshCw className="size-4" aria-hidden="true" /> Coba lagi
             </button>

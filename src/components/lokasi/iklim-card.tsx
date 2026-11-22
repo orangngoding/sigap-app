@@ -48,7 +48,7 @@ export function IklimCard({ lat, lon }: { lat: number; lon: number }) {
               Garis tipis adalah tren linear sederhana, bukan klaim signifikansi statistik.
             </p>
             <p className="text-xs text-muted-foreground">{d.catatan}</p>
-            <Link href="/iklim" className="inline-flex min-h-9 items-center gap-1 text-sm font-semibold text-primary underline underline-offset-2">
+            <Link href="/iklim" className="inline-flex min-h-9 any-pointer-coarse:min-h-11 items-center gap-1 text-sm font-semibold text-primary underline underline-offset-2">
               <TeksPihak>Lihat bulan rawan dan uji kesiapan rumah Anda</TeksPihak> <ArrowRight className="size-4" aria-hidden="true" />
             </Link>
           </div>

@@ -1,12 +1,12 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useReducedMotion } from "motion/react";
 import {
   BellRing, BookCheck, Check, ClipboardCheck, Lock, Pause, Play, QrCode, Smartphone, Sparkles, UserX, WifiOff,
   type LucideIcon,
 } from "lucide-react";
 import { HAZARDS } from "@/lib/hazards/hazards";
 import { IKON_BAHAYA } from "@/lib/hazards/ikon";
+import { useKurangiGerak } from "@/hooks/use-kurangi-gerak";
 
 /** Lama satu slide tampil sebelum pindah otomatis. */
 const DURASI = 6000;
@@ -21,7 +21,7 @@ function Slide({ label, Ikon, judul, isi, children }: { label: string; Ikon: Luc
         <Ikon className="size-3.5" aria-hidden="true" /> {label}
       </p>
       <h2 className="karosel-masuk mt-1 text-base font-bold leading-snug sm:mt-2 sm:text-xl tracking-tight text-foreground" style={d(80)}>{judul}</h2>
-      <p className="karosel-masuk mt-1 line-clamp-2 text-[13px] leading-snug text-muted-foreground sm:mt-1.5 sm:line-clamp-none sm:text-sm sm:leading-relaxed" style={d(160)}>{isi}</p>
+      <p className="karosel-masuk mt-1 line-clamp-2 text-sm leading-snug text-muted-foreground sm:mt-1.5 sm:line-clamp-none sm:leading-relaxed" style={d(160)}>{isi}</p>
       <div className="flex flex-1 flex-col justify-center pt-3 sm:pt-5">{children}</div>
     </div>
   );
@@ -30,7 +30,7 @@ function Slide({ label, Ikon, judul, isi, children }: { label: string; Ikon: Luc
 function SlideApa() {
   const alur: [LucideIcon, string, string][] = [
     [BellRing, "Peringatan BMKG", "bg-warning text-warning-foreground"],
-    [Sparkles, "Disusun SIGAP", "bg-primary/10 text-primary"],
+    [Sparkles, "Disusun SIGAP", "bg-accent text-primary"],
     [ClipboardCheck, "Rencana keluarga", "bg-success text-success-foreground"],
   ];
   return (
@@ -40,7 +40,7 @@ function SlideApa() {
         {alur.map(([Ikon, teks, cls], i) => (
           <div key={teks} className="karosel-masuk relative flex flex-col items-center text-center" style={d(260 + i * 180)}>
             <span className={`flex size-9 items-center justify-center rounded-xl ring-4 ring-surface sm:size-12 sm:rounded-2xl ${cls}`}><Ikon className="size-5" aria-hidden="true" /></span>
-            <span className="mt-1.5 text-[11px] font-semibold leading-tight text-foreground sm:mt-2 sm:text-xs">{teks}</span>
+            <span className="mt-1.5 text-xs font-semibold leading-tight text-foreground sm:mt-2">{teks}</span>
           </div>
         ))}
       </div>
@@ -65,7 +65,7 @@ function SlideKeluarga() {
           <li key={l} className={`karosel-masuk items-center gap-3 rounded-xl border border-border bg-background px-3 py-2 sm:py-2.5 ${i > 0 ? "hidden sm:flex" : "flex"}`} style={d(520 + i * 140)}>
             <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground"><Check className="size-3.5" strokeWidth={3} aria-hidden="true" /></span>
             <span className="flex-1 text-sm font-medium text-foreground">{l}</span>
-            <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">BNPB</span>
+            <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">BNPB</span>
           </li>
         ))}
       </ol>
@@ -85,7 +85,7 @@ function SlideBahaya() {
           return (
             <li key={h.id} className="karosel-masuk inline-flex items-center gap-1.5 rounded-full border border-border bg-background py-1 pl-1 pr-2.5 sm:flex sm:gap-2 sm:rounded-xl sm:p-2" style={d(220 + i * 50)}>
               <span className={`flex size-5 shrink-0 items-center justify-center rounded-full sm:size-7 sm:rounded-lg ${h.bgClass} ${h.colorClass}`}><Ikon className="size-3 sm:size-3.5" aria-hidden="true" /></span>
-              <span className="text-[11px] font-medium leading-tight text-foreground sm:text-xs">{SINGKAT[h.id] ?? h.label}</span>
+              <span className="text-xs font-medium leading-tight text-foreground">{SINGKAT[h.id] ?? h.label}</span>
             </li>
           );
         })}
@@ -126,7 +126,7 @@ function SlidePrivasi() {
         {butir.map(([Ikon, t], i) => (
           <li key={t} className="karosel-masuk flex items-center gap-2.5 rounded-xl border border-border bg-background px-2.5 py-1.5 sm:gap-3 sm:px-3 sm:py-2.5" style={d(260 + i * 140)}>
             <span className="flex size-6 shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary sm:size-8 sm:rounded-lg"><Ikon className="size-3.5 sm:size-4" aria-hidden="true" /></span>
-            <span className="text-[13px] font-medium text-foreground sm:text-sm">{t}</span>
+            <span className="text-sm font-medium text-foreground">{t}</span>
           </li>
         ))}
       </ul>
@@ -140,12 +140,12 @@ function SlideDarurat() {
       <div className="grid grid-cols-2 gap-2">
         <div className="karosel-masuk flex items-center gap-2 rounded-xl border border-border bg-background p-2.5 sm:block sm:p-3" style={d(260)}>
           <span className="flex size-7 shrink-0 items-center justify-center rounded-lg sm:size-8 bg-danger text-danger-foreground"><WifiOff className="size-4" aria-hidden="true" /></span>
-          <p className="text-[13px] font-semibold leading-tight text-foreground sm:mt-2 sm:text-sm">Mode Darurat</p>
+          <p className="text-sm font-semibold leading-tight text-foreground sm:mt-2">Mode Darurat</p>
           <p className="hidden text-xs text-muted-foreground sm:block">Terbuka setelah pernah dibuka sekali</p>
         </div>
         <div className="karosel-masuk flex items-center gap-2 rounded-xl border border-border bg-background p-2.5 sm:block sm:p-3" style={d(400)}>
           <span className="flex size-7 shrink-0 items-center justify-center rounded-lg sm:size-8 bg-muted text-foreground"><QrCode className="size-4" aria-hidden="true" /></span>
-          <p className="text-[13px] font-semibold leading-tight text-foreground sm:mt-2 sm:text-sm">Kartu Siaga</p>
+          <p className="text-sm font-semibold leading-tight text-foreground sm:mt-2">Kartu Siaga</p>
           <p className="hidden text-xs text-muted-foreground sm:block">Kode QR-nya membuka Mode Darurat</p>
         </div>
       </div>
@@ -173,7 +173,7 @@ export function HeroVisual({ jumlahPanduan }: { jumlahPanduan: number }) {
     <SlideDarurat key="darurat" />,
   ];
   const n = slides.length;
-  const diam = useReducedMotion();
+  const diam = useKurangiGerak();
   const jalur = useRef<HTMLDivElement>(null);
   const [aktif, setAktif] = useState(0);
   const aktifRef = useRef(0);
@@ -258,7 +258,7 @@ export function HeroVisual({ jumlahPanduan }: { jumlahPanduan: number }) {
                 onClick={() => ke(i)}
                 aria-label={`Slide ${i + 1}`}
                 aria-current={i === aktif}
-                className="group flex h-8 min-w-6 items-center justify-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                className="group flex h-8 min-w-6 any-pointer-coarse:h-11 any-pointer-coarse:min-w-11 items-center justify-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
               >
                 <span className={`relative block h-1.5 overflow-hidden rounded-full bg-muted transition-[width] duration-300 motion-reduce:transition-none ${i === aktif ? "w-7" : "w-1.5 group-hover:bg-muted-foreground/40"}`}>
                   {i === aktif && (
@@ -277,7 +277,7 @@ export function HeroVisual({ jumlahPanduan }: { jumlahPanduan: number }) {
               type="button"
               onClick={() => setDijeda((v) => !v)}
               aria-label={dijeda ? "Putar slide otomatis" : "Jeda slide otomatis"}
-              className="inline-flex size-8 items-center justify-center rounded-full text-muted-foreground hover:bg-muted hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              className="inline-flex size-8 any-pointer-coarse:size-11 items-center justify-center rounded-full text-muted-foreground hover:bg-muted hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
               {dijeda ? <Play className="size-3.5" aria-hidden="true" /> : <Pause className="size-3.5" aria-hidden="true" />}
             </button>

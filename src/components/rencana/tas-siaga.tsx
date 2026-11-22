@@ -69,7 +69,7 @@ export function TasSiaga({ tas, progres, onToggle, kedaluwarsa, onKedaluwarsa }:
           </p>
           <button
             type="button" onClick={() => unduhIcs(tas, kedaluwarsa)}
-            className="tanpa-cetak inline-flex min-h-10 items-center gap-2 rounded-lg border border-border bg-surface px-3 font-semibold hover:bg-background focus-visible:outline-2 focus-visible:outline-primary"
+            className="tanpa-cetak inline-flex min-h-10 any-pointer-coarse:min-h-11 items-center gap-2 rounded-lg border border-border bg-surface px-3 font-semibold hover:bg-background focus-visible:outline-2 focus-visible:outline-primary"
           >
             <CalendarPlus className="size-4" aria-hidden="true" /> Tambah pengingat ke kalender
           </button>
@@ -123,7 +123,7 @@ export function TasSiaga({ tas, progres, onToggle, kedaluwarsa, onKedaluwarsa }:
                           <label htmlFor={`exp-${i.id}`} className="text-muted-foreground">Kedaluwarsa</label>
                           <input
                             id={`exp-${i.id}`} type="date" value={tgl ?? ""} onChange={(e) => onKedaluwarsa!(i.id, e.target.value)}
-                            className="min-h-9 rounded-md border border-border bg-surface px-2 text-sm focus-visible:outline-2 focus-visible:outline-primary"
+                            className="min-h-9 any-pointer-coarse:min-h-11 rounded-md border border-border bg-surface px-2 text-sm focus-visible:outline-2 focus-visible:outline-primary"
                           />
                           {st && tgl && <span className={`rounded-full px-2 py-0.5 font-semibold ${LENCANA[st]}`}>{labelSisa(tgl)}</span>}
                         </div>

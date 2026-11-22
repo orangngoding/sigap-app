@@ -19,7 +19,7 @@ const PUSTAKA = [
   { label: "Berita cuaca dan iklim", ket: "Prakiraan BMKG, musim, El Niño, suhu panas", href: "/pustaka/cuaca", Ikon: CloudSun },
 ];
 
-const KELAS_MENU = "relative flex min-h-11 items-center gap-2 whitespace-nowrap rounded-xl px-2.5 text-sm lg:px-3.5 font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-primary";
+const KELAS_MENU = "relative flex min-h-11 items-center gap-2 whitespace-nowrap rounded-xl px-2.5 text-sm xl:px-3.5 font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-primary";
 
 function Sorotan() {
   return <motion.span layoutId="nav-aktif" className="absolute inset-0 -z-10 rounded-xl bg-primary shadow-sm" transition={{ type: "spring", stiffness: 420, damping: 34 }} />;
@@ -62,7 +62,7 @@ function MenuPustaka({ path }: { path: string }) {
 export function NavUtama() {
   const path = usePathname();
   return (
-    <nav aria-label="Navigasi utama" className="isolate hidden items-center gap-1 rounded-2xl border border-border/70 bg-surface/60 p-1 md:flex">
+    <nav aria-label="Navigasi utama" className="isolate hidden items-center gap-1 rounded-2xl border border-border/70 bg-surface/60 p-1 lg:flex">
       {NAV.map(({ label, href, Ikon }) => {
         const aktif = path === href || path.startsWith(`${href}/`);
         return (

@@ -146,16 +146,18 @@ Sesuai ketentuan IT RUSH 2026, berikut pihak ketiga yang dipakai dalam pengemban
 - **Data:** BMKG, BNPB, Badan Geologi, Kemenkes, Open-Meteo, NASA, NOAA, USGS, GDACS, OpenStreetMap, dan data wilayah cahyadsn/wilayah; rincian di [docs/data-sources.md](docs/data-sources.md).
 - **Konten panduan:** diparafrasekan dari dokumen resmi dan selalu menyebut sumber serta halamannya; hak atas isi tetap milik lembaga sumbernya.
 
-## Tim
+## Tim pengembang
 
-SIGAP dikembangkan oleh tim empat orang untuk lomba IT RUSH 2026.
+SIGAP dikembangkan oleh tim empat orang untuk lomba IT RUSH 2026, subtema Mitigasi Bencana dan Perubahan Iklim.
 
-| Nama | Peran | Perguruan tinggi |
+| Nama | Perguruan tinggi | GitHub |
 |---|---|---|
-| ISI NAMA (Ketua) | ISI PERAN | ISI KAMPUS |
-| ISI NAMA | ISI PERAN | ISI KAMPUS |
-| ISI NAMA | ISI PERAN | ISI KAMPUS |
-| ISI NAMA | ISI PERAN | ISI KAMPUS |
+| Rasya Falahdia Sastra (Ketua) | IPB University | (https://github.com/orangngoding) |
+| Muhammad Abdan Syakuro | IPB University | (https://github.com/AbdanSyakuroo) |
+| Muhammad Faisal Al Ikhwani | IPB University | (https://github.com/Pesalll) |
+| Haafizh 'Aalim Mardiyanto | IPB University | (https://github.com/haafizham) |
+
+Contoh pengisian kolom (hapus baris ini setelah diisi): **Peran dalam tim** seperti "Frontend developer", "UI/UX designer", "Backend dan integrasi data", atau "Riset konten dan QA"; **Kontribusi utama** seperti "Mode Darurat dan Kartu Siaga" atau "Siaga Iklim dan data BMKG".
 
 ## Lisensi
 

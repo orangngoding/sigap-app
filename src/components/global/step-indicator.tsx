@@ -36,7 +36,7 @@ export function StepIndicator({ current, done = [] }: { current: StepKey; done?:
           return (
             <li key={s.key} className="flex items-center gap-2" aria-current={isCurrent ? "step" : undefined}>
               {isDone && !isCurrent ? (
-                <Link href={s.href} className="flex items-center gap-2 hover:underline">{body}</Link>
+                <Link href={s.href} className="flex items-center gap-2 hover:underline any-pointer-coarse:min-h-11">{body}</Link>
               ) : (
                 <span className="flex items-center gap-2">{body}</span>
               )}

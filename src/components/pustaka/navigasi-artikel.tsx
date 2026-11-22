@@ -117,7 +117,7 @@ export function DaftarIsiSamping({ bagian }: { bagian: BagianIsi[] }) {
             <a
               href={`#${b.id}`}
               aria-current={aktif === b.id ? "location" : undefined}
-              className={`flex min-h-9 items-center rounded-lg px-2 text-sm font-medium hover:bg-muted hover:text-primary ${aktif === b.id ? "bg-primary/10 text-primary" : "text-foreground"}`}
+              className={`flex min-h-9 any-pointer-coarse:min-h-11 items-center rounded-lg px-2 text-sm font-medium hover:bg-muted hover:text-primary ${aktif === b.id ? "bg-primary/10 text-primary" : "text-foreground"}`}
             >
               {b.judul}
             </a>

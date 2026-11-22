@@ -170,6 +170,8 @@ export interface BeritaItem {
   judul: string;
   /** Nama media penerbit. */
   sumber: string;
+  /** Domain situs media (mis. "kompas.com"), untuk menampilkan ikon medianya. */
+  situs?: string;
   waktu: string;
   /** Tautan keluar (https) ke berita. */
   url: string;

@@ -202,7 +202,7 @@ export function PustakaDaftar({ artikel }: { artikel: ArtikelKartu[] }) {
                     <span className={`absolute left-4 top-4 rounded-md bg-white/90 px-2.5 py-1 text-xs font-bold uppercase tracking-wide text-foreground shadow-sm backdrop-blur ${i === 0 && !adaFilter ? "" : "max-sm:hidden"}`}>{a.kategori}</span>
                   </div>
                   <div className={`flex min-w-0 flex-1 flex-col ${i === 0 && !adaFilter ? "p-5 sm:p-6" : "p-4 sm:p-5"}`}>
-                    {!(i === 0 && !adaFilter) && <p className="mb-1 text-[11px] font-bold uppercase tracking-wide text-primary sm:hidden">{a.kategori}</p>}
+                    {!(i === 0 && !adaFilter) && <p className="mb-1 text-xs font-bold uppercase tracking-wide text-primary sm:hidden">{a.kategori}</p>}
                     <h2 className={`font-bold leading-snug text-foreground group-hover:text-primary ${i === 0 && !adaFilter ? "text-xl" : "text-base sm:text-lg"}`}>{a.title}</h2>
                     <p className={`mt-1.5 text-sm leading-relaxed text-muted-foreground ${i === 0 && !adaFilter ? "line-clamp-3" : "line-clamp-2 sm:line-clamp-3"}`}>{a.ringkasan}</p>
                     <div className="mt-auto flex items-center gap-2 pt-3 text-xs font-medium text-muted-foreground sm:pt-4">

@@ -122,7 +122,7 @@ export function PratinjauKartu() {
         </div>
         <div className="relative" data-muncul>
           <div className="absolute inset-6 -z-10 rotate-6 rounded-3xl bg-primary/15" aria-hidden="true" />
-          <div aria-hidden="true" className="mx-auto max-w-md -rotate-2 rounded-2xl border-2 border-black bg-white p-6 text-[13px] leading-snug text-black shadow-2xl shadow-ink/20 transition-transform duration-500 hover:rotate-0 motion-reduce:transition-none">
+          <div aria-hidden="true" className="mx-auto max-w-md -rotate-2 rounded-2xl border-2 border-black bg-white p-6 text-sm leading-snug text-black shadow-2xl shadow-ink/20 transition-transform duration-500 hover:rotate-0 motion-reduce:transition-none">
             <p className="border-b-2 border-black pb-1 text-base font-extrabold uppercase">Kartu Siaga Keluarga</p>
             <p className="mt-1">Gambir, Kec. Gambir, Jakarta Pusat</p>
             <p className="mt-2 font-bold">Nomor darurat</p>

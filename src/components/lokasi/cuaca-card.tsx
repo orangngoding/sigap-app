@@ -191,7 +191,7 @@ export function CuacaCard({ adm4, lat, lon, provinsi, nama }: { adm4: string; la
       return kerangka(
         <div role="alert" className="mt-3 space-y-3 text-sm">
           <p>Data cuaca belum dapat dimuat.</p>
-          <button type="button" onClick={() => { void qJam.refetch(); void qBmkg.refetch(); }} className="inline-flex min-h-10 items-center gap-2 rounded-lg border border-border px-3 font-medium hover:bg-muted"><RefreshCw className="size-4" aria-hidden="true" /> Coba lagi</button>
+          <button type="button" onClick={() => { void qJam.refetch(); void qBmkg.refetch(); }} className="inline-flex min-h-10 any-pointer-coarse:min-h-11 items-center gap-2 rounded-lg border border-border px-3 font-medium hover:bg-muted"><RefreshCw className="size-4" aria-hidden="true" /> Coba lagi</button>
         </div>,
       );
     return kerangka(<>{peringatan}<p className="mt-3 text-sm text-muted-foreground">Prakiraan per jam sedang tidak tersedia; berikut prakiraan resmi BMKG per 3 jam.</p><div className="mt-3"><DaftarBmkg d={bmkg} /></div>{tanya && <div className="mt-3">{tanya}</div>}{sumber}</>);

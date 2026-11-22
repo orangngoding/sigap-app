@@ -44,6 +44,7 @@ import { useRisikoLokasi } from "@/hooks/use-risiko-lokasi";
 
 import { tambahkanBahaya } from "@/lib/preparedness/saran-bahaya";
 import { TeksPihak } from "@/components/rencana/teks-pihak";
+import { gulirKeAwalTab } from "@/lib/utils/gulir-tab";
 
 type TabId = "ringkasan" | "tindakan" | "tas" | "bagikan";
 const TAB: Array<{ id: TabId; label: string; Ikon: typeof LayoutDashboard }> = [
@@ -127,15 +128,14 @@ export function RencanaView() {
   const contoh = params.get("contoh") === "1";
   const tabAwal = params.get("tab");
   const [tab, setTab] = useState<TabId>(tabDari(tabAwal));
-  const tabRef = useRef<HTMLDivElement>(null);
+  const jangkarTab = useRef<HTMLDivElement>(null);
   // Tab tersimpan di URL (bisa dibagikan dan bertahan saat dimuat ulang) tanpa navigasi ulang.
   const pilihTab = (t: TabId) => {
     setTab(t);
     const u = new URL(window.location.href);
     u.searchParams.set("tab", t);
     window.history.replaceState(null, "", u);
-    const atas = tabRef.current?.getBoundingClientRect().top ?? 0;
-    if (atas < 64) tabRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    gulirKeAwalTab(jangkarTab.current);
   };
   const siap = useHydrate(useLokasiStore, useProfilStore, useProgresStore, useRencanaStore, useTasStore, useLatihanStore, useAksiIklimStore);
 
@@ -274,19 +274,26 @@ export function RencanaView() {
       )}
 
       {/* Navigasi tab: menempel di bawah header agar berpindah bagian tanpa menggulir panjang. */}
-      <div ref={tabRef} className="tanpa-cetak bilah-lengket sticky top-[calc(4rem+var(--spanduk,0px))] z-30 -mx-4 px-4 py-2 sm:mx-0 sm:px-0">
-        <div role="tablist" aria-label="Bagian rencana" className="kaca isolate flex gap-1 overflow-x-auto rounded-2xl border border-border/70 p-1 shadow-sm">
+      {/* Jangkar gulir saat ganti tab (lihat gulirKeAwalTab); mb-0 agar tidak menambah jarak space-y. */}
+      <div ref={jangkarTab} aria-hidden="true" className="mb-0 scroll-mt-[calc(4rem+var(--spanduk,0px))]" />
+      <div className="tanpa-cetak bilah-lengket sticky top-[calc(4rem+var(--spanduk,0px))] z-30 -mx-4 px-4 py-2 sm:mx-0 sm:px-0">
+        <div role="tablist" aria-label="Bagian rencana" className="kaca isolate grid grid-cols-4 gap-1 rounded-2xl border border-border/70 p-1 shadow-sm sm:flex sm:overflow-x-auto">
           {TAB.map(({ id, label, Ikon }) => {
             const aktif = tab === id;
             const badge = id === "tindakan" ? `${hitung.tindakanSiap}/${hitung.tindakan}` : id === "tas" ? `${hitung.tasSiap}/${hitung.tas}` : null;
             return (
               <button
                 key={id} type="button" role="tab" id={`tab-${id}`} aria-selected={aktif} aria-controls={`panel-${id}`} onClick={() => pilihTab(id)}
-                className={`relative flex min-h-11 shrink-0 items-center gap-2 rounded-xl px-3.5 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-primary sm:flex-1 sm:justify-center ${aktif ? "text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
+                // HP: empat kolom sama lebar (ikon dan angka di atas, label di bawah) agar semua tab terlihat tanpa digeser.
+                className={`relative flex min-h-14 min-w-0 flex-col items-center justify-center gap-0.5 whitespace-nowrap rounded-xl px-1 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-primary sm:min-h-11 sm:shrink-0 sm:flex-1 sm:flex-row sm:gap-2 sm:px-3.5 sm:text-sm ${aktif ? "text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
               >
                 {aktif && <motion.span layoutId="tab-rencana" className="absolute inset-0 -z-10 rounded-xl bg-primary shadow-sm" transition={{ type: "spring", stiffness: 420, damping: 34 }} />}
-                <Ikon className="size-4" aria-hidden="true" /> {label}
-                {badge && <span className={`rounded-full px-1.5 text-xs tabular-nums ${aktif ? "bg-white/20" : "bg-muted"}`}>{badge}</span>}
+                <span className="flex items-center gap-1">
+                  <Ikon className="size-4 shrink-0" aria-hidden="true" />
+                  {badge && <span className={`rounded-full px-1.5 text-xs tabular-nums sm:hidden ${aktif ? "bg-white/20" : "bg-muted"}`}>{badge}</span>}
+                </span>
+                {label}
+                {badge && <span className={`hidden rounded-full px-1.5 text-xs tabular-nums sm:inline ${aktif ? "bg-white/20" : "bg-muted"}`}>{badge}</span>}
               </button>
             );
           })}

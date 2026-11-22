@@ -34,22 +34,22 @@ export function PemilihKeluarga() {
     return (
       <aside
         aria-labelledby="judul-keluarga-lain"
-        className="tanpa-cetak mb-6 flex flex-col gap-3 rounded-2xl border border-primary/20 bg-primary/5 p-4 sm:flex-row sm:items-center sm:gap-4 sm:p-5"
+        className="tanpa-cetak mb-4 flex items-center gap-3 rounded-2xl border border-primary/20 bg-primary/5 p-3 sm:mb-6 sm:gap-4 sm:p-5"
       >
         <div className="flex min-w-0 flex-1 items-start gap-3 sm:items-center sm:gap-4">
-          <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-primary text-primary-foreground sm:size-12 sm:rounded-2xl" aria-hidden="true">
+          <span className="hidden size-12 shrink-0 place-items-center rounded-2xl bg-primary text-primary-foreground sm:grid" aria-hidden="true">
             <Users className="size-5 sm:size-6" />
           </span>
           <div className="min-w-0">
-            <h2 id="judul-keluarga-lain" className="font-bold text-foreground">Mengelola rencana keluarga lain?</h2>
-            <p className="mt-0.5 text-sm leading-relaxed text-muted-foreground">
+            <h2 id="judul-keluarga-lain" className="text-sm font-bold text-foreground sm:text-base">Mengelola rencana keluarga lain?</h2>
+            <p className="mt-0.5 hidden text-sm leading-relaxed text-muted-foreground sm:block">
               Pak RT, kader, atau kerabat bisa menyusun rencana terpisah untuk tiap keluarga dari perangkat ini.
             </p>
           </div>
         </div>
         <Link
           href="/rencana/keluarga#tambah-keluarga"
-          className="press inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-xl border-2 border-primary bg-surface px-5 text-sm font-semibold text-primary hover:bg-primary hover:text-primary-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          className="press inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-xl border-2 border-primary bg-surface px-3 text-sm sm:px-5 font-semibold text-primary hover:bg-primary hover:text-primary-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         >
           <UserPlus className="size-4" aria-hidden="true" /> Tambah keluarga
         </Link>
@@ -165,7 +165,7 @@ export function SpandukKeluarga() {
           <Link
             href="/rencana/keluarga"
             aria-label="Kelola keluarga"
-            className="inline-flex size-10 items-center justify-center rounded-full border border-amber-400 bg-white/80 text-sm font-semibold transition-colors hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700 sm:size-auto sm:min-h-10 sm:px-4"
+            className="inline-flex size-10 any-pointer-coarse:size-11 items-center justify-center rounded-full border border-amber-400 bg-white/80 text-sm font-semibold transition-colors hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700 sm:size-auto sm:min-h-10 sm:px-4"
           >
             <Settings2 className="size-4 sm:hidden" aria-hidden="true" />
             <span className="hidden sm:inline">Kelola keluarga</span>
@@ -175,7 +175,7 @@ export function SpandukKeluarga() {
               type="button"
               onClick={() => bukaKeluarga(saya.id, "/")}
               aria-label="Kembali ke keluarga saya"
-              className="inline-flex min-h-10 items-center gap-1.5 rounded-full bg-amber-950 px-3 text-sm font-semibold text-amber-50 transition-colors hover:bg-amber-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700 sm:px-4"
+              className="inline-flex min-h-10 any-pointer-coarse:min-h-11 items-center gap-1.5 rounded-full bg-amber-950 px-3 text-sm font-semibold text-amber-50 transition-colors hover:bg-amber-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700 sm:px-4"
             >
               <Undo2 className="size-4" aria-hidden="true" />
               <span className="sm:hidden">Kembali</span>

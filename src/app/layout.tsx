@@ -1,5 +1,5 @@
 
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Suspense } from "react";
 import { Geist_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
@@ -11,6 +11,7 @@ import { Providers } from "@/components/providers";
 import { Toaster } from "@/components/global/toaster";
 import { RegistrasiSW } from "@/components/darurat/registrasi-sw";
 import { AsistenMelayang } from "@/components/tanya/asisten-melayang";
+import { PenandaPengguna } from "@/components/global/penanda-pengguna";
 
 // Plus Jakarta Sans: huruf karya desainer Indonesia (Tokotype), jelas dibaca di layar kecil.
 const jakarta = Plus_Jakarta_Sans({
@@ -23,6 +24,13 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+// viewport-fit=cover: env(safe-area-inset-*) aktif (notch dan garis beranda). Zoom pengguna tidak dikunci (WCAG 1.4.4).
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
@@ -43,8 +51,11 @@ export default function RootLayout({
     <html
       lang="id"
       className={`${jakarta.variable} ${geistMono.variable} h-full antialiased`}
+      // data-pengguna / data-rencana ditulis PenandaPengguna sebelum hydration.
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col pb-16 md:pb-0" suppressHydrationWarning>
+      <body className="min-h-full flex flex-col px-[env(safe-area-inset-left)_env(safe-area-inset-right)] pb-[calc(4rem+env(safe-area-inset-bottom))] lg:pb-0" suppressHydrationWarning>
+        <PenandaPengguna />
         <a
           href="#konten"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-primary-foreground"

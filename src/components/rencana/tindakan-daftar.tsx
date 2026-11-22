@@ -26,7 +26,7 @@ function Sumber({ t }: { t: Tindakan }) {
         <p className="mt-1 inline-flex rounded-full bg-muted px-2 py-0.5 text-xs font-medium text-foreground">Turunan: {c.turunan}</p>
       )}
       <details className="mt-1 text-xs text-muted-foreground">
-        <summary className="inline-flex min-h-8 cursor-pointer items-center rounded font-medium underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Sumber</summary>
+        <summary className="inline-flex min-h-8 any-pointer-coarse:min-h-11 cursor-pointer items-center rounded font-medium underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Sumber</summary>
         <p className="mt-1">
           <a href={c.sourceUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 underline">
             {c.sourceTitle} <ExternalLink className="size-3" aria-hidden="true" />
@@ -124,7 +124,7 @@ export function TindakanDaftar({
           {(["semua", ...urutHazard] as const).map((h) => (
             <button
               key={h} type="button" aria-pressed={fokus === h} onClick={() => setFokus(h)}
-              className={`min-h-10 shrink-0 rounded-full border px-4 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${
+              className={`min-h-10 any-pointer-coarse:min-h-11 shrink-0 rounded-full border px-4 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${
                 fokus === h ? "border-foreground bg-foreground text-background" : "border-border bg-surface text-foreground hover:bg-muted"
               }`}
             >

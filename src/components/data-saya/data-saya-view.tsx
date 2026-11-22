@@ -11,7 +11,7 @@ import { toast } from "@/lib/toast";
 import { StatusBanner } from "@/components/global/status-banner";
 import { useHydrate } from "@/hooks/use-hydrate";
 import { finalisasiProfil } from "@/lib/preparedness/profil-schema";
-import { AWALAN, bacaCadangan, ringkasIsi, type IsiCadangan } from "@/lib/data-saya/cadangan";
+import { AWALAN, MAKS_BYTE_CADANGAN, bacaCadangan, ringkasIsi, type IsiCadangan } from "@/lib/data-saya/cadangan";
 import { AMBANG_LULUS } from "@/lib/latihan/mesin";
 import { SKENARIO_BY_ID } from "@/lib/latihan/skenario";
 import { HAZARD_BY_ID } from "@/lib/hazards/hazards";
@@ -179,6 +179,12 @@ export function DataSayaView() {
     setGalatPulih(null);
     setCadangan(null);
     if (!f) return;
+    // Ukuran diperiksa sebelum dibaca: berkas besar yang salah pilih (mis. video) tidak dimuat utuh ke memori.
+    if (f.size > MAKS_BYTE_CADANGAN) {
+      setGalatPulih("Berkas terlalu besar untuk data SIGAP.");
+      if (pemilihFile.current) pemilihFile.current.value = "";
+      return;
+    }
     const h = bacaCadangan(await f.text());
     if (!h.ok) setGalatPulih(h.pesan);
     else setCadangan(h.isi);
@@ -240,7 +246,7 @@ export function DataSayaView() {
       {selesai && <StatusBanner tone="info">Semua data di perangkat ini sudah dihapus.</StatusBanner>}
 
       {/* Prinsip privasi dalam tiga butir */}
-      <ul className="grid gap-3 sm:grid-cols-3" aria-label="Prinsip privasi SIGAP">
+      <ul className="grid gap-3 md:grid-cols-3" aria-label="Prinsip privasi SIGAP">
         {[
           { Ikon: UserX, judul: "Tanpa akun", isi: "Tidak perlu daftar, email, atau nomor HP." },
           { Ikon: Smartphone, judul: "Tersimpan di HP ini", isi: "Profil, rencana, dan percakapan hanya ada di perangkat Anda." },
@@ -280,7 +286,7 @@ export function DataSayaView() {
           <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
             Rencana siaga, kontak darurat, dan titik kumpul Anda hanya tersimpan di HP ini, karena SIGAP tidak memakai akun. Agar tidak hilang saat ganti HP atau data peramban terhapus, <strong className="text-foreground">simpan data Anda</strong> lalu masukkan lagi di HP baru. Anda tidak perlu membuka berkasnya.
           </p>
-          <ol className="mt-6 grid gap-4 sm:grid-cols-3">
+          <ol className="mt-6 grid gap-4 md:grid-cols-3">
             {[
               { n: 1, Ikon: Download, judul: "Simpan data", isi: "Di HP lama, ketuk tombol di bawah." },
               { n: 2, Ikon: Share2, judul: "Kirim ke diri sendiri", isi: "Lewat WhatsApp ke nomor sendiri, Google Drive, atau email." },

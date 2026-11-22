@@ -31,11 +31,36 @@ function ChipJenis({ j, gelap = false }: { j: Jenis; gelap?: boolean }) {
   );
 }
 
+/** Ikon media: favicon situs penerbit; bila tidak ada domainnya atau gagal dimuat, inisial nama media. */
+function LogoMedia({ b, terang }: { b: BeritaItem; terang: boolean }) {
+  const [gagal, setGagal] = useState(false);
+  if (b.situs && !gagal)
+    return (
+      <span className="grid size-5 shrink-0 place-items-center overflow-hidden rounded-full bg-white ring-1 ring-black/10" aria-hidden="true">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={`https://www.google.com/s2/favicons?domain=${encodeURIComponent(b.situs)}&sz=64`}
+          alt=""
+          width={16}
+          height={16}
+          loading="lazy"
+          decoding="async"
+          referrerPolicy="no-referrer"
+          onError={() => setGagal(true)}
+          className="size-4 object-contain"
+        />
+      </span>
+    );
+  return (
+    <span className={`grid size-5 shrink-0 place-items-center rounded-full text-xs font-bold ${terang ? "bg-white/20 text-white" : "bg-primary/10 text-primary"}`} aria-hidden="true">{b.sumber.charAt(0).toUpperCase()}</span>
+  );
+}
+
 /** Nama media dan waktu terbit. */
 function Meta({ b, terang = false }: { b: BeritaItem; terang?: boolean }) {
   return (
     <span className={`flex items-center gap-2 text-xs ${terang ? "text-white/80" : "text-muted-foreground"}`}>
-      <span className={`grid size-5 shrink-0 place-items-center rounded-full text-[11px] font-bold ${terang ? "bg-white/20 text-white" : "bg-primary/10 text-primary"}`} aria-hidden="true">{b.sumber.charAt(0).toUpperCase()}</span>
+      <LogoMedia b={b} terang={terang} />
       <span className="truncate font-semibold">{b.sumber}</span>
       <span aria-hidden="true">·</span>
       <time dateTime={b.waktu} title={waktuMutlak(b.waktu)} className="shrink-0">{waktuRelatif(b.waktu)}</time>
@@ -108,7 +133,7 @@ function HalamanBerita({ daftar }: { daftar: BeritaItem[] }) {
     const halus = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     el.scrollTo({ left: i * el.clientWidth, behavior: halus ? "smooth" : "auto" });
   };
-  const tombol = "inline-flex min-h-10 min-w-10 items-center justify-center rounded-full px-3 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-primary disabled:opacity-40";
+  const tombol = "inline-flex min-h-10 any-pointer-coarse:min-h-11 min-w-10 items-center justify-center rounded-full px-3 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-primary disabled:opacity-40";
   return (
     <div className="mt-3">
       <div ref={jalur} className="relative flex snap-x snap-mandatory overflow-x-auto overscroll-x-contain rounded-2xl border border-border bg-surface [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" aria-label="Berita lainnya, geser untuk halaman berikutnya">
@@ -281,7 +306,7 @@ export function BeritaHalaman({ mode = "bencana" }: { mode?: "bencana" | "cuaca"
             return (
               <button
                 key={j} type="button" aria-pressed={aktif} onClick={() => { setJenis(j); setBatas(PER_HALAMAN); }}
-                className={`inline-flex min-h-10 shrink-0 items-center gap-1.5 rounded-full border px-3.5 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-primary ${aktif ? "border-primary bg-primary text-primary-foreground" : "border-border bg-surface text-foreground hover:bg-muted"}`}
+                className={`inline-flex min-h-10 any-pointer-coarse:min-h-11 shrink-0 items-center gap-1.5 rounded-full border px-3.5 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-primary ${aktif ? "border-primary bg-primary text-primary-foreground" : "border-border bg-surface text-foreground hover:bg-muted"}`}
               >
                 {j === "semua" ? "Semua" : labelJenis(j)} <span className={`tabular-nums ${aktif ? "text-primary-foreground" : "text-muted-foreground"}`}>{n}</span>
               </button>

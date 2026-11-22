@@ -30,7 +30,7 @@ export function DaftarIsi({ butir }: { butir: Array<{ id: string; judul: string 
             {aktif === b.id && <motion.span layoutId="daftar-isi-aktif" className="absolute inset-0 rounded-lg bg-primary/10" transition={{ type: "spring", stiffness: 420, damping: 36 }} />}
             <a
               href={`#${b.id}`} aria-current={aktif === b.id ? "location" : undefined}
-              className={`relative flex min-h-9 items-center gap-2 rounded-lg px-3 text-sm transition-colors focus-visible:outline-2 focus-visible:outline-primary ${aktif === b.id ? "font-semibold text-primary" : "text-muted-foreground hover:text-foreground"}`}
+              className={`relative flex min-h-9 any-pointer-coarse:min-h-11 items-center gap-2 rounded-lg px-3 text-sm transition-colors focus-visible:outline-2 focus-visible:outline-primary ${aktif === b.id ? "font-semibold text-primary" : "text-muted-foreground hover:text-foreground"}`}
             >
               <span className="w-5 text-xs tabular-nums opacity-60">{i + 1}</span> {b.judul}
             </a>

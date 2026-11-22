@@ -210,7 +210,7 @@ export function LatihanMain({ id, skenario, onSelesai, sesudah }: PropsLatihan) 
                             return (
                               <li key={t.actionId} className="flex flex-wrap items-center justify-between gap-2 rounded-xl bg-muted/60 p-3 text-sm">
                                 <span><span className="block text-xs font-semibold text-primary">Di rencana keluarga Anda</span>{t.title}</span>
-                                <button type="button" onClick={() => setel(t.actionId, !sudah)} aria-pressed={sudah} className={`press inline-flex min-h-10 items-center gap-1.5 rounded-lg px-3 text-xs font-semibold ${sudah ? "bg-success text-success-foreground" : "bg-primary text-primary-foreground hover:bg-primary/90"}`}>
+                                <button type="button" onClick={() => setel(t.actionId, !sudah)} aria-pressed={sudah} className={`press inline-flex min-h-10 any-pointer-coarse:min-h-11 items-center gap-1.5 rounded-lg px-3 text-xs font-semibold ${sudah ? "bg-success text-success-foreground" : "bg-primary text-primary-foreground hover:bg-primary/90"}`}>
                                   <CheckCircle2 className="size-4" aria-hidden="true" /> {sudah ? "Sudah disiapkan" : "Tandai sudah disiapkan"}
                                 </button>
                               </li>

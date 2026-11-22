@@ -21,12 +21,12 @@ const TINGKAT: Record<Tingkat, { label: string; cls: string; Ikon: LucideIcon }>
 };
 const IKON_SUMBER: Record<Sinyal["sumber"], LucideIcon> = { cuaca: CloudSun, gempa: Activity, peringatan: BellRing, risiko: Database };
 const TOMBOL_SEKUNDER =
-  "inline-flex min-h-10 items-center gap-2 rounded-lg border border-border bg-surface px-3 text-sm font-medium hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:opacity-50";
+  "inline-flex min-h-10 any-pointer-coarse:min-h-11 any-pointer-coarse:min-w-11 justify-center items-center gap-2 rounded-lg border border-border bg-surface px-3 text-sm font-medium hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:opacity-50";
 
 type HasilTampil = HasilBriefing & { stale?: boolean };
 
 function TautanTindakan({ href, label }: { href: string; label: string }) {
-  const cls = "inline-flex min-h-8 items-center gap-1 text-xs font-semibold text-primary underline underline-offset-2";
+  const cls = "inline-flex min-h-8 any-pointer-coarse:min-h-11 items-center gap-1 text-xs font-semibold text-primary underline underline-offset-2";
   return href.startsWith("/") ? (
     <Link href={href} className={cls}>{label} <ArrowRight className="size-3" aria-hidden="true" /></Link>
   ) : (
@@ -128,7 +128,7 @@ export function BriefingHarian({ varian = "beranda" }: { varian?: "beranda" | "l
           <div className="mt-4 space-y-3" aria-busy="true" aria-label="Menyusun briefing">
             <div className="h-4 w-3/4 animate-pulse rounded bg-muted motion-reduce:animate-none" />
             <div className="h-4 w-2/3 animate-pulse rounded bg-muted motion-reduce:animate-none" />
-            <div className="grid gap-3 sm:grid-cols-3">
+            <div className="grid gap-3 md:grid-cols-3">
               {[0, 1, 2].map((i) => <div key={i} className="h-24 animate-pulse rounded-xl bg-muted motion-reduce:animate-none" />)}
             </div>
             <p className="text-xs text-muted-foreground"><TeksPihak>Membaca data BMKG untuk wilayah Anda...</TeksPihak></p>
@@ -181,7 +181,7 @@ export function BriefingHarian({ varian = "beranda" }: { varian?: "beranda" | "l
               </ul>
             )}
 
-            <ol className="grid gap-3 sm:grid-cols-3">
+            <ol className="grid gap-3 md:grid-cols-3">
               {d.tindakan.map((x, i) => (
                 <motion.li
                   key={x.judul}

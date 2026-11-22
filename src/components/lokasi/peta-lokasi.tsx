@@ -48,5 +48,6 @@ export default function PetaLokasiLeaflet({ lat, lon, label, presisi, posisi }: 
     };
   }, [lat, lon, presisi, posisi]);
 
-  return <div ref={ref} role="region" aria-label={label} className="h-56 w-full rounded-xl sm:h-72" />;
+  // `isolate z-0`: z-index internal Leaflet (panel 400, kontrol 1000) dikurung di dalam peta agar tidak menimpa navbar dan panel Asisten.
+  return <div ref={ref} role="region" aria-label={label} className="relative isolate z-0 h-56 w-full rounded-xl sm:h-72" />;
 }

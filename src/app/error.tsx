@@ -10,6 +10,12 @@ export default function Galat({ reset }: { error: Error; reset: () => void }) {
           <button type="button" onClick={reset} className="inline-flex min-h-11 items-center rounded-lg bg-primary px-5 text-sm font-semibold text-primary-foreground">Coba lagi</button>
           <a href="/darurat" className="inline-flex min-h-11 items-center rounded-lg border border-border px-5 text-sm font-semibold">Mode Darurat</a>
         </div>
+        {/* Bila galat berulang karena data di perangkat rusak (mis. berkas cadangan dari versi lain), pengguna perlu jalan keluar. */}
+        <p className="mt-6 text-sm text-muted-foreground">
+          Bila galat terus muncul, buka{" "}
+          <a href="/data-saya" className="font-semibold text-primary underline underline-offset-2">Data &amp; privasi</a>{" "}
+          untuk menyimpan cadangan lalu menghapus data di perangkat ini.
+        </p>
       </div>
     </main>
   );

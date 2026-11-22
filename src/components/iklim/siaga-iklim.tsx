@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion } from "motion/react";
 import { useQuery } from "@tanstack/react-query";
@@ -28,6 +28,7 @@ import { SiagaPekan, useSinyalPekan } from "./siaga-pekan";
 import { KartuGlobal } from "./konteks-global";
 import { TigaBulan } from "./tiga-bulan";
 import { TeksPihak, usePihak } from "@/components/rencana/teks-pihak";
+import { gulirKeAwalTab } from "@/lib/utils/gulir-tab";
 
 type TabId = "pekan" | "musim" | "jangka";
 const TAB: Array<{ id: TabId; label: string; sub: string; Ikon: typeof Home }> = [
@@ -104,11 +105,13 @@ export function SiagaIklim() {
   const gridKasar = lokasi ? `${snapProyeksi(lokasi.lat)},${snapProyeksi(lokasi.lon)}` : "";
   const tabAwal = useSearchParams().get("tab");
   const [tab, setTab] = useState<TabId>(tabSah(tabAwal) ? tabAwal : "pekan");
+  const jangkarTab = useRef<HTMLDivElement>(null);
   const pilihTab = (t: TabId) => {
     setTab(t);
     const u = new URL(window.location.href);
     u.searchParams.set("tab", t);
     window.history.replaceState(null, "", u);
+    gulirKeAwalTab(jangkarTab.current);
   };
 
   const proyeksi = useQuery<Tampil<ProyeksiResponse>>({
@@ -212,6 +215,8 @@ export function SiagaIklim() {
         <Link href="/lokasi" className="inline-flex min-h-11 items-center font-semibold text-primary underline underline-offset-2">Ganti lokasi</Link>
       </div>
 
+      {/* Jangkar gulir saat ganti tab (lihat gulirKeAwalTab); mb-0 agar tidak menambah jarak space-y. */}
+      <div ref={jangkarTab} aria-hidden="true" className="mb-0 scroll-mt-[calc(4rem+var(--spanduk,0px))]" />
       <div className="tanpa-cetak bilah-lengket sticky top-[calc(4rem+var(--spanduk,0px))] z-30 -mx-4 px-4 py-2 sm:mx-0 sm:px-0">
         <div role="tablist" aria-label="Rentang waktu" className="kaca isolate grid grid-cols-3 gap-1 rounded-2xl border border-border/70 p-1 shadow-sm">
           {TAB.map(({ id, label, sub, Ikon }) => {
@@ -224,7 +229,7 @@ export function SiagaIklim() {
                 {aktif && <motion.span layoutId="tab-iklim" className="absolute inset-0 -z-10 rounded-xl bg-primary shadow-sm" transition={{ type: "spring", stiffness: 420, damping: 34 }} />}
                 <Ikon className="hidden size-4 sm:block" aria-hidden="true" />
                 <span className="text-sm font-semibold leading-tight">{label}</span>
-                <span className={`text-[11px] leading-tight sm:hidden ${aktif ? "text-primary-foreground/80" : ""}`}>{sub}</span>
+                <span className={`text-xs leading-tight sm:hidden ${aktif ? "text-primary-foreground/80" : ""}`}>{sub}</span>
               </button>
             );
           })}

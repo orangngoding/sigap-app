@@ -4,6 +4,7 @@ import { createJSONStorage, persist } from "zustand/middleware";
 import type { LangkahWizard, ProfilDraft } from "@/types/rencana";
 import { safeStorage } from "@/lib/storage/safe-storage";
 import { buatProfilAwal, rapikanProfil } from "@/lib/preparedness/profil-awal";
+import { sanitasiProfil } from "@/lib/storage/sanitasi";
 
 interface ProfilState {
   profil: ProfilDraft;
@@ -33,13 +34,15 @@ export const useProfilStore = create<ProfilState>()(
       storage: createJSONStorage(() => safeStorage),
       partialize: (s) => ({ profil: s.profil, langkah: s.langkah }),
       migrate: (persisted) => persisted as { profil: ProfilDraft; langkah: LangkahWizard }, // titik migrasi skema berikutnya
-      // Gabungkan dengan nilai awal supaya field baru di versi berikutnya tidak undefined.
+      // Gabungkan dengan nilai awal supaya field baru di versi berikutnya tidak undefined. Kolom yang bentuknya salah
+      // (berkas cadangan rusak atau diedit) diganti nilai awal, agar Mode Darurat dan halaman lain tetap terbuka.
       merge: (persisted, current) => {
-        const p = (persisted ?? {}) as Partial<{ profil: Partial<ProfilDraft>; langkah: LangkahWizard }>;
+        const p = (persisted ?? {}) as { profil?: unknown; langkah?: unknown };
+        const langkah = p.langkah === 1 || p.langkah === 2 || p.langkah === 3 || p.langkah === 4 ? p.langkah : current.langkah;
         return {
           ...current,
-          langkah: p.langkah ?? current.langkah,
-          profil: rapikanProfil({ ...current.profil, ...(p.profil ?? {}) } as ProfilDraft),
+          langkah,
+          profil: rapikanProfil({ ...current.profil, ...sanitasiProfil(p.profil) }),
         };
       },
     },

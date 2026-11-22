@@ -23,7 +23,7 @@ const CONTOH = [
   { Ikon: Leaf, teks: "Apa beda mitigasi dan adaptasi perubahan iklim?" },
 ];
 const AKSI =
-  "inline-flex min-h-8 items-center gap-1 rounded-lg px-2 text-xs font-medium text-muted-foreground hover:bg-muted hover:text-foreground focus-visible:outline-2 focus-visible:outline-primary";
+  "inline-flex min-h-8 any-pointer-coarse:min-h-11 items-center gap-1 rounded-lg px-2 text-xs font-medium text-muted-foreground hover:bg-muted hover:text-foreground focus-visible:outline-2 focus-visible:outline-primary";
 
 function LabelDasar({ h }: { h: NonNullable<PesanChat["hasil"]> }) {
   if (h.refused) return null;
@@ -132,8 +132,8 @@ function Gelembung({
             className="block w-full resize-none bg-transparent px-2 py-1 text-base focus:outline-none"
           />
           <div className="mt-2 flex justify-end gap-2">
-            <button type="button" onClick={() => { setUbah(false); setDraf(p.teks); }} className="min-h-9 rounded-full px-4 text-sm font-semibold text-muted-foreground hover:bg-muted">Batal</button>
-            <button type="submit" disabled={draf.trim().length < 2} className="min-h-9 rounded-full bg-primary px-4 text-sm font-semibold text-primary-foreground hover:bg-primary/90 disabled:opacity-50">Kirim ulang</button>
+            <button type="button" onClick={() => { setUbah(false); setDraf(p.teks); }} className="min-h-9 any-pointer-coarse:min-h-11 rounded-full px-4 text-sm font-semibold text-muted-foreground hover:bg-muted">Batal</button>
+            <button type="submit" disabled={draf.trim().length < 2} className="min-h-9 any-pointer-coarse:min-h-11 rounded-full bg-primary px-4 text-sm font-semibold text-primary-foreground hover:bg-primary/90 disabled:opacity-50">Kirim ulang</button>
           </div>
           <p className="mt-1 px-2 text-xs text-muted-foreground">Jawaban sesudah pertanyaan ini akan diganti.</p>
         </motion.form>
@@ -227,8 +227,8 @@ function PitaDikte({ sisaMs, onKirim, onBatal }: { sisaMs: number | null; onKiri
           {sisaMs === null ? "Mendengarkan… jeda sebentar tidak apa-apa" : `Terkirim otomatis dalam ${Math.ceil(sisaMs / 1000)} detik`}
         </span>
         <span className="flex gap-1">
-          <button type="button" onClick={onKirim} className="min-h-8 rounded-full bg-red-600 px-3 text-xs font-semibold text-white hover:bg-red-700">Kirim sekarang</button>
-          <button type="button" onClick={onBatal} className="min-h-8 rounded-full px-3 text-xs font-semibold hover:bg-red-100">Berhenti</button>
+          <button type="button" onClick={onKirim} className="min-h-8 any-pointer-coarse:min-h-11 rounded-full bg-red-600 px-3 text-xs font-semibold text-white hover:bg-red-700">Kirim sekarang</button>
+          <button type="button" onClick={onBatal} className="min-h-8 any-pointer-coarse:min-h-11 rounded-full px-3 text-xs font-semibold hover:bg-red-100">Berhenti</button>
         </span>
       </div>
       <div className="h-1 bg-red-100"><div className="h-full bg-red-500 transition-[width] duration-200" style={{ width: `${persen}%` }} /></div>

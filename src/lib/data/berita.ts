@@ -127,6 +127,18 @@ export function pisahJudul(judul: string, sumber: string | null): { judul: strin
 const blokItem = (xml: string) => [...xml.matchAll(/<item>([\s\S]*?)<\/item>/gi)].map((m) => m[1]);
 const atribut = (blok: string, tag: string, attr: string) => blok.match(new RegExp(`<${tag}\\s[^>]*${attr}="([^"]+)"`, "i"))?.[1] ?? null;
 
+/** Domain situs media (tanpa "www.") dari URL http(s), untuk ikon medianya; null bila tidak valid. */
+export function domainSitus(url: string | null): string | null {
+  if (!url) return null;
+  try {
+    const u = new URL(url.trim());
+    if (u.protocol !== "https:" && u.protocol !== "http:") return null;
+    return u.hostname.replace(/^www\./, "").toLowerCase() || null;
+  } catch {
+    return null;
+  }
+}
+
 /** Situs partai politik bukan media berita yang netral. */
 const SUMBER_DITOLAK = /\b(partai|dpp|dpw|dpd)\b/i;
 /** Buang ekor nama domain yang kadang tertinggal di judul ("... - kumparan.com"). */
@@ -145,7 +157,8 @@ export function uraiBerita(xml: string, sekarang = new Date()): BeritaItem[] {
     if (judul.length < 8 || !relevan(judul) || SUMBER_DITOLAK.test(sumber)) continue;
     const t = Date.parse(ambilTag(b, "pubDate") ?? "");
     if (Number.isNaN(t) || t > batas) continue;
-    hasil.push({ id: ambilTag(b, "guid") ?? link, judul: potong(judul, 180), sumber: potong(sumber, 60), waktu: new Date(t).toISOString(), url: link, jenis: jenisBerita(judul) });
+    const situs = domainSitus(atribut(b, "source", "url"));
+    hasil.push({ id: ambilTag(b, "guid") ?? link, judul: potong(judul, 180), sumber: potong(sumber, 60), waktu: new Date(t).toISOString(), url: link, jenis: jenisBerita(judul), ...(situs ? { situs } : {}) });
   }
   return hasil;
 }
@@ -200,9 +213,11 @@ export function uraiMedia(xml: string, u: Pick<UmpanMedia, "nama" | "tautan" | "
     const t = Date.parse(ambilTag(b, "pubDate") ?? "");
     if (Number.isNaN(t) || t > batas) continue;
     const gambar = gambarItem(b);
+    const situs = domainSitus(link);
     hasil.push({
       id: ambilTag(b, "guid") ?? link, judul: potong(judul, 180), sumber: u.nama, waktu: new Date(t).toISOString(), url: link, jenis: jenisBerita(judul),
       ...(gambar && u.gambar.test(gambar) ? { gambar } : {}),
+      ...(situs ? { situs } : {}),
     });
   }
   return hasil;

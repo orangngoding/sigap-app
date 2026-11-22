@@ -55,13 +55,13 @@ function Baris({ n, belumAda, onTambah }: { n: NilaiBahaya; belumAda: boolean; o
         )}
         <p className="mt-1 text-xs text-muted-foreground/80">Sumber: {n.sumber}</p>
         {belumAda && onTambah && (
-          <button type="button" onClick={onTambah} className="press mt-2 inline-flex h-9 items-center gap-1 rounded-lg border border-border px-3 text-sm font-semibold hover:bg-muted sm:hidden">
+          <button type="button" onClick={onTambah} className="press mt-2 inline-flex h-9 any-pointer-coarse:h-11 items-center gap-1 rounded-lg border border-border px-3 text-sm font-semibold hover:bg-muted sm:hidden">
             <Plus className="size-4" aria-hidden="true" /> Tambah ke rencana
           </button>
         )}
       </div>
       {belumAda && onTambah && (
-        <button type="button" onClick={onTambah} className="press hidden h-9 shrink-0 items-center gap-1 self-start rounded-lg border border-border px-3 text-sm font-semibold hover:bg-muted sm:inline-flex">
+        <button type="button" onClick={onTambah} className="press hidden h-9 any-pointer-coarse:h-11 shrink-0 items-center gap-1 self-start rounded-lg border border-border px-3 text-sm font-semibold hover:bg-muted sm:inline-flex">
           <Plus className="size-4" aria-hidden="true" /> Tambah
         </button>
       )}
@@ -89,7 +89,7 @@ export function ProfilRisiko({ lokasi, terpilih, onTambah, ringkas = false, judu
       <section aria-labelledby={idJudul} className="rounded-2xl border border-border bg-surface p-5 sm:p-6">
         <h2 id={idJudul} className="text-lg font-bold text-foreground">{judul}</h2>
         <p className="mt-1 text-sm text-muted-foreground">Data risiko lokasi belum dapat dimuat. Anda tetap bisa memilih bahaya secara manual, atau cek peta resmi InaRISK.</p>
-        <button type="button" onClick={() => q.refetch()} className="press mt-3 inline-flex min-h-10 items-center gap-2 rounded-lg border border-border px-3 text-sm font-semibold hover:bg-muted">
+        <button type="button" onClick={() => q.refetch()} className="press mt-3 inline-flex min-h-10 any-pointer-coarse:min-h-11 items-center gap-2 rounded-lg border border-border px-3 text-sm font-semibold hover:bg-muted">
           <RefreshCw className="size-4" aria-hidden="true" /> Coba lagi
         </button>
       </section>
@@ -126,7 +126,7 @@ export function ProfilRisiko({ lokasi, terpilih, onTambah, ringkas = false, judu
 
       {sisa.length > 0 && (
         <div className="border-t border-border pt-2">
-          <button type="button" aria-expanded={buka} onClick={() => setBuka((b) => !b)} className="inline-flex min-h-10 items-center gap-1.5 text-sm font-semibold text-primary">
+          <button type="button" aria-expanded={buka} onClick={() => setBuka((b) => !b)} className="inline-flex min-h-10 any-pointer-coarse:min-h-11 items-center gap-1.5 text-sm font-semibold text-primary">
             <ChevronDown className={`size-4 transition-transform ${buka ? "rotate-180" : ""}`} aria-hidden="true" /> {buka ? "Sembunyikan" : "Lihat"} {sisa.length} bahaya berisiko rendah
           </button>
           {buka && <ul className="divide-y divide-border">{sisa.map((n) => <Baris key={n.id} n={n} belumAda={false} />)}</ul>}

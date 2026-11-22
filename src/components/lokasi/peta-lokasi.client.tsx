@@ -12,7 +12,7 @@ const Peta = dynamic(() => import("./peta-lokasi"), {
   loading: () => <div className="h-56 w-full animate-pulse rounded-xl bg-muted sm:h-72" aria-busy="true" aria-label="Memuat peta" />,
 });
 
-const TOMBOL = "inline-flex min-h-10 items-center gap-1.5 rounded-lg border border-border bg-surface px-3 text-sm font-semibold hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:opacity-60";
+const TOMBOL = "inline-flex min-h-10 any-pointer-coarse:min-h-11 items-center gap-1.5 rounded-lg border border-border bg-surface px-3 text-sm font-semibold hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:opacity-60";
 
 /**
  * Pembungkus muat-malas. Peta bukan satu-satunya cara memilih lokasi (ada pemilih berjenjang). Posisi perangkat

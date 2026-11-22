@@ -197,7 +197,7 @@ export function SimulatorView() {
 
           <div className="rounded-3xl border border-border bg-surface p-5 sm:p-6">
             <h2 className="text-lg font-bold">Pilih tingkat kesulitan</h2>
-            <div role="radiogroup" aria-label="Tingkat kesulitan" className="mt-3 grid gap-2 sm:grid-cols-3">
+            <div role="radiogroup" aria-label="Tingkat kesulitan" className="mt-3 grid gap-2 md:grid-cols-3">
               {TINGKAT_SIMULASI.map((t) => {
                 const Ikon: LucideIcon = t === "dasar" ? CloudSun : t === "menantang" ? Flame : Layers;
                 const aktif = t === tingkatSim;

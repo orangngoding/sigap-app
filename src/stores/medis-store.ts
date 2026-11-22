@@ -2,6 +2,7 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import { safeStorage } from "@/lib/storage/safe-storage";
+import { teksTersimpan } from "@/lib/storage/sanitasi";
 
 export const GOLONGAN_DARAH = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-", "Tidak tahu"] as const;
 export type GolonganDarah = (typeof GOLONGAN_DARAH)[number];
@@ -53,6 +54,20 @@ export const useMedisStore = create<MedisState>()(
       storage: createJSONStorage(() => safeStorage),
       partialize: (s) => ({ nama: s.nama, golonganDarah: s.golonganDarah, alergi: s.alergi, kondisi: s.kondisi, catatan: s.catatan }),
       migrate: (p) => p as InfoMedis,
+      // Info medis tampil di Mode Darurat: nilai yang bukan teks (berkas cadangan rusak) dikosongkan, bukan dibiarkan
+      // membuat halaman gagal dimuat.
+      merge: (persisted, current) => {
+        const p = (persisted ?? {}) as Record<string, unknown>;
+        const gol = teksTersimpan(p.golonganDarah);
+        return {
+          ...current,
+          nama: potong(teksTersimpan(p.nama), 40),
+          golonganDarah: (GOLONGAN_DARAH as readonly string[]).includes(gol) ? (gol as GolonganDarah) : "",
+          alergi: potong(teksTersimpan(p.alergi)),
+          kondisi: potong(teksTersimpan(p.kondisi)),
+          catatan: potong(teksTersimpan(p.catatan)),
+        };
+      },
     },
   ),
 );
