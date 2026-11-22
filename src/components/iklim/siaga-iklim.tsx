@@ -221,7 +221,7 @@ export function SiagaIklim() {
                 key={id} type="button" role="tab" id={`tab-${id}`} aria-selected={aktif} aria-controls={`panel-${id}`} onClick={() => pilihTab(id)}
                 className={`relative flex min-h-14 flex-col items-center justify-center rounded-xl px-2 text-center transition-colors focus-visible:outline-2 focus-visible:outline-primary sm:flex-row sm:gap-2 ${aktif ? "text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
               >
-                {aktif && <motion.span layoutId="tab-iklim" className="absolute inset-0 -z-10 rounded-xl bg-primary shadow-sm shadow-primary/30" transition={{ type: "spring", stiffness: 420, damping: 34 }} />}
+                {aktif && <motion.span layoutId="tab-iklim" className="absolute inset-0 -z-10 rounded-xl bg-primary shadow-sm" transition={{ type: "spring", stiffness: 420, damping: 34 }} />}
                 <Ikon className="hidden size-4 sm:block" aria-hidden="true" />
                 <span className="text-sm font-semibold leading-tight">{label}</span>
                 <span className={`text-[11px] leading-tight sm:hidden ${aktif ? "text-primary-foreground/80" : ""}`}>{sub}</span>

@@ -20,7 +20,7 @@ export default function OpengraphImage() {
           </div>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-          <span style={{ fontSize: 58, fontWeight: 800, lineHeight: 1.1, letterSpacing: -1.5, maxWidth: 980 }}>Dari peringatan resmi menjadi rencana siaga keluargamu.</span>
+          <span style={{ fontSize: 58, fontWeight: 800, lineHeight: 1.1, letterSpacing: -1.5, maxWidth: 980 }}>Dari peringatan resmi menjadi rencana siaga keluargamu</span>
           <span style={{ fontSize: 28, color: WARNA_MEREK.ombak }}>Data BMKG · Panduan BNPB · Asisten AI · Latihan Siaga · Mode Darurat</span>
         </div>
       </div>

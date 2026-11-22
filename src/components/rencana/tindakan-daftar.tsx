@@ -103,7 +103,7 @@ export function TindakanDaftar({
           return (
             <button
               key={f.id} type="button" role="tab" aria-selected={aktif} aria-controls={`fase-${f.id}`} id={`tab-fase-${f.id}`} onClick={() => setFase(f.id)}
-              className={`relative overflow-hidden rounded-2xl border p-3 text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${aktif ? "border-primary bg-primary text-primary-foreground shadow-md shadow-primary/20" : "border-border bg-surface hover:border-primary/40"}`}
+              className={`relative overflow-hidden rounded-2xl border p-3 text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${aktif ? "border-primary bg-primary text-primary-foreground shadow-md" : "border-border bg-surface hover:border-primary/40"}`}
             >
               <span className="block text-sm font-bold">{f.judul}</span>
               <span className={`block text-xs ${aktif ? "text-primary-foreground/80" : "text-muted-foreground"}`}>

@@ -25,7 +25,9 @@ export function AsistenMelayang() {
           type="button"
           data-masuk
           style={{ "--tunda": "700ms" } as React.CSSProperties}
-          className="tanpa-cetak fixed bottom-20 right-4 z-40 inline-flex size-14 items-center justify-center gap-2 rounded-full bg-primary text-sm sm:size-auto sm:min-h-12 sm:px-5 font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/30 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary md:bottom-6 md:right-6"
+          // HP: disembunyikan karena navigasi bawah sudah punya "Asisten" dan tombol bulat menutupi isi halaman.
+          // Panel tetap bisa dibuka dari tombol "Tanya" di dalam halaman (lewat store).
+          className="tanpa-cetak fixed bottom-20 right-4 z-40 hidden size-14 md:inline-flex items-center justify-center gap-2 rounded-full bg-primary text-sm sm:size-auto sm:min-h-12 sm:px-5 font-semibold text-primary-foreground shadow-lg transition hover:bg-primary/90 hover:shadow-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary md:bottom-6 md:right-6"
         >
           <Sparkles className={`size-5 sm:size-4 ${memuat ? "animate-pulse motion-reduce:animate-none" : ""}`} aria-hidden="true" />
           <span className="sr-only sm:not-sr-only">Tanya Asisten</span>

@@ -27,7 +27,7 @@ export function SiteHeader() {
         </Link>
         <Link
           href="/darurat"
-          className="inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-xl bg-destructive px-3 text-sm font-bold text-white shadow-sm shadow-red-900/20 hover:bg-red-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-destructive sm:px-4"
+          className="inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-xl bg-destructive px-3 text-sm font-bold text-white shadow-sm hover:bg-red-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-destructive sm:px-4"
           aria-label="Buka Mode Darurat"
         >
           <span className="size-2.5 rounded-full bg-white" aria-hidden="true" />

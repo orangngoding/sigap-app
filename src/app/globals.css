@@ -167,6 +167,12 @@
 }
 
 @layer base {
+  /* Placeholder cukup kontras (WCAG 4.5:1) di latar terang. Selektor html lebih spesifik dari bawaan Tailwind;
+     kelas placeholder:* (mis. Mode Darurat yang gelap) tetap menang karena berada di layer utilities. */
+  html input::placeholder,
+  html textarea::placeholder {
+    color: color-mix(in oklab, var(--muted-foreground) 92%, transparent);
+  }
   * {
     @apply border-border outline-ring/50;
   }
@@ -186,6 +192,31 @@
     @apply bg-background text-foreground;
     font-size: 16px;
     line-height: 1.5;
+    /* Teks statis (label, judul, hiasan) memakai kursor panah biasa, bukan I-beam. Teks tetap bisa diseleksi. */
+    cursor: default;
+  }
+  /* Elemen yang memang untuk diketik atau dibaca panjang tetap memakai kursor teks. */
+  input:not([type="checkbox"], [type="radio"], [type="range"], [type="button"], [type="submit"], [type="reset"], [type="file"], [type="color"]),
+  textarea,
+  [contenteditable="true"],
+  article p,
+  article li {
+    cursor: text;
+  }
+  /* Elemen yang bisa diklik tetap memakai kursor tangan. */
+  a[href],
+  button:not(:disabled),
+  [role="button"],
+  [role="tab"],
+  [role="menuitem"],
+  [role="option"],
+  [role="checkbox"],
+  [role="radio"],
+  [role="switch"],
+  summary,
+  label[for],
+  select {
+    cursor: pointer;
   }
 }
 
@@ -295,7 +326,7 @@
   }
   .angkat:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 28px -14px rgb(15 118 110 / 0.35);
+    box-shadow: 0 10px 28px -14px rgb(13 31 30 / 0.22);
   }
 
   /* Masuk sekali saat halaman dimuat (hero). Urutan lewat --tunda. */
@@ -335,6 +366,39 @@
 @keyframes sigap-masuk {
   from { opacity: 0; transform: translateY(14px); }
   to { opacity: 1; transform: none; }
+}
+
+/* Halaman chat Asisten di HP: tanpa footer, agar layar penuh untuk percakapan (footer tetap ada di layar lebar). */
+@media (max-width: 767px) {
+  body:has(main[data-halaman-chat]) footer[data-bingkai-situs] {
+    display: none;
+  }
+}
+
+/* Carousel "Mengenal SIGAP" di hero: isi slide aktif masuk berurutan, garis alur tumbuh, titik aktif terisi sesuai waktu. */
+.karosel-masuk {
+  animation: sigap-masuk 520ms cubic-bezier(0.2, 0, 0, 1) both;
+  animation-delay: var(--d, 0ms);
+}
+.karosel-garis {
+  transform-origin: left center;
+  animation: karosel-tumbuh 700ms cubic-bezier(0.2, 0, 0, 1) both;
+  animation-delay: var(--d, 0ms);
+}
+.karosel-jalan {
+  transform-origin: left center;
+  animation: karosel-tumbuh var(--durasi, 6s) linear both;
+}
+[data-jeda="true"] .karosel-jalan {
+  animation-play-state: paused;
+}
+@keyframes karosel-tumbuh {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .karosel-masuk { animation-name: sigap-pudar; animation-duration: 200ms; }
+  .karosel-garis { animation: none; }
 }
 @keyframes sigap-titik {
   0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
@@ -419,7 +483,8 @@
 
   /* Kaca: header dan panel di atas foto. */
   .kaca {
-    background-color: rgb(255 255 255 / 0.78);
+    /* Cukup pekat agar teks yang lewat di belakang bilah lengket tidak terbaca tembus. */
+    background-color: rgb(255 255 255 / 0.9);
     backdrop-filter: saturate(1.6) blur(14px);
     -webkit-backdrop-filter: saturate(1.6) blur(14px);
   }

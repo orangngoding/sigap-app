@@ -1,3 +1,4 @@
+import { useId } from "react";
 import { WARNA_MEREK } from "@/lib/gambar/warna-merek";
 
 /**
@@ -11,7 +12,8 @@ export const LOGO_TULANG = "M21.5 40.2c5.6-7.4 11.5-12.8 20.2-18.4";
 export const LOGO_OMBAK = "M19.5 47.2c2.1-1.7 4.2-1.7 6.3 0s4.2 1.7 6.3 0 4.2-1.7 6.3 0 4.2 1.7 6.3 0";
 
 export function LogoMark({ className = "size-9", judul }: { className?: string; judul?: string }) {
-  const id = "sigap-logo-gradasi";
+  // Id unik per logo: header dan footer sama-sama memuat logo; id kembar membuat gradasi bisa gagal tampil.
+  const id = `sigap-logo-${useId().replace(/[^a-zA-Z0-9_-]/g, "")}`;
   return (
     <svg viewBox="0 0 64 64" className={className} role={judul ? "img" : undefined} aria-hidden={judul ? undefined : true} aria-label={judul}>
       <defs>

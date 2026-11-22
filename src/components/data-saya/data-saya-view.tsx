@@ -30,7 +30,7 @@ import { useAksiIklimStore } from "@/stores/aksi-iklim-store";
 import { useIklimRumahStore } from "@/stores/iklim-rumah-store";
 
 const BTN = "inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-border bg-surface px-5 text-sm font-semibold hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
-const BTN_UTAMA = "inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-primary px-5 text-sm font-semibold text-primary-foreground shadow-sm shadow-primary/30 hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
+const BTN_UTAMA = "inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-primary px-5 text-sm font-semibold text-primary-foreground shadow-sm hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
 
 /** Hapus semua kunci SIGAP (cache respons, log AI, prefill) selain yang dikelola store. */
 function hapusSisaKunci() {
@@ -246,9 +246,10 @@ export function DataSayaView() {
           { Ikon: Smartphone, judul: "Tersimpan di HP ini", isi: "Profil, rencana, dan percakapan hanya ada di perangkat Anda." },
           { Ikon: CloudOff, judul: "Tidak disimpan server", isi: "Server hanya menerima ringkasan tanpa identitas untuk menyusun rencana." },
         ].map(({ Ikon, judul, isi }, i) => (
-          <motion.li key={judul} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 * i }} className="rounded-2xl bg-primary/5 p-5">
-            <Ikon className="size-6 text-primary" aria-hidden="true" />
-            <p className="mt-3 font-bold text-foreground">{judul}</p>
+          <motion.li key={judul} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 * i }} className="grid grid-cols-[auto_1fr] gap-x-3 rounded-2xl bg-primary/5 p-4 sm:block sm:p-5">
+            {/* HP: ikon di samping teks agar ringkas; layar lebar: ikon di atas. */}
+            <Ikon className="row-span-2 size-6 text-primary" aria-hidden="true" />
+            <p className="font-bold text-foreground sm:mt-3">{judul}</p>
             <p className="mt-1 text-sm text-muted-foreground">{isi}</p>
           </motion.li>
         ))}

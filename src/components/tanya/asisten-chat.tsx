@@ -67,7 +67,7 @@ const MASUK = { initial: { opacity: 0, y: 12 }, animate: { opacity: 1, y: 0 }, t
 
 function AvatarAsisten({ kecil = false }: { kecil?: boolean }) {
   return (
-    <span className={`flex shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-emerald-600 text-white shadow-sm shadow-primary/30 ${kecil ? "size-8" : "size-14 rounded-2xl"}`} aria-hidden="true">
+    <span className={`flex shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-emerald-600 text-white shadow-sm ${kecil ? "size-8" : "size-14 rounded-2xl"}`} aria-hidden="true">
       <Sparkles className={kecil ? "size-4" : "size-7"} />
     </span>
   );
@@ -141,7 +141,7 @@ function Gelembung({
     }
     return (
       <motion.div {...gerak} className="group flex flex-col items-end gap-1">
-        <p className="max-w-[85%] whitespace-pre-line rounded-3xl rounded-br-md bg-gradient-to-br from-primary to-emerald-700 px-4 py-3 text-primary-foreground shadow-sm shadow-primary/20">{p.teks}</p>
+        <p className="max-w-[85%] whitespace-pre-line rounded-3xl rounded-br-md bg-gradient-to-br from-primary to-emerald-700 px-4 py-3 text-primary-foreground shadow-sm">{p.teks}</p>
         <div className="flex gap-1 opacity-100 transition-opacity md:opacity-0 md:group-hover:opacity-100 md:group-focus-within:opacity-100">
           <button type="button" disabled={!bisaUbah} onClick={() => { setDraf(p.teks); setUbah(true); }} className={`${AKSI} disabled:opacity-40`} aria-label="Ubah pertanyaan ini">
             <Pencil className="size-3.5" aria-hidden="true" /> Ubah
@@ -380,7 +380,7 @@ export function AsistenChat({ varian = "halaman" }: Props) {
                 <button
                   type="submit" disabled={q.trim().length < 2 || kepanjangan}
                   aria-label={peringatan ? "Jelaskan peringatan" : "Kirim pertanyaan"}
-                  className="inline-flex size-11 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-sm shadow-primary/30 hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:bg-muted disabled:text-muted-foreground disabled:shadow-none"
+                  className="inline-flex size-11 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-sm hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:bg-muted disabled:text-muted-foreground disabled:shadow-none"
                 >
                   <ArrowUp className="size-5" aria-hidden="true" />
                 </button>

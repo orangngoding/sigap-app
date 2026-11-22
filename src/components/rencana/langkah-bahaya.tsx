@@ -103,7 +103,7 @@ export function LangkahBahaya({ profil, ubah, errors, lokasi }: Props) {
         </ul>
         <p className="mt-4 text-sm text-muted-foreground">
           {sebut("Saran ini berasal dari jawaban Anda, bukan peta risiko resmi.")}{" "}
-          <a href={URL_INARISK} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 font-semibold text-primary underline-offset-2 hover:underline">
+          <a href={URL_INARISK} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center gap-1 font-semibold text-primary underline-offset-2 hover:underline">
             Cek peta risiko resmi di InaRISK <ExternalLink className="size-3.5" aria-hidden="true" />
             <span className="sr-only">(tab baru)</span>
           </a>

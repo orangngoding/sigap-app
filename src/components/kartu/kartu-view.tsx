@@ -83,8 +83,8 @@ export function KartuView() {
       `}</style>
 
       <div className="tanpa-cetak mb-6 space-y-4">
-        <div className="flex flex-wrap items-end gap-4">
-          <div>
+        <div className="flex flex-wrap items-end gap-x-4 gap-y-3">
+          <div className="w-full sm:w-auto">
             <label htmlFor="nama-keluarga" className="block text-sm font-semibold">Nama keluarga (opsional)</label>
             <input
               id="nama-keluarga"
@@ -92,7 +92,7 @@ export function KartuView() {
               maxLength={NAMA_KELUARGA_MAKS}
               value={namaKeluarga}
               onChange={(e) => ubah({ namaKeluarga: e.target.value })}
-              className="mt-1 min-h-11 w-64 max-w-full rounded-lg border border-border bg-surface px-3 text-sm"
+              className="mt-1 min-h-11 w-full rounded-lg border border-border bg-surface px-3 text-base sm:w-64 sm:text-sm"
               aria-describedby="nama-bantuan"
             />
             <p id="nama-bantuan" className="mt-1 text-xs text-muted-foreground">{namaKeluarga.length}/{NAMA_KELUARGA_MAKS} karakter</p>

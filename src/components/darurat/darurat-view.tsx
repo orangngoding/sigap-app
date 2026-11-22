@@ -185,7 +185,7 @@ export function DaruratView() {
         {/* Blok 1: nomor penting, 112 paling besar */}
         <section aria-labelledby="d-nomor" className="mt-6 grid gap-3 md:grid-cols-[1.2fr_1fr]">
           <h2 id="d-nomor" className="sr-only">Nomor penting</h2>
-          <a href={`tel:${utama.nomor}`} className={`group relative flex min-h-36 items-center gap-5 overflow-hidden rounded-3xl bg-red-600 p-6 text-white shadow-2xl shadow-red-900/50 hover:bg-red-500 ${FOKUS}`}>
+          <a href={`tel:${utama.nomor}`} className={`group relative flex min-h-36 items-center gap-5 overflow-hidden rounded-3xl bg-red-600 p-6 text-white shadow-2xl hover:bg-red-500 ${FOKUS}`}>
             <span className="relative flex size-20 shrink-0 items-center justify-center rounded-full bg-white text-red-600">
               <span className="absolute inset-0 animate-ping [animation-iteration-count:3]! rounded-full bg-white/50 motion-reduce:animate-none" aria-hidden="true" />
               <Phone className="relative size-9" aria-hidden="true" />
@@ -248,7 +248,7 @@ export function DaruratView() {
 
         {/* Blok 3: langkah */}
         {paket && aktif && (
-          <section aria-labelledby="d-langkah" className="mt-8 rounded-3xl border-2 border-white/80 p-5 sm:p-6">
+          <section aria-labelledby="d-langkah" className="mt-8 rounded-3xl border-2 border-white/80 p-4 sm:p-6">
             <h2 id="d-langkah" className="text-2xl font-bold">Saat {labelAktif.toLowerCase()}</h2>
             <div className="mt-4 grid gap-3 sm:grid-cols-[1fr_auto]">
               <button type="button" onClick={() => setPanduan(true)} className={`inline-flex min-h-16 items-center justify-center gap-3 rounded-2xl bg-yellow-300 px-5 text-xl font-extrabold text-black hover:bg-yellow-200 ${FOKUS}`}>
@@ -256,24 +256,36 @@ export function DaruratView() {
               </button>
               <TombolBacakan id={`darurat-${aktif}`} teks={`Saat kejadian. ${paket.saat.map((l, i) => `${i + 1}. ${teksLengkap(l)}`).join(" ")}`} />
             </div>
-            {/* Langkah dikelompokkan menurut keadaan (di dalam bangunan, di mobil, ...): orang panik langsung menemukan yang berlaku. */}
+            {/* Langkah dikelompokkan menurut keadaan (di dalam bangunan, di mobil, ...) dan bisa dilipat: orang panik langsung
+                membuka yang berlaku untuknya tanpa menggulir semua langkah. Kelompok pertama terbuka; "Pandu saya" dan
+                "Bacakan" tetap memuat semua langkah. Native <details>: tetap jalan tanpa JavaScript dan tanpa internet. */}
             {paket.kelompok.map((k, ki) => {
               const awal = paket.kelompok.slice(0, ki).reduce((n, x) => n + x.langkah.length, 0);
+              const daftar = (
+                <ol className="space-y-2" start={awal + 1}>
+                  {k.langkah.map((l, i) => (
+                    <li key={l.id} className="flex gap-3 rounded-2xl bg-white/10 p-3.5 sm:gap-4 sm:p-4">
+                      <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-yellow-300 text-base font-black text-black sm:size-10 sm:text-lg" aria-hidden="true">{awal + i + 1}</span>
+                      <span className="pt-0.5 sm:pt-1">
+                        <span className="block text-lg font-bold leading-snug sm:text-xl">{l.teks}{l.turunan ? " *" : ""}</span>
+                        {l.detail && <span className="mt-1 block text-base leading-snug text-white/85 sm:text-lg">{l.detail}</span>}
+                      </span>
+                    </li>
+                  ))}
+                </ol>
+              );
+              if (!k.keadaan) return <div key="umum" className="mt-4">{daftar}</div>;
               return (
-                <div key={k.keadaan ?? "umum"} className="mt-4">
-                  {k.keadaan && <h3 className="mb-2 text-lg font-extrabold text-yellow-300">{k.keadaan}</h3>}
-                  <ol className="space-y-2" start={awal + 1}>
-                    {k.langkah.map((l, i) => (
-                      <li key={l.id} className="flex gap-4 rounded-2xl bg-white/10 p-4">
-                        <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-yellow-300 text-lg font-black text-black" aria-hidden="true">{awal + i + 1}</span>
-                        <span className="pt-1">
-                          <span className="block text-xl font-bold">{l.teks}{l.turunan ? " *" : ""}</span>
-                          {l.detail && <span className="mt-1 block text-lg leading-snug text-white/85">{l.detail}</span>}
-                        </span>
-                      </li>
-                    ))}
-                  </ol>
-                </div>
+                <details key={`${aktif}-${k.keadaan}`} open={ki === 0} className="group mt-3 rounded-2xl border-2 border-white/25 open:border-yellow-300/70">
+                  <summary className={`flex min-h-16 cursor-pointer list-none items-center gap-3 rounded-2xl px-4 py-3 [&::-webkit-details-marker]:hidden ${FOKUS}`}>
+                    <span className="flex-1">
+                      <span className="block text-lg font-extrabold leading-tight text-yellow-300 sm:text-xl">{k.keadaan}</span>
+                      <span className="block text-sm font-semibold text-white/70">{k.langkah.length} langkah</span>
+                    </span>
+                    <ChevronDown className="size-6 shrink-0 transition-transform group-open:rotate-180 motion-reduce:transition-none" aria-hidden="true" />
+                  </summary>
+                  <div className="px-3 pb-3 sm:px-4 sm:pb-4">{daftar}</div>
+                </details>
               );
             })}
             {[...paket.saat, ...paket.sesudah].some((l) => l.turunan) && (

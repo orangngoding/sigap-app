@@ -114,9 +114,10 @@ export default function MetodologiPage() {
               { Ikon: ShieldCheck, judul: "AI diberi pagar", isi: "Tidak meramal bencana, tidak memberi dosis obat, dan tidak mengarang sumber." },
               { Ikon: Lock, judul: "Data tetap di HP Anda", isi: "Tanpa akun, tanpa pelacak. Nama dan kontak tidak pernah dikirim." },
             ].map(({ Ikon, judul, isi }) => (
-              <li key={judul} data-muncul className="rounded-3xl bg-primary/5 p-5">
-                <Ikon className="size-6 text-primary" aria-hidden="true" />
-                <p className="mt-3 text-lg font-bold text-foreground">{judul}</p>
+              <li key={judul} data-muncul className="grid grid-cols-[auto_1fr] gap-x-3 rounded-3xl bg-primary/5 p-4 sm:block sm:p-5">
+                {/* HP: ikon di samping teks agar ringkas; layar lebar: ikon di atas. */}
+                <Ikon className="row-span-2 size-6 text-primary" aria-hidden="true" />
+                <p className="text-lg font-bold leading-snug text-foreground sm:mt-3">{judul}</p>
                 <p className="mt-1 text-sm text-muted-foreground">{isi}</p>
               </li>
             ))}
@@ -130,7 +131,7 @@ export default function MetodologiPage() {
             <span className="alur-garis absolute left-6 right-6 top-6 hidden h-0.5 md:block" aria-hidden="true" />
             {ALUR.map(({ Ikon, judul, isi }, i) => (
               <li key={judul} data-muncul className="relative flex gap-4 md:flex-col md:gap-0">
-                <span className="relative flex size-12 shrink-0 items-center justify-center rounded-2xl bg-emerald-400 text-ink shadow-lg shadow-emerald-500/20 ring-4 ring-ink print:ring-0">
+                <span className="relative flex size-12 shrink-0 items-center justify-center rounded-2xl bg-emerald-400 text-ink shadow-lg ring-4 ring-ink print:ring-0">
                   <Ikon className="size-5" aria-hidden="true" />
                 </span>
                 <span>
@@ -198,7 +199,7 @@ export default function MetodologiPage() {
               <p className={P}>Potongan disusun dengan bantuan AI dari sumber resmi, dengan kalimat sendiri (parafrase), lalu halaman yang dikutip dicocokkan ke dokumen aslinya. Potongan ini belum melalui tinjauan terpisah oleh ahli, jadi periksa sumbernya bila ragu.</p>
               <p className={P}>{JUMLAH_TURUNAN} langkah ditandai <strong>turunan</strong>: tidak ada panduan resmi khusus untuk bahaya itu (misalnya langkah saat dan sesudah gelombang tinggi atau banjir rob), sehingga langkahnya diambil dari panduan banjir umum. Label ini selalu tampil di Rencana dan Mode Darurat.</p>
               <details className="mt-4 rounded-2xl border border-border p-4 text-sm">
-                <summary className="cursor-pointer font-semibold">Daftar dokumen sumber ({PENERBIT.length})</summary>
+                <summary className="cursor-pointer py-3 font-semibold">Daftar dokumen sumber ({PENERBIT.length})</summary>
                 <ul className="mt-2 list-disc space-y-1 pl-5">{PENERBIT.map((s) => <li key={s}>{s}</li>)}</ul>
               </details>
             </Bagian>

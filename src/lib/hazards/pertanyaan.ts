@@ -71,6 +71,6 @@ export const PERTANYAAN_PEMICU: PertanyaanPemicu[] = [
 
 /** Gempa dan cuaca ekstrem disarankan untuk semua pengguna (Blueprint 2.3). */
 export const SELALU_DISARANKAN: HazardId[] = ["gempa", "cuaca_ekstrem"];
-export const ALASAN_SELALU = "disarankan untuk semua pengguna";
+export const ALASAN_SELALU = "penting untuk semua keluarga di Indonesia";
 
 export const URL_INARISK = "https://inarisk.bnpb.go.id/"; // verifikasi tim sebelum rilis (Blueprint 11.2)

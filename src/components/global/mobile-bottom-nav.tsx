@@ -55,6 +55,10 @@ const moreNavigation = [
     href: "/pustaka/berita",
   },
   {
+    label: "Berita cuaca dan iklim",
+    href: "/pustaka/cuaca",
+  },
+  {
     label: "Metodologi",
     href: "/metodologi",
   },

@@ -23,7 +23,8 @@ export function StatusBanner({
   return (
     <div role="status" className={`flex flex-wrap items-center gap-x-3 gap-y-1 rounded-lg px-3 py-2 text-sm ${cls}`}>
       <Icon className="size-4 shrink-0" aria-hidden="true" />
-      <span className="flex-1">{children}</span>
+      {/* Lebar minimum: di layar sempit tombol aksi turun ke baris berikutnya, teks tidak terhimpit. */}
+      <span className="min-w-[13rem] flex-1">{children}</span>
       {action}
     </div>
   );

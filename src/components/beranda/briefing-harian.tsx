@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "motion/react";
-import { Activity, AlertTriangle, ArrowRight, BellRing, CheckCircle2, CloudSun, Database, ExternalLink, Eye, MapPin, RefreshCw, Sparkles, type LucideIcon } from "lucide-react";
+import { Activity, AlertTriangle, ArrowRight, BellRing, CheckCircle2, CloudSun, Database, ExternalLink, Eye, RefreshCw, Sparkles, type LucideIcon } from "lucide-react";
 import type { HasilBriefing } from "@/lib/ai/briefing";
 import type { Sinyal, Tingkat } from "@/lib/briefing/sinyal";
 import { useHydrate } from "@/hooks/use-hydrate";
@@ -93,25 +93,8 @@ export function BriefingHarian({ varian = "beranda" }: { varian?: "beranda" | "l
 
   if (!siap) return <div className={bungkus}><div className="h-40 animate-pulse rounded-2xl bg-muted motion-reduce:animate-none" aria-hidden="true" /></div>;
 
-  if (!lokasi) {
-    if (varian !== "beranda") return null;
-    return (
-      <section aria-label="Briefing Siaga Hari Ini" className={bungkus}>
-        <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-dashed border-primary/30 bg-primary/5 p-5">
-          <div className="flex items-start gap-3">
-            <Sparkles className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden="true" />
-            <div>
-              <p className="font-semibold text-foreground">Briefing Siaga Hari Ini</p>
-              <p className="text-sm text-muted-foreground"><TeksPihak>Pilih lokasi untuk mendapat ringkasan cuaca, gempa, dan peringatan BMKG di wilayah Anda, beserta 3 tindakan untuk keluarga.</TeksPihak></p>
-            </div>
-          </div>
-          <Link href="/lokasi" className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-primary px-5 text-sm font-semibold text-primary-foreground hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-            <MapPin className="size-4" aria-hidden="true" /> Pilih lokasi
-          </Link>
-        </div>
-      </section>
-    );
-  }
+  // Tanpa lokasi: ajakan memilih lokasi digabung dengan kartu risiko (RisikoTeratas) agar tidak ada dua tombol sama.
+  if (!lokasi) return null;
 
   const d = q.data;
   const t = d ? TINGKAT[d.tingkat] : null;

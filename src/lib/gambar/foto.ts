@@ -92,6 +92,14 @@ export const FOTO = {
     "lisensiUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
     "halaman": "https://commons.wikimedia.org/wiki/File:Fishing_boats_in_Banda_Aceh_after_2004_tsunami_DD-SD-06-07375.JPEG"
   },
+  "tsunami_gelombang": {
+    "src": "/img/photo-f177627-960.jpg",
+    "alt": "Gelombang tsunami 2004 menerjang pantai Ao Nang, Krabi",
+    "oleh": "David Rydevik",
+    "lisensi": "Public domain",
+    "lisensiUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+    "halaman": "https://commons.wikimedia.org/wiki/File:2004-tsunami.jpg"
+  },
   "karhutla": {
     "src": "/img/photo-f15794313-960.jpg",
     "alt": "Kabut asap kebakaran hutan dan lahan menyelimuti jembatan di Riau",

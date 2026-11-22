@@ -52,3 +52,7 @@ skills-lock.json
 
 # Konfigurasi alat pribadi
 .mcp.json
+
+# Cache alat bantu pengembangan (detektor desain, Playwright), bukan bagian aplikasi
+.impeccable/
+.playwright/

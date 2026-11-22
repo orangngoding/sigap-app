@@ -171,10 +171,43 @@ export function teksKabar(jenis: JenisKabar, o: { posisi?: Posisi | null; titikK
 }
 
 /**
- * Tautan SMS ke banyak penerima sekaligus. Android memakai pemisah koma; iOS hanya andal untuk satu penerima, jadi
- * antarmuka juga menyediakan tombol per kontak. Nomor dibersihkan: hanya angka dan tanda +.
+ * Bentuk baku nomor Indonesia untuk membandingkan dan mengirim: hanya angka, awalan +62/62 menjadi 0
+ * ("+62 812-3456" dan "0812 3456" dianggap nomor yang sama). Nomor luar negeri (+ selain 62) dibiarkan dengan +.
  */
-export function tautanSms(nomor: string[], teks: string): string {
-  const penerima = nomor.map((n) => n.replace(/[^\d+]/g, "")).filter((n) => n.length >= 6);
-  return `sms:${penerima.join(",")}?body=${encodeURIComponent(teks)}`;
+export function kanonNomor(n: string): string {
+  const bersih = n.trim().replace(/[^\d+]/g, "").replace(/(?!^)\+/g, "");
+  if (/^\+62\d/.test(bersih)) return `0${bersih.slice(3)}`;
+  if (/^62\d{8,}$/.test(bersih)) return `0${bersih.slice(2)}`;
+  return bersih;
+}
+
+/** Nomor yang diketik sendiri: hanya angka (boleh diawali +), 6–15 digit. Mengembalikan bentuk baku atau null. */
+export function rapikanNomor(masukan: string): string | null {
+  const bersih = masukan.trim().replace(/[\s().-]/g, "");
+  if (!/^\+?\d+$/.test(bersih)) return null;
+  const digit = bersih.replace("+", "").length;
+  return digit >= 6 && digit <= 15 ? kanonNomor(bersih) : null;
+}
+
+/** Daftar nomor tanpa kembar (dibandingkan dalam bentuk baku) dan tanpa nomor terlalu pendek. */
+export function nomorUnik(nomor: string[]): string[] {
+  return [...new Set(nomor.map(kanonNomor))].filter((n) => n.replace("+", "").length >= 6);
+}
+
+/**
+ * Tautan SMS dengan pesan terisi. Format berbeda per sistem:
+ * - Android: `sms:a,b?body=` (koma untuk banyak penerima).
+ * - iOS: `sms:a&body=` untuk satu penerima, `sms:/open?addresses=a,b&body=` untuk banyak (format yang dikenali Pesan iOS).
+ * Antarmuka tetap menyediakan tombol per penerima sebagai cadangan bila aplikasi SMS hanya mengisi satu nomor.
+ */
+export function tautanSms(nomor: string[], teks: string, ios = false): string {
+  const penerima = nomorUnik(nomor);
+  const isi = encodeURIComponent(teks);
+  if (!ios) return `sms:${penerima.join(",")}?body=${isi}`;
+  return penerima.length > 1 ? `sms:/open?addresses=${penerima.join(",")}&body=${isi}` : `sms:${penerima[0] ?? ""}&body=${isi}`;
+}
+
+/** Perangkat iPhone/iPad (termasuk iPadOS yang mengaku Mac). */
+export function pakaiIos(ua: string, sentuh = 0): boolean {
+  return /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/i.test(ua) && sentuh > 1);
 }

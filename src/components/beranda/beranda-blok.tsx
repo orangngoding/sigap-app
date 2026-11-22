@@ -10,20 +10,18 @@ const JUDUL = "text-3xl font-extrabold tracking-tight text-foreground sm:text-4x
 const LABEL = "text-sm font-semibold uppercase tracking-wider text-primary";
 const WRAP = "mx-auto max-w-7xl px-4 sm:px-6 lg:px-8";
 
-/** Deretan lembaga sumber panduan dan data. */
-export function SumberResmi() {
+/** Deretan lembaga sumber panduan dan data, tampil di bagian bawah hero (latar gelap). */
+export function SumberResmi({ gaya }: { gaya?: React.CSSProperties }) {
   const sumber = ["BMKG", "BNPB", "Badan Geologi", "Kemenkes", "BPBD", "Open-Meteo"];
   return (
-    <section aria-label="Sumber resmi" className="border-b border-border bg-surface">
-      <div className={`${WRAP} flex flex-col gap-4 py-7 md:flex-row md:items-center md:justify-between`}>
-        <p className="text-sm font-medium text-muted-foreground">Panduan dan data disusun dari sumber resmi</p>
-        <ul className="flex flex-wrap items-center gap-x-8 gap-y-3">
-          {sumber.map((s) => (
-            <li key={s} className="text-lg font-extrabold tracking-tight text-foreground/40 transition-colors hover:text-primary">{s}</li>
-          ))}
-        </ul>
-      </div>
-    </section>
+    <div data-masuk style={gaya} className="mt-10 max-w-2xl border-t border-white/15 pt-6">
+      <p className="text-sm font-medium text-white/70">Panduan dan data disusun dari sumber resmi</p>
+      <ul aria-label="Sumber resmi" className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2">
+        {sumber.map((s) => (
+          <li key={s} className="text-base font-extrabold tracking-tight text-white/85 sm:text-lg">{s}</li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
@@ -35,7 +33,7 @@ export function CaraKerja() {
     { Ikon: ClipboardCheck, judul: "Dapat rencana dan Kartu Siaga", isi: "Tindakan sebelum, saat, dan sesudah per bahaya, isi tas siaga, skor, dan kartu siap cetak." },
   ];
   return (
-    <section aria-labelledby="judul-cara" className="py-20">
+    <section aria-labelledby="judul-cara" className="py-14 sm:py-20">
       <div className={WRAP}>
         <div className="max-w-2xl" data-muncul>
           <span className={LABEL}>Cara kerja</span>
@@ -44,19 +42,17 @@ export function CaraKerja() {
         <ol className="relative mt-12 grid gap-6 md:grid-cols-3">
           <span className="absolute left-7 right-7 top-7 hidden h-0.5 bg-gradient-to-r from-primary/40 via-primary to-primary/40 md:block" aria-hidden="true" />
           {langkah.map(({ Ikon, judul, isi }, i) => (
-            <li key={judul} data-muncul className="relative">
-              <span className="relative flex size-14 items-center justify-center rounded-2xl bg-primary text-primary-foreground shadow-lg shadow-primary/30 ring-8 ring-background">
+            // HP: ikon di samping teks (ringkas); layar lebar: ikon di atas, dihubungkan garis.
+            <li key={judul} data-muncul className="relative grid grid-cols-[auto_1fr] gap-x-4 md:block">
+              <span className="relative row-span-3 flex size-12 items-center justify-center rounded-2xl bg-primary text-primary-foreground shadow-lg ring-8 ring-background md:size-14">
                 <Ikon className="size-6" aria-hidden="true" />
               </span>
-              <p className="mt-6 text-sm font-bold text-primary">Langkah {i + 1}</p>
+              <p className="text-sm font-bold text-primary md:mt-6">Langkah {i + 1}</p>
               <h3 className="mt-1 text-xl font-bold text-foreground">{judul}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{isi}</p>
             </li>
           ))}
         </ol>
-        <Link href="/lokasi" className="mt-10 inline-flex min-h-12 items-center gap-2 rounded-xl bg-primary px-6 text-sm font-semibold text-primary-foreground shadow-sm shadow-primary/30 hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-          Mulai dari lokasi <ArrowRight className="size-4" aria-hidden="true" />
-        </Link>
       </div>
     </section>
   );
@@ -65,7 +61,7 @@ export function CaraKerja() {
 /** Sembilan bahaya sebagai kartu foto; tiap kartu membuka artikel Pustaka bahaya itu. */
 export function BencanaDicakup() {
   return (
-    <section aria-labelledby="judul-bencana" className="bg-surface py-20">
+    <section aria-labelledby="judul-bencana" className="bg-surface py-14 sm:py-20">
       <div className={WRAP}>
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between" data-muncul>
           <div className="max-w-2xl">
@@ -77,23 +73,25 @@ export function BencanaDicakup() {
             Semua artikel Pustaka <ArrowRight className="size-4" aria-hidden="true" />
           </Link>
         </div>
-        <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {/* HP: dua kolom; kartu pertama lebar penuh, kartu lain ringkas (foto + nama) agar tidak memanjang 9 layar. */}
+        <ul className="mt-8 grid grid-cols-2 gap-3 sm:mt-10 sm:gap-4 lg:grid-cols-3">
           {HAZARDS.map((h, i) => {
             const artikel = SEMUA_ARTIKEL.find((a) => a.hazards.includes(h.id));
             const besar = i === 0;
+            const sembunyiHp = besar ? "" : "hidden sm:block";
             return (
-              <li key={h.id} data-muncul className={besar ? "sm:col-span-2 lg:row-span-2" : ""}>
+              <li key={h.id} data-muncul className={besar ? "col-span-2 lg:row-span-2" : ""}>
                 <Link
                   href={artikel ? `/pustaka/${artikel.slug}` : "/pustaka"}
-                  className="angkat group relative flex h-full min-h-60 flex-col justify-end overflow-hidden rounded-3xl bg-ink p-6 text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                  className={`angkat group relative flex h-full flex-col justify-end overflow-hidden rounded-3xl bg-ink text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:min-h-60 sm:p-6 ${besar ? "min-h-60 p-5" : "min-h-36 p-4"}`}
                 >
-                  <Foto foto={fotoBahaya(h.id)} hias zoom sizes={besar ? "(min-width: 1024px) 66vw, 100vw" : "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"} latar />
+                  <Foto foto={fotoBahaya(h.id)} hias zoom sizes={besar ? "(min-width: 1024px) 66vw, 100vw" : "(min-width: 1024px) 33vw, 50vw"} latar />
                   <span className="absolute inset-0 bg-gradient-to-t from-ink via-ink/55 to-ink/5" aria-hidden="true" />
                   <span className="relative">
-                    <span className="inline-flex rounded-full bg-white/15 px-2.5 py-1 text-xs font-semibold backdrop-blur">{h.level === "A" ? "Panduan lengkap" : "Panduan inti"}</span>
-                    <span className={`mt-3 block font-extrabold tracking-tight ${besar ? "text-3xl" : "text-xl"}`}>{h.label}</span>
-                    <span className="mt-1 block max-w-md text-sm text-white/80">{HAZARD_DESKRIPSI[h.id]}</span>
-                    <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-emerald-300">
+                    <span className={`w-fit rounded-full bg-white/15 px-2.5 py-1 text-xs font-semibold backdrop-blur ${besar ? "inline-flex" : "hidden sm:inline-flex"}`}>{h.level === "A" ? "Panduan lengkap" : "Panduan inti"}</span>
+                    <span className={`block font-extrabold leading-tight tracking-tight sm:mt-3 ${besar ? "mt-3 text-3xl" : "text-base sm:text-xl"}`}>{h.label}</span>
+                    <span className={`mt-1 max-w-md text-sm text-white/80 ${besar ? "block" : sembunyiHp}`}>{HAZARD_DESKRIPSI[h.id]}</span>
+                    <span className={`mt-3 items-center gap-1 text-sm font-semibold text-emerald-300 ${besar ? "inline-flex" : "hidden sm:inline-flex"}`}>
                       Baca panduan <ArrowRight className="size-4 transition-transform group-hover:translate-x-1 motion-reduce:transition-none" aria-hidden="true" />
                     </span>
                   </span>
@@ -110,7 +108,7 @@ export function BencanaDicakup() {
 /** Pratinjau Kartu Siaga contoh (bukan data pengguna). */
 export function PratinjauKartu() {
   return (
-    <section aria-labelledby="judul-kartu" className="overflow-hidden py-20">
+    <section aria-labelledby="judul-kartu" className="overflow-hidden py-14 sm:py-20">
       <div className={`${WRAP} grid items-center gap-12 lg:grid-cols-2`}>
         <div data-muncul>
           <span className={LABEL}>Hasil yang bisa dipakai</span>
@@ -153,7 +151,7 @@ export function TransparansiAi() {
     { Ikon: BadgeCheck, judul: "Cara diperiksa", isi: "Setiap tindakan memuat sumbernya. Kode menolak sumber karangan, angka baru, dan kalimat ramalan. Tanpa AI, semua fitur tetap jalan." },
   ];
   return (
-    <section aria-labelledby="judul-ai" className="relative isolate overflow-hidden bg-ink py-20 text-ink-foreground">
+    <section aria-labelledby="judul-ai" className="relative isolate overflow-hidden bg-ink py-14 text-ink-foreground sm:py-20">
       <Foto foto={FOTO.bmkg} hias sizes="100vw" latar className="-z-20 opacity-30" />
       <div className="absolute inset-0 -z-10 bg-gradient-to-br from-ink via-ink/95 to-ink/70" aria-hidden="true" />
       <div className={WRAP}>
@@ -164,9 +162,8 @@ export function TransparansiAi() {
         <ul className="mt-10 grid gap-4 md:grid-cols-3">
           {butir.map(({ Ikon, judul, isi }) => (
             <li key={judul} data-muncul className="kaca-gelap rounded-3xl border border-white/10 p-6">
-              <span className="flex size-11 items-center justify-center rounded-xl bg-emerald-400/15 text-emerald-300"><Ikon className="size-5" aria-hidden="true" /></span>
-              <h3 className="mt-4 text-lg font-bold text-white">{judul}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-ink-muted">{isi}</p>
+              <h3 className="flex items-center gap-2.5 text-lg font-bold text-white"><Ikon className="size-5 shrink-0 text-emerald-300" aria-hidden="true" /> {judul}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-ink-muted">{isi}</p>
             </li>
           ))}
         </ul>
@@ -181,7 +178,7 @@ export function TransparansiAi() {
 /** Ajakan Mode Darurat. */
 export function KartuModeDarurat() {
   return (
-    <section aria-labelledby="judul-darurat" className={`${WRAP} py-20`}>
+    <section aria-labelledby="judul-darurat" className={`${WRAP} py-14 sm:py-20`}>
       <div data-muncul className="relative isolate flex flex-col gap-6 overflow-hidden rounded-3xl bg-black p-8 text-white sm:flex-row sm:items-center sm:justify-between sm:p-10">
         <div className="absolute -right-16 -top-16 -z-10 size-64 rounded-full bg-red-600/40 blur-3xl" aria-hidden="true" />
         <div className="flex items-start gap-4">

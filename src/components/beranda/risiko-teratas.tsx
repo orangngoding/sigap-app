@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { ArrowRight, Database, MapPin } from "lucide-react";
+import { ArrowRight, Database, MapPin, Sparkles } from "lucide-react";
 import { useHydrate } from "@/hooks/use-hydrate";
 import { useRisikoLokasi } from "@/hooks/use-risiko-lokasi";
 import { useLokasiStore } from "@/stores/lokasi-store";
@@ -20,22 +20,34 @@ export function RisikoTeratas() {
   const q = useRisikoLokasi(siap ? lokasi : null);
 
   if (!siap) return null;
+  // Tanpa lokasi: satu kartu, satu tombol. Memilih lokasi sekali membuka briefing harian dan risiko titik rumah.
   if (!lokasi)
     return (
-      <section aria-labelledby="judul-risiko-teratas" className={BUNGKUS}>
-        <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-border bg-surface p-5 sm:p-6">
-          <div className="flex max-w-2xl items-start gap-3">
-            <Database className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden="true" />
-            <div>
-              <h2 id="judul-risiko-teratas" className="font-semibold text-foreground">Bencana apa yang mengintai rumahmu?</h2>
-              <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                SIGAP menilai 9 bahaya untuk titik rumahmu dari catatan nyata: jarak ke gunung api, gempa sejak 1976, riwayat tsunami, jarak pantai, lereng, pola iklim 30 tahun, dan titik panas satelit. Rencanamu disusun dari hasilnya.
-              </p>
-              <p className="mt-2 text-xs text-muted-foreground">Sumber: {SUMBER.join(" · ")}</p>
-            </div>
+      <section aria-labelledby="judul-risiko-teratas" className="mx-auto max-w-7xl px-4 pb-4 pt-12 sm:px-6 lg:px-8">
+        <div className="grid gap-5 rounded-2xl border border-border bg-surface p-5 sm:p-6 lg:grid-cols-[1fr_auto] lg:items-center">
+          <div>
+            <h2 id="judul-risiko-teratas" className="text-lg font-bold text-foreground">Bencana apa yang mengintai rumahmu?</h2>
+            <p className="mt-1 text-sm text-muted-foreground">Pilih lokasi sekali, SIGAP langsung menyiapkan dua hal ini:</p>
+            <ul className="mt-4 grid gap-3 md:grid-cols-2">
+              <li className="flex items-start gap-3">
+                <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary"><Sparkles className="size-4" aria-hidden="true" /></span>
+                <span>
+                  <span className="block text-sm font-semibold text-foreground">Briefing Siaga Hari Ini</span>
+                  <span className="block text-sm leading-relaxed text-muted-foreground">Cuaca, gempa, dan peringatan BMKG di wilayahmu, beserta 3 tindakan untuk keluarga.</span>
+                </span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary"><Database className="size-4" aria-hidden="true" /></span>
+                <span>
+                  <span className="block text-sm font-semibold text-foreground">Risiko di titik rumahmu</span>
+                  <span className="block text-sm leading-relaxed text-muted-foreground">9 bahaya dinilai dari catatan nyata: gunung api, gempa sejak 1976, tsunami, lereng, dan pola iklim 30 tahun.</span>
+                </span>
+              </li>
+            </ul>
+            <p className="mt-4 text-xs text-muted-foreground">Sumber: BMKG · {SUMBER.join(" · ")}</p>
           </div>
-          <Link href="/lokasi" className="press inline-flex min-h-11 items-center gap-2 rounded-lg bg-primary px-5 text-sm font-semibold text-primary-foreground hover:bg-primary/90">
-            <MapPin className="size-4" aria-hidden="true" /> Cek risiko lokasimu
+          <Link href="/lokasi" className="press inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-primary px-6 text-sm font-semibold text-primary-foreground hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+            <MapPin className="size-4" aria-hidden="true" /> Pilih lokasi
           </Link>
         </div>
       </section>

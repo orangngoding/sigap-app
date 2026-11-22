@@ -76,7 +76,7 @@ export function DaftarSesi({ onPilih }: { onPilih?: () => void }) {
     <div className="flex h-full min-h-0 flex-col">
       <button
         type="button" onClick={() => { sesiBaru(); onPilih?.(); }}
-        className="flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-primary px-4 text-sm font-semibold text-primary-foreground shadow-sm shadow-primary/30 hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        className="flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-primary px-4 text-sm font-semibold text-primary-foreground shadow-sm hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
       >
         <Plus className="size-4" aria-hidden="true" /> Percakapan baru
       </button>

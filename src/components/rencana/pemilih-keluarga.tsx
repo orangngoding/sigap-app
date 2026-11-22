@@ -32,10 +32,28 @@ export function PemilihKeluarga() {
   if (!siap || !aktif) return <div className="mb-4 h-11" aria-hidden="true" />;
   if (jumlah < 2)
     return (
-      <p className="tanpa-cetak mb-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-muted-foreground">
-        <Users className="size-4 text-primary" aria-hidden="true" /> Mendampingi keluarga lain, misalnya warga RT?
-        <Link href="/rencana/keluarga" className="inline-flex min-h-11 items-center font-semibold text-primary underline underline-offset-2">Buat rencana untuk keluarga lain</Link>
-      </p>
+      <aside
+        aria-labelledby="judul-keluarga-lain"
+        className="tanpa-cetak mb-6 flex flex-col gap-3 rounded-2xl border border-primary/20 bg-primary/5 p-4 sm:flex-row sm:items-center sm:gap-4 sm:p-5"
+      >
+        <div className="flex min-w-0 flex-1 items-start gap-3 sm:items-center sm:gap-4">
+          <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-primary text-primary-foreground sm:size-12 sm:rounded-2xl" aria-hidden="true">
+            <Users className="size-5 sm:size-6" />
+          </span>
+          <div className="min-w-0">
+            <h2 id="judul-keluarga-lain" className="font-bold text-foreground">Mengelola rencana keluarga lain?</h2>
+            <p className="mt-0.5 text-sm leading-relaxed text-muted-foreground">
+              Pak RT, kader, atau kerabat bisa menyusun rencana terpisah untuk tiap keluarga dari perangkat ini.
+            </p>
+          </div>
+        </div>
+        <Link
+          href="/rencana/keluarga#tambah-keluarga"
+          className="press inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-xl border-2 border-primary bg-surface px-5 text-sm font-semibold text-primary hover:bg-primary hover:text-primary-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        >
+          <UserPlus className="size-4" aria-hidden="true" /> Tambah keluarga
+        </Link>
+      </aside>
     );
   const lain = !aktif.milikSaya;
   return (
@@ -128,10 +146,10 @@ export function SpandukKeluarga() {
   if (!tampil || !aktif) return null;
   const saya = daftar.find((k) => k.milikSaya);
   return (
-    <div ref={ref} data-bingkai-situs role="status" className="tanpa-cetak sticky top-16 z-40 border-b-2 border-amber-400 bg-amber-100 text-amber-950 shadow-sm shadow-amber-900/10">
+    <div ref={ref} data-bingkai-situs role="status" className="tanpa-cetak sticky top-16 z-40 border-b-2 border-amber-400 bg-amber-100 text-amber-950 shadow-sm">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-2 sm:gap-6 sm:px-6 lg:px-8">
         <div className="flex min-w-0 items-center gap-3">
-          <span className="grid size-8 shrink-0 place-items-center rounded-full bg-amber-500 text-white shadow-sm shadow-amber-600/30 sm:size-9" aria-hidden="true">
+          <span className="grid size-8 shrink-0 place-items-center rounded-full bg-amber-500 text-white shadow-sm sm:size-9" aria-hidden="true">
             <Users className="size-4 sm:size-[18px]" />
           </span>
           <p className="min-w-0 text-sm leading-snug">

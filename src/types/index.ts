@@ -174,8 +174,8 @@ export interface BeritaItem {
   /** Tautan keluar (https) ke berita. */
   url: string;
   /** Jenis bencana hasil klasifikasi judul (kata kunci); "umum" bila tidak spesifik. */
-  jenis?: HazardId | "umum";
-  /** Foto dari umpan penerbit (hanya Antara), ditampilkan apa adanya dengan tautan ke beritanya. */
+  jenis?: HazardId | "umum" | "iklim";
+  /** Foto dari umpan penerbit (ANTARA, CNN Indonesia, Tempo, Okezone), ditampilkan apa adanya dengan tautan ke beritanya. */
   gambar?: string;
 }
 
@@ -194,6 +194,8 @@ export interface BeritaResponse extends ApiBase {
   /** false = umpan tidak terbaca; UI tidak boleh menyatakan "tidak ada berita". */
   tersedia: boolean;
   daftar: BeritaItem[];
+  /** Berita cuaca dan iklim (prakiraan/peringatan BMKG, musim, El Niño/La Niña, cuaca ekstrem), terpisah dari daftar bencana. */
+  cuaca?: BeritaItem[];
   /** Peringatan GDACS 30 hari terakhir (kosong bila tidak ada atau umpan gagal). */
   resmi?: PeringatanGlobal[];
   /** Penerbit/umpan yang berhasil dibaca pada pengambilan ini. */

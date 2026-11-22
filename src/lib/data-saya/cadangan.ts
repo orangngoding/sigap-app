@@ -8,7 +8,7 @@ export const AWALAN = "sigap:v1:";
 export const MAKS_BYTE_CADANGAN = 2 * 1024 * 1024;
 
 /** Kunci yang boleh dipulihkan. Cache respons data dan antrean toast tidak ikut (bisa dibuat ulang). */
-const POLA_KUNCI = /^sigap:v1:(lokasi|profil|progres|rencana|kartu|tanya|latihan|tas|iklimrumah|medis|simulasi|aksiiklim|keluarga)$/;
+const POLA_KUNCI = /^sigap:v1:(lokasi|profil|progres|rencana|kartu|tanya|latihan|tas|iklimrumah|medis|simulasi|aksiiklim|keluarga|smslain)$/;
 
 export interface IsiCadangan {
   diekspor: string | null;
@@ -72,6 +72,7 @@ const LABEL: Record<string, string> = {
   keluarga: "daftar keluarga yang didampingi",
   medis: "info medis darurat",
   simulasi: "riwayat Simulasi",
+  smslain: "nomor SMS tambahan Mode Darurat",
 };
 
 /** Daftar isi cadangan yang mudah dibaca, untuk konfirmasi sebelum memulihkan. */

@@ -1,7 +1,7 @@
 // Uji terhadap umpan RSS NYATA Google Berita (diambil 2026-11-18).
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { gabungBerita, jenisBerita, rapikanJudul, judulGdacs, pisahJudul, relevan, uraiAntara, uraiBerita, uraiGdacs } from "@/lib/data/berita";
+import { gabungBerita, gambarItem, jenisBerita, rapikanJudul, judulGdacs, pisahJudul, relevan, uraiAntara, uraiBerita, uraiGdacs, uraiMedia, UMPAN_MEDIA } from "@/lib/data/berita";
 
 let lulus = 0; const gagal: string[] = [];
 const uji = (nama: string, fn: () => void) => { try { fn(); lulus++; console.log("OK   ", nama); } catch (e) { gagal.push(nama); console.log("GAGAL", nama, "->", (e as Error).message.split("\n")[0]); } };
@@ -77,6 +77,72 @@ uji("judul tanpa ekor domain; situs partai politik tidak dipakai", () => {
   assert.equal(rapikanJudul("Gempa M5,4 guncang Nias - Sumatera Utara"), "Gempa M5,4 guncang Nias - Sumatera Utara");
   const it = `<item><title>Banjir rendam 3 desa - PKS - Partai Keadilan Sejahtera</title><link>https://news.google.com/a</link><pubDate>Wed, 18 Nov 2026 11:00:00 GMT</pubDate><source url="https://pks.id">PKS - Partai Keadilan Sejahtera</source></item>`;
   assert.equal(uraiBerita(`<rss>${it}</rss>`, SEKARANG).length, 0);
+});
+uji("umpan media berfoto: VIVA (img di deskripsi CDATA), Tempo (<img>URL</img>), foto dari domain lain ditolak", () => {
+  const media = (nama: string) => UMPAN_MEDIA.find((u) => u.nama === nama)!;
+  const [tempo, okezone] = [media("Tempo"), media("Okezone")];
+  const itViva = `<item><title><![CDATA[Banjir rendam 200 rumah di Bekasi]]></title><link>https://www.viva.co.id/berita/nasional/1</link><pubDate>Wed, 18 Nov 2026 11:00:00 +0700</pubDate><description><![CDATA[ <img src="https://thumb.viva.co.id/media/a.jpg?w=360&amp;q=90"/> Isi]]></description></item>`;
+  const a = uraiMedia(`<rss>${itViva}</rss>`, media("VIVA"), SEKARANG);
+  assert.equal(a.length, 1);
+  assert.equal(a[0].sumber, "VIVA");
+  assert.equal(a[0].gambar, "https://thumb.viva.co.id/media/a.jpg?w=360&q=90");
+  const itTempo = `<item><title>Longsor tutup jalan Garut</title><img>https://statik.tempo.co/data/x_720.jpg</img><link>https://nasional.tempo.co/read/1/longsor</link><pubDate>Wed, 18 Nov 2026 11:00:00 +0700</pubDate></item>`;
+  assert.equal(uraiMedia(`<rss>${itTempo}</rss>`, tempo, SEKARANG)[0].gambar, "https://statik.tempo.co/data/x_720.jpg");
+  const itAsing = `<item><title>Gempa M5 guncang Sukabumi</title><link>https://news.okezone.com/read/1</link><pubDate>Wed, 18 Nov 2026 11:00:00 +0700</pubDate><media:content url="https://contoh-asing.example/a.jpg"/></item>`;
+  const c = uraiMedia(`<rss>${itAsing}</rss>`, okezone, SEKARANG);
+  assert.equal(c.length, 1);
+  assert.equal(c[0].gambar, undefined);
+  assert.equal(gambarItem(`<description>&lt;img src=&quot;https://img.okezone.com/a.jpg&quot;&gt;</description>`), "https://img.okezone.com/a.jpg");
+});
+uji("judul kembar: versi berfoto yang dipakai, data masukan tidak diubah", () => {
+  const tanpa = { id: "g", judul: "Banjir rendam 200 rumah di Bekasi", sumber: "Kompas", waktu: "2026-11-18T05:00:00.000Z", url: "https://news.google.com/a" };
+  const dengan = { ...tanpa, id: "v", sumber: "VIVA", waktu: "2026-11-18T04:00:00.000Z", url: "https://www.viva.co.id/a", gambar: "https://thumb.viva.co.id/a.jpg" };
+  const d = gabungBerita([[tanpa], [dengan]]);
+  assert.equal(d.length, 1);
+  assert.equal(d[0].id, "v");
+  assert.equal(d[0].gambar, "https://thumb.viva.co.id/a.jpg");
+  assert.equal("gambar" in tanpa, false);
+});
+
+uji("berita berfoto didahulukan saat memilih 60, hasil tetap urut terbaru", () => {
+  const jam = (h: number) => new Date(Date.UTC(2026, 10, 18, h)).toISOString();
+  const google = Array.from({ length: 70 }, (_, i) => ({ id: `g${i}`, judul: `Banjir rendam kampung${i} sungai${i} warga${i}x`, sumber: `Media ${i}`, waktu: jam(12), url: "https://news.google.com/a" }));
+  const foto = Array.from({ length: 5 }, (_, i) => ({ id: `f${i}`, judul: `Longsor tutup jalan${i} bukit${i} desa${i}y`, sumber: "detikcom", waktu: jam(1 + i), url: "https://news.detik.com/a", gambar: "https://akcdn.detik.net.id/a.jpg" }));
+  const d = gabungBerita([foto, google]);
+  assert.equal(d.length, 60);
+  assert.equal(d.filter((b) => b.gambar).length, 5); // berita berfoto yang lebih lama tetap masuk
+  assert.ok(d.every((b, i) => i === 0 || Date.parse(d[i - 1].waktu) >= Date.parse(b.waktu)));
+});
+
+uji("kata kunci tidak salah tangkap: robot, iklim usaha, kiasan, luar negeri, galian ambles", () => {
+  assert.ok(!relevan("Vingroup Ciptakan Robot Humanoid, Ambisi Vietnam Kuasai Teknologi Masa Depan"));
+  assert.ok(!relevan("Kepastian Hukum Jadi Kunci Iklim Usaha, Akses Layanan Legal Perlu Dipermudah"));
+  assert.ok(!relevan("Film terbaru banjir pujian penonton"));
+  assert.ok(!relevan("Badai Terjang Brasil, Sejumlah Bangunan Rusak Diterjang Angin Kencang"));
+  assert.ok(!relevan("Bekas Galian PDAM Dibiarkan Ambles, Warga Keluhkan Saat Hujan"));
+  assert.ok(relevan("Banjir rob genangi pesisir Jakarta Utara"));
+  assert.equal(jenisBerita("Banjir rob genangi pesisir Jakarta Utara"), "gelombang_abrasi");
+  assert.equal(jenisBerita("Robinsar ajak warga cegah banjir"), "banjir");
+});
+
+uji("kejadian sama dengan kalimat berbeda digabung jadi satu", () => {
+  const x = (id: string, judul: string, sumber: string) => ({ id, judul, sumber, waktu: "2026-11-22T01:00:00.000Z", url: "https://news.google.com/" + id, jenis: jenisBerita(judul) });
+  const d = gabungBerita([[
+    x("a", "Gunung Semeru dan Ibu Meletus, Lontarkan Abu Vulkanik Ratusan Meter", "A"),
+    x("b", "Semeru dan Gunung Ibu Erupsi Beruntun, Kolom Abu Vulkanik Ratusan Meter", "B"),
+    x("c", "Gunung Ibu dan Semeru Meletus Beruntun, Abu 400 Meter", "C"),
+    x("d", "Gempa M4,8 Guncang Sentani, Papua", "D"),
+  ]]);
+  assert.equal(d.length, 2);
+});
+
+uji("berita cuaca dan iklim: kategori sendiri; bahaya spesifik tetap didahulukan", () => {
+  assert.equal(jenisBerita("Prakiraan Cuaca Semarang Minggu, BMKG Sebut Berpotensi Hujan"), "iklim");
+  assert.equal(jenisBerita("El Nino Tekan Curah Hujan tetapi BMKG Ingatkan Hujan Ekstrem"), "iklim");
+  assert.equal(jenisBerita("BMKG peringatkan hujan lebat di sejumlah wilayah"), "cuaca_ekstrem");
+  assert.equal(jenisBerita("Musim kemarau, warga mulai kesulitan air bersih"), "kekeringan");
+  assert.ok(relevan("Prakiraan cuaca Jakarta hari ini"));
+  assert.ok(!relevan("Harga cabai naik saat musim hujan"));
 });
 console.log(`\n${lulus} lulus, ${gagal.length} gagal`);
 process.exit(gagal.length ? 1 : 0);

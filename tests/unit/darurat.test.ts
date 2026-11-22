@@ -1,6 +1,6 @@
 // Jalankan: npx tsx tests/unit/darurat.test.ts  (Mode Darurat: situasi kritis, kabar SMS, nomor penting, risiko offline)
 import assert from "node:assert/strict";
-import { KETUKAN_RJP_PER_MENIT, SITUASI, tautanSms, teksKabar } from "@/lib/darurat/situasi";
+import { KETUKAN_RJP_PER_MENIT, SITUASI, kanonNomor, nomorUnik, pakaiIos, rapikanNomor, tautanSms, teksKabar } from "@/lib/darurat/situasi";
 import { bacaRisikoTersimpan } from "@/hooks/use-risiko-lokasi";
 import { lolosPenyaring } from "@/lib/ai/guardrails";
 import kontak from "@/generated/kontak.json";
@@ -63,10 +63,35 @@ t("kabar SMS: selamat/butuh bantuan, lokasi bila ada, titik kumpul hanya saat se
   assert.doesNotMatch(b, /maps|titik kumpul/i);
 });
 
-t("tautan SMS: nomor dibersihkan, beberapa penerima dipisah koma, isi dikodekan", () => {
+t("tautan SMS Android: nomor dibakukan, beberapa penerima dipisah koma, isi dikodekan", () => {
   const u = tautanSms(["0812-3456-7890", "+62 813 1111 2222", "12"], "Saya SELAMAT & aman");
-  assert.equal(u, "sms:081234567890,+6281311112222?body=Saya%20SELAMAT%20%26%20aman");
+  assert.equal(u, "sms:081234567890,081311112222?body=Saya%20SELAMAT%20%26%20aman");
   assert.equal(tautanSms([], "x"), "sms:?body=x");
+});
+
+t("tautan SMS iOS: satu penerima memakai &body=, banyak penerima memakai /open?addresses=", () => {
+  assert.equal(tautanSms(["0812 3456 7890"], "a b", true), "sms:081234567890&body=a%20b");
+  assert.equal(tautanSms(["0812 3456 7890", "0813 1111 2222"], "x", true), "sms:/open?addresses=081234567890,081311112222&body=x");
+  assert.equal(tautanSms([], "x", true), "sms:&body=x");
+  assert.ok(pakaiIos("Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X)"));
+  assert.ok(pakaiIos("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)", 5)); // iPadOS
+  assert.ok(!pakaiIos("Mozilla/5.0 (Linux; Android 14; SM-A156E)", 5));
+});
+
+t("nomor sama dalam bentuk berbeda (08.. / +628.. / 628..) dianggap satu penerima", () => {
+  assert.equal(kanonNomor("+62 812-3456-7890"), "081234567890");
+  assert.equal(kanonNomor("6281234567890"), "081234567890");
+  assert.equal(kanonNomor("+1 555 0100"), "+15550100"); // luar negeri tetap
+  assert.deepEqual(nomorUnik(["0812 3456 7890", "+6281234567890", "62 812 3456 7890", "0813 1111 2222"]), ["081234567890", "081311112222"]);
+});
+
+t("nomor lain yang diketik: spasi/tanda hubung dibuang, 6-15 digit, huruf ditolak", () => {
+  assert.equal(rapikanNomor(" 0812-3456 7890 "), "081234567890");
+  assert.equal(rapikanNomor("+62 (813) 1111-2222"), "081311112222");
+  assert.equal(rapikanNomor("12345"), null);
+  assert.equal(rapikanNomor("0812abc"), null);
+  assert.equal(rapikanNomor("1234567890123456"), null);
+  assert.equal(rapikanNomor("08+12"), null);
 });
 
 t("risiko tersimpan untuk offline: hanya dipakai untuk lokasi yang sama; data rusak = null", () => {

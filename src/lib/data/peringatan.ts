@@ -11,7 +11,13 @@ const MAKS_DETAIL = 5;
 
 // ---------- Pengurai XML minimal ----------
 const ENTITAS: Record<string, string> = { "&amp;": "&", "&lt;": "<", "&gt;": ">", "&quot;": '"', "&apos;": "'", "&#39;": "'" };
-const bukaEntitas = (s: string) => s.replace(/&(?:amp|lt|gt|quot|apos|#39);/g, (m) => ENTITAS[m] ?? m);
+const sekali = (s: string) =>
+  s
+    .replace(/&(?:amp|lt|gt|quot|apos|#39);/g, (m) => ENTITAS[m] ?? m)
+    .replace(/&#(\d{1,6});/g, (m, d: string) => { const n = Number(d); return n > 0 && n < 0x110000 ? String.fromCodePoint(n) : m; })
+    .replace(/&#x([0-9a-f]{1,6});/gi, (m, h: string) => { const n = parseInt(h, 16); return n > 0 && n < 0x110000 ? String.fromCodePoint(n) : m; });
+/** Urai entitas, termasuk angka (&#039;) dan yang terkode dua kali (&amp;#039;) dari sebagian umpan media. */
+const bukaEntitas = (s: string) => sekali(sekali(s));
 
 /** Teks aman: buka CDATA, buang tag, urai entitas, buang tag yang muncul dari entitas, rapikan spasi. Dirender sebagai teks biasa. */
 export function bersihXml(s: string): string {

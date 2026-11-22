@@ -9,7 +9,7 @@ export const FOTO_BAHAYA: Record<HazardId | "umum", KunciFoto> = {
   longsor: "longsor",
   gempa: "gempa",
   cuaca_ekstrem: "cuaca_ekstrem",
-  tsunami: "evakuasi",
+  tsunami: "tsunami_gelombang",
   kekeringan: "kekeringan",
   karhutla: "karhutla",
   gunung_api: "gunung_api",

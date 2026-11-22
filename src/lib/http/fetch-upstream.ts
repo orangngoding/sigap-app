@@ -12,6 +12,16 @@ const ALLOWED_HOSTS = new Set([
   "news.google.com", // umpan RSS berita bencana (Pustaka)
   "www.antaranews.com", // RSS ANTARA, kantor berita resmi (Pustaka > Berita)
   "www.gdacs.org", // peringatan bencana global PBB dan Komisi Eropa (Pustaka > Berita)
+  // RSS media nasional yang menyertakan foto (Pustaka > Berita)
+  "rss.tempo.co",
+  "sindikasi.okezone.com",
+  "www.jpnn.com",
+  "www.viva.co.id",
+  "www.inews.id",
+  "news.detik.com",
+  "feed.liputan6.com",
+  "nasional.sindonews.com",
+  "lapi.kumparan.com",
   "www.cpc.ncep.noaa.gov", // indeks ONI (El Niño/La Niña) NOAA CPC (Siaga Iklim)
   "psl.noaa.gov", // indeks Niño 3.4 dan DMI (IOD) NOAA PSL (Siaga Iklim)
   "firms.modaps.eosdis.nasa.gov", // titik panas satelit VIIRS NASA FIRMS (karhutla)

@@ -7,20 +7,29 @@ Dokumen ini mencatat atribusi terhadap framework, library, aset visual, dan sumb
 
 ## 2. Framework and Libraries
 
-| Technology | Purpose | License |
-|---|---|---|
-| Next.js | Web framework | To be verified |
-| React | UI library | To be verified |
-| TypeScript | Programming language | To be verified |
-| Tailwind CSS | Styling | To be verified |
-| Zustand | State management | To be verified |
-| TanStack Query | Data fetching | To be verified |
-| Leaflet | Interactive maps | To be verified |
-| Recharts | Data visualization | To be verified |
+| Pustaka | Versi | Kegunaan | Lisensi |
+|---|---|---|---|
+| Next.js | 16.4.6 | Framework web | MIT |
+| React, React DOM | 19.3.0 | Pustaka antarmuka | MIT |
+| TypeScript | 5.9.3 | Bahasa pemrograman | Apache-2.0 |
+| Tailwind CSS | 4.3.3 | Styling | MIT |
+| tw-animate-css | 1.4.0 | Animasi utilitas | MIT |
+| Radix UI | 1.8.1 | Komponen aksesibel (dialog, menu, pilihan) | MIT |
+| shadcn | 4.23.0 | Pola komponen | MIT |
+| class-variance-authority | 0.7.1 | Varian kelas komponen | Apache-2.0 |
+| lucide-react | 1.73.0 | Ikon | ISC |
+| Motion | 14.14.0 | Animasi | MIT |
+| Zustand | 5.1.0 | Penyimpanan di perangkat | MIT |
+| TanStack Query | 5.107.1 | Pengambilan data | MIT |
+| Zod | 4.6.7 | Validasi skema | MIT |
+| Leaflet | 1.9.4 | Peta interaktif | BSD-2-Clause |
+| Recharts | 3.10.1 | Grafik | MIT |
+| jsPDF | 4.2.1 | PDF Kartu Siaga | MIT |
+| qrcode | 1.5.4 | Kode QR Kartu Siaga | MIT |
 
 ## 3. Visual Assets
 
-Atribusi aset visual akan dicatat berdasarkan sumber dan lisensi masing-masing aset.
+Foto ilustrasi dicatat di bagian [Foto](#foto). Ikon dari lucide-react (ISC). Logo SIGAP dibuat oleh tim.
 
 ## 4. Data Sources
 
@@ -53,10 +62,10 @@ Setiap dependency atau aset baru yang digunakan harus diperiksa lisensinya dan d
 - **Open-Meteo Historical Weather API** (reanalisis ERA5, Copernicus Climate Change Service): pola bulanan iklim saat ini periode 1991-2020 di tab Musim ini.
 - Model proyeksi CMIP6 HighResMIP yang dipakai lewat Open-Meteo: **EC-Earth3P-HR** (konsorsium EC-Earth) dan **MRI-AGCM3-2-S** (Meteorological Research Institute, Japan Meteorological Agency). Data dikoreksi bias oleh Open-Meteo terhadap ERA5.
 
-## 8. Berita Bencana (Pustaka)
+## 8. Berita Bencana dan Cuaca (Pustaka)
 
 - **Google Berita** (RSS pencarian, https://news.google.com/): judul, nama media, waktu, dan tautan keluar; isi berita tidak disalin.
-- **ANTARA** (RSS terkini, https://www.antaranews.com/rss/terkini.xml): judul, waktu, tautan, dan foto dari umpan, ditampilkan apa adanya dengan tautan ke berita aslinya.
+- **RSS media nasional**: ANTARA, Tempo, Okezone, JPNN, VIVA, iNews, detikcom, Liputan6, SINDOnews, dan kumparan. Ditampilkan judul, waktu, tautan, dan foto dari umpan penerbit (hanya dari domain penerbitnya), dengan tautan ke berita aslinya.
 - **GDACS**, Global Disaster Alert and Coordination System (PBB dan Komisi Eropa, https://www.gdacs.org/): peringatan untuk Indonesia; judul berbahasa Inggris diterjemahkan oleh kode dari pola tetapnya.
 
 ## 9. Basis Pengetahuan dari Buku Saku BNPB
@@ -119,6 +128,7 @@ Foto ilustrasi dari Wikimedia Commons (lisensi bebas), disimpan di `public/img/`
 | Petugas mengevakuasi warga setelah tanah longsor di Serasan | National Disaster Mitigation Agency | [Public domain](https://creativecommons.org/publicdomain/mark/1.0/) | [Commons](https://commons.wikimedia.org/wiki/File:Serasan_landslide_aftermath.jpg) |
 | Gunung Sinabung mengeluarkan asap erupsi saat fajar | Arteri Project | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Commons](https://commons.wikimedia.org/wiki/File:Asap_Erupsi_Gunung_Sinabung_di_Pagi_Hari.jpg) |
 | Rumah tertutup abu vulkanik setelah erupsi Merapi | USAID Indonesia | [Public domain](https://creativecommons.org/publicdomain/mark/1.0/) | [Commons](https://commons.wikimedia.org/wiki/File:Mount_Merapi_Eruption_(5134675344).jpg) |
+| Gelombang tsunami 2004 menerjang pantai Ao Nang, Krabi | David Rydevik | [Public domain](https://creativecommons.org/publicdomain/mark/1.0/) | [Commons](https://commons.wikimedia.org/wiki/File:2004-tsunami.jpg) |
 | Pelabuhan perahu nelayan di Banda Aceh setelah tsunami 2004 | Michael L. Bak | [Public domain](https://creativecommons.org/publicdomain/mark/1.0/) | [Commons](https://commons.wikimedia.org/wiki/File:Fishing_boats_in_Banda_Aceh_after_2004_tsunami_DD-SD-06-07375.JPEG) |
 | Kabut asap kebakaran hutan dan lahan menyelimuti jembatan di Riau | anwar siak from Kesultanan Siak, indonesia | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0) | [Commons](https://commons.wikimedia.org/wiki/File:Kabut_Asap.jpg) |
 | Tanah sawah retak akibat kemarau panjang | Rosser1954 | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Commons](https://commons.wikimedia.org/wiki/File:Cracked_earth_after_prolonged_drought._2020.jpg) |

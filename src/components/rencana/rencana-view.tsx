@@ -284,7 +284,7 @@ export function RencanaView() {
                 key={id} type="button" role="tab" id={`tab-${id}`} aria-selected={aktif} aria-controls={`panel-${id}`} onClick={() => pilihTab(id)}
                 className={`relative flex min-h-11 shrink-0 items-center gap-2 rounded-xl px-3.5 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-primary sm:flex-1 sm:justify-center ${aktif ? "text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
               >
-                {aktif && <motion.span layoutId="tab-rencana" className="absolute inset-0 -z-10 rounded-xl bg-primary shadow-sm shadow-primary/30" transition={{ type: "spring", stiffness: 420, damping: 34 }} />}
+                {aktif && <motion.span layoutId="tab-rencana" className="absolute inset-0 -z-10 rounded-xl bg-primary shadow-sm" transition={{ type: "spring", stiffness: 420, damping: 34 }} />}
                 <Ikon className="size-4" aria-hidden="true" /> {label}
                 {badge && <span className={`rounded-full px-1.5 text-xs tabular-nums ${aktif ? "bg-white/20" : "bg-muted"}`}>{badge}</span>}
               </button>
@@ -319,16 +319,17 @@ export function RencanaView() {
               ))}
             </ul>
             {hasil.langkahBerikutnya && (
-              <div className="mt-4 flex items-center gap-3 rounded-xl border border-primary/25 bg-primary/5 p-3">
+              // HP: ikon + teks satu baris, tombol selebar kotak di bawahnya; layar lebar: semuanya sebaris.
+              <div className="mt-4 grid grid-cols-[auto_1fr] items-center gap-3 rounded-xl border border-primary/25 bg-primary/5 p-3 sm:flex">
                 <Target className="size-5 shrink-0 text-primary" aria-hidden="true" />
                 <p className="min-w-0 flex-1 text-sm"><span className="font-semibold">Langkah berikutnya:</span> {hasil.langkahBerikutnya.judul}</p>
                 {hasil.langkahBerikutnya.phase === "latihan" ? (
                   // Butir simulasi hanya tercentang dengan lulus simulasi, bukan dicentang manual.
-                  <Link href={`/latihan?bahaya=${hasil.langkahBerikutnya.key.replace("latihan:", "")}`} className="inline-flex min-h-10 shrink-0 items-center gap-1 rounded-lg bg-primary px-3 text-xs font-bold text-primary-foreground hover:bg-primary/90">
+                  <Link href={`/latihan?bahaya=${hasil.langkahBerikutnya.key.replace("latihan:", "")}`} className="col-span-2 inline-flex min-h-11 shrink-0 items-center justify-center gap-1 rounded-lg bg-primary px-4 text-sm font-bold text-primary-foreground hover:bg-primary/90">
                     Mulai simulasi <ChevronRight className="size-3.5" aria-hidden="true" />
                   </Link>
                 ) : (
-                  <button type="button" onClick={() => toggle(hasil.langkahBerikutnya!.key)} className="inline-flex min-h-10 shrink-0 items-center gap-1 rounded-lg bg-primary px-3 text-xs font-bold text-primary-foreground hover:bg-primary/90">
+                  <button type="button" onClick={() => toggle(hasil.langkahBerikutnya!.key)} className="col-span-2 inline-flex min-h-11 shrink-0 items-center justify-center gap-1 rounded-lg bg-primary px-4 text-sm font-bold text-primary-foreground hover:bg-primary/90">
                     <Check className="size-3.5" aria-hidden="true" /> Tandai selesai
                   </button>
                 )}
@@ -384,7 +385,7 @@ export function RencanaView() {
       <div id="panel-bagikan" role="tabpanel" aria-labelledby="tab-bagikan" className={tab === "bagikan" ? "panel-masuk space-y-6" : "hidden"}>
         <div className="grid gap-4 sm:grid-cols-2">
           {!contoh && (
-            <Link href="/rencana/kartu" className="angkat group flex items-start gap-4 rounded-2xl bg-primary p-5 text-primary-foreground shadow-lg shadow-primary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+            <Link href="/rencana/kartu" className="angkat group flex items-start gap-4 rounded-2xl bg-primary p-5 text-primary-foreground shadow-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
               <Printer className="size-6 shrink-0" aria-hidden="true" />
               <span><span className="block font-bold">Buat Kartu Siaga</span><span className="block text-sm text-primary-foreground/80">Satu halaman untuk ditempel di rumah, dengan kode QR ke Mode Darurat.</span></span>
             </Link>
