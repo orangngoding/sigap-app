@@ -3,6 +3,7 @@
 import type { BeritaResponse, CuacaResponse, GempaResponse, IklimResponse, PeringatanResponse } from "@/types";
 import { fetchIklim, iklimDariPower } from "./iklim";
 import { cachedWithStale } from "@/lib/http/server-cache";
+import { URL_SITUS } from "@/lib/situs";
 import { fetchCuaca } from "./cuaca";
 import { buildGempa, fetchGempaRaw } from "./gempa";
 import { fetchBerita } from "./berita";
@@ -95,7 +96,7 @@ export function ambilProyeksi(lat: number, lon: number): Promise<ProyeksiRespons
   );
 }
 
-const UA_MET = `SIGAP/1.0 aplikasi kesiapsiagaan bencana (${process.env.NEXT_PUBLIC_SITE_URL ?? "https://github.com"})`;
+const UA_MET = `SIGAP/1.0 aplikasi kesiapsiagaan bencana (${URL_SITUS})`;
 
 /** Cadangan prakiraan: MET Norway (sekitar 9 hari) + hujan 30 hari terakhir NASA POWER (pelengkap; gagal = null). */
 async function prakiraanCadangan(la: number, lo: number): Promise<RawPrakiraan> {

@@ -130,10 +130,13 @@ export async function buatPdfKartu(isi: IsiKartuPdf): Promise<HasilPdfKartu> {
   doc.setFont("helvetica", "normal");
   doc.setFontSize(pt);
   const penafian = doc.splitTextToSize(
-    "Dibuat dengan SIGAP. Pindai kode QR untuk Mode Darurat (bisa dibuka tanpa internet setelah pernah dibuka). Bukan pengganti arahan BPBD, BMKG, atau petugas berwenang.",
+    "Dibuat dengan SIGAP. Pindai kode QR atau buka alamat di bawah untuk Mode Darurat (bisa tanpa internet setelah pernah dibuka). Bukan pengganti arahan BPBD, BMKG, atau petugas berwenang.",
     lebar - qrMm - 4,
   ) as string[];
   doc.text(penafian, tepi, yKaki + baris(pt));
+  // Alamat tertulis: tetap bisa diketik bila kamera tidak bisa memindai; di PDF juga dapat diklik.
+  doc.setFont("helvetica", "bold");
+  doc.textWithLink(isi.urlDarurat.replace(/^https?:\/\//, ""), tepi, yKaki + baris(pt) * (penafian.length + 1) + 0.5, { url: isi.urlDarurat });
   const qr = await QR.toDataURL(isi.urlDarurat, { margin: 0, errorCorrectionLevel: "M", width: 300 });
   doc.addImage(qr, "PNG", tepi + lebar - qrMm, yKaki, qrMm, qrMm);
 

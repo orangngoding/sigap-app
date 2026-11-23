@@ -12,6 +12,7 @@ import { Toaster } from "@/components/global/toaster";
 import { RegistrasiSW } from "@/components/darurat/registrasi-sw";
 import { AsistenMelayang } from "@/components/tanya/asisten-melayang";
 import { PenandaPengguna } from "@/components/global/penanda-pengguna";
+import { URL_SITUS } from "@/lib/situs";
 
 // Plus Jakarta Sans: huruf karya desainer Indonesia (Tokotype), jelas dibaca di layar kecil.
 const jakarta = Plus_Jakarta_Sans({
@@ -33,8 +34,9 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
+  metadataBase: new URL(URL_SITUS),
   openGraph: { type: "website", locale: "id_ID", siteName: "SIGAP" },
+  twitter: { card: "summary_large_image" },
   title: {
     default: "SIGAP - Siaga dan Tanggap Bencana",
     template: "%s | SIGAP",

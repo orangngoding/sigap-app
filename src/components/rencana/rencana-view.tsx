@@ -177,16 +177,17 @@ export function RencanaView() {
   const rencana = contoh ? (templat ? { ...templat, mode: "contoh" as const } : null) : ada ? tersimpan : templat;
   const usang = ada && !!hashSekarang && tersimpan.hashMasukan !== hashSekarang;
 
-  // Kunjungan pertama untuk lokasi ini: simpan templat dulu (halaman Kartu dan Darurat siap offline), lalu minta AI.
+  // Kunjungan pertama untuk lokasi ini, atau profil diubah sejak rencana disusun: simpan templat dulu (Tindakan dan
+  // Tas Siaga langsung sesuai; Kartu dan Darurat siap offline), lalu minta AI.
   const sudahOtomatis = useRef(false);
   useEffect(() => {
-    if (contoh || !siap || !lokasi || !templat || sudahOtomatis.current) return;
+    if (contoh || !siap || !lokasi || !templat || !hashSekarang || sudahOtomatis.current) return;
     sudahOtomatis.current = true;
     const s = useRencanaStore.getState().rencana;
-    if (s && s.lokasiAdm4 === lokasi.adm4) return;
+    if (s && s.lokasiAdm4 === lokasi.adm4 && s.hashMasukan === hashSekarang) return;
     simpanRencana(templat);
     void susun({ otomatis: true });
-  }, [contoh, siap, lokasi, templat, simpanRencana, susun]);
+  }, [contoh, siap, lokasi, templat, hashSekarang, simpanRencana, susun]);
 
   const tas = useMemo(() => rencana?.tas ?? [], [rencana?.tas]);
   const faktor = rencana?.faktorKerentanan ?? [];

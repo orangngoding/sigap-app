@@ -34,8 +34,33 @@ function useDidukung(cek: () => boolean): boolean {
 export const teksUntukDibaca = (t: string) =>
   t.replace(/\*\*/g, "").replace(/^\s*[-•]\s+/gm, "").replace(/^\s*(\d+)\.\s+/gm, "$1, ").replace(/\s+/g, " ").trim();
 
+// Android melaporkan bahasa Indonesia sebagai "in-ID"/"in_ID" (kode ISO lama), peramban lain "id-ID".
+const kodeIndonesia = (lang: string) => /^(id|in)([-_]|$)/i.test(lang);
+
+/** Suara Indonesia terbaik yang terpasang: lokal (bisa offline) lebih dulu, lalu suara jaringan. */
 function suaraIndonesia(): SpeechSynthesisVoice | undefined {
-  return window.speechSynthesis.getVoices().find((v) => v.lang.toLowerCase().startsWith("id"));
+  const semua = window.speechSynthesis.getVoices();
+  const id = semua.filter((v) => kodeIndonesia(v.lang) || /indonesia/i.test(v.name));
+  return id.find((v) => v.localService) ?? id[0];
+}
+
+// Chrome memuat daftar suara secara asinkron: getVoices() kosong pada panggilan pertama. Muat lebih awal.
+let suaraDisiapkan = false;
+function siapkanSuara() {
+  if (suaraDisiapkan || typeof window === "undefined" || !("speechSynthesis" in window)) return;
+  suaraDisiapkan = true;
+  window.speechSynthesis.getVoices();
+  window.speechSynthesis.addEventListener?.("voiceschanged", () => window.speechSynthesis.getVoices());
+}
+
+/** Tunggu daftar suara siap (paling lama ~1 detik) agar suara Indonesia bisa dipilih sejak bacaan pertama. */
+function tungguSuara(): Promise<void> {
+  const s = window.speechSynthesis;
+  if (s.getVoices().length > 0) return Promise.resolve();
+  return new Promise((selesai) => {
+    const t = setTimeout(selesai, 1000);
+    s.addEventListener?.("voiceschanged", () => { clearTimeout(t); selesai(); }, { once: true });
+  });
 }
 
 /** Bacakan teks; hanya satu teks dibacakan dalam satu waktu (ditandai dengan `id`). */
@@ -43,9 +68,14 @@ export function useBacakan() {
   const didukung = useDidukung(() => typeof window !== "undefined" && "speechSynthesis" in window);
   const [sedang, setSedang] = useState<string | null>(null);
 
-  useEffect(() => () => { if (typeof window !== "undefined" && "speechSynthesis" in window) window.speechSynthesis.cancel(); }, []);
+  useEffect(() => {
+    siapkanSuara();
+    return () => { if (typeof window !== "undefined" && "speechSynthesis" in window) window.speechSynthesis.cancel(); };
+  }, []);
 
+  const terakhir = useRef<string | null>(null);
   const berhenti = useCallback(() => {
+    terakhir.current = null;
     window.speechSynthesis.cancel();
     setSedang(null);
   }, []);
@@ -53,15 +83,22 @@ export function useBacakan() {
   const baca = useCallback((id: string, teks: string) => {
     const s = window.speechSynthesis;
     s.cancel();
-    const u = new SpeechSynthesisUtterance(teksUntukDibaca(teks));
-    u.lang = "id-ID";
-    const v = suaraIndonesia();
-    if (v) u.voice = v;
-    u.rate = 0.95;
-    u.onend = () => setSedang((x) => (x === id ? null : x));
-    u.onerror = () => setSedang((x) => (x === id ? null : x));
+    terakhir.current = id;
     setSedang(id);
-    s.speak(u);
+    const bicara = () => {
+      if (terakhir.current !== id) return; // sudah dihentikan atau diganti teks lain selama menunggu
+      const u = new SpeechSynthesisUtterance(teksUntukDibaca(teks));
+      const v = suaraIndonesia();
+      if (v) u.voice = v;
+      u.lang = "id-ID";
+      u.rate = 0.95;
+      u.onend = () => setSedang((x) => (x === id ? null : x));
+      u.onerror = () => setSedang((x) => (x === id ? null : x));
+      s.speak(u);
+    };
+    // Safari iOS hanya mau berbicara bila speak() dipanggil langsung dari ketukan: jangan menunda bila suara sudah siap.
+    if (s.getVoices().length > 0) bicara();
+    else void tungguSuara().then(bicara);
   }, []);
 
   /** Tekan sekali untuk membaca, sekali lagi untuk berhenti. */

@@ -16,8 +16,8 @@ import { useRencanaStore } from "@/stores/rencana-store";
 import { finalisasiProfil } from "@/lib/preparedness/profil-schema";
 import { useKeluarga } from "@/hooks/use-keluarga";
 import { TeksPihak } from "@/components/rencana/teks-pihak";
+import { URL_DARURAT, URL_SITUS } from "@/lib/situs";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "";
 const GARIS = "________________";
 const BTN = "min-h-11 rounded-lg border px-4 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
 
@@ -44,9 +44,8 @@ export function KartuView() {
 
   useEffect(() => {
     let batal = false;
-    const url = `${SITE_URL || window.location.origin}/darurat`;
     import("qrcode")
-      .then((m) => m.toString(url, { type: "svg", margin: 1, errorCorrectionLevel: "M" }))
+      .then((m) => m.toString(URL_DARURAT, { type: "svg", margin: 1, errorCorrectionLevel: "M" }))
       .then((svg) => { if (!batal) setQr(svg); })
       .catch(() => { if (!batal) setQr(null); });
     return () => { batal = true; };
@@ -132,7 +131,7 @@ export function KartuView() {
                   langkah: grup.map((g) => ({ bahaya: HAZARD_BY_ID[g.hazard as keyof typeof HAZARD_BY_ID].label, langkah: g.langkah.map((t) => t.title) })),
                   tas: tas.map((i) => `${i.jumlah} ${i.satuan} ${i.nama.toLowerCase()}`),
                   catatan: tampilkanCatatan ? catatan : undefined,
-                  urlDarurat: `${SITE_URL || window.location.origin}/darurat`,
+                  urlDarurat: URL_DARURAT,
                 });
                 // PDF dibuat sepenuhnya di peramban; tidak ada data yang dikirim ke server (Blueprint 8.1).
                 const url = URL.createObjectURL(blob);
@@ -229,8 +228,15 @@ export function KartuView() {
         )}
 
         <footer className="mt-3 flex items-end justify-between gap-4 border-t-2 border-black pt-2">
-          <p style={{ maxWidth: "70%" }}>Dibuat dengan SIGAP. Pindai untuk Mode Darurat (bisa dibuka tanpa internet setelah pernah dibuka). Bukan pengganti arahan BPBD, BMKG, atau petugas berwenang.</p>
-          {qr ? <div role="img" aria-label="Kode QR ke halaman Mode Darurat" style={{ width: "26mm", height: "26mm" }} dangerouslySetInnerHTML={{ __html: qr }} /> : <p><strong>{(SITE_URL || "").replace(/^https?:\/\//, "")}/darurat</strong></p>}
+          <div style={{ maxWidth: "70%" }}>
+            <p>Dibuat dengan SIGAP. Pindai kode QR atau buka alamat di bawah untuk Mode Darurat (bisa tanpa internet setelah pernah dibuka). Bukan pengganti arahan BPBD, BMKG, atau petugas berwenang.</p>
+            <p className="mt-1 font-bold [overflow-wrap:anywhere]">
+              <a href={URL_DARURAT} className="underline underline-offset-2">
+                {URL_SITUS.replace(/^https?:\/\//, "")}<wbr />/darurat
+              </a>
+            </p>
+          </div>
+          {qr && <div role="img" aria-label={`Kode QR ke ${URL_DARURAT}`} className="shrink-0" style={{ width: "26mm", height: "26mm" }} dangerouslySetInnerHTML={{ __html: qr }} />}
         </footer>
       </article>
     </div>

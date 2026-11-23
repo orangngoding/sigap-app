@@ -4,14 +4,13 @@ import type { HazardId, Lokasi } from "@/types";
 import type { ItemTas, Tindakan } from "@/types/rencana";
 import { tautanWhatsApp, teksBagikan } from "@/lib/rencana/bagikan";
 import { toast } from "@/lib/toast";
+import { URL_DARURAT } from "@/lib/situs";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "";
 const CLS = "inline-flex min-h-12 items-center gap-2 rounded-lg border border-border bg-surface px-5 text-sm font-semibold hover:bg-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
 
 /** Bagikan ringkasan rencana ke keluarga lewat WhatsApp, atau salin teksnya. Nomor kontak tidak ikut. */
 export function TombolBagikan(p: { lokasi: Lokasi; bahaya: HazardId[]; tindakan: Tindakan[]; tas: ItemTas[]; titikKumpul?: string }) {
-  const teks = () =>
-    teksBagikan({ ...p, urlDarurat: SITE_URL ? `${SITE_URL.replace(/\/$/, "")}/darurat` : `${window.location.origin}/darurat` });
+  const teks = () => teksBagikan({ ...p, urlDarurat: URL_DARURAT });
 
   const salin = async () => {
     try {
