@@ -23,6 +23,8 @@ Panduan keselamatan bersumber dari dokumen resmi BNPB, BMKG, Badan Geologi, dan 
 
 - [Fitur](#fitur)
 - [Penggunaan AI dalam fitur](#penggunaan-ai-dalam-fitur)
+- [Struktur situs dan navigasi](#struktur-situs-dan-navigasi)
+- [Metodologi singkat](#metodologi-singkat)
 - [Teknologi](#teknologi)
 - [Menjalankan](#menjalankan)
 - [Variabel lingkungan](#variabel-lingkungan)
@@ -54,6 +56,7 @@ Sembilan bahaya dicakup: banjir, longsor, gempa bumi, cuaca ekstrem, tsunami, ke
 | Tas Siaga dan skor | `/rencana?tab=tas` | Jumlah barang (air, makanan, obat, perlengkapan bayi, dan lainnya) dihitung kode dari profil keluarga dan lama persediaan. Checklist dan skor kesiapsiagaan tersimpan di perangkat. |
 | Pengingat kedaluwarsa | `/rencana?tab=tas` | Tanggal kedaluwarsa air, makanan, obat, dan baterai dicatat dan diperingatkan di Rencana dan Beranda. Pengguna bisa mengunduh pengingat kalender (.ics) seminggu sebelum kedaluwarsa, ditambah pemeriksaan tiap 3 bulan. |
 | Bagikan ke keluarga | `/rencana?tab=bagikan` | Ringkasan rencana (112, titik kumpul, langkah saat kejadian, isi tas) dikirim lewat WhatsApp atau disalin sebagai teks. Nomor kontak tidak ikut. |
+| Siapkan Mode Darurat | `/rencana?tab=bagikan` | Dikerjakan selagi tenang: mengisi **info medis untuk penolong** (nama panggilan, golongan darah, alergi, penyakit, catatan; hanya tersimpan di perangkat) dan **memasang SIGAP di layar utama** agar Mode Darurat satu ketukan dan tetap terbuka tanpa internet. |
 | Kartu Siaga | `/rencana/kartu` | Satu halaman A4/A5 hitam putih: bahaya dan fakta risiko, nomor darurat, kontak keluarga, titik kumpul, tindakan kunci, dan isi tas ringkas. Kode QR beserta alamat tertulis mengarah ke Mode Darurat (`sigap-app-itrush.vercel.app/darurat`). Kartu bisa dicetak atau diunduh sebagai PDF yang dibuat di perangkat. |
 | Cetak rencana lengkap | `/rencana/cetak` | Dokumen A4 berisi identitas, risiko, nomor penting, tindakan per bencana, dan Tas Siaga, untuk dicetak atau disimpan sebagai PDF. |
 | Rencana untuk keluarga lain | `/rencana/keluarga` | Ketua RT, kader, atau kerabat bisa menyusun rencana terpisah untuk banyak keluarga dari satu perangkat. Tiap keluarga punya lokasi, profil, rencana, dan Kartu Siaga sendiri, dan pengguna berganti keluarga lewat pemilih keluarga. Spanduk penanda tampil saat yang dibuka bukan keluarga sendiri. Mode Darurat tetap menampilkan keluarga pemilik perangkat. |
@@ -86,8 +89,8 @@ Sembilan bahaya dicakup: banjir, longsor, gempa bumi, cuaca ekstrem, tsunami, ke
 | Artikel | `/pustaka`, `/pustaka/[slug]` | 11 artikel edukasi yang dibangun dari KB, bisa disaring per kategori dan bahaya, dicari, dan dicetak. |
 | Berita bencana | `/pustaka/berita` | Berita 7 hari terakhir dari Google Berita dan RSS media nasional, dengan foto dari penerbit. Kode menyaring agar hanya peristiwa bencana di Indonesia yang tampil, menggabungkan judul kembar, dan memberi label jenis bencana. Peringatan resmi GDACS untuk Indonesia juga ditampilkan. |
 | Berita cuaca dan iklim | `/pustaka/cuaca` | Berita prakiraan dan peringatan BMKG, musim, El Niño/La Niña, suhu panas, dan kualitas udara. |
-| Data & privasi | `/data-saya` | Ringkasan data di perangkat. Pengguna bisa mengunduh cadangan (JSON) dan memulihkannya di perangkat lain, atau menghapus semua data. |
-| Metodologi | `/metodologi` | Cara kerja, sumber data, batasan, peran AI, dan statistik KB (323 potongan panduan). |
+| Data & privasi | `/data-saya` | Ringkasan data di perangkat. Pengguna bisa mengunduh cadangan (JSON), mengirimnya lewat menu Bagikan ponsel, memulihkannya di perangkat lain, atau menghapus semua data (termasuk info medis, Simulasi, dan Siaga Iklim). Halaman ini juga memuat **Pasang SIGAP sebagai aplikasi (PWA)**: tombol pasang satu ketukan bila peramban mendukung, penanda "sudah terpasang", dan panduan per platform (Android, iPhone/iPad, desktop). Tanpa toko aplikasi dan tanpa akun. |
+| Metodologi | `/metodologi` | Cara kerja, sumber data, batasan, peran AI, rumus skor, privasi, pemasangan dan mode luring, serta statistik KB (323 potongan panduan). |
 
 ## Penggunaan AI dalam fitur
 
@@ -108,6 +111,32 @@ SIGAP memakai **Google Gemini** (bawaan `gemini-3.5-flash-lite`, lewat REST API 
 
 Rincian pagar pengaman dan metode evaluasinya ada di [docs/ai-evaluation.md](docs/ai-evaluation.md), dengan hasil terbaru di [docs/ai-evaluation-hasil.md](docs/ai-evaluation-hasil.md).
 
+## Struktur situs dan navigasi
+
+Bilah atas desktop memuat Lokasi, Siaga Iklim, Rencana, Simulasi, Asisten, dan menu tarik-turun Pustaka. Menu bawah HP memuat Beranda, Lokasi, Siaga Iklim, Rencana, dan menu lanjutan untuk Simulasi, Asisten, Pustaka, Data & privasi, dan Metodologi. Footer mengelompokkan tautan menjadi **Fitur** dan **Informasi**.
+
+| Kelompok | Halaman |
+|---|---|
+| **Fitur utama** | Beranda `/`, Lokasi `/lokasi`, Siaga Iklim `/iklim`, Rencana `/rencana` (profil, kartu, cetak, keluarga), Simulasi `/latihan`, Asisten `/tanya` |
+| **Darurat** | Mode Darurat `/darurat`, juga halaman awal aplikasi yang sudah dipasang (`start_url` manifest PWA) |
+| **Informasi** | Pustaka `/pustaka` (artikel, berita bencana, berita cuaca dan iklim), Metodologi `/metodologi`, Data & privasi `/data-saya` |
+
+Alur pengguna baru: **Lokasi → Profil keluarga → Rencana Siaga (Tas Siaga, Kartu Siaga) → Siapkan Mode Darurat → Latihan**. Semua tahap memakai data yang sama dari penyimpanan di perangkat, jadi pengguna bisa berhenti dan melanjutkan kapan saja lewat kartu **Lanjutkan rencana** di Beranda.
+
+## Metodologi singkat
+
+Rincian lengkap ada di halaman [`/metodologi`](https://sigap-app-itrush.vercel.app/metodologi). Ringkasannya, setiap saran SIGAP melewati lima langkah:
+
+1. **Data resmi.** BMKG, BNPB, Kemenkes, Badan Geologi, dan penyedia data terbuka (Open-Meteo, NASA, NOAA, USGS).
+2. **Kode menghitung.** Sinyal bahaya, tingkat perhatian, skor kesiapsiagaan, dan jumlah isi Tas Siaga dihitung oleh kode yang bisa diuji, bukan ditebak AI.
+3. **AI merangkai.** Gemini hanya menyusun bahasa dari potongan panduan resmi dan sinyal yang sudah dihitung.
+4. **Penyaring memeriksa.** Kode memvalidasi skema, kutipan sumber, angka, dan menolak kalimat ramalan atau jaminan. Bila gagal, dipakai templat tanpa AI.
+5. **Pengguna memutuskan.** SIGAP adalah alat bantu persiapan, bukan peringatan dini resmi.
+
+Rumus skor: `Skor = 100 × bobot butir yang dicentang ÷ bobot semua butir`. Butirnya tindakan Sebelum dan Saat, item Tas Siaga, dan simulasi yang lulus (nilai 70 ke atas). Panduan Sesudah tidak dihitung. Basis pengetahuan berisi 323 potongan panduan bersumber (halaman dan tanggal akses), dan bank soal uji awal berisi 147 soal tim.
+
+Prinsip rekayasa: **offline-first** untuk bagian darurat (service worker dan aset terkemas), **local-first** untuk data pribadi (localStorage, tanpa akun), dan **degradasi bertahap** untuk data luar (setiap sumber punya cadangan, dan kartu tidak pernah menyatakan "aman" bila umpan resmi tidak terbaca).
+
 ## Teknologi
 
 - **Kerangka:** Next.js 16 (App Router, Cache Components, Turbopack), React 19, TypeScript 5
@@ -116,7 +145,7 @@ Rincian pagar pengaman dan metode evaluasinya ada di [docs/ai-evaluation.md](doc
 - **Peta dan grafik:** Leaflet (OpenStreetMap), Recharts
 - **Dokumen:** jsPDF dan qrcode untuk Kartu Siaga PDF
 - **AI:** Gemini lewat REST API langsung; pencarian KB memakai BM25 buatan sendiri, tanpa embedding dan tanpa layanan eksternal
-- **Luring:** service worker manual (`public/sw.js`) untuk Mode Darurat, dan manifest PWA
+- **Luring dan PWA:** service worker manual (`public/sw.js`) untuk Mode Darurat, manifest PWA (`src/app/manifest.ts`, `start_url` `/darurat`), dan hook `use-pasang-pwa` untuk tombol pasang (`beforeinstallprompt`), deteksi mode terpasang, dan panduan per platform
 - **Suara:** Web Speech API peramban, untuk dikte dan Bacakan berbahasa Indonesia
 - **Uji dan CI:** uji unit dengan `tsx` dan `node:assert`, ESLint, pemeriksaan tipe, dan GitHub Actions (`.github/workflows/ci.yml`)
 - **Hosting:** Vercel
@@ -142,7 +171,7 @@ Buka http://localhost:3000. Tanpa `GEMINI_API_KEY`, semua fitur tetap berjalan m
 | `npm run dev` | Server pengembangan |
 | `npm run build` lalu `npm start` | Build dan jalankan versi produksi |
 | `npm run lint` / `npm run typecheck` | ESLint dan pemeriksaan tipe |
-| `npm run test:unit` | Seluruh uji unit (29 berkas, tanpa jaringan) |
+| `npm run test:unit` | Seluruh uji unit (30 berkas, tanpa jaringan) |
 | `npm run validate:content` | Validasi skema dan status konten KB |
 | `npm run build:content` | Bangun ulang indeks KB dan Pustaka ke `src/generated/` setelah mengubah `content/` |
 | `npm run eval:ai` | Evaluasi AI dengan model sungguhan; hasilnya ditulis ke `docs/ai-evaluation-hasil.md` |
@@ -197,9 +226,10 @@ scripts/            Validasi dan pembangunan konten, data wilayah, data risiko, 
 src/app/            Halaman (App Router), rute API, metadata, gambar OpenGraph, manifest PWA
 src/components/     Komponen per fitur: beranda, lokasi, risiko, rencana, kartu, iklim, latihan, simulasi,
                     tanya, darurat, pustaka, data-saya, metodologi, global (header, navigasi), ui
-src/hooks/          Hook React (suara, penyusunan rencana, hidrasi store, risiko lokasi, keluarga)
+src/hooks/          Hook React (suara, penyusunan rencana, hidrasi store, risiko lokasi, keluarga, pasang PWA)
 src/lib/            Logika: ai/ (penyedia, pagar, prompt), briefing/, data/ (BMKG, Open-Meteo, NASA, berita),
-                    darurat/, iklim/, kartu/ (isi dan PDF), kb/ (pencarian BM25), latihan/, simulasi/,
+                    data-saya/ (cadangan dan pemulihan), darurat/, iklim/, kartu/ (isi dan PDF), keluarga/,
+                    kb/ (pencarian BM25), latihan/, simulasi/,
                     preparedness/ (profil, skor), rencana/, risiko/, storage/ (penyaring data tersimpan),
                     ratelimit/, http/, geo/, situs.ts (URL publik)
 src/stores/         Penyimpanan Zustand di perangkat (lokasi, profil, rencana, progres, tas, medis, keluarga, dll.)
@@ -217,6 +247,7 @@ docs/               Arsitektur, evaluasi AI, atribusi, dan sumber data
 - **Kabari keluarga:** SMS dan lokasi GPS dikirim lewat aplikasi SMS di ponsel pengguna sendiri, bukan lewat server SIGAP.
 - **Suara:** Bacakan berjalan di perangkat. Dikte diproses layanan pengenal suara bawaan peramban (pada Chrome milik Google), bukan server SIGAP.
 - **Header keamanan di produksi:** Content-Security-Policy, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, dan Permissions-Policy. Header `X-Powered-By` dimatikan.
+- **Pemasangan aplikasi:** SIGAP dipasang lewat peramban (PWA), bukan toko aplikasi, sehingga tidak ada akun, pelacak, atau izin tambahan. Service worker hanya menyimpan halaman inti dan berkas statis; rute API dan data pribadi tidak pernah masuk cache-nya.
 - **Menghapus data:** pengguna bisa menghapus seluruh datanya kapan saja di halaman Data & privasi.
 
 ## Penggunaan AI coding assistant, template, dan aset open-source

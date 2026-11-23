@@ -354,7 +354,6 @@ export function DataSayaView() {
         </p>
       </section>
 
-      {/* Unduh & Pasang Aplikasi via Browser (PWA) */}
       <section aria-labelledby="judul-unduh-aplikasi" className="overflow-hidden rounded-3xl border border-border bg-surface">
         <div className="p-6 sm:p-8">
           <div className="flex flex-wrap items-center justify-between gap-3">
@@ -369,7 +368,6 @@ export function DataSayaView() {
             Pasang SIGAP langsung dari peramban ke layar utama ponsel atau komputer Anda tanpa melalui Google Play Store atau Apple App Store. Bebas akun, bebas pelacakan, dan Mode Darurat tetap siap dibuka tanpa koneksi internet.
           </p>
 
-          {/* Keunggulan PWA untuk Privasi & Kesiapsiagaan */}
           <div className="mt-6 grid gap-3 sm:grid-cols-3">
             <div className="rounded-2xl border border-border bg-background p-4">
               <UserX className="size-5 text-primary" aria-hidden="true" />
@@ -394,7 +392,6 @@ export function DataSayaView() {
             </div>
           </div>
 
-          {/* Status Aplikasi / Tombol Pasang */}
           <div className="mt-6">
             {sudahTerpasang ? (
               <div className="flex flex-col gap-3 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-4 sm:flex-row sm:items-center sm:justify-between">
@@ -431,7 +428,6 @@ export function DataSayaView() {
                   </div>
                 ) : null}
 
-                {/* Panduan Pemasangan Manual per Browser */}
                 <div className="rounded-2xl border border-border bg-background p-4 sm:p-5">
                   <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border pb-3">
                     <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">

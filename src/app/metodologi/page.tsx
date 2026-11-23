@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { AMBANG_BULAN_KERING_MM, BATAS_RASIO_KEMARAU, HARI_GANGGUAN_AIR, HEMAT_AIR_PERSEN, KATALOG, KURANG_AIR_WASPADA_HARI, LITER_PER_ORANG_HARI, MIN_HARI_CADANGAN_AIR, MIN_PUNCAK, SELISIH_HUJAN, SELISIH_PANAS } from "@/lib/iklim/ketahanan";
 import Link from "next/link";
-import { BadgeCheck, BookOpenCheck, Calculator, CheckCircle2, Code2, Database, History, Info, Lock, MessageSquareHeart, ShieldCheck, Sparkles, UserCheck } from "lucide-react";
+import { BadgeCheck, BookOpenCheck, Calculator, CheckCircle2, Code2, Database, History, Info, Lock, MessageSquareHeart, ShieldCheck, Smartphone, Sparkles, UserCheck } from "lucide-react";
 import { DaftarIsi } from "@/components/metodologi/daftar-isi";
 import { KepalaHalaman } from "@/components/global/kepala-halaman";
 import { Foto } from "@/components/global/foto";
@@ -57,6 +57,7 @@ const BAGIAN = [
   { id: "m4", judul: "Peran AI dan pagar pengaman" },
   { id: "m5", judul: "Rumus skor dan Tas Siaga" },
   { id: "m6", judul: "Privasi" },
+  { id: "m11", judul: "Pemasangan dan mode luring" },
   { id: "m7", judul: "Atribusi dan kredit foto" },
   { id: "m8", judul: "AI dalam pengembangan" },
   { id: "m9", judul: "Versi konten" },
@@ -292,6 +293,9 @@ export default function MetodologiPage() {
                   ["Pertanyaan Asisten dan teks peringatan yang ditempel", "Perangkat (riwayat percakapan)", "Ya, diproses sementara", "Ya"],
                   ["Ringkasan rencana untuk Asisten (skor, judul tindakan dan isi tas yang belum siap)", "Perangkat", "Ya, diproses sementara", "Ya"],
                   ["Hasil Latihan Siaga, tanggal kedaluwarsa tas", "Perangkat", "Tidak", "Tidak"],
+                  ["Info medis untuk penolong (nama panggilan, golongan darah, alergi, penyakit, catatan)", "Perangkat", "Tidak", "Tidak"],
+                  ["Rencana untuk keluarga lain (lokasi, profil, rencana per keluarga)", "Perangkat", "Hanya profil tanpa identitas dan nama wilayah, sama seperti keluarga sendiri", "Sama seperti profil tanpa identitas"],
+                  ["Status pemasangan aplikasi (PWA)", "Dibaca peramban, tidak disimpan SIGAP", "Tidak", "Tidak"],
                   ["Suara saat dikte", "Tidak disimpan", "Tidak (diproses layanan suara peramban)", "Tidak"],
                   ["Teks rencana yang dibagikan, file cadangan", "Tidak disimpan", "Tidak (dikirim sendiri oleh pengguna)", "Tidak"],
                 ]}
@@ -300,6 +304,23 @@ export default function MetodologiPage() {
               <Link href="/data-saya" className="mt-4 inline-flex min-h-11 items-center gap-2 rounded-xl bg-primary px-4 text-sm font-semibold text-primary-foreground hover:bg-primary/90">
                 <Lock className="size-4" aria-hidden="true" /> Lihat, pindahkan, atau hapus data Anda
               </Link>
+            </Bagian>
+
+            <Bagian id="m11" judul="Pemasangan dan mode luring" Ikon={Smartphone}>
+              <p className={P}>SIGAP dapat dipasang sebagai aplikasi lewat peramban (Progressive Web App), tanpa toko aplikasi dan tanpa akun. Tombol pasang ada di halaman Data &amp; privasi (lengkap dengan panduan Android, iPhone/iPad, dan desktop) serta di Rencana, tab Bagikan, pada langkah &ldquo;Siapkan Mode Darurat&rdquo;. Aplikasi terpasang langsung dibuka ke Mode Darurat.</p>
+              <Tabel
+                kepala={["Kondisi", "Yang tetap bisa dipakai", "Yang perlu internet"]}
+                baris={[
+                  ["Setelah satu kali kunjungan online", "Mode Darurat (nomor darurat, langkah per bahaya, pertolongan pertama, senter, peluit SOS, info medis), Kartu Siaga, dan halaman yang pernah dibuka", "Cuaca, gempa, peringatan, berita, Asisten, penyusunan rencana oleh AI, dan peta"],
+                  ["Belum pernah dibuka online", "Tidak ada; buka Mode Darurat sekali saat tenang", "Semua"],
+                ]}
+              />
+              <ul className="mt-4 list-disc space-y-1 pl-5 leading-relaxed">
+                <li>Service worker menyimpan halaman inti beserta berkas JS dan CSS-nya. Rute API dan data pribadi tidak pernah masuk cache; data pengguna ada di penyimpanan lokal perangkat.</li>
+                <li>Pesan kabar keluarga dikirim lewat SMS dari ponsel pengguna karena SMS tetap terkirim saat data internet mati, dan GPS tidak butuh internet.</li>
+                <li>Cadangan data (JSON) dibuat di perangkat dan tidak melewati server SIGAP. Memasang aplikasi tidak menambah izin atau pelacakan.</li>
+                <li>iPhone dan iPad tidak menyediakan tombol pasang otomatis; pengguna memakai Bagikan lalu &ldquo;Tambah ke Layar Utama&rdquo; di Safari.</li>
+              </ul>
             </Bagian>
 
             <Bagian id="m7" judul="Atribusi dan kredit foto" Ikon={BadgeCheck}>
@@ -327,7 +348,7 @@ export default function MetodologiPage() {
             </Bagian>
 
             <Bagian id="m8" judul="Pemakaian AI dalam pengembangan" Ikon={Code2}>
-              <p className={P}>Di dalam aplikasi, AI (Google Gemini) dipakai sebagai komponen fungsional untuk Rencana Siaga, Briefing Siaga Hari Ini, Jelaskan Peringatan, dan Asisten SIGAP, dengan instruksi sistem, skema keluaran, dan penyaring buatan tim. Pertanyaan dapat diucapkan dan jawaban dibacakan memakai Web Speech API peramban; dikte diproses layanan pengenal suara peramban, bukan server SIGAP.</p>
+              <p className={P}>Di dalam aplikasi, AI (Google Gemini) dipakai sebagai komponen fungsional untuk Rencana Siaga, Briefing Siaga Hari Ini, Jelaskan Peringatan, Asisten SIGAP, Simulator Bencana AI, dan Siaga Iklim (rencana 7 hari dan Penasihat Keputusan), dengan instruksi sistem, skema keluaran, dan penyaring buatan tim. Pertanyaan dapat diucapkan dan jawaban dibacakan memakai Web Speech API peramban; dikte diproses layanan pengenal suara peramban, bukan server SIGAP.</p>
               <p className={P}>Selama pengembangan, tim memakai asisten AI pemrograman untuk menulis dan memeriksa kode, menyusun draf potongan panduan dari dokumen resmi, serta mencocokkan halaman sumber. Keputusan produk dan arsitektur diambil tim.</p>
             </Bagian>
 
