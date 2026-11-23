@@ -13,7 +13,7 @@ Panduan keselamatan bersumber dari dokumen resmi BNPB, BMKG, Badan Geologi, dan 
 | | |
 |---|---|
 | Website | https://sigap-app-itrush.vercel.app |
-| Video demo | _Tautan menyusul_ |
+| Video demo | https://youtu.be/0zgmVqM8IwU |
 | Repository | https://github.com/orangngoding/sigap-app |
 | Akun demo | Tidak diperlukan. SIGAP dipakai tanpa daftar akun; semua data pribadi tersimpan di perangkat pengguna. Data contoh tersedia lewat tombol "Coba dengan data contoh" di Beranda (`/rencana?contoh=1`). |
 
