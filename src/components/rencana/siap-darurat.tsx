@@ -2,31 +2,18 @@
 // "Siapkan Mode Darurat" di Rencana > Bagikan: hal yang perlu dikerjakan SELAGI TENANG agar Mode Darurat siap dipakai
 // saat panik, yaitu info medis untuk penolong dan memasang SIGAP di layar utama (tetap terbuka tanpa internet).
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { Cross, Download, Siren, Smartphone } from "lucide-react";
 import { useHydrate } from "@/hooks/use-hydrate";
+import { usePasangPwa } from "@/hooks/use-pasang-pwa";
 import { GOLONGAN_DARAH, MEDIS_TEKS_MAKS, adaInfoMedis, useMedisStore, type GolonganDarah } from "@/stores/medis-store";
 
 const MASUKAN = "mt-1 block w-full min-h-11 rounded-xl border border-border bg-background px-3 py-2 text-base focus-visible:outline-2 focus-visible:outline-primary";
-
-interface PromptPasang extends Event {
-  prompt: () => Promise<void>;
-}
 
 export function SiapDarurat() {
   const siap = useHydrate(useMedisStore);
   const m = useMedisStore();
   const ada = siap && adaInfoMedis(m);
-  const [pasang, setPasang] = useState<PromptPasang | null>(null);
-
-  useEffect(() => {
-    const tangkap = (e: Event) => {
-      e.preventDefault();
-      setPasang(e as PromptPasang);
-    };
-    window.addEventListener("beforeinstallprompt", tangkap);
-    return () => window.removeEventListener("beforeinstallprompt", tangkap);
-  }, []);
+  const { bisaPasang, sudahTerpasang, pasang: jalankanPasang } = usePasangPwa();
 
   return (
     <section aria-labelledby="judul-siap-darurat" className="rounded-2xl border border-border bg-surface p-5 sm:p-6">
@@ -77,8 +64,10 @@ export function SiapDarurat() {
       <div className="mt-6 border-t border-border pt-5">
         <h3 className="flex items-center gap-2 font-bold text-foreground"><Smartphone className="size-4 text-primary" aria-hidden="true" /> Pasang SIGAP di layar utama</h3>
         <p className="mt-1 text-sm text-muted-foreground">Mode Darurat jadi satu ketuk dari layar utama dan tetap terbuka tanpa internet.</p>
-        {pasang ? (
-          <button type="button" onClick={() => void pasang.prompt()} className="press mt-3 inline-flex min-h-11 items-center gap-2 rounded-xl bg-primary px-4 text-sm font-semibold text-primary-foreground">
+        {sudahTerpasang ? (
+          <p className="mt-2 text-sm font-semibold text-emerald-600 dark:text-emerald-400">SIGAP sudah terpasang di layar utama perangkat ini.</p>
+        ) : bisaPasang ? (
+          <button type="button" onClick={() => void jalankanPasang()} className="press mt-3 inline-flex min-h-11 items-center gap-2 rounded-xl bg-primary px-4 text-sm font-semibold text-primary-foreground">
             <Download className="size-4" aria-hidden="true" /> Pasang SIGAP
           </button>
         ) : (

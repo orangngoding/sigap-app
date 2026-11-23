@@ -4,12 +4,13 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
 import {
-  CalendarClock, ChevronDown, ClipboardList, CloudOff, Download, Dumbbell, FileCheck2, HardDrive, Lock, MapPin,
-  MessageSquare, Share2, ShieldCheck, Smartphone, Trash2, Upload, UserX, Users,
+  CalendarClock, CheckCircle2, ChevronDown, ClipboardList, CloudOff, Download, Dumbbell, FileCheck2, HardDrive, Lock, MapPin,
+  MessageSquare, Share2, ShieldCheck, Smartphone, Trash2, Upload, UserX, Users, WifiOff,
 } from "lucide-react";
 import { toast } from "@/lib/toast";
 import { StatusBanner } from "@/components/global/status-banner";
 import { useHydrate } from "@/hooks/use-hydrate";
+import { usePasangPwa } from "@/hooks/use-pasang-pwa";
 import { finalisasiProfil } from "@/lib/preparedness/profil-schema";
 import { AWALAN, MAKS_BYTE_CADANGAN, bacaCadangan, ringkasIsi, type IsiCadangan } from "@/lib/data-saya/cadangan";
 import { AMBANG_LULUS } from "@/lib/latihan/mesin";
@@ -127,6 +128,17 @@ export function DataSayaView() {
   const [galatPulih, setGalatPulih] = useState<string | null>(null);
   const pemilihFile = useRef<HTMLInputElement>(null);
   const router = useRouter();
+
+  const { bisaPasang, sudahTerpasang, platform, pasang: jalankanPasang } = usePasangPwa();
+  const [tabPilihan, setTabPilihan] = useState<"android" | "ios" | "desktop" | null>(null);
+  const tabAktif = tabPilihan ?? (platform === "ios" || platform === "android" ? platform : "android");
+
+  const handlePasang = async () => {
+    const sukses = await jalankanPasang();
+    if (sukses) {
+      toast("Aplikasi SIGAP berhasil dipasang ke layar utama perangkat Anda.");
+    }
+  };
 
   const hapusSemua = () => {
     useLokasiStore.getState().clearLokasi();
@@ -339,6 +351,196 @@ export function DataSayaView() {
         <p className="flex items-start gap-2 border-t border-border bg-muted/40 px-6 py-3 text-xs text-muted-foreground sm:px-8">
           <Lock className="mt-0.5 size-3.5 shrink-0" aria-hidden="true" />
           Berkas ini berisi kontak darurat dan titik kumpul Anda. Simpan di tempat pribadi dan jangan kirim ke grup umum.
+        </p>
+      </section>
+
+      {/* Unduh & Pasang Aplikasi via Browser (PWA) */}
+      <section aria-labelledby="judul-unduh-aplikasi" className="overflow-hidden rounded-3xl border border-border bg-surface">
+        <div className="p-6 sm:p-8">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <h2 id="judul-unduh-aplikasi" className="flex items-center gap-2 text-2xl font-extrabold tracking-tight">
+              <Smartphone className="size-6 text-primary" aria-hidden="true" /> Unduh aplikasi via browser
+            </h2>
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+              <ShieldCheck className="size-3.5" aria-hidden="true" /> PWA Tanpa Akun
+            </span>
+          </div>
+          <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
+            Pasang SIGAP langsung dari peramban ke layar utama ponsel atau komputer Anda tanpa melalui Google Play Store atau Apple App Store. Bebas akun, bebas pelacakan, dan Mode Darurat tetap siap dibuka tanpa koneksi internet.
+          </p>
+
+          {/* Keunggulan PWA untuk Privasi & Kesiapsiagaan */}
+          <div className="mt-6 grid gap-3 sm:grid-cols-3">
+            <div className="rounded-2xl border border-border bg-background p-4">
+              <UserX className="size-5 text-primary" aria-hidden="true" />
+              <p className="mt-2 text-sm font-semibold text-foreground">Tanpa akun &amp; toko aplikasi</p>
+              <p className="mt-0.5 text-xs text-muted-foreground">
+                Tidak memerlukan akun Google atau Apple ID. Privasi Anda terjaga tanpa riwayat unduhan di server pihak ketiga.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-border bg-background p-4">
+              <WifiOff className="size-5 text-primary" aria-hidden="true" />
+              <p className="mt-2 text-sm font-semibold text-foreground">Akses luring (tanpa internet)</p>
+              <p className="mt-0.5 text-xs text-muted-foreground">
+                Mode Darurat dan data siaga keluarga tetap dapat dibuka langsung dari layar utama meski listrik padam atau sinyal seluler putus.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-border bg-background p-4">
+              <HardDrive className="size-5 text-primary" aria-hidden="true" />
+              <p className="mt-2 text-sm font-semibold text-foreground">Ringan &amp; hemat memori</p>
+              <p className="mt-0.5 text-xs text-muted-foreground">
+                Ukuran sangat kecil (&lt; 2 MB) dan tidak membebani memori penyimpanan ponsel Anda.
+              </p>
+            </div>
+          </div>
+
+          {/* Status Aplikasi / Tombol Pasang */}
+          <div className="mt-6">
+            {sudahTerpasang ? (
+              <div className="flex flex-col gap-3 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-4 sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-emerald-600 dark:text-emerald-400" aria-hidden="true" />
+                  <div>
+                    <p className="text-sm font-semibold text-foreground">Aplikasi sudah terpasang di perangkat ini</p>
+                    <p className="mt-0.5 text-xs text-muted-foreground">
+                      SIGAP sudah aktif sebagai aplikasi mandiri. Anda dapat membukanya langsung dari layar utama atau daftar aplikasi perangkat Anda.
+                    </p>
+                  </div>
+                </div>
+                <Link
+                  href="/darurat"
+                  className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-xl bg-primary px-4 text-xs font-semibold text-primary-foreground hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                >
+                  Buka Mode Darurat
+                </Link>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                {bisaPasang ? (
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                    <button
+                      type="button"
+                      onClick={() => void handlePasang()}
+                      className={BTN_UTAMA}
+                    >
+                      <Download className="size-4" aria-hidden="true" /> Pasang SIGAP ke layar utama
+                    </button>
+                    <p className="text-xs text-muted-foreground">
+                      Ketuk tombol di atas untuk langsung menambahkan ikon SIGAP ke layar utama perangkat Anda.
+                    </p>
+                  </div>
+                ) : null}
+
+                {/* Panduan Pemasangan Manual per Browser */}
+                <div className="rounded-2xl border border-border bg-background p-4 sm:p-5">
+                  <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border pb-3">
+                    <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                      Panduan pasang via browser
+                    </p>
+                    <div className="flex gap-1 rounded-xl bg-muted p-1 text-xs" role="tablist" aria-label="Pilihan sistem operasi atau peramban">
+                      <button
+                        type="button"
+                        role="tab"
+                        aria-selected={tabAktif === "android"}
+                        onClick={() => setTabPilihan("android")}
+                        className={`rounded-lg px-2.5 py-1 font-medium transition-colors ${
+                          tabAktif === "android"
+                            ? "bg-surface font-semibold text-foreground shadow-sm"
+                            : "text-muted-foreground hover:text-foreground"
+                        }`}
+                      >
+                        Android
+                      </button>
+                      <button
+                        type="button"
+                        role="tab"
+                        aria-selected={tabAktif === "ios"}
+                        onClick={() => setTabPilihan("ios")}
+                        className={`rounded-lg px-2.5 py-1 font-medium transition-colors ${
+                          tabAktif === "ios"
+                            ? "bg-surface font-semibold text-foreground shadow-sm"
+                            : "text-muted-foreground hover:text-foreground"
+                        }`}
+                      >
+                        iPhone / iPad
+                      </button>
+                      <button
+                        type="button"
+                        role="tab"
+                        aria-selected={tabAktif === "desktop"}
+                        onClick={() => setTabPilihan("desktop")}
+                        className={`rounded-lg px-2.5 py-1 font-medium transition-colors ${
+                          tabAktif === "desktop"
+                            ? "bg-surface font-semibold text-foreground shadow-sm"
+                            : "text-muted-foreground hover:text-foreground"
+                        }`}
+                      >
+                        Laptop / PC
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="mt-4">
+                    {tabAktif === "android" && (
+                      <ol className="space-y-2 text-xs text-foreground sm:text-sm">
+                        <li className="flex items-start gap-2">
+                          <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">1</span>
+                          <span>Buka SIGAP di <strong>Google Chrome</strong> atau <strong>Samsung Internet</strong>.</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">2</span>
+                          <span>Ketuk tombol menu <strong>titik tiga (⋮)</strong> di sudut kanan atas peramban.</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">3</span>
+                          <span>Pilih <strong>&ldquo;Tambahkan ke layar utama&rdquo;</strong> atau <strong>&ldquo;Instal aplikasi&rdquo;</strong>, lalu konfirmasi.</span>
+                        </li>
+                      </ol>
+                    )}
+
+                    {tabAktif === "ios" && (
+                      <ol className="space-y-2 text-xs text-foreground sm:text-sm">
+                        <li className="flex items-start gap-2">
+                          <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">1</span>
+                          <span>Buka halaman ini di browser <strong>Safari</strong> pada iPhone atau iPad Anda.</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">2</span>
+                          <span>Ketuk tombol <strong>Bagikan</strong> (ikon kotak dengan panah mengarah ke atas di bilah bawah).</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">3</span>
+                          <span>Gulir ke bawah dan ketuk <strong>&ldquo;Tambah ke Layar Utama&rdquo;</strong> (<em>Add to Home Screen</em>), lalu ketuk <strong>Tambah</strong>.</span>
+                        </li>
+                      </ol>
+                    )}
+
+                    {tabAktif === "desktop" && (
+                      <ol className="space-y-2 text-xs text-foreground sm:text-sm">
+                        <li className="flex items-start gap-2">
+                          <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">1</span>
+                          <span>Gunakan browser <strong>Google Chrome</strong>, <strong>Microsoft Edge</strong>, atau <strong>Brave</strong>.</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">2</span>
+                          <span>Klik ikon <strong>Pasang / Unduh aplikasi</strong> di ujung kanan bilah alamat URL (address bar).</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">3</span>
+                          <span>Atau klik menu titik tiga (⋮) &gt; <strong>Simpan dan bagikan</strong> &gt; <strong>Pasang SIGAP</strong>.</span>
+                        </li>
+                      </ol>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+
+        <p className="flex items-start gap-2 border-t border-border bg-muted/40 px-6 py-3 text-xs text-muted-foreground sm:px-8">
+          <ShieldCheck className="mt-0.5 size-3.5 shrink-0 text-primary" aria-hidden="true" />
+          Pemasangan lewat browser ini (Progressive Web App) tidak memerlukan izin akses berbahaya (seperti kontak pribadi, SMS, atau kamera) dan tidak mengirimkan data perangkat Anda ke server mana pun.
         </p>
       </section>
 
